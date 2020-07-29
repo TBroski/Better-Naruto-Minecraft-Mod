@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "###",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/iron"
+    },
+    "X": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "result":
+  {
+    "item": "benarutomod:headband_helmet",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "benarutomod:spiked_rations_pill"
+    },
+    "title": {
+      "translate": "advancements.benarutomod.spiked_rations_pill.title"
+    },
+    "description": {
+      "translate": "advancements.benarutomod.spiked_rations_pill.text"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kao": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 5
+  },
+  "parent": "benarutomod:rations_pill"
+}

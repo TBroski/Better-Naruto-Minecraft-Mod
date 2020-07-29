@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":
+  [
+
+    {
+      "item": "minecraft:porkchop"
+    },
+
+    {
+      "item": "minecraft:beef"
+    },
+
+    {
+      "item": "minecraft:wheat_seeds"
+    },
+
+    {
+      "item": "benarutomod:rice"
+    }
+  ],
+
+  "result":
+  {
+    "item": "benarutomod:rations_pill",
+    "count": 1
+  }
+}

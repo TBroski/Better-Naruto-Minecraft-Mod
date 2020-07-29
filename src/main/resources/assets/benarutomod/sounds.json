@@ -1,0 +1,23 @@
+{
+  "item.naruto_pain_disc": {
+    "category": "item",
+    "subtitle": "item.naruto_pain_disc.sub",
+    "sounds": [
+      {
+        "name": "benarutomod:item/naruto_pain_disc",
+        "stream": true
+      }
+    ]
+  },
+
+  "item.naruto_itachi_disc": {
+    "category": "item",
+    "subtitle": "item.naruto_itachi_disc.sub",
+    "sounds": [
+      {
+        "name": "benarutomod:item/naruto_itachi_disc",
+        "stream": true
+      }
+    ]
+  }
+}

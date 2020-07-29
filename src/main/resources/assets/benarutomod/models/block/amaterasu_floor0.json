@@ -1,0 +1,7 @@
+{
+    "parent": "benarutomod:block/amaterasu_floor",
+    "textures": {
+        "particle": "benarutomod:blocks/amaterasu_0",
+        "fire": "benarutomod:blocks/amaterasu_0"
+    }
+}

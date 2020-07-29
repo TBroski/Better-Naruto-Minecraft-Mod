@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=false": { "model": "benarutomod:block/sakura_pressure_plate" },
+    "powered=true": { "model": "benarutomod:block/sakura_pressure_plate_down" }
+  }
+}

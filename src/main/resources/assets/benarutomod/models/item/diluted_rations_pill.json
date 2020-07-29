@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "benarutomod:items/diluted_rations_pill"
+  }
+}

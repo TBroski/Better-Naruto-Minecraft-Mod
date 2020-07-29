@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_bottom",
+  "textures": {
+    "bottom": "benarutomod:blocks/sakura_door_bottom",
+    "top": "benarutomod:blocks/sakura_door_top"
+  }
+}

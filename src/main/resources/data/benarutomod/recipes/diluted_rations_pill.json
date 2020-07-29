@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":
+  [
+
+    {
+      "item": "benarutomod:rations_pill"
+    },
+
+    {
+      "item": "benarutomod:rations_pill"
+    }
+  ],
+
+  "result":
+  {
+    "item": "benarutomod:diluted_rations_pill",
+    "count": 1
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "benarutomod:block/sakura_wood" },
+    "axis=z": { "model": "benarutomod:block/sakura_wood", "x": 90 },
+    "axis=x": { "model": "benarutomod:block/sakura_wood", "x": 90, "y": 90 }
+  }
+}

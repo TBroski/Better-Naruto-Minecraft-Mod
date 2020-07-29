@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "benarutomod:wind_symbol"
+    },
+    "title": {
+      "translate": "advancements.benarutomod.windnature.title"
+    },
+    "description": {
+      "translate": "advancements.benarutomod.windnature.text"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kao": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 5
+  },
+  "parent": "benarutomod:chakra"
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "benarutomod:fire_symbol"
+    },
+    "title": {
+      "translate": "advancements.benarutomod.firenature.title"
+    },
+    "description": {
+      "translate": "advancements.benarutomod.firenature.text"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kao": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 5
+  },
+  "parent": "benarutomod:chakra"
+}

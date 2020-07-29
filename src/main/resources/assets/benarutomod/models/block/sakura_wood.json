@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "benarutomod:blocks/sakura_log",
+    "side": "benarutomod:blocks/sakura_log"
+  }
+}

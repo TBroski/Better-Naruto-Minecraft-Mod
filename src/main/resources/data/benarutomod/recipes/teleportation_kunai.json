@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":
+  [
+
+    {
+      "item": "benarutomod:kunai"
+    },
+
+    {
+      "item": "benarutomod:teleportation_paper"
+    }
+  ],
+
+  "result":
+  {
+    "item": "benarutomod:teleportation_kunai",
+    "count": 1
+  }
+}

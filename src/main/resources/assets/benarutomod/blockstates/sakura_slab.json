@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "benarutomod:block/sakura_slab" },
+    "type=top": { "model": "benarutomod:block/sakura_slab_top" },
+    "type=double": { "model": "benarutomod:block/sakura_planks" }
+  }
+}

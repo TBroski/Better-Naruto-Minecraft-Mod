@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "benarutomod:blocks/sakura_planks",
+    "top": "benarutomod:blocks/sakura_planks",
+    "side": "benarutomod:blocks/sakura_planks"
+  }
+}

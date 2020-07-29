@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":
+  [
+
+    {
+      "item": "minecraft:ender_pearl"
+    },
+
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+
+  "result":
+  {
+    "item": "benarutomod:teleportation_paper",
+    "count": 1
+  }
+}

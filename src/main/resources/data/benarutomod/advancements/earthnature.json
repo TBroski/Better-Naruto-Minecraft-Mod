@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "benarutomod:earth_symbol"
+    },
+    "title": {
+      "translate": "advancements.benarutomod.earthnature.title"
+    },
+    "description": {
+      "translate": "advancements.benarutomod.earthnature.text"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kao": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 5
+  },
+  "parent": "benarutomod:chakra"
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y":  { "model": "benarutomod:block/stripped_sakura_log" },
+    "axis=z":   { "model": "benarutomod:block/stripped_sakura_log", "x": 90 },
+    "axis=x":   { "model": "benarutomod:block/stripped_sakura_log", "x": 90, "y": 90 }
+  }
+}

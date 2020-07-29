@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":
+  [
+
+    {
+      "item": "minecraft:book"
+    },
+
+    {
+      "item": "minecraft:cyan_dye"
+    }
+  ],
+
+  "result":
+  {
+    "item": "benarutomod:diluted_rations_pill",
+    "count": 1
+  }
+}
