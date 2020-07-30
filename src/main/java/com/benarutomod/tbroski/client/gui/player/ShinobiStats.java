@@ -68,7 +68,7 @@ public class ShinobiStats extends Screen {
         addButton(guiButtonSettingsWheel = new GuiButtonSettingsWheel(this.width - 31, 10, $ -> {
             Minecraft.getInstance().displayGuiScreen(new RenderSettings());
         }));
-        addButton(guiButtonArrowUp = new GuiButtonArrowUp(this.guiLeft + 50, this.guiTop - 15, $ -> {
+        addButton(guiButtonArrowUp = new GuiButtonArrowUp(this.guiLeft + 50, this.guiTop - 15, true, $ -> {
             this.onGuiButtonArrowUpPress();
         }));
         addButton(guiButtonArrowDown = new GuiButtonArrowDown(this.guiLeft + 50, this.guiTop + 15, $ -> {
