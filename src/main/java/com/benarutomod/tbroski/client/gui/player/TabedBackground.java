@@ -8,9 +8,12 @@ import com.benarutomod.tbroski.client.gui.widgets.GuiButtonTab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 
@@ -23,15 +26,10 @@ public abstract class TabedBackground extends Screen {
     private int guiLeft;
     private int guiTop;
 
-    private int openedTab;
-    private GuiButtonTab guiButtonTab0;
-    private GuiButtonTab guiButtonTab1;
-    private GuiButtonTab guiButtonTab2;
-    private GuiButtonTab guiButtonTab3;
-    private GuiButtonTab guiButtonTab4;
-    private GuiButtonTab guiButtonTab5;
+    public int openedTab;
 
-    public abstract ArrayList<GuiButtonTab> getTabs();
+    public abstract void registerTabs();
+    public abstract void renderPage(int openedTab);
 
     protected TabedBackground(ITextComponent titleIn) {
         super(titleIn);
@@ -41,36 +39,20 @@ public abstract class TabedBackground extends Screen {
 
     @Override
     protected void init() {
-        buttons.clear();
-
         this.guiLeft = this.width / 2;
         this.guiTop = this.height / 2;
+        registerTabs();
 
-        int tabSize = getTabs().size();
-        if (tabSize > 6) {
-            System.out.println("ERROR: Too many tabs in." + getTabs());
+/*        addButton(new GuiButtonTab(this.getWidthInFromTab(1), this.getHeightInFromTab(1), 220, 220, 1, "Chakra Control", $ -> {
+            //openedTab = 0;
+            System.out.println("CALLED");
+        }));*/
+
+        int tabSize = this.buttons.size();
+        if (tabSize > 8) {
+            System.out.println("ERROR: Too many tabs in. Tabs: " + buttons);
         }
 
-        for (GuiButtonTab tab : getTabs()) {
-            if (tabSize > 0 && tab == getTabs().get(0)) {
-                addButton(guiButtonTab0 = tab);
-            }
-            if (tabSize > 1 && tab == getTabs().get(1)) {
-                addButton(guiButtonTab1 = tab);
-            }
-            if (tabSize > 2 && tab == getTabs().get(2)) {
-                addButton(guiButtonTab2 = tab);
-            }
-            if (tabSize > 3 && tab == getTabs().get(3)) {
-                addButton(guiButtonTab3 = tab);
-            }
-            if (tabSize > 4 && tab == getTabs().get(4)) {
-                addButton(guiButtonTab4 = tab);
-            }
-            if (tabSize > 5 && tab == getTabs().get(5)) {
-                addButton(guiButtonTab5 = tab);
-            }
-        }
         super.init();
     }
 
@@ -84,11 +66,23 @@ public abstract class TabedBackground extends Screen {
         IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
 
         mc.textureManager.bindTexture(MAIN_TEXTURE);
-        mc.ingameGUI.blit(guiLeft - 84, guiTop - 55, 0, 63, 168, 111);
+        mc.ingameGUI.blit(guiLeft - 112, guiTop - 73, 0, 63, 224, 145);
 
-        for (GuiButtonTab tab : getTabs()) {
-            tab.renderButton(p_render_1_, p_render_2_, p_render_3_);
+        for (Widget tab : this.buttons) {
+            if (tab instanceof GuiButtonTab) {
+                if (!((GuiButtonTab) tab).toggled) tab.renderButton(p_render_1_, p_render_2_, p_render_3_);
+            }
         }
+        mc.ingameGUI.blit(guiLeft - 112, guiTop - 73, 0, 209, 224, 4);
+        for (Widget tab : this.buttons) {
+            if (tab instanceof GuiButtonTab) {
+                if (((GuiButtonTab) tab).toggled) tab.renderButton(p_render_1_, p_render_2_, p_render_3_);
+            }
+        }
+
+        checkForToggled();
+        checkForToolTip(p_render_1_, p_render_2_);
+        renderPage(openedTab);
     }
 
     @Override
@@ -102,15 +96,34 @@ public abstract class TabedBackground extends Screen {
     }
 
     public int getWidthInFromTab(int tabNumber) {
-        if (tabNumber > 5) {
-            System.out.println("Too many tabs (Max 6, including 0). " + tabNumber);
+        if (tabNumber > 7) {
+            System.out.println("Too many tabs (Max 8, including 0). " + tabNumber);
             return 0;
         }
-        return (this.guiLeft - 84) + tabNumber * 28;
+        return (this.guiLeft - 112) + tabNumber * 28;
     }
 
-
     public int getHeightInFromTab(int tabNumber) {
-        return guiTop - 86;
+        return guiTop - 101;
+    }
+
+    private void checkForToggled() {
+        for (Widget tab : this.buttons) {
+            if (tab instanceof GuiButtonTab) {
+                if (((GuiButtonTab) tab).toggled && ((GuiButtonTab) tab).getTab() != openedTab) {
+                    ((GuiButtonTab) tab).toggled = false;
+                }
+            }
+        }
+    }
+
+    private void checkForToolTip(int p_render_1_, int p_render_2_) {
+        for (Widget tab : this.buttons) {
+            if (tab instanceof GuiButtonTab) {
+                if (tab.isHovered()) {
+                    renderTooltip(((GuiButtonTab) tab).getToolTip(), p_render_1_, p_render_2_);
+                }
+            }
+        }
     }
 }
