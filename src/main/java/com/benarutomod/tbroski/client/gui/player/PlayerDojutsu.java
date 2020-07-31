@@ -4,16 +4,13 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
-import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsu;
+import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsuScreen;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonDojutsu;
 import com.benarutomod.tbroski.common.BeNMDojutsu;
 import com.benarutomod.tbroski.init.DojutsuInit;
-import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextComponent;
@@ -47,7 +44,8 @@ public class PlayerDojutsu extends Screen{
 
         addButton(guiButtonSharingan = new GuiButtonDojutsu(this.guiLeft - 32, this.guiTop - 32, DojutsuInit.MANGEKYOU_SHARINGAN, $ -> {
                 if ((playerc.returnPlayerLeftDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN && playerc.returnPlayerLeftDojutsu() != DojutsuInit.SHARINGAN) || (playerc.returnPlayerLeftDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN && playerc.returnPlayerRightDojutsu() != DojutsuInit.SHARINGAN)) {
-                    mc.displayGuiScreen(new SharinganJutsu());
+                    //mc.displayGuiScreen(new SharinganJutsu());
+                    mc.displayGuiScreen(new SharinganJutsuScreen());
                 }
                 else {
                     player.sendMessage(new StringTextComponent("You don't posses a Mangekyou Sharingan."));

@@ -12,8 +12,6 @@ import java.util.function.Supplier;
 
 public class PacketAdvancement {
 
-    //1 = Chakra
-
     private String advancement;
 
     public PacketAdvancement(String advancement)

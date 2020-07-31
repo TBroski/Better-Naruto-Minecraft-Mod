@@ -14,7 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 
 
-public abstract class TabedBackground extends Screen {
+public abstract class AbstractTabedBackground extends Screen {
 
     private static final ResourceLocation MAIN_TEXTURE = new ResourceLocation(Main.MODID, "textures/gui/tabedbackground.png");
 
@@ -23,10 +23,10 @@ public abstract class TabedBackground extends Screen {
 
     public int openedTab;
 
-    public abstract void registerTabs();
+    public abstract void registerTabsAndWidgets(IPlayerHandler playerCapability);
     public abstract void renderPage(int openedTab, int p_render_1_, int p_render_2_, float p_render_3_);
 
-    protected TabedBackground(ITextComponent titleIn) {
+    protected AbstractTabedBackground(ITextComponent titleIn) {
         super(titleIn);
     }
 
@@ -36,7 +36,12 @@ public abstract class TabedBackground extends Screen {
     protected void init() {
         this.guiLeft = this.width / 2;
         this.guiTop = this.height / 2;
-        registerTabs();
+        Minecraft mc = Minecraft.getInstance();
+        AbstractClientPlayerEntity player = mc.player;
+        LazyOptional<IPlayerHandler> player_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
+
+        registerTabsAndWidgets(playerc);
 
         int tabSize = 0;
         for (Widget tab : this.buttons) {

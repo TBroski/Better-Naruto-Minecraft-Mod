@@ -4,7 +4,6 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
-import com.benarutomod.tbroski.client.gui.DojutsuTransplant;
 import com.benarutomod.tbroski.client.gui.widgets.shinobistats.*;
 import com.benarutomod.tbroski.client.gui.widgets.player.GuiButtonPlayerArm;
 import com.benarutomod.tbroski.client.gui.widgets.player.GuiButtonPlayerBody;
@@ -71,7 +70,7 @@ public class ShinobiStats extends Screen {
         addButton(guiButtonArrowUp = new GuiButtonArrowUp(this.guiLeft + 50, this.guiTop - 15, true, $ -> {
             this.onGuiButtonArrowUpPress();
         }));
-        addButton(guiButtonArrowDown = new GuiButtonArrowDown(this.guiLeft + 50, this.guiTop + 15, $ -> {
+        addButton(guiButtonArrowDown = new GuiButtonArrowDown(this.guiLeft + 50, this.guiTop + 15, true, $ -> {
             this.onGuiButtonArrowDownPress();
         }));
         addButton(guiButtonPlayerHead = new GuiButtonPlayerHead(this.guiLeft - 16, this.guiTop - 48, player, $ -> {
@@ -79,7 +78,7 @@ public class ShinobiStats extends Screen {
         }));
         addButton(guiButtonPlayerBody = new GuiButtonPlayerBody(this.guiLeft - 16, this.guiTop - 16, player, $ -> {
             //Minecraft.getInstance().displayGuiScreen(new PlayerChakraandBodyInfusion());
-            Minecraft.getInstance().displayGuiScreen(new TestBody());
+            Minecraft.getInstance().displayGuiScreen(new PlayerBody());
         }));
         addButton(guiButtonPlayerArm1 = new GuiButtonPlayerArm(this.guiLeft - 32, this.guiTop - 16, player, $ -> {
             Minecraft.getInstance().displayGuiScreen(new PlayerJutsu());

@@ -17,14 +17,6 @@ public class NetworkLoader {
     public static SimpleChannel INSTANCE;
     private static int id = 1;
 
-
-    private final static ResourceLocation res = new ResourceLocation(Main.MODID);
-    public static final SimpleChannel channel = NetworkRegistry.ChannelBuilder.named(res)
-            .clientAcceptedVersions(s -> Objects.equals(s, "1"))
-            .serverAcceptedVersions(s -> Objects.equals(s, "1"))
-            .networkProtocolVersion(() -> "1")
-            .simpleChannel();
-
     public static int nextID() {
         return id++;
     }
@@ -58,5 +50,7 @@ public class NetworkLoader {
         INSTANCE.registerMessage(nextID(), PacketBackItem.class, PacketBackItem::encode, PacketBackItem::decode, PacketBackItem::handle);
         INSTANCE.registerMessage(nextID(), PacketBackSlotSync.class, PacketBackSlotSync::encode, PacketBackSlotSync::decode, PacketBackSlotSync::handle);
         INSTANCE.registerMessage(nextID(), PacketCurseMarkMeleeAttacked.class, PacketCurseMarkMeleeAttacked::encode, PacketCurseMarkMeleeAttacked::decode, PacketCurseMarkMeleeAttacked::handle);
+        INSTANCE.registerMessage(nextID(), PacketPlayerBodyModeSync.class, PacketPlayerBodyModeSync::encode, PacketPlayerBodyModeSync::decode, PacketPlayerBodyModeSync::handle);
+        INSTANCE.registerMessage(nextID(), PacketPlayerHasBodyModeSync.class, PacketPlayerHasBodyModeSync::encode, PacketPlayerHasBodyModeSync::decode, PacketPlayerHasBodyModeSync::handle);
     }
 }

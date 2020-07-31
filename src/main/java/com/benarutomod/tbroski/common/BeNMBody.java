@@ -7,6 +7,7 @@ public class BeNMBody {
     private final String mode;
     private boolean flight;
     private Effect effect;
+    private Effect attackingEffect;
 
     public BeNMBody(String mode) {
         this.mode = mode;
@@ -26,11 +27,20 @@ public class BeNMBody {
         return this;
     }
 
+    public BeNMBody setAttackingEffect(Effect effect) {
+        this.attackingEffect = attackingEffect;
+        return this;
+    }
+
     public boolean allowsPlayerFlight() {
         return this.flight;
     }
 
     public Effect getPlayerEffect() {
         return this.effect;
+    }
+
+    public Effect getAttackingEffect() {
+        return this.attackingEffect;
     }
 }

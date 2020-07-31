@@ -64,15 +64,10 @@ public class DojutsuEntityFinder {
                     GL11.glPushMatrix();
 
                     ActiveRenderInfo camera = Minecraft.getInstance().gameRenderer.getActiveRenderInfo();
-                    //PlayerEntity camera = player;
                     GL11.glRotated(MathHelper.wrapDegrees(camera.getPitch()), 1, 0, 0);
                     GL11.glRotated(MathHelper.wrapDegrees(camera.getYaw() + 180.0 + Minecraft.getInstance().gameSettings.fov - 70), 0, 1, 0);
-                    //GL11.glRotated(MathHelper.wrapDegrees(camera.getPitch(event.getPartialTicks())), 1, 0, 0);
-                    //GL11.glRotated(MathHelper.wrapDegrees(camera.getYaw(event.getPartialTicks()) + 180.0), 0, 1, 0);
                     Vec3d camPos = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
                     GL11.glTranslated(-camPos.x, -camPos.y, -camPos.z);
-                    //Vec3d camPos = player.getEyePosition(event.getPartialTicks());
-                    //GL11.glTranslated(-camPos.x, -camPos.y, -camPos.z);
 
                     renderBoxes(entities, event);
 

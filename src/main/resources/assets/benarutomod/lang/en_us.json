@@ -148,5 +148,10 @@
   "jutsu.benarutomod.lightningarrow": "Lightning Arrow Jutsu (Cost 5)",
   "jutsu.benarutomod.windarrow": "Wind Arrow Jutsu (Cost 5)",
   "jutsu.benarutomod.moltenfist": "Molten Fist Technigue (Cost 4)",
-  "jutsu.benarutomod.fistrock": "Fist Rock Technigue (Cost 4)"
+  "jutsu.benarutomod.fistrock": "Fist Rock Technigue (Cost 4)",
+  "jutsu.benarutomod.amaterasu": "Amaterasu (Cost 15)",
+  "jutsu.benarutomod.tsukuyomi": "Tsukuyomi (Cost 8)",
+
+  "body.benarutomod.cursemarkmode": "Curse Mark Mode",
+  "body.benarutomod.toadsagemode": "Toad Sage Mode"
 }

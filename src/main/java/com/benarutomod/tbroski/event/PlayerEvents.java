@@ -8,10 +8,7 @@ import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.common.BeNMClan;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.entity.shinobi.AbstractShinobiEntity;
-import com.benarutomod.tbroski.init.ClanInit;
-import com.benarutomod.tbroski.init.DamageInit;
-import com.benarutomod.tbroski.init.DojutsuInit;
-import com.benarutomod.tbroski.init.ItemInit;
+import com.benarutomod.tbroski.init.*;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerDojutsuSync;
 import com.benarutomod.tbroski.networking.packets.chakra.*;
@@ -30,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -163,17 +161,44 @@ public class PlayerEvents {
     }
 
     public static void checkPlayerDojutsuDamage(LivingDamageEvent event) {
-        PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-        LazyOptional<IPlayerHandler> playerc = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-        IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
+        if (event.getEntityLiving() instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+            LazyOptional<IPlayerHandler> playerc = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+            IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
 
-        if (player_cap.returnBodyInfusionToggled() && event.getSource() != DamageInit.DODGED && (player_cap.returnPlayerLeftDojutsu().canDodgeDamage() || player_cap.returnPlayerRightDojutsu().canDodgeDamage())) {
-            if (new Random().nextInt(6) == 0) {
-                event.setCanceled(true);
-                player.attackEntityFrom(DamageInit.DODGED, event.getAmount() - Config.SERVER.sharinganDodgedDamage.get());
-                player.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("event." + Main.MODID + ".livingdamage.dodgedmessage").getString() + Config.SERVER.sharinganDodgedDamage.get()), true);
+            if (player_cap.returnBodyInfusionToggled() && event.getSource() != DamageInit.DODGED && (player_cap.returnPlayerLeftDojutsu().canDodgeDamage() || player_cap.returnPlayerRightDojutsu().canDodgeDamage())) {
+                if (new Random().nextInt(6) == 0) {
+                    event.setCanceled(true);
+                    player.attackEntityFrom(DamageInit.DODGED, event.getAmount() - Config.SERVER.sharinganDodgedDamage.get());
+                    player.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("event." + Main.MODID + ".livingdamage.dodgedmessage").getString() + Config.SERVER.sharinganDodgedDamage.get()), true);
+                }
             }
         }
+        if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
+            LazyOptional<IPlayerHandler> playerc = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+            IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
+            if (event.getSource().damageType.equalsIgnoreCase("player")) {
+                if (player_cap.returnBodyInfusionToggled()) {
+
+                    if (player_cap.returnPlayerBodyMode().getAttackingEffect() != null) {
+                        if (new Random().nextInt(5) == 0) {
+                            event.getEntityLiving().addPotionEffect(new EffectInstance(player_cap.returnPlayerBodyMode().getAttackingEffect(), 40, 1));
+                        }
+                    }
+
+                    if (player_cap.returnPlayerLeftDojutsu().doesRestrictChakra() || player_cap.returnPlayerRightDojutsu().doesRestrictChakra()) {
+                        if (event.getEntityLiving() instanceof PlayerEntity) {
+                            event.getEntityLiving().getPersistentData().putInt("restrictedchakra", (((int) player_cap.returnChakraControl()) * 25) + 25);
+                        }
+                        else {
+                            event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SLOWNESS, (((int) player_cap.returnChakraControl()) * 25) + 25, 1));
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     public static void checkPlayerDojutsuDeath(LivingDeathEvent event) {

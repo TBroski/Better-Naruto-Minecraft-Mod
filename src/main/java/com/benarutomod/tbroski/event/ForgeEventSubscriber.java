@@ -243,9 +243,7 @@ public class ForgeEventSubscriber {
     public void livingDamage(LivingDamageEvent event) {
         DamageSource source = event.getSource();
         KakuzuEntity.cancelDamage(event);
-        if (event.getEntityLiving() instanceof PlayerEntity) {
-            PlayerEvents.checkPlayerDojutsuDamage(event);
-        }
+        PlayerEvents.checkPlayerDojutsuDamage(event);
         if (source.damageType.equalsIgnoreCase("player")) {
             PlayerEntity playerEntity = (PlayerEntity) source.getTrueSource();
             LazyOptional<IPlayerHandler> playerc = playerEntity.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
@@ -255,16 +253,6 @@ public class ForgeEventSubscriber {
             }
             if (playerEntity.getPersistentData().getBoolean("fistrocktechnigue") == true) {
                 event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1));
-            }
-            if (player_cap.returnBodyInfusionToggled()) {
-                if (player_cap.returnPlayerLeftDojutsu().doesRestrictChakra() || player_cap.returnPlayerRightDojutsu().doesRestrictChakra()) {
-                    if (event.getEntityLiving() instanceof PlayerEntity) {
-                        event.getEntityLiving().getPersistentData().putInt("restrictedchakra", (((int) player_cap.returnChakraControl()) * 25) + 25);
-                    }
-                    else {
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SLOWNESS, (((int) player_cap.returnChakraControl()) * 25) + 25, 1));
-                    }
-                }
             }
         }
     }
