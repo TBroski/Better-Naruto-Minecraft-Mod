@@ -105,7 +105,7 @@ public class PlayerBody extends AbstractTabedBackground {
                 chakraControlUp.visible = true;
                 chakraControlUp.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 font.drawStringWithShadow("Statistics", this.guiLeft - 70, this.guiTop - 50, 0x453100);
-                font.drawString("Cost 2 BeNM Points", this.guiLeft + 25, this.guiTop + 5, 0x453100);
+                font.drawString("Cost 2 BeNM Points", this.guiLeft + 15, this.guiTop + 20, 0x453100);
                 font.drawString("Chakra Control Level = " + playerc.returnChakraControl(), this.guiLeft - 105, this.guiTop - 35, 0x453100);
                 font.drawString("Jutsu Cost = Jutsu Cost * 0." + (int) (100 - playerc.returnChakraControl()), this.guiLeft - 105, this.guiTop - 25, 0x453100);
                 break;

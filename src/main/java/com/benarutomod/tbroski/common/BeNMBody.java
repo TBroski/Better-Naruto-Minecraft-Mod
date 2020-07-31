@@ -28,7 +28,7 @@ public class BeNMBody {
     }
 
     public BeNMBody setAttackingEffect(Effect effect) {
-        this.attackingEffect = attackingEffect;
+        this.attackingEffect = effect;
         return this;
     }
 

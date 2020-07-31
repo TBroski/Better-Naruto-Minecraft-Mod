@@ -11,8 +11,8 @@ public class BodyInit {
 
     public static final BeNMBody NULL = new BeNMBody("null");
 
-    public static final BeNMBody TOAD_SAGE_MODE = new BeNMBody("toad_sage").setAttackingEffect(Effects.WITHER);
-    public static final BeNMBody CURSE_MARK_MODE = new BeNMBody("curse_mark").setPlayerEffect(EffectInit.CHAKRA_REG.get());
+    public static final BeNMBody TOAD_SAGE_MODE = new BeNMBody("toad_sage").setPlayerEffect(EffectInit.SAGE_CHAKRA_REG.get());
+    public static final BeNMBody CURSE_MARK_MODE = new BeNMBody("curse_mark").setAttackingEffect(Effects.WITHER);
 
     public static void register() {
         BODIES.add(NULL);

@@ -180,13 +180,11 @@ public class PlayerEvents {
             IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
             if (event.getSource().damageType.equalsIgnoreCase("player")) {
                 if (player_cap.returnBodyInfusionToggled()) {
-
                     if (player_cap.returnPlayerBodyMode().getAttackingEffect() != null) {
                         if (new Random().nextInt(5) == 0) {
                             event.getEntityLiving().addPotionEffect(new EffectInstance(player_cap.returnPlayerBodyMode().getAttackingEffect(), 40, 1));
                         }
                     }
-
                     if (player_cap.returnPlayerLeftDojutsu().doesRestrictChakra() || player_cap.returnPlayerRightDojutsu().doesRestrictChakra()) {
                         if (event.getEntityLiving() instanceof PlayerEntity) {
                             event.getEntityLiving().getPersistentData().putInt("restrictedchakra", (((int) player_cap.returnChakraControl()) * 25) + 25);

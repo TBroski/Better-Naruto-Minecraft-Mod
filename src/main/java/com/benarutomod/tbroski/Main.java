@@ -87,6 +87,7 @@ public class Main {
 		CapabilityManager.INSTANCE.register(IPlayerHandler.class, new PlayerCapability.Storage(), PlayerCapability::new);
 		EntityInit.registerEntityWorldSpawns();
 		FeatureInit.registerBiomeFeatures();
+		BodyInit.register();
 	}
 
 	private void onClientSetup(FMLClientSetupEvent e)
