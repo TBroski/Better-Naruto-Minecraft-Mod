@@ -3,6 +3,7 @@ package com.benarutomod.tbroski.effects;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
+import com.benarutomod.tbroski.common.BeNMRegistry;
 import com.benarutomod.tbroski.common.IBeNMBiome;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraSync;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 public class SageChakraEffect extends Effect {
 
     public SageChakraEffect() {
-        super(EffectType.BENEFICIAL, 0x7CD7DE);
+        super(EffectType.BENEFICIAL, 0x00FF00);
     }
 
     @Override

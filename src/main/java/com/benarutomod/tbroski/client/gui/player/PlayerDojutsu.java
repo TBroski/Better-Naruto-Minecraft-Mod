@@ -3,6 +3,8 @@ package com.benarutomod.tbroski.client.gui.player;
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 //import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsuScreen;
+import com.benarutomod.tbroski.client.gui.player.jutsu.EightPathJutsuScreen;
+import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsuScreen;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonDojutsu;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonTab;
 import com.benarutomod.tbroski.common.BeNMDojutsu;
@@ -27,7 +29,7 @@ public class PlayerDojutsu extends AbstractTabedBackground {
         }));
         addButton(guiButtonSharingan = new GuiButtonDojutsu(this.guiLeft - 90, this.guiTop - 50, DojutsuInit.MANGEKYOU_SHARINGAN, $ -> {
             if ((playerCapability.returnPlayerLeftDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN && playerCapability.returnPlayerLeftDojutsu() != DojutsuInit.SHARINGAN) || (playerCapability.returnPlayerLeftDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN && playerCapability.returnPlayerRightDojutsu() != DojutsuInit.SHARINGAN)) {
-                //Minecraft.getInstance().displayGuiScreen(new SharinganJutsuScreen());
+                Minecraft.getInstance().displayGuiScreen(new SharinganJutsuScreen());
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't posses a Mangekyou Sharingan."));
@@ -35,7 +37,7 @@ public class PlayerDojutsu extends AbstractTabedBackground {
         }));
         addButton(guiButtonRinnegan = new GuiButtonDojutsu(this.guiLeft - 70, this.guiTop - 50, DojutsuInit.RINNEGAN, $ -> {
             if (playerCapability.returnPlayerLeftDojutsu().canUseEightPaths() || playerCapability.returnPlayerRightDojutsu().canUseEightPaths()) {
-                //Minecraft.getInstance().displayGuiScreen(new SharinganJutsuScreen());
+                Minecraft.getInstance().displayGuiScreen(new EightPathJutsuScreen());
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't posses a dojutsu that can use Eight Paths Techniques."));

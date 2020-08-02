@@ -1,12 +1,12 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu.wind;
 
-import com.benarutomod.tbroski.entity.projectile.jutsu.AbstractJutsuEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.AbstractNinjutsuEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.world.World;
 
-public abstract class AbstractWindJutsuEntity extends AbstractJutsuEntity {
+public abstract class AbstractWindJutsuEntity extends AbstractNinjutsuEntity {
     public AbstractWindJutsuEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
         super(type, worldIn);
     }

@@ -60,7 +60,7 @@ public class CapabilityHandler {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketKeybindSet(8, playercap.returnKeybind8(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketKeybindSet(9, playercap.returnKeybind9(), true));
             for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
-                NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(jutsu.getCorrelatedPlugin() + "." + jutsu.getName(), jutsu.hasJutsu(playercap), true));
+                NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(jutsu.getName(), jutsu.hasJutsu(playercap), true));
             }
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketBeNMPointsSync(playercap.returnBeNMPoints(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerEntityAffiliationSync(playercap.returnPlayerEntityAffiliation(), true));

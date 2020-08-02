@@ -14,7 +14,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 
-public abstract class AbstractGenjutsuProjectileEntity extends AbstractJutsuEntity{
+public abstract class AbstractGenjutsuProjectileEntity extends AbstractJutsuEntity {
     public AbstractGenjutsuProjectileEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
         super(type, worldIn);
     }

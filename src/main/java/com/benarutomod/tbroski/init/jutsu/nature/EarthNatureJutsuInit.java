@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.init.jutsu;
+package com.benarutomod.tbroski.init.jutsu.nature;
 
 import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
 import com.benarutomod.tbroski.common.BeNMJutsu;
@@ -52,7 +52,7 @@ public class EarthNatureJutsuInit {
         }, (playerCapability) -> playerCapability.hasMudMoatJutsuBoolean()));
 
         jutsuRegistry.register(new BeNMJutsu(pluginIn, "fist_rock", BeNMJutsu.Type.EARTH_NATURE, 4, 0.5F, 64, 32, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
-            //Suspected Syncing Error, needs to be fixed pre-release
+            //Calls NBT in ForgeEventSubscriber::livingDamage
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);

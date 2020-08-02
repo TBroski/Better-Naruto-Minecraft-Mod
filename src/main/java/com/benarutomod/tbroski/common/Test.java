@@ -1,7 +1,10 @@
 package com.benarutomod.tbroski.common;
 
 import com.benarutomod.tbroski.Main;
-import com.benarutomod.tbroski.init.jutsu.*;
+import com.benarutomod.tbroski.init.ClanInit;
+import com.benarutomod.tbroski.init.DojutsuInit;
+import com.benarutomod.tbroski.init.jutsu.ERankJutsuInit;
+import com.benarutomod.tbroski.init.jutsu.nature.*;
 
 import java.util.List;
 
@@ -14,14 +17,23 @@ public class Test implements IBeNMPlugin {
     }
 
     @Override
-    public void registerNewDojutsus(List<BeNMDojutsu> dojutsus) {
-
+    public void registerNewDojutsus(BeNMRegistry.DojutsuRegistry dojutsuRegistry) {
+        dojutsuRegistry.register(DojutsuInit.NULL);
+        dojutsuRegistry.register(DojutsuInit.EMPTY);
+        dojutsuRegistry.register(DojutsuInit.SHARINGAN);
+        dojutsuRegistry.register(DojutsuInit.MANGEKYOU_SHARINGAN);
+        dojutsuRegistry.register(DojutsuInit.RINNEGAN);
+        dojutsuRegistry.register(DojutsuInit.BYAKUGAN);
     }
 
     @Override
-    public void registerNewClans(List<BeNMClan> clans) {
-
+    public void registerNewClans(BeNMRegistry.ClanRegistry clanRegistry) {
+        clanRegistry.register(ClanInit.NULL);
+        clanRegistry.register(ClanInit.UCHIHA);
+        clanRegistry.register(ClanInit.HYUGA);
+        clanRegistry.register(ClanInit.UZUMAKI);
     }
+
 
     @Override
     public void registerNewBodyModes(List<BeNMBody> bodies) {
@@ -36,5 +48,6 @@ public class Test implements IBeNMPlugin {
         WindNatureJutsuInit.registerWindJutsu(jutsuRegistry, this);
         LightningNatureJutsuInit.registerLightningJutsu(jutsuRegistry, this);
         MagnetNatureJutsuInit.registerMagnetJutsu(jutsuRegistry, this);
+        ERankJutsuInit.registerERankJutsu(jutsuRegistry, this);
     }
 }

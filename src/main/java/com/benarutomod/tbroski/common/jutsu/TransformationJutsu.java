@@ -6,9 +6,12 @@ import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.util.LazyOptional;
@@ -22,15 +25,18 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class TransformationJutsu {
     public static final int chakraAmount = 10;
 
+    // Has a lot of bad code, needs lots of work!
     public static final int TransformationJutsuID = 23;
     public static void TransormationJutsu(PlayerEntity playerIn, int chakraAmount) {
             LazyOptional<IPlayerHandler> capabilities = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
-            if (playercap.returnChakra() > (chakraAmount * ((100 - playercap.returnChakraControl()) * 0.01))) {
-                    RayTraceResult rayTraceResult = Minecraft.getInstance().objectMouseOver;
-                    if (rayTraceResult.getType() == RayTraceResult.Type.ENTITY) {
-                        playercap.addChakra((float) (-chakraAmount * ((100 - playercap.returnChakraControl()) * 0.01)));
-                        Entity entity = ((EntityRayTraceResult) rayTraceResult).getEntity();
+                Vec3d vec3d = playerIn.getEyePosition(1.0F);
+                Vec3d vec3d1 = playerIn.getLook(1.0F);
+                Vec3d vec3d2 = vec3d.add(vec3d1.x * 4, vec3d1.y * 4, vec3d1.z * 4);
+                AxisAlignedBB axisalignedbb = playerIn.getBoundingBox().expand(vec3d1.scale(4)).grow(1.0D, 1.0D, 1.0D);
+                EntityRayTraceResult rayTraceResult = ProjectileHelper.rayTraceEntities(playerIn, vec3d, vec3d2, axisalignedbb, $ -> !playerIn.isSpectator() && playerIn.canBeCollidedWith(), 4);
+                if (rayTraceResult != null) {
+                        Entity entity = rayTraceResult.getEntity();
                         if (entity instanceof LivingEntity && (!(entity instanceof PlayerEntity))) {
                             LivingEntity livingEntity = (LivingEntity) entity;
                             if (playerIn.getPersistentData().getBoolean("mobcontrol") == false) {
@@ -59,10 +65,6 @@ public class TransformationJutsu {
                     playerIn.getPersistentData().putInt("controlledmobid", -1);
                     Minecraft.getInstance().player.getPersistentData().putInt("controlledmobid", -1);
             }
-            else {
-                playerIn.sendMessage(new StringTextComponent("Not Enough Chakra"));
-            }
-        }
 
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent event)

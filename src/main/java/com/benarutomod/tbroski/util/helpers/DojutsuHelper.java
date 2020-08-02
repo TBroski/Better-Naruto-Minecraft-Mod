@@ -1,6 +1,7 @@
 package com.benarutomod.tbroski.util.helpers;
 
 import com.benarutomod.tbroski.common.BeNMDojutsu;
+import com.benarutomod.tbroski.common.BeNMRegistry;
 import com.benarutomod.tbroski.init.DojutsuInit;
 
 public class DojutsuHelper {
@@ -11,7 +12,7 @@ public class DojutsuHelper {
     }
     
     public static BeNMDojutsu getDojutsuFromString(String dojutsu) {
-        for (BeNMDojutsu benmDojutsu : DojutsuInit.DOJUTSUS) {
+        for (BeNMDojutsu benmDojutsu : BeNMRegistry.DOJUTSUS.getValues()) {
             if (benmDojutsu.getString().equalsIgnoreCase(dojutsu)) {
                 return benmDojutsu;
             }

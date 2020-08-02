@@ -6,6 +6,7 @@ import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.world.World;
 
 public abstract class AbstractJutsuEntity extends ProjectileItemEntity {
+
     public AbstractJutsuEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
         super(type, worldIn);
     }

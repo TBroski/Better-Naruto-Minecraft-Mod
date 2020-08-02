@@ -1,6 +1,7 @@
-package com.benarutomod.tbroski.client.gui.player.jutsu;
+package com.benarutomod.tbroski.client.gui.player.jutsu.nature;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
 import com.benarutomod.tbroski.common.BeNMJutsu;
 import com.benarutomod.tbroski.common.BeNMRegistry;

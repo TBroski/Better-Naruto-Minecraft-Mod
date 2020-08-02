@@ -5,6 +5,8 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
+import com.benarutomod.tbroski.networking.NetworkLoader;
+import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraSync;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.widget.button.Button;
@@ -15,6 +17,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class BeNMJutsu {
 
@@ -33,6 +36,7 @@ public class BeNMJutsu {
     private final IHasJutsu hasJutsu;
     private ResourceLocation resourceLocation;
     private IExtraCheck extraCheck;
+    private ICancelEventListener onCancelEvent;
 
     public BeNMJutsu(IBeNMPlugin plugin, String registryName, Type type, int beNMPointCost, float chakraCost, int u, int v, boolean toggle, IAction action, IGUIJutsuButtonPress buttonPress, IGUIJutsuUpdateButton updateButton, IJutsuServerSync serverSync, IHasJutsu hasJutsu) {
         this.name = registryName;
@@ -63,6 +67,11 @@ public class BeNMJutsu {
 
     public BeNMJutsu setExtraJutsuChecks(IExtraCheck extraCheck) {
         this.extraCheck = extraCheck;
+        return this;
+    }
+
+    public BeNMJutsu addCancelEventListener(ICancelEventListener onCancelEvent) {
+        this.onCancelEvent = onCancelEvent;
         return this;
     }
 
@@ -103,16 +112,25 @@ public class BeNMJutsu {
         }
         if (playercap.returnChakra() >= (this.getChakraCost() * ((100F - playercap.returnChakraControl()) * 0.01F))) {
             playercap.addChakra((-this.getChakraCost() * ((100F - playercap.returnChakraControl()) * 0.01F)));
-            if (!playercap.returnToggleJutsuMessage()) playerIn.sendMessage(new StringTextComponent(new TranslationTextComponent("jutsu." + this.getCorrelatedPlugin().getPluginId() + "." + this.getName()).getString() + "! " + + (-this.getChakraCost() * ((100 - playercap.returnChakraControl()) * 0.01)) + " Chakra"));
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> playerIn), new PacketChakraSync(playercap.returnChakra()));
+            if (!playercap.returnToggleJutsuMessage() && !this.isToggle()) playerIn.sendMessage(new StringTextComponent(new TranslationTextComponent("jutsu." + this.getCorrelatedPlugin().getPluginId() + "." + this.getName()).getString() + "! " + + (-this.getChakraCost() * ((100 - playercap.returnChakraControl()) * 0.01)) + " Chakra"));
             action.action(playerIn, taijutsuModifier0, taijutsuModifier1, playercap);
         }
         else {
+            if (isToggle()) {
+                throwCancelEvent(playerIn);
+                playerIn.getPersistentData().putBoolean(getCorrelatedPlugin().getPluginId() + "_" + getName(), false);
+            }
             playerIn.sendStatusMessage(new TranslationTextComponent("jutsu." + Main.MODID + ".message.notenoughchakra"), true);
         }
     }
 
     public void update(GuiButtonJutsu jutsuButton, IPlayerHandler playerCapability) {
         update.update(jutsuButton, playerCapability);
+    }
+
+    public void throwCancelEvent(ServerPlayerEntity playerIn) {
+        onCancelEvent.onCancel(playerIn);
     }
 
     public void sync(IPlayerHandler playerCapability, boolean has) {
@@ -170,5 +188,9 @@ public class BeNMJutsu {
 
     public interface IExtraCheck {
         boolean check(ServerPlayerEntity playerIn, int taijutsuModifier0, int taijutsuModifier1);
+    }
+
+    public interface ICancelEventListener {
+        void onCancel(ServerPlayerEntity playerIn);
     }
 }

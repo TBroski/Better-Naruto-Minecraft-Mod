@@ -133,10 +133,10 @@
 
   "jutsu.benarutomod.message.notenoughchakra": "Not Enough Chakra.",
 
-  "jutsu.benarutomod.clone": "Clone Jutsu (Cost 6)",
-  "jutsu.benarutomod.invisibility": "Invisibility Jutsu (Cost 2)",
-  "jutsu.benarutomod.replacement": "Body Replacement Jutsu (Cost 3)",
-  "jutsu.benarutomod.transformation": "Transformation Technique (Cost 5)",
+  "jutsu.benarutomod.clone": "Clone Jutsu",
+  "jutsu.benarutomod.invisibility": "Invisibility Jutsu",
+  "jutsu.benarutomod.replacement": "Body Replacement Jutsu",
+  "jutsu.benarutomod.transformation": "Transformation Technique",
   "jutsu.benarutomod.fireball": "Fireball Jutsu",
   "jutsu.benarutomod.phoenix_flower": "Phoenix Flower Jutsu",
   "jutsu.benarutomod.gale_palm": "Gale Palm Technique",
@@ -152,9 +152,10 @@
   "jutsu.benarutomod.wind_arrow": "Wind Arrow Jutsu",
   "jutsu.benarutomod.molten_fist": "Molten Fist Technique",
   "jutsu.benarutomod.fist_rock": "Fist Rock Technique",
-  "jutsu.benarutomod.amaterasu": "Amaterasu (Cost 15)",
-  "jutsu.benarutomod.tsukuyomi": "Tsukuyomi (Cost 8)",
-  "jutsu.benarutomod.matterrepulsion": "Matter Repulsion Technique",
+  "jutsu.benarutomod.amaterasu": "Amaterasu",
+  "jutsu.benarutomod.tsukuyomi": "Tsukuyomi",
+  "jutsu.benarutomod.matter_repulsion": "Matter Repulsion Technique",
+  "jutsu.benarutomod.self_levitation": "Self Levitation Technique",
 
   "body.benarutomod.cursemarkmode": "Curse Mark Mode",
   "body.benarutomod.toadsagemode": "Toad Sage Mode"

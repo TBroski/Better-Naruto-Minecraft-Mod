@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.init.jutsu;
+package com.benarutomod.tbroski.init.jutsu.nature;
 
 import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
 import com.benarutomod.tbroski.common.BeNMJutsu;
@@ -52,7 +52,7 @@ public class FireNatureJutsuInit {
         }, (playerCapability) -> playerCapability.hasPhoenixFlowerJutsuBoolean()));
 
         jutsuRegistry.register(new BeNMJutsu(pluginIn, "molten_fist", BeNMJutsu.Type.FIRE_NATURE, 4, 0.5F, 16, 32, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
-            //Suspected Syncing Issue, needs to be fixed before release
+            //Calls NBT in ForgeEventSubscriber::livingDamage
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);

@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.init.jutsu;
+package com.benarutomod.tbroski.init.jutsu.nature;
 
 import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
 import com.benarutomod.tbroski.common.BeNMJutsu;
@@ -6,7 +6,10 @@ import com.benarutomod.tbroski.common.BeNMRegistry;
 import com.benarutomod.tbroski.common.IBeNMPlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.FallingBlockEntity;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.*;
+
+import java.util.Random;
 
 public class MagnetNatureJutsuInit {
 
@@ -53,8 +56,11 @@ public class MagnetNatureJutsuInit {
             return false;
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "self_levitation", BeNMJutsu.Type.MAGNET_NATURE, 11, 175F, 96, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
-            playerIn.getPersistentData().putInt("sand_levitation", 100);
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "self_levitation", BeNMJutsu.Type.MAGNET_NATURE, 11, 1.5F, 96, 16, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+            playerIn.abilities.allowFlying = true;
+            playerIn.abilities.isFlying = true;
+            playerIn.sendPlayerAbilities();
+            playerIn.world.addParticle(ParticleTypes.CRIT, playerIn.getPosX() + new Random().nextDouble(), playerIn.getPosY() - 1, playerIn.getPosZ() + new Random().nextDouble(), 0.2, 0.2, 0.2);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
@@ -67,6 +73,12 @@ public class MagnetNatureJutsuInit {
             buttonJutsu.setHasJutsu(playerCapability.hasSelfLevitationJutsuBoolean());
         }, (playerCapability, has) -> {
             playerCapability.setSelfLevitationJutsuBoolean(has);
-        }, (playerCapability) -> playerCapability.hasSelfLevitationJutsuBoolean()));
+        }, (playerCapability) -> playerCapability.hasSelfLevitationJutsuBoolean()).addCancelEventListener((playerIn) -> {
+            if (!playerIn.abilities.isCreativeMode) {
+                playerIn.abilities.isFlying = false;
+                playerIn.abilities.allowFlying = false;
+                playerIn.sendPlayerAbilities();
+            }
+        }));
     }
 }

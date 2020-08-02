@@ -14,7 +14,6 @@ public class BeNMDojutsu {
     private boolean damageDodgable;
     private boolean restrictsChakra;
     private boolean eightPaths;
-    private boolean flight;
 
     public BeNMDojutsu(String dojutsu, Type type, int size) {
         this.dojutsu = dojutsu;

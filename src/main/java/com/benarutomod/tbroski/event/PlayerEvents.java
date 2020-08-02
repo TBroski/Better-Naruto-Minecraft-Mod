@@ -6,6 +6,7 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.common.BeNMClan;
+import com.benarutomod.tbroski.common.BeNMRegistry;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.entity.shinobi.AbstractShinobiEntity;
 import com.benarutomod.tbroski.init.*;
@@ -83,15 +84,31 @@ public class PlayerEvents {
 
             player.addItemStackToInventory(new ItemStack(ItemInit.KUNAI.get()));
 
-            ArrayList<BeNMClan> availableClans = new ArrayList<>();
-
-            for (BeNMClan clan : ClanInit.CLANS) {
+            ArrayList<BeNMClan> clans = new ArrayList<>();
+            for (BeNMClan clan : BeNMRegistry.CLANS.getValues()) {
                 if (clan != ClanInit.NULL) {
-                    availableClans.add(clan);
+                    clans.add(clan);
                 }
             }
+            double totalWeight = 0.0D;
+            for (BeNMClan clan : clans)
+            {
+                totalWeight += clan.getWeight();
+            }
 
-            player_cap.setPlayerClan(availableClans.get(new Random().nextInt(availableClans.size())));
+            int randomIndex = -1;
+            double random = Math.random() * totalWeight;
+            for (int i = 0; i < clans.size(); ++i)
+            {
+                random -= clans.get(i).getWeight();
+                if (random <= 0.0D)
+                {
+                    randomIndex = i;
+                    break;
+                }
+            }
+            BeNMClan randomClan = clans.get(randomIndex);
+            player_cap.setPlayerClan(randomClan);
 
             if (player_cap.returnPlayerClan().getClanDojutsu() != DojutsuInit.NULL) {
                 player_cap.setPlayerLeftDojutsu(player_cap.returnPlayerClan().getClanDojutsu());

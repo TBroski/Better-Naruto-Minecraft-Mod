@@ -1,19 +1,24 @@
 package com.benarutomod.tbroski.common;
 
-import com.benarutomod.tbroski.init.ClanInit;
 import com.benarutomod.tbroski.init.DojutsuInit;
 
 public class BeNMClan {
 
     private final String clan;
+    private final int weight;
 
     private BeNMDojutsu dojutsu = DojutsuInit.NULL;
     private String message = "";
     private Nature nature = Nature.NULL;
     private float startingChakra = 300F;
 
-    public BeNMClan(String clan) {
+    public BeNMClan(String clan, int weight) {
         this.clan = clan;
+        this.weight = weight;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 
     public String getString() {

@@ -3,8 +3,7 @@ package com.benarutomod.tbroski.networking;
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.networking.packets.*;
 import com.benarutomod.tbroski.networking.packets.chakra.*;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsu;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketSetJutsuBoolean;
+import com.benarutomod.tbroski.networking.packets.jutsu.*;
 import com.benarutomod.tbroski.networking.packets.settings.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -50,5 +49,8 @@ public class NetworkLoader {
         INSTANCE.registerMessage(nextID(), PacketCurseMarkMeleeAttacked.class, PacketCurseMarkMeleeAttacked::encode, PacketCurseMarkMeleeAttacked::decode, PacketCurseMarkMeleeAttacked::handle);
         INSTANCE.registerMessage(nextID(), PacketPlayerBodyModeSync.class, PacketPlayerBodyModeSync::encode, PacketPlayerBodyModeSync::decode, PacketPlayerBodyModeSync::handle);
         INSTANCE.registerMessage(nextID(), PacketPlayerHasBodyModeSync.class, PacketPlayerHasBodyModeSync::encode, PacketPlayerHasBodyModeSync::decode, PacketPlayerHasBodyModeSync::handle);
+        INSTANCE.registerMessage(nextID(), PacketJutsuCancelEvent.class, PacketJutsuCancelEvent::encode, PacketJutsuCancelEvent::decode, PacketJutsuCancelEvent::handle);
+        INSTANCE.registerMessage(nextID(), PacketJutsuNBTSync.class, PacketJutsuNBTSync::encode, PacketJutsuNBTSync::decode, PacketJutsuNBTSync::handle);
+        INSTANCE.registerMessage(nextID(), PacketJutsuCaller.class, PacketJutsuCaller::encode, PacketJutsuCaller::decode, PacketJutsuCaller::handle);
     }
 }

@@ -1,23 +1,23 @@
 package com.benarutomod.tbroski.client.gui.player.jutsu;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
 import com.benarutomod.tbroski.common.BeNMJutsu;
 import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.ArrayList;
 
-public class LightningNatureJutsu extends AbstractJutsuScreen {
+public class EightPathJutsuScreen extends AbstractJutsuScreen{
 
     private ArrayList<BeNMJutsu> jutsus = new ArrayList<>();
 
-    public LightningNatureJutsu() {
-        super(new TranslationTextComponent("gui." + Main.MODID + ".title.lightningnaturejutsu"));
+    public EightPathJutsuScreen() {
+        super(new TranslationTextComponent("gui." + Main.MODID + ".title.eightpathjutsu"));
         for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
-            if (jutsu.getType() == BeNMJutsu.Type.LIGHTNING_NATURE) {
+            if (jutsu.getType() == BeNMJutsu.Type.EIGHT_PATH_TECHNIQUE) {
                 this.jutsus.add(jutsu);
             }
         }

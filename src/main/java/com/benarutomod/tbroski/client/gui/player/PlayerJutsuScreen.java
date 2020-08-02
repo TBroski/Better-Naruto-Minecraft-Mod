@@ -5,6 +5,7 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.player.jutsu.*;
+import com.benarutomod.tbroski.client.gui.player.jutsu.nature.*;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonTab;
 import com.benarutomod.tbroski.client.gui.widgets.symbols.GuiButtonSymbol;
 import net.minecraft.client.Minecraft;
@@ -45,7 +46,7 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
         //Page 0
         addButton(eSymbol = new GuiButtonSymbol(this.guiLeft - 5, this.guiTop - 20, 10, 0, $ -> {
             if (playerCapability.hasChakraBoolean()) {
-                //Minecraft.getInstance().displayGuiScreen(new ERankJutsu());
+                Minecraft.getInstance().displayGuiScreen(new ERankJutsuScreen());
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Chakra."));
@@ -95,9 +96,10 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
         }));
 
         //Page 2
-        addButton(magnetSymbol = new GuiButtonSymbol(this.guiLeft + 15, this.guiTop - 13, 0, 50, $ -> {
+        addButton(magnetSymbol = new GuiButtonSymbol(this.guiLeft - 5, this.guiTop - 5, 0, 50, $ -> {
+            Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
             if (playerCapability.hasMagnetNature()) {
-                Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
+                //Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Magnet Nature."));

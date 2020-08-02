@@ -60,6 +60,7 @@ public class Main {
 
 		MinecraftForge.EVENT_BUS.register(this);
 
+		// API Search and Registry
 		ScanResult scanResult = new ClassGraph().enableClassInfo().enableAnnotationInfo().scan();
 		ClassInfoList classInfoList = scanResult.getClassesWithAnnotation(BeNMPlugin.class.getName());
 		for (Class markedClass : classInfoList.loadClasses()) {
@@ -68,12 +69,13 @@ public class Main {
 					System.out.println("BeNM Plugin found at: " + markedClass.getName());
 					IBeNMPlugin plugin = (IBeNMPlugin) markedClass.newInstance();
 					plugin.registerNewJutsu(BeNMRegistry.JUTSUS);
+					plugin.registerNewDojutsus(BeNMRegistry.DOJUTSUS);
+					plugin.registerNewClans(BeNMRegistry.CLANS);
 				}
 			}
 		}
+
 		KeybindInit.register();
-		ClanInit.register();
-		DojutsuInit.register();
 		FluidInit.FLUIDS.register(modEventBus);
 		EffectInit.EFFECT.register(modEventBus);
 		EntityInit.ENTITIES.register(modEventBus);

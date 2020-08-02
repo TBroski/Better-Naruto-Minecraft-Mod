@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.util.helpers;
 
+import com.benarutomod.tbroski.client.gui.player.ShinobiStats;
 import com.benarutomod.tbroski.common.BeNMClan;
 import com.benarutomod.tbroski.common.BeNMJutsu;
 import com.benarutomod.tbroski.common.BeNMRegistry;
@@ -13,6 +14,8 @@ import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.*;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraAddition;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsu;
+import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuCaller;
+import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.util.InputMappings;
@@ -27,6 +30,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
+import sun.nio.ch.Net;
 
 import java.util.Random;
 
@@ -135,26 +139,6 @@ public class KeyboardHelper {
                     player.getPersistentData().putBoolean("bodyinfusion", false);
                 }
             }
-            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
-                if (jutsu.isToggle()) {
-                    String nbtName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
-                    if (player.getPersistentData().getBoolean(nbtName)) {
-                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(jutsu.getName()));
-                    }
-                }
-            }
-/*            if (player.getPersistentData().getBoolean("invisibilitytechnigue") == true)
-            {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(EffectsJutsu.InvisibilityTechniqueID, 1, 1));
-            }
-            if (player.getPersistentData().getBoolean("moltenfisttechnigue") == true)
-            {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(EffectsJutsu.MoltenFistJutsuID, 1, 1));
-            }
-            if (player.getPersistentData().getBoolean("fistrocktechnigue") == true)
-            {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(EffectsJutsu.FistRockJutsuID, 1, 1));
-            }*/
             if (player.getPersistentData().getBoolean("handinfusion") == true)
             {
                 NetworkLoader.INSTANCE.sendToServer(new PacketJutsu("handinfusion"));
@@ -168,7 +152,7 @@ public class KeyboardHelper {
                 NetworkLoader.INSTANCE.sendToServer(new PacketJutsu("bodyinfusion"));
             }
             if (KeybindInit.SHINOBI_STATS.isPressed()) {
-                NetworkLoader.INSTANCE.sendToServer(new PacketGUIOpen());
+                Minecraft.getInstance().displayGuiScreen(new ShinobiStats());
             }
         }
     }
@@ -184,31 +168,31 @@ public class KeyboardHelper {
             if (isTabDown()) {
                 if (player.getPersistentData().getBoolean("handinfusion") == true) {
                     if (KeybindInit.KEYBIND1.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind1());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 1));
                     }
                     if (KeybindInit.KEYBIND2.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind2());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 2));
                     }
                     if (KeybindInit.KEYBIND3.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind3());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 3));
                     }
                     if (KeybindInit.KEYBIND4.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind4());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 4));
                     }
                     if (KeybindInit.KEYBIND5.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind5());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 5));
                     }
                     if (KeybindInit.KEYBIND6.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind6());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 6));
                     }
                     if (KeybindInit.KEYBIND7.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind7());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 7));
                     }
                     if (KeybindInit.KEYBIND8.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind8());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 8));
                     }
                     if (KeybindInit.KEYBIND9.isKeyDown()) {
-                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind9());
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 9));
                     }
                 }
             }

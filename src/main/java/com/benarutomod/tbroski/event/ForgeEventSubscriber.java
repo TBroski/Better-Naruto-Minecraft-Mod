@@ -6,12 +6,16 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.container.ExtendedPlayerInventory;
+import com.benarutomod.tbroski.common.BeNMJutsu;
+import com.benarutomod.tbroski.common.BeNMRegistry;
+import com.benarutomod.tbroski.common.jutsu.JutsuCaller;
 import com.benarutomod.tbroski.entity.shinobi.akatsuki.kakuzu.KakuzuEntity;
 import com.benarutomod.tbroski.init.EffectInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerBodyModeSync;
 import com.benarutomod.tbroski.networking.packets.PacketToggleInfusionBoolean;
+import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsu;
 import com.benarutomod.tbroski.networking.packets.settings.PacketBackSlotSync;
 import com.benarutomod.tbroski.networking.packets.settings.PacketToggleScrollBoolean;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -124,6 +128,26 @@ public class ForgeEventSubscriber {
             if (player != null) {
                 GlobalEvents.playerRaid(event);
                 PlayerEvents.regenerateChakra(event);
+            }
+            IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
+            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                if (jutsu.isToggle()) {
+                    String nbtName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
+                    if (player.getPersistentData().getBoolean(nbtName)) {
+                        int taijutsuModifier0 = 0;
+                        int taijutsuModifier1 = 0;
+                        if (playercap.returnTaijutsu() >= 15) {
+                            taijutsuModifier0 = 3; taijutsuModifier1 = 2;
+                        }
+                        else if (playercap.returnTaijutsu() >= 10) {
+                            taijutsuModifier0 = 2; taijutsuModifier1 = 1;
+                        }
+                        else if (playercap.returnTaijutsu() >= 5) {
+                            taijutsuModifier0 = 1; taijutsuModifier1 = 0;
+                        }
+                        jutsu.act((ServerPlayerEntity) player, taijutsuModifier0, taijutsuModifier1);
+                    }
+                }
             }
         }
 
@@ -252,10 +276,10 @@ public class ForgeEventSubscriber {
             PlayerEntity playerEntity = (PlayerEntity) source.getTrueSource();
             LazyOptional<IPlayerHandler> playerc = playerEntity.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
-            if (playerEntity.getPersistentData().getBoolean("moltenfisttechnigue") == true) {
+            if (playerEntity.getPersistentData().getBoolean(Main.MODID + "_molten_fist")) {
                 event.getEntityLiving().setFire(2);
             }
-            if (playerEntity.getPersistentData().getBoolean("fistrocktechnigue") == true) {
+            if (playerEntity.getPersistentData().getBoolean(Main.MODID + "_fist_rock")) {
                 event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1));
             }
         }

@@ -40,7 +40,7 @@ public class PacketJutsu {
     public static void handle(PacketJutsu msg, Supplier<NetworkEvent.Context> ctx)
     {
         ctx.get().enqueueWork(() -> {
-            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+/*            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
                 if (jutsu.getName().equalsIgnoreCase(msg.jutsuType)) {
                     IPlayerHandler playercap = ctx.get().getSender().getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
                     int taijutsuModifier0 = 0;
@@ -57,7 +57,7 @@ public class PacketJutsu {
                     jutsu.act(ctx.get().getSender(), taijutsuModifier0, taijutsuModifier1);
                     break;
                 }
-            }
+            }*/
             if (msg.jutsuType.equalsIgnoreCase("handinfusion")) {
                 IPlayerHandler playercap = ctx.get().getSender().getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
                 int taijutsuModifier0 = 0;
