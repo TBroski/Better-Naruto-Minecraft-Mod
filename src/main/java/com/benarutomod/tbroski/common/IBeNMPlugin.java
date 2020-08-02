@@ -9,10 +9,13 @@ import java.util.List;
  */
 public interface IBeNMPlugin {
 
+    String getPluginId();
 
     void registerNewDojutsus(List<BeNMDojutsu> dojutsus);
 
     void registerNewClans(List<BeNMClan> clans);
 
     void registerNewBodyModes(List<BeNMBody> bodies);
+
+    void registerNewJutsu(BeNMRegistry.JutsuRegistry jutsuRegistry);
 }

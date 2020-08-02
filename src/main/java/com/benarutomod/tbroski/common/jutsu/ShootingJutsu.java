@@ -30,23 +30,6 @@ import java.util.List;
 
 public class ShootingJutsu {
 
-    public static final int FireballJutsuID = 8;
-    public static void FireballJutsu(PlayerEntity playerIn, int chakraAmount)
-    {
-        LazyOptional<IPlayerHandler> capabilities = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
-        if (playercap.returnChakra() >= (-chakraAmount * ((100 - playercap.returnChakraControl()) * 0.01))) {
-            playercap.addChakra((float) (-chakraAmount * ((100 - playercap.returnChakraControl()) * 0.01)));
-            FireballEntity entity = new FireballEntity(playerIn.world, playerIn);
-            entity.setItem(new ItemStack(ItemInit.FIREBALL_JUTSU.get()));
-            entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.3F, 1.0F);
-            playerIn.world.addEntity(entity);
-            if (!playercap.returnToggleJutsuMessage()) playerIn.sendMessage(new StringTextComponent("Fireball Jutsu! " + (-chakraAmount * ((100 - playercap.returnChakraControl()) * 0.01)) + " Chakra"));
-        }
-        else {
-            playerIn.sendMessage(new StringTextComponent("Not Enough Chakra"));
-        }
-    }
     public static final int WaterShurikenJutsuID = 9;
     public static void WaterShurikenJutsu(PlayerEntity playerIn, int chakraAmount)
     {

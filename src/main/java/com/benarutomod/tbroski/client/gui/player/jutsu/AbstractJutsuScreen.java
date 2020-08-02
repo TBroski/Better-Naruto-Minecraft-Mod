@@ -142,7 +142,7 @@ public abstract class AbstractJutsuScreen extends Screen {
         GL11.glPushMatrix();
         for (Widget button : this.buttons) {
             if (button.isHovered() && button instanceof GuiButtonJutsu) {
-                renderTooltip(new TranslationTextComponent("jutsu." + Main.MODID + "." + ((GuiButtonJutsu) button).getName()).getString(), p_render_1_, p_render_2_);
+                renderTooltip(new TranslationTextComponent("jutsu." + ((GuiButtonJutsu) button).getTranslationName()).getString() + " (Costs " + ((GuiButtonJutsu) button).getCost() + ")", p_render_1_, p_render_2_);
             }
         }
         GL11.glPopMatrix();
@@ -173,7 +173,7 @@ public abstract class AbstractJutsuScreen extends Screen {
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.002F);
         GL11.glPushMatrix();
         for (Widget button : this.buttons) {
-            if (button instanceof GuiButtonJutsu && this.jutsuToggle.equalsIgnoreCase("jutsu." + Main.MODID + "." + ((GuiButtonJutsu) button).getName())) {
+            if (button instanceof GuiButtonJutsu && this.jutsuToggle.equalsIgnoreCase("jutsu." + ((GuiButtonJutsu) button).getTranslationName())) {
                 mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 240, 224, 16,16);
             }
         }

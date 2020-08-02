@@ -1,5 +1,9 @@
 package com.benarutomod.tbroski;
 
+import com.benarutomod.tbroski.common.BeNMPlugin;
+import com.benarutomod.tbroski.common.BeNMRegistry;
+import com.benarutomod.tbroski.common.IBeNMPlugin;
+import com.benarutomod.tbroski.common.Test;
 import com.benarutomod.tbroski.integration.Curios;
 import com.benarutomod.tbroski.blocks.AmaterasuFireBlockBase;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
@@ -17,21 +21,15 @@ import com.benarutomod.tbroski.capabilities.CapabilityHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 
 import com.benarutomod.tbroski.util.helpers.KeyboardHelper;
-import com.google.common.collect.ImmutableSet;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfoList;
+import io.github.classgraph.ScanResult;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.LiquidsConfig;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -46,8 +44,7 @@ public class Main {
 
 	public static final String MODID = "benarutomod";
 
-	public Main()
-	{
+	public Main() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		MinecraftForge.EVENT_BUS.register(new ChakraBar());
 		MinecraftForge.EVENT_BUS.register(new Notifications());
@@ -63,7 +60,17 @@ public class Main {
 
 		MinecraftForge.EVENT_BUS.register(this);
 
-
+		ScanResult scanResult = new ClassGraph().enableClassInfo().enableAnnotationInfo().scan();
+		ClassInfoList classInfoList = scanResult.getClassesWithAnnotation(BeNMPlugin.class.getName());
+		for (Class markedClass : classInfoList.loadClasses()) {
+			for (Class markedInterface : markedClass.getInterfaces()) {
+				if (markedInterface == IBeNMPlugin.class) {
+					System.out.println("BeNM Plugin found at: " + markedClass.getName());
+					IBeNMPlugin plugin = (IBeNMPlugin) markedClass.newInstance();
+					plugin.registerNewJutsu(BeNMRegistry.JUTSUS);
+				}
+			}
+		}
 		KeybindInit.register();
 		ClanInit.register();
 		DojutsuInit.register();

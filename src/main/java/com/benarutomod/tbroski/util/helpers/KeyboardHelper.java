@@ -1,6 +1,8 @@
 package com.benarutomod.tbroski.util.helpers;
 
 import com.benarutomod.tbroski.common.BeNMClan;
+import com.benarutomod.tbroski.common.BeNMJutsu;
+import com.benarutomod.tbroski.common.BeNMRegistry;
 import com.benarutomod.tbroski.common.jutsu.*;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
@@ -16,6 +18,8 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
@@ -118,7 +122,6 @@ public class KeyboardHelper {
                 else if (player.getPersistentData().getBoolean("handinfusion") == false) {
                     player.getPersistentData().putBoolean("handinfusion", true);
                     NetworkLoader.INSTANCE.sendToServer(new PacketBackItem());
-                    //player.sendMessage(new StringTextComponent("Hand Infused"));
                 } else {
                     player.getPersistentData().putBoolean("handinfusion", false);
                 }
@@ -132,7 +135,15 @@ public class KeyboardHelper {
                     player.getPersistentData().putBoolean("bodyinfusion", false);
                 }
             }
-            if (player.getPersistentData().getBoolean("invisibilitytechnigue") == true)
+            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                if (jutsu.isToggle()) {
+                    String nbtName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
+                    if (player.getPersistentData().getBoolean(nbtName)) {
+                        NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(jutsu.getName()));
+                    }
+                }
+            }
+/*            if (player.getPersistentData().getBoolean("invisibilitytechnigue") == true)
             {
                 NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(EffectsJutsu.InvisibilityTechniqueID, 1, 1));
             }
@@ -143,18 +154,18 @@ public class KeyboardHelper {
             if (player.getPersistentData().getBoolean("fistrocktechnigue") == true)
             {
                 NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(EffectsJutsu.FistRockJutsuID, 1, 1));
-            }
+            }*/
             if (player.getPersistentData().getBoolean("handinfusion") == true)
             {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(EffectsJutsu.HandInfusionID, 1, 0));
+                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu("handinfusion"));
             }
             if (player.getPersistentData().getBoolean("leginfusion") == true)
             {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(EffectsJutsu.LegInfusionID, 1, 0));
+                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu("leginfusion"));
             }
             if (player.getPersistentData().getBoolean("bodyinfusion") == true)
             {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu(EffectsJutsu.BodyInfusionID, 1, 0));
+                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu("bodyinfusion"));
             }
             if (KeybindInit.SHINOBI_STATS.isPressed()) {
                 NetworkLoader.INSTANCE.sendToServer(new PacketGUIOpen());

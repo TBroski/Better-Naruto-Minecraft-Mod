@@ -19,6 +19,8 @@ import com.benarutomod.tbroski.networking.packets.jutsu.PacketSetJutsuBoolean;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -61,24 +63,24 @@ public class PlayerBody extends AbstractTabedBackground {
         //Page 2
         addButton(setBodyMode = new GuiButtonArrowDown(this.guiLeft - 11, this.guiTop + 40, false, $ -> {
             playerCapability.setPlayerBodyMode(currentBodyMode);
-            NetworkLoader.INSTANCE.sendToServer(new PacketPlayerBodyModeSync(playerCapability.returnPlayerBodyMode().getString(), false));
+            NetworkLoader.INSTANCE.sendToServer(new PacketPlayerBodyModeSync(playerCapability.returnPlayerBodyMode().getString(), Minecraft.getInstance().player.getEntityId(), false));
             Minecraft.getInstance().player.sendMessage(new StringTextComponent("Body Mode set to: " + new TranslationTextComponent(this.bodyToggle).getString()));
         }));
-        addButton(curseMark = new GuiButtonJutsu(this.guiLeft - 100, this.guiTop - 40, 224, 0, "cursemarkmode", playerCapability.returnPlayerCurseMark() > 0, 0, $ -> {
+        addButton(curseMark = new GuiButtonJutsu(this.guiLeft - 100, this.guiTop - 40, 224, 0, Main.MODID + ".cursemarkmode", playerCapability.returnPlayerCurseMark() > 0, 0, $ -> {
             if (playerCapability.returnPlayerCurseMark() > 0)
             {
                 this.currentBodyMode = BodyInit.CURSE_MARK_MODE;
-                this.bodyToggle = "body." + Main.MODID + "." + curseMark.getName();
+                this.bodyToggle = "body." + curseMark.getTranslationName();
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Curse Mark Mode."));
             }
         }));
-        addButton(toadSage = new GuiButtonJutsu(this.guiLeft - 80, this.guiTop - 40, 224, 17, "toadsagemode", playerCapability.returnPlayerToadSageMode() > 0, 0, $ -> {
+        addButton(toadSage = new GuiButtonJutsu(this.guiLeft - 80, this.guiTop - 40, 224, 17, Main.MODID + ".toadsagemode", playerCapability.returnPlayerToadSageMode() > 0, 0, $ -> {
             if (playerCapability.returnPlayerToadSageMode() > 0)
             {
                 this.currentBodyMode = BodyInit.TOAD_SAGE_MODE;
-                this.bodyToggle = "body." + Main.MODID + "." + toadSage.getName();
+                this.bodyToggle = "body." + toadSage.getTranslationName();
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Toad Sage Mode."));
@@ -144,7 +146,7 @@ public class PlayerBody extends AbstractTabedBackground {
     {
         for (GuiButtonJutsu button : widgets) {
             if (button.isHovered()) {
-                renderTooltip(new TranslationTextComponent("body." + Main.MODID + "." + button.getName()).getString(), p_render_1, p_render_2);
+                renderTooltip(new TranslationTextComponent("body." + button.getTranslationName()).getString(), p_render_1, p_render_2);
             }
         }
     }
@@ -174,7 +176,7 @@ public class PlayerBody extends AbstractTabedBackground {
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.002F);
 
         for (GuiButtonJutsu button : widgets) {
-            if (this.bodyToggle.equalsIgnoreCase("body." + Main.MODID + "." + button.getName())) {
+            if (this.bodyToggle.equalsIgnoreCase("body." + button.getTranslationName())) {
                 mc.ingameGUI.blit(button.widthIn, button.heightIn, 240, 224, 16,16);
             }
         }

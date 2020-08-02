@@ -77,14 +77,13 @@ public class ShinobiStats extends Screen {
             Minecraft.getInstance().displayGuiScreen(new PlayerDojutsu());
         }));
         addButton(guiButtonPlayerBody = new GuiButtonPlayerBody(this.guiLeft - 16, this.guiTop - 16, player, $ -> {
-            //Minecraft.getInstance().displayGuiScreen(new PlayerChakraandBodyInfusion());
             Minecraft.getInstance().displayGuiScreen(new PlayerBody());
         }));
         addButton(guiButtonPlayerArm1 = new GuiButtonPlayerArm(this.guiLeft - 32, this.guiTop - 16, player, $ -> {
-            Minecraft.getInstance().displayGuiScreen(new PlayerJutsu());
+            Minecraft.getInstance().displayGuiScreen(new PlayerJutsuScreen());
         }));
         addButton(guiButtonPlayerArm2 = new GuiButtonPlayerArm(this.guiLeft + 16, this.guiTop - 16, player, $ -> {
-            Minecraft.getInstance().displayGuiScreen(new PlayerJutsu());
+            Minecraft.getInstance().displayGuiScreen(new PlayerJutsuScreen());
         }));
         addButton(guiButtonPlayerLeg1 = new GuiButtonPlayerLeg(this.guiLeft - 16, this.guiTop + 32, player, $ -> {
             Minecraft.getInstance().displayGuiScreen(new PlayerTaijutsu());
@@ -144,6 +143,7 @@ public class ShinobiStats extends Screen {
             }
             font.drawStringWithShadow(new TranslationTextComponent("gui." + Main.MODID + ".playeraffiliation.shinobistats").getString() + this.entityName, 10, 30, 0xFF0000);
         }
+        font.drawStringWithShadow(new TranslationTextComponent("gui." + Main.MODID + ".benmpoints.shinobistats").getString() + playerc.returnBeNMPoints(), 10, 10, 0x32cd32);
         font.drawStringWithShadow(new TranslationTextComponent("gui." + Main.MODID + ".benmpoints.shinobistats").getString() + playerc.returnBeNMPoints(), 10, 10, 0x32cd32);
     }
 

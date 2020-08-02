@@ -112,7 +112,8 @@ dependencies {
 }
 
 repositories { maven { url = "https://maven.theillusivec4.top/" } } 
-dependencies { 
+dependencies {
+    implementation 'io.github.classgraph:classgraph:4.8.7'
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.15.2-2.0.2.4") 
     compileOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.15.2-2.0.2.4:api") 
 }

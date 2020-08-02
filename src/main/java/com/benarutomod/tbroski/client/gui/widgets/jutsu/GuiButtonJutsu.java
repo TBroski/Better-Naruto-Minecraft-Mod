@@ -5,6 +5,7 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
+import com.benarutomod.tbroski.common.BeNMJutsu;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketBeNMPointsSync;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketSetJutsuBoolean;
@@ -70,8 +71,21 @@ public class GuiButtonJutsu extends Button {
         this.has = has;
     }
 
-    public String getName() {
+    public String getTranslationName() {
         return this.name;
+    }
+
+    public String getJutsuName() {
+        String string = getTranslationName();
+        String[] parts = string.split("\\.");
+        if (parts.length > 1) {
+            return parts[1];
+        }
+        return string;
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     public boolean doNormalPress(AbstractJutsuScreen screen) {
@@ -82,8 +96,7 @@ public class GuiButtonJutsu extends Button {
 
         if (this.hasJutsu())
         {
-            System.out.println("Selected");
-            screen.jutsuToggle = "jutsu." + Main.MODID + "." + this.getName();
+            screen.jutsuToggle = "jutsu." + this.getTranslationName();
         }
         else if (playerc.returnBeNMPoints() >= this.cost)
         {
@@ -97,7 +110,7 @@ public class GuiButtonJutsu extends Button {
         return flag;
     }
 
-    public void sendPackets(int jutsuID, boolean hasJutsu) {
-        NetworkLoader.INSTANCE.sendToServer(new PacketSetJutsuBoolean(jutsuID, hasJutsu, false));
+    public void sendPackets(String jutsuName, boolean hasJutsu) {
+        NetworkLoader.INSTANCE.sendToServer(new PacketSetJutsuBoolean(jutsuName, hasJutsu, false));
     }
 }

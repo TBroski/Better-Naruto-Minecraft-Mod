@@ -1,3 +1,4 @@
+/*
 package com.benarutomod.tbroski.client.gui.player;
 
 import com.benarutomod.tbroski.Main;
@@ -25,7 +26,7 @@ public class PlayerJutsu extends Screen {
     TextComponent availableJutsu;
     GuiButtonFireSymbol fireNature;
     GuiButtonWaterSymbol waterNature;
-    GuiButtonEarthSymbol earthNature;
+    GuiButtonSymbol earthNature;
     GuiButtonLightningSymbol lightningNature;
     GuiButtonWindSymbol windNature;
     Button eRankJutsu;
@@ -47,43 +48,49 @@ public class PlayerJutsu extends Screen {
         this.guiTop = (this.height) / 2;
 
         addButton(eRankJutsu = new Button(this.guiLeft + 60 - (font.getStringWidth(this.availableJutsu.getString()) / 2), this.guiTop - 40, 70, 20, new StringTextComponent("E Rank Jutsu").getString(), $ -> {
-            Minecraft.getInstance().displayGuiScreen(new ERankJutsu());
+            //Minecraft.getInstance().displayGuiScreen(new ERankJutsu());
+            Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
         }));
         addButton(fireNature = new GuiButtonFireSymbol(this.guiLeft - 60, this.guiTop - 13, $ -> {
+            Minecraft.getInstance().displayGuiScreen(new FireNatureJutsu());
             if (playerc.hasFireNature()) {
-                Minecraft.getInstance().displayGuiScreen(new FireNatureJutsu());
+                //Minecraft.getInstance().displayGuiScreen(new FireNatureJutsu());
             }
             else {
                 player.sendMessage(new StringTextComponent("You don't have Fire Nature"));
             }
         }));
         addButton(waterNature = new GuiButtonWaterSymbol(this.guiLeft - 45, this.guiTop, $ -> {
+            Minecraft.getInstance().displayGuiScreen(new WaterNatureJutsu());
             if (playerc.hasWaterNature()) {
-                Minecraft.getInstance().displayGuiScreen(new WaterNatureJutsu());
+                //Minecraft.getInstance().displayGuiScreen(new WaterNatureJutsu());
             }
             else {
                 player.sendMessage(new StringTextComponent("You don't have Water Nature"));
             }
         }));
-        addButton(earthNature = new GuiButtonEarthSymbol(this.guiLeft - 75, this.guiTop, $ -> {
+        addButton(earthNature = new GuiButtonSymbol(this.guiLeft - 75, this.guiTop, $ -> {
+            Minecraft.getInstance().displayGuiScreen(new EarthNatureJutsu());
             if (playerc.hasEarthNature()) {
-                Minecraft.getInstance().displayGuiScreen(new EarthNatureJutsu());
+                //Minecraft.getInstance().displayGuiScreen(new EarthNatureJutsu());
             }
             else {
                 player.sendMessage(new StringTextComponent("You don't have Earth Nature"));
             }
         }));
         addButton(windNature = new GuiButtonWindSymbol(this.guiLeft - 68, this.guiTop + 15, $ -> {
+            Minecraft.getInstance().displayGuiScreen(new WindNatureJutsu());
             if (playerc.hasWindNature()) {
-                Minecraft.getInstance().displayGuiScreen(new WindNatureJutsu());
+                //Minecraft.getInstance().displayGuiScreen(new WindNatureJutsu());
             }
             else {
                 player.sendMessage(new StringTextComponent("You don't have Wind Nature"));
             }
         }));
         addButton(lightningNature = new GuiButtonLightningSymbol(this.guiLeft - 52, this.guiTop + 15, $ -> {
+            Minecraft.getInstance().displayGuiScreen(new LightningNatureJutsu());
             if (playerc.hasLightningNature()) {
-                Minecraft.getInstance().displayGuiScreen(new LightningNatureJutsu());
+                //Minecraft.getInstance().displayGuiScreen(new LightningNatureJutsu());
             }
             else {
                 player.sendMessage(new StringTextComponent("You don't have Lightning Nature"));
@@ -122,3 +129,4 @@ public class PlayerJutsu extends Screen {
         return super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
     }
 }
+*/

@@ -45,7 +45,7 @@ public class DojutsuLayer<T extends LivingEntity, M extends EntityModel<T>> exte
                 this.getEntityModel().copyModelAttributesTo(this.leftModel);
                 this.getEntityModel().copyModelAttributesTo(this.rightModel);
                 if (this.leftModel instanceof ModelLeftEye) ((ModelLeftEye) this.leftModel).setPartialTick(entitylivingbaseIn, partialTicks);
-                if (this.rightModel instanceof ModelLeftEye) ((ModelRightEye) this.rightModel).setPartialTick(entitylivingbaseIn, partialTicks);
+                if (this.rightModel instanceof ModelRightEye) ((ModelRightEye) this.rightModel).setPartialTick(entitylivingbaseIn, partialTicks);
                 this.leftModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                 this.rightModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                 IVertexBuilder iVertexBuilderLeft = ItemRenderer.getBuffer(bufferIn, this.leftModel.getRenderType(playerc.returnPlayerLeftDojutsu().getResourceLocation()), false, false);

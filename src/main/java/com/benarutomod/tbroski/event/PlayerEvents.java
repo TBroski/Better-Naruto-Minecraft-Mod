@@ -196,7 +196,6 @@ public class PlayerEvents {
                 }
             }
         }
-
     }
 
     public static void checkPlayerDojutsuDeath(LivingDeathEvent event) {

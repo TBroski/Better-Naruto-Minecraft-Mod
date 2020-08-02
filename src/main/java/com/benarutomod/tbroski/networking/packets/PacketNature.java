@@ -20,6 +20,7 @@ public class PacketNature {
     //4 = Wind
     //5 = Lightning
     //6 = *CHAKRA*
+    //7 = Magnet
 
     private int nature;
     private boolean has;
@@ -140,6 +141,21 @@ public class PacketNature {
                         LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
                         IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
                         playercap.setChakraBoolean(msg.has);
+                    }
+                    break;
+                case 7:
+                    if (msg.toClient)
+                    {
+                        ClientPlayerEntity player = Minecraft.getInstance().player;
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setMagnetNature(msg.has);
+                    }
+                    else {
+                        ServerPlayerEntity player = ctx.get().getSender();
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setMagnetNature(msg.has);
                     }
                     break;
             }

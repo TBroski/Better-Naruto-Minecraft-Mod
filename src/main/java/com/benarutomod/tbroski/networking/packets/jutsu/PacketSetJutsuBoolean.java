@@ -1,5 +1,7 @@
 package com.benarutomod.tbroski.networking.packets.jutsu;
 
+import com.benarutomod.tbroski.common.BeNMJutsu;
+import com.benarutomod.tbroski.common.BeNMRegistry;
 import com.benarutomod.tbroski.common.jutsu.*;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
@@ -25,9 +27,9 @@ public class PacketSetJutsuBoolean {
 
     private boolean has;
     private boolean toClient;
-    private int jutsuType;
+    private String jutsuType;
 
-    public PacketSetJutsuBoolean(int jutsuType, boolean has, boolean toClient)
+    public PacketSetJutsuBoolean(String jutsuType, boolean has, boolean toClient)
     {
         this.jutsuType = jutsuType;
         this.toClient = toClient;
@@ -36,14 +38,14 @@ public class PacketSetJutsuBoolean {
 
     public static void encode(PacketSetJutsuBoolean msg, PacketBuffer buf)
     {
-        buf.writeInt(msg.jutsuType);
+        buf.writeString(msg.jutsuType);
         buf.writeBoolean(msg.has);
         buf.writeBoolean(msg.toClient);
     }
 
     public static PacketSetJutsuBoolean decode(PacketBuffer buf)
     {
-        int data = buf.readInt();
+        String data = buf.readString();
         boolean has = buf.readBoolean();
         boolean toClient = buf.readBoolean();
         return new PacketSetJutsuBoolean(data, has, toClient);
@@ -52,7 +54,22 @@ public class PacketSetJutsuBoolean {
     public static void handle(PacketSetJutsuBoolean msg, Supplier<NetworkEvent.Context> ctx)
     {
         ctx.get().enqueueWork(() -> {
-            switch (msg.jutsuType)
+
+            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                if (jutsu.getName().equalsIgnoreCase(msg.jutsuType)) {
+                    if (msg.toClient) {
+                        ClientPlayerEntity player = Minecraft.getInstance().player;
+                        IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
+                        jutsu.sync(playercap, msg.has);
+                    }
+                    else {
+                        ServerPlayerEntity player = ctx.get().getSender();
+                        IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
+                        jutsu.sync(playercap, msg.has);
+                    }
+                }
+            }
+/*            switch (msg.jutsuType)
             {
                 case CloneJutsu.BasicCloneJutsuID:
                     if (msg.toClient)
@@ -340,7 +357,7 @@ public class PacketSetJutsuBoolean {
                         playercap.setTsukuyomiJutsuBoolean(msg.has);
                     }
                     break;
-            }
+            }*/
         });
         ctx.get().setPacketHandled(true);
     }

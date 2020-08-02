@@ -23,7 +23,7 @@ public class GuiButtonDojutsu extends Button {
     }
 
     public GuiButtonDojutsu(int widthIn, int heightIn, BeNMDojutsu dojutsu, IPressable onPress) {
-        super(widthIn, heightIn, 16, 16, "", onPress);
+        super(widthIn, heightIn, 16 * (dojutsu.getSize() + 1), 16, "", onPress);
         this.onPress = onPress;
         this.widthIn = widthIn;
         this.heightIn = heightIn;

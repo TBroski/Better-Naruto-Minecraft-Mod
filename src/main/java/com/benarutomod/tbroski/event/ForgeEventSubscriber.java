@@ -10,6 +10,7 @@ import com.benarutomod.tbroski.entity.shinobi.akatsuki.kakuzu.KakuzuEntity;
 import com.benarutomod.tbroski.init.EffectInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
+import com.benarutomod.tbroski.networking.packets.PacketPlayerBodyModeSync;
 import com.benarutomod.tbroski.networking.packets.PacketToggleInfusionBoolean;
 import com.benarutomod.tbroski.networking.packets.settings.PacketBackSlotSync;
 import com.benarutomod.tbroski.networking.packets.settings.PacketToggleScrollBoolean;
@@ -18,6 +19,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FallingBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
@@ -31,6 +33,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.*;
+import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -174,6 +177,7 @@ public class ForgeEventSubscriber {
                 LazyOptional<IPlayerHandler> capabilities = target.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
                 IPlayerHandler targetcap = capabilities.orElse(new PlayerCapability());
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleScrollBoolean(targetcap.returnToggleScrollRenderer(), true, targetID));
+                NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketPlayerBodyModeSync(targetcap.returnPlayerBodyMode().getString(), targetID, true));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(1, true, targetcap.returnHandInfusionToggled(), targetID));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(2, true, targetcap.returnBodyInfusionToggled(), targetID));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(3, true, targetcap.returnLegInfusionToggled(), targetID));
@@ -182,7 +186,7 @@ public class ForgeEventSubscriber {
         }
     }
 
-    @SubscribeEvent
+/*    @SubscribeEvent
     public void renderPlayer(RenderPlayerEvent.Pre event) {
         PlayerEntity player = event.getPlayer();
         PlayerRenderer render = event.getRenderer();
@@ -194,8 +198,8 @@ public class ForgeEventSubscriber {
             ModelRenderer newLeftArm = new PlayerModel(0, false).bipedLeftArm;
             ModelRenderer newRightArm = new PlayerModel(0, false).bipedRightArm;
 
-/*            model.bipedLeftArm.copyModelAngles(newLeftArm);
-            model.bipedRightArm.copyModelAngles(newRightArm);*/
+*//*            model.bipedLeftArm.copyModelAngles(newLeftArm);
+            model.bipedRightArm.copyModelAngles(newRightArm);*//*
             newLeftArm.copyModelAngles(model.bipedLeftArm);
             newRightArm.copyModelAngles(model.bipedRightArm);
             newBody.copyModelAngles(model.bipedBody);
@@ -218,7 +222,7 @@ public class ForgeEventSubscriber {
 
             event.getMatrixStack().pop();
         }
-    }
+    }*/
 
     @SubscribeEvent
     public void renderName(PlayerEvent.NameFormat event) {

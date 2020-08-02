@@ -1,6 +1,8 @@
 package com.benarutomod.tbroski.capabilities;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.common.BeNMJutsu;
+import com.benarutomod.tbroski.common.BeNMRegistry;
 import com.benarutomod.tbroski.common.jutsu.*;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
@@ -47,6 +49,7 @@ public class CapabilityHandler {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(3, playercap.hasEarthNature(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(4, playercap.hasWindNature(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(5, playercap.hasLightningNature(), true));
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(7, playercap.hasMagnetNature(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketKeybindSet(1, playercap.returnKeybind1(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketKeybindSet(2, playercap.returnKeybind2(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketKeybindSet(3, playercap.returnKeybind3(), true));
@@ -56,27 +59,9 @@ public class CapabilityHandler {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketKeybindSet(7, playercap.returnKeybind7(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketKeybindSet(8, playercap.returnKeybind8(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketKeybindSet(9, playercap.returnKeybind9(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(CloneJutsu.BasicCloneJutsuID, playercap.hasCloneJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(BodyReplacementJutsu.BasicBodyReplacementJutsuID, playercap.hasBodyReplacementBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(EffectsJutsu.InvisibilityTechniqueID, playercap.hasInvisibilityBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(SummoningJutsu.BasicSummoningJutsuID, playercap.hasSummoningBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.FireballJutsuID, playercap.hasFireballJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.WaterShurikenJutsuID, playercap.hasWaterShurikenJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.FlyingStonesJutsuID, playercap.hasFlyingStonesJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.LightningBallJutsuID, playercap.hasLightningBallJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.GalePalmJutsuID, playercap.hasGalePalmJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.PhoenixFlowerJutsuID, playercap.hasPhoenixFlowerJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.RagingWavesJutsuID, playercap.hasRagingWavesJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.MudMoatJutsuID, playercap.hasMudMoatJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.StunGunJutsuID, playercap.hasStunGunJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.WindExplosionJutsuID, playercap.hasWindExplosionJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(EffectsJutsu.MoltenFistJutsuID, playercap.hasMoltenFistJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.WaterSharkBulletJutsuID, playercap.hasWaterSharkBulletJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(EffectsJutsu.FistRockJutsuID, playercap.hasFistRockJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.LightningArrowJutsuID, playercap.hasLightningArrowJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(ShootingJutsu.WindArrowJutsuID, playercap.hasWindArrowJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(SharinganJutsu.AmaterasuJutsuID, playercap.hasAmaterasuJutsuBoolean(), true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(SharinganJutsu.TsukuyomiJutsuID, playercap.hasTsukuyomiJutsuBoolean(), true));
+            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketSetJutsuBoolean(jutsu.getCorrelatedPlugin() + "." + jutsu.getName(), jutsu.hasJutsu(playercap), true));
+            }
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketBeNMPointsSync(playercap.returnBeNMPoints(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerEntityAffiliationSync(playercap.returnPlayerEntityAffiliation(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketEyeSlotSync(playercap.returnplayerEyeSlot(), true));
@@ -86,7 +71,7 @@ public class CapabilityHandler {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketTaijutsu(playercap.returnTaijutsu(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerDojutsuSync(playercap.returnPlayerLeftDojutsu().getString(), true, true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerDojutsuSync(playercap.returnPlayerRightDojutsu().getString(), false, true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerBodyModeSync(playercap.returnPlayerBodyMode().getString(), true));
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerBodyModeSync(playercap.returnPlayerBodyMode().getString(), player.getEntityId(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerHasBodyModeSync(1, playercap.returnPlayerCurseMark(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerHasBodyModeSync(2,  playercap.returnPlayerToadSageMode(), true));
         }
@@ -133,6 +118,7 @@ public class CapabilityHandler {
             chakra.setWindNature(oldchakra.hasWindNature());
             chakra.setEarthNature(oldchakra.hasEarthNature());
             chakra.setLightningNature(oldchakra.hasLightningNature());
+            chakra.setMagnetNature(oldchakra.hasMagnetNature());
 
             chakra.setCloneJutsuBoolean(oldchakra.hasCloneJutsuBoolean());
             chakra.setSummoningBoolean(oldchakra.hasSummoningBoolean());
@@ -159,6 +145,9 @@ public class CapabilityHandler {
             chakra.setFlyingStonesJutsuBoolean(oldchakra.hasFlyingStonesJutsuBoolean());
             chakra.setMudMoatJutsuBoolean(oldchakra.hasMudMoatJutsuBoolean());
             chakra.setFistRockJutsuBoolean(oldchakra.hasFistRockJutsuBoolean());
+
+            chakra.setMatterRepulsionJutsuBoolean(oldchakra.hasMatterRepulsionJutsuBoolean());
+            chakra.setSelfLevitationJutsuBoolean(oldchakra.hasSelfLevitationJutsuBoolean());
 
             chakra.setAmaterasuJutsuBoolean(oldchakra.hasAmaterasuJutsuBoolean());
             chakra.setTsukuyomiJutsuBoolean(oldchakra.hasTsukuyomiJutsuBoolean());

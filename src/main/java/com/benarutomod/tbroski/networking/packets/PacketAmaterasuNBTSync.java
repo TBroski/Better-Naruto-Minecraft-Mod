@@ -36,7 +36,12 @@ public class PacketAmaterasuNBTSync {
     {
         ctx.get().enqueueWork(() -> {
             Entity entity = Minecraft.getInstance().world.getEntityByID(msg.entityID);
-            if (entity != null) entity.getPersistentData().putBoolean("amaterasufire", msg.onFire);
+            if (entity != null) {
+                entity.getPersistentData().putBoolean("amaterasufire", msg.onFire);
+                if (msg.onFire) {
+                    entity.getPersistentData().putInt("amaterasuconnectiony", -1);
+                }
+            }
         });
         ctx.get().setPacketHandled(true);
     }

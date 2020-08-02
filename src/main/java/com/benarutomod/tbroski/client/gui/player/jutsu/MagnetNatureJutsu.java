@@ -1,23 +1,23 @@
 package com.benarutomod.tbroski.client.gui.player.jutsu;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
 import com.benarutomod.tbroski.common.BeNMJutsu;
 import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.ArrayList;
 
-public class EarthNatureJutsu extends AbstractJutsuScreen {
+public class MagnetNatureJutsu extends AbstractJutsuScreen {
 
     private ArrayList<BeNMJutsu> jutsus = new ArrayList<>();
 
-    public EarthNatureJutsu() {
-        super(new TranslationTextComponent("gui." + Main.MODID + ".title.earthnaturejutsu"));
+    public MagnetNatureJutsu() {
+        super(new TranslationTextComponent("gui." + Main.MODID + ".title.magnetnaturejutsu"));
         for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
-            if (jutsu.getType() == BeNMJutsu.Type.EARTH_NATURE) {
+            if (jutsu.getType() == BeNMJutsu.Type.MAGNET_NATURE) {
                 this.jutsus.add(jutsu);
             }
         }

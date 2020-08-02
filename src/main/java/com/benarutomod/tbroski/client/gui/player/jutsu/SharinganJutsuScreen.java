@@ -1,3 +1,4 @@
+/*
 package com.benarutomod.tbroski.client.gui.player.jutsu;
 
 import com.benarutomod.tbroski.Main;
@@ -24,7 +25,7 @@ public class SharinganJutsuScreen extends AbstractJutsuScreen{
                 guiButtonAmaterasu.sendPackets(SharinganJutsu.AmaterasuJutsuID, true);
             }
         }));
-        addButton(guiButtonTsukuyomi = new GuiButtonJutsu(this.guiLeft - 70, this.guiTop - 90, 240, 16, "tsukuyomi", playerCapability.hasTsukuyomiJutsuBoolean(), 8,$ -> {
+        addButton(guiButtonTsukuyomi = new GuiButtonJutsu(this.guiLeft - 70, this.guiTop - 90, 240, 16, "tsukuyomi", playerCapability.hasTsukuyomiJutsuBoolean(), 8, $ -> {
             boolean didBuy = guiButtonTsukuyomi.doNormalPress(this);
             if (didBuy) {
                 playerCapability.setTsukuyomiJutsuBoolean(true);
@@ -39,3 +40,4 @@ public class SharinganJutsuScreen extends AbstractJutsuScreen{
         guiButtonTsukuyomi.setHasJutsu(playerCapability.hasTsukuyomiJutsuBoolean());
     }
 }
+*/

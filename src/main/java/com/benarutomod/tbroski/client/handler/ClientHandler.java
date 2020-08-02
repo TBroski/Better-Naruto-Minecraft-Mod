@@ -1,12 +1,9 @@
 package com.benarutomod.tbroski.client.handler;
 
 import com.benarutomod.tbroski.client.gui.container.ExtendedPlayerInventory;
+import com.benarutomod.tbroski.client.renderer.layers.*;
 import com.benarutomod.tbroski.client.renderer.mobs.FrogRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.SnakeRenderer;
-import com.benarutomod.tbroski.client.renderer.layers.BackLayer;
-import com.benarutomod.tbroski.client.renderer.layers.ClayLayer;
-import com.benarutomod.tbroski.client.renderer.layers.DojutsuLayer;
-import com.benarutomod.tbroski.client.renderer.layers.ScrollLayer;
 import com.benarutomod.tbroski.client.renderer.projectile.ExplosiveKunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.KunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.TeleportationKunaiRenderer;
@@ -138,6 +135,7 @@ public class ClientHandler {
             layers.add(new BackLayer<>(renderer));
             layers.add(new ScrollLayer<>(renderer));
             layers.add(new DojutsuLayer<>(renderer));
+            layers.add(new BodyModeLayer<>(renderer));
         }
     }
 

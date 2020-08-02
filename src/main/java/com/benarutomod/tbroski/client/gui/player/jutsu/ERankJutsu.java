@@ -1,3 +1,4 @@
+/*
 package com.benarutomod.tbroski.client.gui.player.jutsu;
 
 import com.benarutomod.tbroski.Main;
@@ -97,3 +98,4 @@ public class ERankJutsu extends AbstractJutsuScreen {
         NetworkLoader.INSTANCE.sendToServer(new PacketShinobiLevel(playerc.returnShinobiLevel(), false));
     }
 }
+*/

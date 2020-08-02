@@ -5,21 +5,27 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiButtonWindSymbol extends Button {
+public class GuiButtonSymbol extends Button {
 
     final ResourceLocation texture = new ResourceLocation(Main.MODID + ":textures/gui/symbols.png");
 
-    protected final IPressable onPress;
-    int u = 0;
-    int v = 40;
+    protected final Button.IPressable onPress;
+    final int u;
+    final int v;
     int widthIn;
     int heightIn;
 
-    public GuiButtonWindSymbol(int widthIn, int heightIn, IPressable onPress) {
+    public void onPress() {
+        this.onPress.onPress(this);
+    }
+
+    public GuiButtonSymbol(int widthIn, int heightIn, int u, int v, IPressable onPress) {
         super(widthIn, heightIn, 10, 10, "", onPress);
         this.widthIn = widthIn;
         this.heightIn = heightIn;
         this.onPress = onPress;
+        this.u = u;
+        this.v = v;
     }
 
     @Override

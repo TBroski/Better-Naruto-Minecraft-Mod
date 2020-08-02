@@ -56,6 +56,7 @@ public class PlayerCapability implements IPlayerHandler {
     private boolean windNature;
     private boolean earthNature;
     private boolean waterNature;
+    private boolean magnetNature;
 	private boolean cloneJutsu;
 	private boolean replacementJutsu;
 	private boolean summoningJutsu;
@@ -76,6 +77,8 @@ public class PlayerCapability implements IPlayerHandler {
 	private boolean lightningBallJutsu;
 	private boolean stunGunJutsu;
 	private boolean lightningArrowJutsu;
+	private boolean matterRepulsionJutsu;
+	private boolean selfLevitationJutsu;
 	private boolean amaterasuJutsu;
 	private boolean tsukuyomiJutsu;
 	private boolean joined;
@@ -542,6 +545,16 @@ public class PlayerCapability implements IPlayerHandler {
     {
         return this.windNature;
     }
+    @Override
+    public void setMagnetNature(boolean has)
+    {
+        this.windNature = has;
+    }
+    @Override
+    public boolean hasMagnetNature()
+    {
+        return this.windNature;
+    }
 
 
     @Override
@@ -764,6 +777,27 @@ public class PlayerCapability implements IPlayerHandler {
         return this.lightningArrowJutsu;
     }
 
+    @Override
+    public void setMatterRepulsionJutsuBoolean(boolean has)
+    {
+        this.matterRepulsionJutsu = has;
+    }
+    @Override
+    public boolean hasMatterRepulsionJutsuBoolean()
+    {
+        return this.matterRepulsionJutsu;
+    }
+
+    @Override
+    public void setSelfLevitationJutsuBoolean(boolean has)
+    {
+        this.selfLevitationJutsu = has;
+    }
+    @Override
+    public boolean hasSelfLevitationJutsuBoolean()
+    {
+        return this.selfLevitationJutsu;
+    }
 
     @Override
     public void setAmaterasuJutsuBoolean(boolean has)
@@ -837,6 +871,7 @@ public class PlayerCapability implements IPlayerHandler {
             tag.putBoolean("windnature", instance.hasWindNature());
             tag.putBoolean("earthnature", instance.hasEarthNature());
             tag.putBoolean("lightningnature", instance.hasLightningNature());
+            tag.putBoolean("magnetnature", instance.hasMagnetNature());
 
             tag.putBoolean("haschakra", instance.hasChakraBoolean());
             //Jutsu
@@ -865,6 +900,9 @@ public class PlayerCapability implements IPlayerHandler {
             tag.putBoolean("lightningball", instance.hasLightningBallJutsuBoolean());
             tag.putBoolean("stungun", instance.hasStunGunJutsuBoolean());
             tag.putBoolean("lightningarrow", instance.hasLightningArrowJutsuBoolean());
+            //Magnet
+            tag.putBoolean("matterrepulsion", instance.hasMatterRepulsionJutsuBoolean());
+            tag.putBoolean("selflevitation", instance.hasSelfLevitationJutsuBoolean());
             //Sharingan
             tag.putBoolean("amaterasu", instance.hasAmaterasuJutsuBoolean());
             tag.putBoolean("tsukuyomi", instance.hasTsukuyomiJutsuBoolean());
@@ -916,6 +954,7 @@ public class PlayerCapability implements IPlayerHandler {
             instance.setEarthNature(((CompoundNBT) tag).getBoolean("earthnature"));
             instance.setWindNature(((CompoundNBT) tag).getBoolean("windnature"));
             instance.setLightningNature(((CompoundNBT) tag).getBoolean("lightningnature"));
+            instance.setMagnetNature(((CompoundNBT) tag).getBoolean("magnetnature"));
 
             instance.setChakraBoolean(((CompoundNBT) tag).getBoolean("haschakra"));
             //Jutsu
@@ -944,6 +983,9 @@ public class PlayerCapability implements IPlayerHandler {
             instance.setGalePalmJutsuBoolean(((CompoundNBT) tag).getBoolean("galepalm"));
             instance.setWindExplosionJutsuBoolean(((CompoundNBT) tag).getBoolean("windexplosion"));
             instance.setWindArrowJutsuBoolean(((CompoundNBT) tag).getBoolean("windarrow"));
+            //Magnet
+            instance.setMatterRepulsionJutsuBoolean(((CompoundNBT) tag).getBoolean("matterrepulsion"));
+            instance.setSelfLevitationJutsuBoolean(((CompoundNBT) tag).getBoolean("selflevitation"));
             //Shaingan
             instance.setAmaterasuJutsuBoolean(((CompoundNBT) tag).getBoolean("amaterasu"));
             instance.setTsukuyomiJutsuBoolean(((CompoundNBT) tag).getBoolean("tsukuyomi"));

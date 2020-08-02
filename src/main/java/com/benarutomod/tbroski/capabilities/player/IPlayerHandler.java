@@ -124,6 +124,9 @@ public interface IPlayerHandler {
 	void setLightningNature(boolean has);
 	boolean hasLightningNature();
 
+	void setMagnetNature(boolean has);
+	boolean hasMagnetNature();
+
 
 	void setCloneJutsuBoolean(boolean has);
 	void setBodyReplacementBoolean(boolean has);
@@ -150,6 +153,9 @@ public interface IPlayerHandler {
 	void setLightningBallJutsuBoolean(boolean has);
 	void setStunGunJutsuBoolean(boolean has);
 	void setLightningArrowJutsuBoolean(boolean has);
+
+	void setMatterRepulsionJutsuBoolean(boolean has);
+	void setSelfLevitationJutsuBoolean(boolean has);
 
 	void setAmaterasuJutsuBoolean(boolean has);
 	void setTsukuyomiJutsuBoolean(boolean has);
@@ -180,6 +186,9 @@ public interface IPlayerHandler {
 	boolean hasLightningBallJutsuBoolean();
 	boolean hasStunGunJutsuBoolean();
 	boolean hasLightningArrowJutsuBoolean();
+
+	boolean hasMatterRepulsionJutsuBoolean();
+	boolean hasSelfLevitationJutsuBoolean();
 
 	boolean hasAmaterasuJutsuBoolean();
 	boolean hasTsukuyomiJutsuBoolean();
