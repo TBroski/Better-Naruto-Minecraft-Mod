@@ -7,6 +7,7 @@ public abstract class BeNMRegistry<T> {
     public static BeNMRegistry.JutsuRegistry JUTSUS = new BeNMRegistry.JutsuRegistry();
     public static BeNMRegistry.DojutsuRegistry DOJUTSUS = new BeNMRegistry.DojutsuRegistry();
     public static BeNMRegistry.ClanRegistry CLANS = new BeNMRegistry.ClanRegistry();
+    public static BeNMRegistry.BodyModeRegistry BODY_MODES = new BeNMRegistry.BodyModeRegistry();
 
     public abstract ArrayList<T> getValues();
     public abstract void register(T registryObject);
@@ -53,6 +54,21 @@ public abstract class BeNMRegistry<T> {
         @Override
         public void register(BeNMClan registryObject) {
             CLANS.add(registryObject);
+        }
+    }
+
+    public static class BodyModeRegistry extends BeNMRegistry<BeNMBody> {
+
+        private ArrayList<BeNMBody> BODY_MODES = new ArrayList<>();
+
+        @Override
+        public ArrayList<BeNMBody> getValues() {
+            return BODY_MODES;
+        }
+
+        @Override
+        public void register(BeNMBody registryObject) {
+            BODY_MODES.add(registryObject);
         }
     }
 }

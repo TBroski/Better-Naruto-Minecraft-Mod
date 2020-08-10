@@ -71,7 +71,7 @@ public class CapabilityHandler {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketTaijutsu(playercap.returnTaijutsu(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerDojutsuSync(playercap.returnPlayerLeftDojutsu().getString(), true, true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerDojutsuSync(playercap.returnPlayerRightDojutsu().getString(), false, true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerBodyModeSync(playercap.returnPlayerBodyMode().getString(), player.getEntityId(), true));
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerBodyModeSync(playercap.returnPlayerBodyMode().getName(), player.getEntityId(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerHasBodyModeSync(1, playercap.returnPlayerCurseMark(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerHasBodyModeSync(2,  playercap.returnPlayerToadSageMode(), true));
         }

@@ -65,6 +65,12 @@
   "key.benarutomod.keybind1": "Jutsu Keybind 1",
   "key.benarutomod.keybind2": "Jutsu Keybind 2",
   "key.benarutomod.keybind3": "Jutsu Keybind 3",
+  "key.benarutomod.keybind4": "Jutsu Keybind 4",
+  "key.benarutomod.keybind5": "Jutsu Keybind 5",
+  "key.benarutomod.keybind6": "Jutsu Keybind 6",
+  "key.benarutomod.keybind7": "Jutsu Keybind 7",
+  "key.benarutomod.keybind8": "Jutsu Keybind 8",
+  "key.benarutomod.keybind9": "Jutsu Keybind 9",
   "key.categories.benarutomod": "Better Naruto Mod",
 
   "item.benarutomod.naruto_itachi_disc": "§bMusic Disc§b",
@@ -98,7 +104,7 @@
   "gui.benarutomod.text.availabletaijutsu": "Available Taijutsu",
 
   "effect.benarutomod.chakra_reg": "Chakra Regeneration",
-  "effect.benarutomod.sage_chakra_reg": "Sage Chakra Regeneration",
+  "effect.benarutomod.sage_chakra_reg": "Sage Regeneration",
 
   "event.benarutomod.akatsuki.uponmessage": "Your chakra senses a strange presence nearby.",
   "event.benarutomod.livingdamage.dodgedmessage": "You've dodged damage of the amount: ",
@@ -157,6 +163,6 @@
   "jutsu.benarutomod.matter_repulsion": "Matter Repulsion Technique",
   "jutsu.benarutomod.self_levitation": "Self Levitation Technique",
 
-  "body.benarutomod.cursemarkmode": "Curse Mark Mode",
-  "body.benarutomod.toadsagemode": "Toad Sage Mode"
+  "body.benarutomod.curse_mark": "Curse Mark Mode",
+  "body.benarutomod.toad_sage": "Toad Sage Mode"
 }

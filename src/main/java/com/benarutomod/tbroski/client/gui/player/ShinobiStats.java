@@ -77,7 +77,7 @@ public class ShinobiStats extends Screen {
             Minecraft.getInstance().displayGuiScreen(new PlayerDojutsu());
         }));
         addButton(guiButtonPlayerBody = new GuiButtonPlayerBody(this.guiLeft - 16, this.guiTop - 16, player, $ -> {
-            Minecraft.getInstance().displayGuiScreen(new PlayerBody());
+            Minecraft.getInstance().displayGuiScreen(new PlayerBodyScreen());
         }));
         addButton(guiButtonPlayerArm1 = new GuiButtonPlayerArm(this.guiLeft - 32, this.guiTop - 16, player, $ -> {
             Minecraft.getInstance().displayGuiScreen(new PlayerJutsuScreen());

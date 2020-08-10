@@ -11,6 +11,7 @@ import com.benarutomod.tbroski.entity.projectile.jutsu.fire.PhoenixFlowerEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.lightning.LightningArrowEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.lightning.LightningBallEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.sharingan.AmaterasuJutsuEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.sixpath.MiniRocketProjectileEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.water.RagingWavesEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.water.WaterSharkBulletEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.water.WaterShurikenEntity;
@@ -99,6 +100,8 @@ public class EntityInit {
         }
     }
 
+    //Jutsu but not really
+    public static final RegistryObject<EntityType<MiniRocketProjectileEntity>> MINI_ROCKET = ENTITIES.register("mini_rocket", () -> EntityType.Builder.<MiniRocketProjectileEntity>create(MiniRocketProjectileEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + "mini_rocket"));
     //Jutsu
     public static final RegistryObject<EntityType<FireballEntity>> FIREBALL_JUTSU = ENTITIES.register("fireball_jutsu", () -> EntityType.Builder.<FireballEntity>create(FireballEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + "fireball_jutsu"));
     public static final RegistryObject<EntityType<PhoenixFlowerEntity>> PHOENIX_FLOWER_JUTSU = ENTITIES.register("phoenix_flower_jutsu", () -> EntityType.Builder.<PhoenixFlowerEntity>create(PhoenixFlowerEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + "phoenix_flower_jutsu"));

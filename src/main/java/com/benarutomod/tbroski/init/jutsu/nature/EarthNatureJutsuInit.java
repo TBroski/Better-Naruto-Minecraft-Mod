@@ -20,7 +20,7 @@ public class EarthNatureJutsuInit {
             playerIn.world.addEntity(entity);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setFlyingStonesJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -39,7 +39,7 @@ public class EarthNatureJutsuInit {
             playerIn.world.addEntity(entity);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setMudMoatJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -55,7 +55,7 @@ public class EarthNatureJutsuInit {
             //Calls NBT in ForgeEventSubscriber::livingDamage
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setFistRockJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);

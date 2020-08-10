@@ -132,16 +132,22 @@ public class ItemInit {
     public static final RegistryObject<Item> FANGS_SYMBOL = ITEMS.register("fangs_symbol", UniqueItemBase::new);
 
 
+    //Jutsu but not really
+    public static final RegistryObject<Item> MINI_ROCKET = ITEMS.register("mini_rocket", UniqueItemBase::new);
     //Jutsu
     public static final RegistryObject<Item> FIREBALL_JUTSU = ITEMS.register("fireball_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> PHOENIX_FLOWER_JUTSU = ITEMS.register("phoenix_flower_jutsu", UniqueItemBase::new);
+
     public static final RegistryObject<Item> LIGHTNING_BALL_JUTSU = ITEMS.register("lightning_ball_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> LIGHTNING_ARROW_JUTSU = ITEMS.register("lightning_arrow_jutsu", UniqueItemBase::new);
+
     public static final RegistryObject<Item> GALE_PALM_JUTSU = ITEMS.register("gale_palm_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> WIND_EXPLOSION_JUTSU = ITEMS.register("wind_explosion_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> WIND_ARROW_JUTSU = ITEMS.register("wind_arrow_jutsu", UniqueItemBase::new);
+
     public static final RegistryObject<Item> FLYING_STONES_JUTSU = ITEMS.register("flying_stones_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> MUD_MOAT_JUTSU = ITEMS.register("mud_moat_jutsu", UniqueItemBase::new);
+
     public static final RegistryObject<Item> WATER_SHURIKEN_JUTSU = ITEMS.register("water_shuriken_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> RAGING_WAVES_JUTSU = ITEMS.register("raging_waves_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> WATER_SHARK_BULLET_JUTSU = ITEMS.register("water_shark_bullet_jutsu", UniqueItemBase::new);

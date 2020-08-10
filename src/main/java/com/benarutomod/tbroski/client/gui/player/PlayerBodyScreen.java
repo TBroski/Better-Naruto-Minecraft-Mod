@@ -4,6 +4,7 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
+import com.benarutomod.tbroski.client.gui.player.body.BodyModeScreen;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonTab;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
 import com.benarutomod.tbroski.client.gui.widgets.shinobistats.GuiButtonArrowDown;
@@ -29,7 +30,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 
-public class PlayerBody extends AbstractTabedBackground {
+public class PlayerBodyScreen extends AbstractTabedBackground {
 
     private ArrayList<GuiButtonTab> tabs = new ArrayList<>();
 
@@ -41,7 +42,7 @@ public class PlayerBody extends AbstractTabedBackground {
     private String bodyToggle = "";
     private BeNMBody currentBodyMode = BodyInit.NULL;
 
-    protected PlayerBody() {
+    protected PlayerBodyScreen() {
         super(new TranslationTextComponent("gui." + Main.MODID + ".title.bodychakra"));
     }
 
@@ -62,11 +63,12 @@ public class PlayerBody extends AbstractTabedBackground {
 
         //Page 2
         addButton(setBodyMode = new GuiButtonArrowDown(this.guiLeft - 11, this.guiTop + 40, false, $ -> {
-            playerCapability.setPlayerBodyMode(currentBodyMode);
-            NetworkLoader.INSTANCE.sendToServer(new PacketPlayerBodyModeSync(playerCapability.returnPlayerBodyMode().getString(), Minecraft.getInstance().player.getEntityId(), false));
-            Minecraft.getInstance().player.sendMessage(new StringTextComponent("Body Mode set to: " + new TranslationTextComponent(this.bodyToggle).getString()));
+            Minecraft.getInstance().displayGuiScreen(new BodyModeScreen());
+            // Uncomment these playerCapability.setPlayerBodyMode(currentBodyMode);
+            //NetworkLoader.INSTANCE.sendToServer(new PacketPlayerBodyModeSync(playerCapability.returnPlayerBodyMode().getName(), Minecraft.getInstance().player.getEntityId(), false));
+            //Minecraft.getInstance().player.sendMessage(new StringTextComponent("Body Mode set to: " + new TranslationTextComponent(this.bodyToggle).getString()));
         }));
-        addButton(curseMark = new GuiButtonJutsu(this.guiLeft - 100, this.guiTop - 40, 224, 0, Main.MODID + ".cursemarkmode", playerCapability.returnPlayerCurseMark() > 0, 0, $ -> {
+/*        addButton(curseMark = new GuiButtonJutsu(this.guiLeft - 100, this.guiTop - 40, 224, 0, Main.MODID + ".cursemarkmode", playerCapability.returnPlayerCurseMark() > 0, 0, $ -> {
             if (playerCapability.returnPlayerCurseMark() > 0)
             {
                 this.currentBodyMode = BodyInit.CURSE_MARK_MODE;
@@ -85,7 +87,7 @@ public class PlayerBody extends AbstractTabedBackground {
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Toad Sage Mode."));
             }
-        }));
+        }));*/
     }
 
     @Override
@@ -98,8 +100,8 @@ public class PlayerBody extends AbstractTabedBackground {
             chakraControlUp.visible = false;
         }
         if (openedTab != 1) {
-            curseMark.visible = false;
-            toadSage.visible = false;
+/*            curseMark.visible = false;
+            toadSage.visible = false;*/
             setBodyMode.visible = false;
         }
         switch (openedTab) {
@@ -112,15 +114,15 @@ public class PlayerBody extends AbstractTabedBackground {
                 font.drawString("Jutsu Cost = Jutsu Cost * 0." + (int) (100 - playerc.returnChakraControl()), this.guiLeft - 105, this.guiTop - 25, 0x453100);
                 break;
             case 1:
-                curseMark.visible = true;
-                toadSage.visible = true;
+/*                curseMark.visible = true;
+                toadSage.visible = true;*/
                 setBodyMode.visible = true;
-                curseMark.renderButton(p_render_1_, p_render_2_, p_render_3_);
-                toadSage.renderButton(p_render_1_, p_render_2_, p_render_3_);
+/*                curseMark.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                toadSage.renderButton(p_render_1_, p_render_2_, p_render_3_);*/
                 setBodyMode.renderButton(p_render_1_, p_render_2_, p_render_3_);
-                checkHovered(p_render_1_, p_render_2_, curseMark, toadSage);
-                checkCovered(curseMark, toadSage);
-                checkToggled(curseMark, toadSage);
+                //checkHovered(p_render_1_, p_render_2_, curseMark, toadSage);
+                //checkCovered(curseMark, toadSage);
+                //checkToggled(curseMark, toadSage);
                 break;
         }
     }

@@ -27,6 +27,7 @@ public abstract class AbstractGenjutsuProjectileEntity extends AbstractJutsuEnti
         super(type, livingEntityIn, worldIn);
     }
 
+    @Override
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();

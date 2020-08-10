@@ -201,7 +201,7 @@ public class ForgeEventSubscriber {
                 LazyOptional<IPlayerHandler> capabilities = target.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
                 IPlayerHandler targetcap = capabilities.orElse(new PlayerCapability());
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleScrollBoolean(targetcap.returnToggleScrollRenderer(), true, targetID));
-                NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketPlayerBodyModeSync(targetcap.returnPlayerBodyMode().getString(), targetID, true));
+                NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketPlayerBodyModeSync(targetcap.returnPlayerBodyMode().getName(), targetID, true));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(1, true, targetcap.returnHandInfusionToggled(), targetID));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(2, true, targetcap.returnBodyInfusionToggled(), targetID));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(3, true, targetcap.returnLegInfusionToggled(), targetID));

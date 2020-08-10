@@ -34,7 +34,7 @@ public class MagnetNatureJutsuInit {
             }
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setMatterRepulsionJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -63,7 +63,7 @@ public class MagnetNatureJutsuInit {
             playerIn.world.addParticle(ParticleTypes.CRIT, playerIn.getPosX() + new Random().nextDouble(), playerIn.getPosY() - 1, playerIn.getPosZ() + new Random().nextDouble(), 0.2, 0.2, 0.2);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setSelfLevitationJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);

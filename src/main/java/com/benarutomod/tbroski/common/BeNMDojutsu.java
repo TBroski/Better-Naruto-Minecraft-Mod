@@ -58,7 +58,7 @@ public class BeNMDojutsu {
         return this;
     }
 
-    public BeNMDojutsu setCanUseEightPaths() {
+    public BeNMDojutsu setCanUseSixPathsTechnique() {
         this.eightPaths = true;
         return this;
     }

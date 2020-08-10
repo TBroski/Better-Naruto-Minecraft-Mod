@@ -5,6 +5,8 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
+import com.benarutomod.tbroski.common.interfaces.IBeNMJutsuButtonPress;
+import com.benarutomod.tbroski.common.interfaces.IBeNMJutsuButtonUpdate;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraSync;
 import net.minecraft.client.Minecraft;
@@ -22,7 +24,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 public class BeNMJutsu {
 
     private final String name;
-    private final IBeNMPlugin correlatedPlugin;
+    private IBeNMPlugin correlatedPlugin;
     private final Type type;
     private final boolean toggle;
     private final int u;
@@ -30,15 +32,15 @@ public class BeNMJutsu {
     private final int cost;
     private final float chakraCost;
     private final IAction action;
-    private final IGUIJutsuButtonPress press;
-    private final IGUIJutsuUpdateButton update;
+    private final IBeNMJutsuButtonPress press;
+    private final IBeNMJutsuButtonUpdate update;
     private final IJutsuServerSync sync;
     private final IHasJutsu hasJutsu;
     private ResourceLocation resourceLocation;
     private IExtraCheck extraCheck;
     private ICancelEventListener onCancelEvent;
 
-    public BeNMJutsu(IBeNMPlugin plugin, String registryName, Type type, int beNMPointCost, float chakraCost, int u, int v, boolean toggle, IAction action, IGUIJutsuButtonPress buttonPress, IGUIJutsuUpdateButton updateButton, IJutsuServerSync serverSync, IHasJutsu hasJutsu) {
+    public BeNMJutsu(IBeNMPlugin plugin, String registryName, Type type, int beNMPointCost, float chakraCost, int u, int v, boolean toggle, IAction action, IBeNMJutsuButtonPress buttonPress, IBeNMJutsuButtonUpdate updateButton, IJutsuServerSync serverSync, IHasJutsu hasJutsu) {
         this.name = registryName;
         this.correlatedPlugin = plugin;
         this.type = type;
@@ -58,6 +60,11 @@ public class BeNMJutsu {
 
     public IBeNMPlugin getCorrelatedPlugin() {
         return correlatedPlugin;
+    }
+
+    public BeNMJutsu setPlugin(IBeNMPlugin pluginIn) {
+        this.correlatedPlugin = pluginIn;
+        return this;
     }
 
     public BeNMJutsu setResourceLocationForGUI(ResourceLocation resourceLocation) {
@@ -137,12 +144,12 @@ public class BeNMJutsu {
         sync.update(playerCapability, has);
     }
 
-    public IGUIJutsuButtonPress getPress() {
-        return press;
+    public IBeNMJutsuButtonPress getPress() {
+        return this.press;
     }
 
     public float getChakraCost() {
-        return chakraCost;
+        return this.chakraCost;
     }
 
     public boolean hasJutsu(IPlayerHandler playerCapability) {
@@ -150,32 +157,11 @@ public class BeNMJutsu {
     }
 
     public enum Type {
-        FIRE_NATURE, LIGHTNING_NATURE, EARTH_NATURE, WIND_NATURE, WATER_NATURE, MAGNET_NATURE, E_RANK, SHARINGAN_ABILITY, EIGHT_PATH_TECHNIQUE
+        FIRE_NATURE, LIGHTNING_NATURE, EARTH_NATURE, WIND_NATURE, WATER_NATURE, MAGNET_NATURE, E_RANK, SHARINGAN_ABILITY, SIX_PATH_TECHNIQUE
     }
 
     public interface IAction {
         void action(ServerPlayerEntity playerIn, int taijutsuModifier0, int taijutsuModifier1, IPlayerHandler playerCapability);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public interface IGUIJutsuUpdateButton {
-        void update(GuiButtonJutsu buttonJutsu, IPlayerHandler playerCapability);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public interface IGUIJutsuButtonPress extends Button.IPressable {
-        void onPress(GuiButtonJutsu p_onPress_1_, IPlayerHandler playerCapability);
-
-        @Override
-        default void onPress(Button p_onPress_1_) {
-            if (p_onPress_1_ instanceof GuiButtonJutsu) {
-                ClientPlayerEntity player = Minecraft.getInstance().player;
-                LazyOptional<IPlayerHandler> player_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-                IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
-
-                onPress((GuiButtonJutsu) p_onPress_1_, playerc);
-            }
-        }
     }
 
     public interface IJutsuServerSync {

@@ -4,7 +4,9 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
+import com.benarutomod.tbroski.client.gui.player.body.AbstractBodyScreen;
 import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
+import com.benarutomod.tbroski.common.BeNMBody;
 import com.benarutomod.tbroski.common.BeNMJutsu;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketBeNMPointsSync;
@@ -14,11 +16,12 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 
 public class GuiButtonJutsu extends Button {
 
-    final ResourceLocation texture = new ResourceLocation(Main.MODID + ":textures/gui/jutsu.png");
+    ResourceLocation texture = new ResourceLocation(Main.MODID + ":textures/gui/jutsu.png");
 
     protected final IPressable onPress;
     final int u;
@@ -29,18 +32,7 @@ public class GuiButtonJutsu extends Button {
     private int cost;
     private boolean has;
 
-    @Deprecated
-    public GuiButtonJutsu(int widthIn, int heightIn, int u, int v, IPressable onPress) {
-        super(widthIn, heightIn, 16, 16, "", onPress);
-        this.widthIn = widthIn;
-        this.heightIn = heightIn;
-        this.u = u;
-        this.v = v;
-        this.onPress = onPress;
-        this.name = "";
-    }
-
-    public GuiButtonJutsu(int widthIn, int heightIn, int u, int v, String name, boolean has, int cost, IPressable onPress) {
+    public GuiButtonJutsu(int widthIn, int heightIn, int u, int v, String name, boolean has, int cost, ResourceLocation resourceLocation, IPressable onPress) {
         super(widthIn, heightIn, 16, 16, "", onPress);
         this.widthIn = widthIn;
         this.heightIn = heightIn;
@@ -50,6 +42,7 @@ public class GuiButtonJutsu extends Button {
         this.name = name;
         this.has = has;
         this.cost = cost;
+        this.texture = resourceLocation;
     }
 
     @Override
@@ -88,7 +81,7 @@ public class GuiButtonJutsu extends Button {
         return cost;
     }
 
-    public boolean doNormalPress(AbstractJutsuScreen screen) {
+    public boolean doJutsuPress(AbstractJutsuScreen screen) {
         PlayerEntity playerEntity = Minecraft.getInstance().player;
         LazyOptional<IPlayerHandler> player_cap = playerEntity.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
         IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
@@ -106,6 +99,21 @@ public class GuiButtonJutsu extends Button {
         }
         else {
             playerEntity.sendMessage(new StringTextComponent("Not Enough BeNM Points (Need " + this.cost + ")"));
+        }
+        return flag;
+    }
+
+    public boolean doBodyPress(AbstractBodyScreen screen, BeNMBody bodyMode) {
+        PlayerEntity playerEntity = Minecraft.getInstance().player;
+        boolean flag = false;
+        if (this.hasJutsu())
+        {
+            screen.bodyToggle = "body." + this.getTranslationName();
+            screen.currentBodyMode = bodyMode;
+            flag = true;
+        }
+        else {
+            playerEntity.sendMessage(new StringTextComponent("Conditions not met for " + new TranslationTextComponent(this.getTranslationName()).getString() + "."));
         }
         return flag;
     }

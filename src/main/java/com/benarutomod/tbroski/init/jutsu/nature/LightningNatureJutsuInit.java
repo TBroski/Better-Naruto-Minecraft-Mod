@@ -29,7 +29,7 @@ public class LightningNatureJutsuInit {
             playerIn.world.addEntity(entity);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setLightningBallJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -61,7 +61,7 @@ public class LightningNatureJutsuInit {
             }
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setStunGunJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -80,7 +80,7 @@ public class LightningNatureJutsuInit {
             playerIn.world.addEntity(entity);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setLightningArrowJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);

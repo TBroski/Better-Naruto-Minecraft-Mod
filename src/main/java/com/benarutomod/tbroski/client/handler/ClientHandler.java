@@ -14,6 +14,7 @@ import com.benarutomod.tbroski.client.renderer.projectile.jutsu.fire.PhoenixFlow
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.lightning.LightningArrowRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.lightning.LightningBallRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.sharingan.AmaterasuJutsuRenderer;
+import com.benarutomod.tbroski.client.renderer.projectile.jutsu.sixpath.MiniRocketRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.water.RagingWavesRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.water.WaterSharkBulletRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.water.WaterShurikenRenderer;
@@ -91,6 +92,8 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WATER_STYLE_MASKED_ANIMAL.get(), WaterStyleMaskedAnimalRenderer::new);
 
 
+        //Jutsu but not really jutsu.
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.MINI_ROCKET.get(), new MiniRocketRenderer.Factory());
         //Jutsu
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FIREBALL_JUTSU.get(), new FireBallRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LIGHTNING_BALL_JUTSU.get(), new LightningBallRenderer.Factory());
@@ -169,21 +172,5 @@ public class ClientHandler {
         {
             layers.add(new ClayLayer<>(renderer));
         }
-    }
-
-    private static double syncedFuel;
-    public static void executeProcedure(Map<String, Object> dependencies) {
-        if (dependencies.get("entity") == null) {
-            System.err.println("Failed to load dependency entity for procedure SyncedFuelProcedure!");
-            return;
-        }
-        Entity entity = (Entity) dependencies.get("entity");
-        if (entity.world.isRemote) {
-            entity.getPersistentData().putDouble("fuel", syncedFuel);
-        }
-        else {
-            syncedFuel = entity.getPersistentData().getDouble("fuel");
-        }
-        System.out.println(entity.world.isRemote);
     }
 }

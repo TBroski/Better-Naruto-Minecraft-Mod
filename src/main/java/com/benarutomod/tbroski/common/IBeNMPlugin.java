@@ -15,7 +15,7 @@ public interface IBeNMPlugin {
 
     void registerNewClans(BeNMRegistry.ClanRegistry clanRegistry);
 
-    void registerNewBodyModes(List<BeNMBody> bodies);
+    void registerNewBodyModes(BeNMRegistry.BodyModeRegistry bodyModeRegistry);
 
     void registerNewJutsu(BeNMRegistry.JutsuRegistry jutsuRegistry);
 }

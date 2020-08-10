@@ -3,7 +3,7 @@ package com.benarutomod.tbroski.client.gui.player;
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 //import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsuScreen;
-import com.benarutomod.tbroski.client.gui.player.jutsu.EightPathJutsuScreen;
+import com.benarutomod.tbroski.client.gui.player.jutsu.SixPathJutsuScreen;
 import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsuScreen;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonDojutsu;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonTab;
@@ -36,11 +36,12 @@ public class PlayerDojutsu extends AbstractTabedBackground {
             }
         }));
         addButton(guiButtonRinnegan = new GuiButtonDojutsu(this.guiLeft - 70, this.guiTop - 50, DojutsuInit.RINNEGAN, $ -> {
+            Minecraft.getInstance().displayGuiScreen(new SixPathJutsuScreen());
             if (playerCapability.returnPlayerLeftDojutsu().canUseEightPaths() || playerCapability.returnPlayerRightDojutsu().canUseEightPaths()) {
-                Minecraft.getInstance().displayGuiScreen(new EightPathJutsuScreen());
+                //Minecraft.getInstance().displayGuiScreen(new SixPathJutsuScreen());
             }
             else {
-                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't posses a dojutsu that can use Eight Paths Techniques."));
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't posses a dojutsu that can use Six Paths Techniques."));
             }
         }));
     }

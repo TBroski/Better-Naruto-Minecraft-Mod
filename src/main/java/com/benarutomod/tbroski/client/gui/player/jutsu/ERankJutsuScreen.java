@@ -28,7 +28,7 @@ public class ERankJutsuScreen extends AbstractJutsuScreen {
         int x = -90;
         int y = -90;
         for (BeNMJutsu jutsu : this.jutsus) {
-            addButton(new GuiButtonJutsu(this.guiLeft + x, this.guiTop + y, jutsu.getU(), jutsu.getV(), jutsu.getCorrelatedPlugin().getPluginId() + "." + jutsu.getName(), false, jutsu.getCost(), jutsu.getPress()));
+            addButton(new GuiButtonJutsu(this.guiLeft + x, this.guiTop + y, jutsu.getU(), jutsu.getV(), jutsu.getCorrelatedPlugin().getPluginId() + "." + jutsu.getName(), false, jutsu.getCost(), jutsu.getResourceLocationForGUI(), jutsu.getPress()));
             if (x == 90) {
                 x = -90;
                 y += 20;

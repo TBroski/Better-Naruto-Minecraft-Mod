@@ -3,7 +3,6 @@ package com.benarutomod.tbroski;
 import com.benarutomod.tbroski.common.BeNMPlugin;
 import com.benarutomod.tbroski.common.BeNMRegistry;
 import com.benarutomod.tbroski.common.IBeNMPlugin;
-import com.benarutomod.tbroski.common.Test;
 import com.benarutomod.tbroski.integration.Curios;
 import com.benarutomod.tbroski.blocks.AmaterasuFireBlockBase;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
@@ -44,7 +43,7 @@ public class Main {
 
 	public static final String MODID = "benarutomod";
 
-	public Main() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+	public Main() {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		MinecraftForge.EVENT_BUS.register(new ChakraBar());
 		MinecraftForge.EVENT_BUS.register(new Notifications());
@@ -59,21 +58,6 @@ public class Main {
 		NetworkLoader.registerMessages();
 
 		MinecraftForge.EVENT_BUS.register(this);
-
-		// API Search and Registry
-		ScanResult scanResult = new ClassGraph().enableClassInfo().enableAnnotationInfo().scan();
-		ClassInfoList classInfoList = scanResult.getClassesWithAnnotation(BeNMPlugin.class.getName());
-		for (Class markedClass : classInfoList.loadClasses()) {
-			for (Class markedInterface : markedClass.getInterfaces()) {
-				if (markedInterface == IBeNMPlugin.class) {
-					System.out.println("BeNM Plugin found at: " + markedClass.getName());
-					IBeNMPlugin plugin = (IBeNMPlugin) markedClass.newInstance();
-					plugin.registerNewJutsu(BeNMRegistry.JUTSUS);
-					plugin.registerNewDojutsus(BeNMRegistry.DOJUTSUS);
-					plugin.registerNewClans(BeNMRegistry.CLANS);
-				}
-			}
-		}
 
 		KeybindInit.register();
 		FluidInit.FLUIDS.register(modEventBus);
@@ -96,7 +80,28 @@ public class Main {
 		CapabilityManager.INSTANCE.register(IPlayerHandler.class, new PlayerCapability.Storage(), PlayerCapability::new);
 		EntityInit.registerEntityWorldSpawns();
 		FeatureInit.registerBiomeFeatures();
-		BodyInit.register();
+
+		// API Search and Registry with help from ClassGraph libraries.
+		ScanResult scanResult = new ClassGraph().enableClassInfo().enableAnnotationInfo().scan();
+		ClassInfoList classInfoList = scanResult.getClassesWithAnnotation(BeNMPlugin.class.getName());
+		for (Class markedClass : classInfoList.loadClasses()) {
+			for (Class markedInterface : markedClass.getInterfaces()) {
+				if (markedInterface == IBeNMPlugin.class) {
+					System.out.println("BeNM Plugin found at: " + markedClass.getName());
+					try {
+						IBeNMPlugin plugin = (IBeNMPlugin) markedClass.newInstance();
+						plugin.registerNewJutsu(BeNMRegistry.JUTSUS);
+						plugin.registerNewDojutsus(BeNMRegistry.DOJUTSUS);
+						plugin.registerNewClans(BeNMRegistry.CLANS);
+						plugin.registerNewBodyModes(BeNMRegistry.BODY_MODES);
+					} catch (InstantiationException instantiationException) {
+						instantiationException.printStackTrace();
+					} catch (IllegalAccessException illegalAccessException) {
+						illegalAccessException.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 	private void onClientSetup(FMLClientSetupEvent e)

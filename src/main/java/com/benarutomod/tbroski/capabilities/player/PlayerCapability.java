@@ -851,7 +851,7 @@ public class PlayerCapability implements IPlayerHandler {
             tag.putString("playeraffiliation", instance.returnPlayerEntityAffiliation());
             tag.putString("playerleftdojutsu", instance.returnPlayerLeftDojutsu().getString());
             tag.putString("playerrightdojutsu", instance.returnPlayerRightDojutsu().getString());
-            tag.putString("playerbody", instance.returnPlayerBodyMode().getString());
+            tag.putString("playerbody", instance.returnPlayerBodyMode().getName());
             tag.putString("playerclan", instance.returnPlayerClan().getString());
 
             //Keybinds for Jutsu

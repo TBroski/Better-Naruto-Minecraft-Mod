@@ -22,7 +22,7 @@ public class WaterNatureJutsuInit {
             playerIn.world.addEntity(entity);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setWaterShurikenJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -41,7 +41,7 @@ public class WaterNatureJutsuInit {
             playerIn.world.addEntity(entity);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setRagingWavesJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -60,7 +60,7 @@ public class WaterNatureJutsuInit {
             playerIn.world.addEntity(entity);
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setWaterSharkBulletJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);

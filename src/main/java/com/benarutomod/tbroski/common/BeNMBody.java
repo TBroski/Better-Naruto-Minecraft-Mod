@@ -1,12 +1,27 @@
 package com.benarutomod.tbroski.common;
 
+import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
+import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
+import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
+import com.benarutomod.tbroski.client.gui.player.body.AbstractBodyScreen;
+import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
+import com.benarutomod.tbroski.common.interfaces.IBeNMJutsuButtonPress;
+import com.benarutomod.tbroski.common.interfaces.IBeNMJutsuButtonUpdate;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.LazyOptional;
 
 public class BeNMBody {
 
     private final String mode;
+    private IBeNMPlugin plugin;
     private boolean flight;
     private Effect effect;
     private Effect attackingEffect;
@@ -15,13 +30,62 @@ public class BeNMBody {
     private int dojutsuOffset;
     private ResourceLocation modelTexture;
     private ResourceLocation dojutsuTexture;
+    private ResourceLocation guiTexture;
+    private final IBeNMJutsuButtonPress buttonPress;
+    private final IBeNMJutsuButtonUpdate buttonUpdate;
+    private final int u;
+    private final int v;
 
-    public BeNMBody(String mode) {
+    public BeNMBody(IBeNMPlugin pluginIn, String mode, int u, int v, IBeNMJutsuButtonPress buttonPress, IBeNMJutsuButtonUpdate buttonUpdate) {
+        this.plugin = pluginIn;
         this.mode = mode;
+        this.u = u;
+        this.v = v;
+        this.buttonPress = buttonPress;
+        this.buttonUpdate = buttonUpdate;
+
+        this.guiTexture = new ResourceLocation(Main.MODID, "textures/gui/jutsu.png");
     }
 
-    public String getString() {
+    public BeNMBody(IBeNMPlugin pluginIn, String mode, int u, int v, IBeNMJutsuButtonUpdate buttonUpdate) {
+        this.plugin = pluginIn;
+        this.mode = mode;
+        this.u = u;
+        this.v = v;
+        this.buttonPress = (buttonJutsu, playerCapability) -> {
+            if (Minecraft.getInstance().currentScreen instanceof AbstractBodyScreen) {
+                buttonJutsu.doBodyPress((AbstractBodyScreen) Minecraft.getInstance().currentScreen, this);
+            }
+        };
+        this.buttonUpdate = buttonUpdate;
+
+        this.guiTexture = new ResourceLocation(Main.MODID, "textures/gui/jutsu.png");
+    }
+
+    public String getName() {
         return this.mode;
+    }
+
+    public IBeNMPlugin getCorrelatedPlugin() {
+        return plugin;
+    }
+
+    public BeNMBody setPlugin(IBeNMPlugin pluginIn) {
+        this.plugin = pluginIn;
+        return this;
+    }
+
+    public int getU() {
+        return u;
+    }
+
+    public int getV() {
+        return v;
+    }
+
+    public BeNMBody setResourceLocationForGUI(ResourceLocation resourceLocation) {
+        this.guiTexture = resourceLocation;
+        return this;
     }
 
     public BeNMBody setAllowsPlayerFlight() {
@@ -82,5 +146,17 @@ public class BeNMBody {
 
     public ResourceLocation getDojutsuResourceLocationOnRender() {
         return this.dojutsuTexture;
+    }
+
+    public ResourceLocation getResourceLocationForGUI() {
+        return this.guiTexture;
+    }
+
+    public void update(GuiButtonJutsu buttonBody, IPlayerHandler playerCapability) {
+        buttonUpdate.update(buttonBody, playerCapability);
+    }
+
+    public IBeNMJutsuButtonPress getPress() {
+        return this.buttonPress;
     }
 }

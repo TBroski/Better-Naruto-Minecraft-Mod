@@ -32,7 +32,7 @@ public class ERankJutsuInit {
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 setGenin(Minecraft.getInstance().player);
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setCloneJutsuBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -47,9 +47,9 @@ public class ERankJutsuInit {
         jutsuRegistry.register(new BeNMJutsu(pluginIn, "body_replacement", BeNMJutsu.Type.E_RANK, 3, 30F, 0, 32, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             Vec3d vec3d = playerIn.getEyePosition(1.0F);
             Vec3d vec3d1 = playerIn.getLook(1.0F);
-            Vec3d vec3d2 = vec3d.add(vec3d1.x * 10, vec3d1.y * 10, vec3d1.z * 10);
-            AxisAlignedBB axisalignedbb = playerIn.getBoundingBox().expand(vec3d1.scale(10)).grow(1.0D, 1.0D, 1.0D);
-            EntityRayTraceResult entityRayTraceResult = ProjectileHelper.rayTraceEntities(playerIn, vec3d, vec3d2, axisalignedbb, $ -> !playerIn.isSpectator() && playerIn.canBeCollidedWith(), 10);
+            Vec3d vec3d2 = vec3d.add(vec3d1.x * 20, vec3d1.y * 20, vec3d1.z * 20);
+            AxisAlignedBB axisalignedbb = playerIn.getBoundingBox().expand(vec3d1.scale(20)).grow(1.0D, 1.0D, 1.0D);
+            EntityRayTraceResult entityRayTraceResult = ProjectileHelper.rayTraceEntities(playerIn, vec3d, vec3d2, axisalignedbb, $ -> !playerIn.isSpectator() && playerIn.canBeCollidedWith(), 40);
             BlockRayTraceResult blockRayTraceResult = playerIn.world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d2, RayTraceContext.BlockMode.OUTLINE,  RayTraceContext.FluidMode.NONE, playerIn));
             if (entityRayTraceResult != null) {
                 BlockPos pos = entityRayTraceResult.getEntity().getPosition();
@@ -66,7 +66,7 @@ public class ERankJutsuInit {
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 setGenin(Minecraft.getInstance().player);
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setBodyReplacementBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -94,7 +94,7 @@ public class ERankJutsuInit {
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 setGenin(Minecraft.getInstance().player);
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setInvisibilityBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);
@@ -111,7 +111,7 @@ public class ERankJutsuInit {
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 setGenin(Minecraft.getInstance().player);
-                boolean didBuy = buttonJutsu.doNormalPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+                boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
                 if (didBuy) {
                     playerCapability.setInvisibilityBoolean(true);
                     buttonJutsu.sendPackets(buttonJutsu.getJutsuName(), true);

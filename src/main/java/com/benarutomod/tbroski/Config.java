@@ -8,6 +8,7 @@ public class Config {
     public static class Server {
 
         public final ForgeConfigSpec.BooleanValue entityWorldDamage;
+        public final ForgeConfigSpec.BooleanValue playerWorldDamage;
         public final ForgeConfigSpec.BooleanValue byakuganCanSeePlayers;
         public final ForgeConfigSpec.IntValue sharinganDodgedDamage;
 
@@ -15,6 +16,12 @@ public class Config {
 
             builder.comment("BeNM Mod Configuration")
                     .push("benarutomod");
+
+            playerWorldDamage = builder
+                    .comment("Defines world damage from jutsu and items, such as wind explosion jutsu. The value true subscribes to world damage.")
+                    .translation("config." + Main.MODID + ".playerWorldDamage")
+                    .worldRestart()
+                    .define("playerWorldDamage", true);
 
             entityWorldDamage = builder
                     .comment("Defines world damage from items, such as explosive kunai thrown by mobs. The value true subscribes to world damage.")

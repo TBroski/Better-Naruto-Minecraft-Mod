@@ -1,15 +1,22 @@
-package com.benarutomod.tbroski.common;
+package com.benarutomod.tbroski;
 
-import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.client.renderer.layers.models.bodymode.ModelCurseMarkWings;
+import com.benarutomod.tbroski.common.BeNMBody;
+import com.benarutomod.tbroski.common.BeNMPlugin;
+import com.benarutomod.tbroski.common.BeNMRegistry;
+import com.benarutomod.tbroski.common.IBeNMPlugin;
+import com.benarutomod.tbroski.init.BodyInit;
 import com.benarutomod.tbroski.init.ClanInit;
 import com.benarutomod.tbroski.init.DojutsuInit;
+import com.benarutomod.tbroski.init.EffectInit;
 import com.benarutomod.tbroski.init.jutsu.ERankJutsuInit;
+import com.benarutomod.tbroski.init.jutsu.SixPathJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.nature.*;
-
-import java.util.List;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.ResourceLocation;
 
 @BeNMPlugin
-public class Test implements IBeNMPlugin {
+public class MainPlugin implements IBeNMPlugin {
 
     @Override
     public String getPluginId() {
@@ -34,10 +41,16 @@ public class Test implements IBeNMPlugin {
         clanRegistry.register(ClanInit.UZUMAKI);
     }
 
-
     @Override
-    public void registerNewBodyModes(List<BeNMBody> bodies) {
+    public void registerNewBodyModes(BeNMRegistry.BodyModeRegistry bodyModeRegistry) {
+        bodyModeRegistry.register(BodyInit.NULL);
+        bodyModeRegistry.register(new BeNMBody(this, "curse_mark", 224, 0, (buttonBody, playerCapability) -> {
+            buttonBody.setHasJutsu(playerCapability.returnPlayerCurseMark() > 0);
+        }).setAttackingEffect(Effects.WITHER).setModelOnRender(new ModelCurseMarkWings(), new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/cursemarkwings.png")));
 
+        bodyModeRegistry.register(new BeNMBody(this, "toad_sage", 224, 16, (buttonBody, playerCapability) -> {
+            buttonBody.setHasJutsu(playerCapability.returnPlayerToadSageMode() > 0);
+        }).setPlayerEffect(EffectInit.SAGE_CHAKRA_REG.get()).setDojutsuModelOnRender(1, 1, new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/toadsageeyes.png")));
     }
 
     @Override
@@ -49,5 +62,6 @@ public class Test implements IBeNMPlugin {
         LightningNatureJutsuInit.registerLightningJutsu(jutsuRegistry, this);
         MagnetNatureJutsuInit.registerMagnetJutsu(jutsuRegistry, this);
         ERankJutsuInit.registerERankJutsu(jutsuRegistry, this);
+        SixPathJutsuInit.registerSixPathJutsu(jutsuRegistry, this);
     }
 }

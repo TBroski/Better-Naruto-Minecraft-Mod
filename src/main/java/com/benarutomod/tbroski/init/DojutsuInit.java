@@ -12,6 +12,6 @@ public class DojutsuInit {
 
     public static final BeNMDojutsu SHARINGAN = new BeNMDojutsu("sharingan", BeNMDojutsu.Type.SHARINGAN, 0).setCanDodgeDamage();
     public static final BeNMDojutsu MANGEKYOU_SHARINGAN = new BeNMDojutsu("mangekyou_sharingan", BeNMDojutsu.Type.SHARINGAN, 0).setCanDodgeDamage();
-    public static final BeNMDojutsu RINNEGAN = new BeNMDojutsu("rinnegan", BeNMDojutsu.Type.SHARINGAN, 1).setCanDodgeDamage().setCanUseEightPaths();
+    public static final BeNMDojutsu RINNEGAN = new BeNMDojutsu("rinnegan", BeNMDojutsu.Type.SHARINGAN, 1).setCanDodgeDamage().setCanUseSixPathsTechnique();
     public static final BeNMDojutsu BYAKUGAN = new BeNMDojutsu("byakugan", BeNMDojutsu.Type.BYAKUGAN, 1).setCanSeeChakra().setRestrictsChakra();
 }
