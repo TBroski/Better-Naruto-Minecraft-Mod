@@ -35,7 +35,7 @@ public class EntityEvents {
     public static void AddEntityAi(EntityJoinWorldEvent event)
     {
         MobEntity entity = (MobEntity) event.getEntity();
-        if (!(entity instanceof AbstractShinobiEntity) && !(entity instanceof EnderDragonEntity) && !(entity instanceof WitherEntity) && !(entity instanceof AbstractCloneEntity) && entity.isNonBoss()) {
+        if (!(entity instanceof AbstractShinobiEntity) && !(entity instanceof AbstractCloneEntity) && entity.isNonBoss()) {
             entity.goalSelector.addGoal(1, new FindandReturnItemGoal(entity, 3000));
         }
     }

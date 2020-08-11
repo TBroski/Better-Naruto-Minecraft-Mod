@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.common;
 
+import com.benarutomod.tbroski.common.enums.Nature;
 import com.benarutomod.tbroski.init.DojutsuInit;
 
 public class BeNMClan {
@@ -59,9 +60,5 @@ public class BeNMClan {
 
     public float getStartingChakra() {
         return this.startingChakra;
-    }
-
-    public enum Nature {
-        NULL, FIRE, WATER, EARTH, WIND, LIGHTNING,
     }
 }

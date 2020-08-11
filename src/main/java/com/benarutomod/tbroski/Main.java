@@ -50,7 +50,7 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(new Amaterasu());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 		MinecraftForge.EVENT_BUS.register(new ForgeEventSubscriber());
-		MinecraftForge.EVENT_BUS.register(new NetworkLoader());
+		//MinecraftForge.EVENT_BUS.register(new NetworkLoader());
 		MinecraftForge.EVENT_BUS.register(new KeyboardHelper());
 		MinecraftForge.EVENT_BUS.register(new TransformationJutsu());
 		MinecraftForge.EVENT_BUS.register(new AmaterasuFireBlockBase());

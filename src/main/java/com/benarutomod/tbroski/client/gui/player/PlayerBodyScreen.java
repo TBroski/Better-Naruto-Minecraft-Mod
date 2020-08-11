@@ -29,6 +29,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerBodyScreen extends AbstractTabedBackground {
 
@@ -37,8 +38,6 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
     private GuiButtonArrowUp chakraControlUp;
     private GuiButtonArrowDown setBodyMode;
 
-    private GuiButtonJutsu curseMark;
-    private GuiButtonJutsu toadSage;
     private String bodyToggle = "";
     private BeNMBody currentBodyMode = BodyInit.NULL;
 
@@ -52,7 +51,7 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
         addButton(new GuiButtonTab(this.getWidthInFromTab(0), this.getHeightInFromTab(0), 0, 240, 0, "Chakra Control", $ -> {
             openedTab = 0;
         }));
-        addButton(new GuiButtonTab(this.getWidthInFromTab(1), this.getHeightInFromTab(1), 16, 240, 1, "Body Mode Selection", $ -> {
+        addButton(new GuiButtonTab(this.getWidthInFromTab(1), this.getHeightInFromTab(1), 16, 240, 1, "Body Mode Selection & Attributes", $ -> {
             openedTab = 1;
         }));
 
@@ -68,26 +67,6 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
             //NetworkLoader.INSTANCE.sendToServer(new PacketPlayerBodyModeSync(playerCapability.returnPlayerBodyMode().getName(), Minecraft.getInstance().player.getEntityId(), false));
             //Minecraft.getInstance().player.sendMessage(new StringTextComponent("Body Mode set to: " + new TranslationTextComponent(this.bodyToggle).getString()));
         }));
-/*        addButton(curseMark = new GuiButtonJutsu(this.guiLeft - 100, this.guiTop - 40, 224, 0, Main.MODID + ".cursemarkmode", playerCapability.returnPlayerCurseMark() > 0, 0, $ -> {
-            if (playerCapability.returnPlayerCurseMark() > 0)
-            {
-                this.currentBodyMode = BodyInit.CURSE_MARK_MODE;
-                this.bodyToggle = "body." + curseMark.getTranslationName();
-            }
-            else {
-                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Curse Mark Mode."));
-            }
-        }));
-        addButton(toadSage = new GuiButtonJutsu(this.guiLeft - 80, this.guiTop - 40, 224, 17, Main.MODID + ".toadsagemode", playerCapability.returnPlayerToadSageMode() > 0, 0, $ -> {
-            if (playerCapability.returnPlayerToadSageMode() > 0)
-            {
-                this.currentBodyMode = BodyInit.TOAD_SAGE_MODE;
-                this.bodyToggle = "body." + toadSage.getTranslationName();
-            }
-            else {
-                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Toad Sage Mode."));
-            }
-        }));*/
     }
 
     @Override
@@ -100,8 +79,6 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
             chakraControlUp.visible = false;
         }
         if (openedTab != 1) {
-/*            curseMark.visible = false;
-            toadSage.visible = false;*/
             setBodyMode.visible = false;
         }
         switch (openedTab) {
@@ -114,15 +91,27 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
                 font.drawString("Jutsu Cost = Jutsu Cost * 0." + (int) (100 - playerc.returnChakraControl()), this.guiLeft - 105, this.guiTop - 25, 0x453100);
                 break;
             case 1:
-/*                curseMark.visible = true;
-                toadSage.visible = true;*/
                 setBodyMode.visible = true;
-/*                curseMark.renderButton(p_render_1_, p_render_2_, p_render_3_);
-                toadSage.renderButton(p_render_1_, p_render_2_, p_render_3_);*/
                 setBodyMode.renderButton(p_render_1_, p_render_2_, p_render_3_);
-                //checkHovered(p_render_1_, p_render_2_, curseMark, toadSage);
-                //checkCovered(curseMark, toadSage);
-                //checkToggled(curseMark, toadSage);
+                if (playerc.returnPlayerBodyMode() != BodyInit.NULL) font.drawString("Selected Body Mode: " + new TranslationTextComponent("body." + playerc.returnPlayerBodyMode().getCorrelatedPlugin().getPluginId() + "." + playerc.returnPlayerBodyMode().getName()).getString(), this.guiLeft - (font.getStringWidth("Selected Body Mode: " + new TranslationTextComponent("body." + playerc.returnPlayerBodyMode().getCorrelatedPlugin().getPluginId() + "." + playerc.returnPlayerBodyMode().getName()).getString()) / 2), this.guiTop - 45, 0x453100);
+
+                List<String> attribs = new ArrayList<>();
+                if (playerc.returnPlayerBodyMode().getPlayerEffect() != null) {
+                    attribs.add("Player Effect: " + playerc.returnPlayerBodyMode().getPlayerEffect().getDisplayName().getString());
+                }
+                if (playerc.returnPlayerBodyMode().getAttackingEffect() != null) {
+                    attribs.add("Attacking Effect: " + playerc.returnPlayerBodyMode().getAttackingEffect().getDisplayName().getString());
+                }
+                if (playerc.returnPlayerBodyMode().allowsPlayerFlight()) {
+                    attribs.add("Flight");
+                }
+
+                int i = -30;
+                for (String attrib : attribs) {
+                    font.drawString(attrib, this.guiLeft - 105, this.guiTop + i, 0x453100);
+                    i += 15;
+                }
+                attribs.clear();
                 break;
         }
     }

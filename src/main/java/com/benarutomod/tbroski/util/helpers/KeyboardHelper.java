@@ -4,6 +4,7 @@ import com.benarutomod.tbroski.client.gui.player.ShinobiStats;
 import com.benarutomod.tbroski.common.BeNMClan;
 import com.benarutomod.tbroski.common.BeNMJutsu;
 import com.benarutomod.tbroski.common.BeNMRegistry;
+import com.benarutomod.tbroski.common.enums.Nature;
 import com.benarutomod.tbroski.common.jutsu.*;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
@@ -66,7 +67,7 @@ public class KeyboardHelper {
                     NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("chakra"));
                     player_cap.setChakraBoolean(true);
                     NetworkLoader.INSTANCE.sendToServer(new PacketChakraAddition());
-                    if (player_cap.returnPlayerClan().getClanNature() == BeNMClan.Nature.NULL) {
+                    if (player_cap.returnPlayerClan().getClanNature() == Nature.NULL) {
                         if (randChakraNum > 4) {
                             mcinstance.displayGuiScreen(new FirePaperGui());
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(1, true, false));
@@ -95,22 +96,22 @@ public class KeyboardHelper {
                         }
                     }
                     else {
-                        if (player_cap.returnPlayerClan().getClanNature() == BeNMClan.Nature.FIRE) {
+                        if (player_cap.returnPlayerClan().getClanNature() == Nature.FIRE) {
                             mcinstance.displayGuiScreen(new FirePaperGui());
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(1, true, false));
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(1, true, true));
                             NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("firenature"));
-                        } else if (player_cap.returnPlayerClan().getClanNature() == BeNMClan.Nature.LIGHTNING) {
+                        } else if (player_cap.returnPlayerClan().getClanNature() == Nature.LIGHTNING) {
                             mcinstance.displayGuiScreen(new LightningPaperGui());
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(5, true, false));
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(5, true, true));
                             NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("lightningnature"));
-                        } else if (player_cap.returnPlayerClan().getClanNature() == BeNMClan.Nature.WIND) {
+                        } else if (player_cap.returnPlayerClan().getClanNature() == Nature.WIND) {
                             mcinstance.displayGuiScreen(new WindPaperGui());
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(4, true, false));
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(4, true, true));
                             NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("windnature"));
-                        } else if (player_cap.returnPlayerClan().getClanNature() == BeNMClan.Nature.EARTH) {
+                        } else if (player_cap.returnPlayerClan().getClanNature() == Nature.EARTH) {
                             mcinstance.displayGuiScreen(new EarthPaperGui());
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(3, true, false));
                             NetworkLoader.INSTANCE.sendToServer(new PacketNature(3, true, true));

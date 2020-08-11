@@ -15,7 +15,12 @@ import com.benarutomod.tbroski.networking.packets.settings.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -23,6 +28,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber
 public class CapabilityHandler {
@@ -77,82 +85,82 @@ public class CapabilityHandler {
         }
     }
 
-        @SubscribeEvent
-        public void onPlayerClone(PlayerEvent.Clone event) {
-            PlayerEntity player = event.getPlayer();
-            LazyOptional<IPlayerHandler> chakra_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-            IPlayerHandler chakra = chakra_cap.orElse(new PlayerCapability());
-            LazyOptional<IPlayerHandler> oldchakra_cap = event.getOriginal().getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-            IPlayerHandler oldchakra = oldchakra_cap.orElse(new PlayerCapability());
+    @SubscribeEvent
+    public void onPlayerClone(PlayerEvent.Clone event) {
+        PlayerEntity player = event.getPlayer();
+        LazyOptional<IPlayerHandler> chakra_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler chakra = chakra_cap.orElse(new PlayerCapability());
+        LazyOptional<IPlayerHandler> oldchakra_cap = event.getOriginal().getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler oldchakra = oldchakra_cap.orElse(new PlayerCapability());
 
-            chakra.setChakra(oldchakra.returnChakra());
-            chakra.setmaxChakra(oldchakra.returnmaxChakra());
-            chakra.setcolorChakra(oldchakra.returncolorChakra());
-            chakra.setChakraControl(oldchakra.returnChakraControl());
-            chakra.setplayerEyeSlot(oldchakra.returnplayerEyeSlot());
-            chakra.setjoinWorld(oldchakra.joinWorld());
-            chakra.setTaijutsu(oldchakra.returnTaijutsu());
-            chakra.setBeNMPoints(oldchakra.returnBeNMPoints());
-            chakra.setregenChakra(oldchakra.returnregenChakra());
-            chakra.setPlayerEntityAffiliation(oldchakra.returnPlayerEntityAffiliation());
-            chakra.setPlayerLeftDojutsu(oldchakra.returnPlayerLeftDojutsu());
-            chakra.setPlayerRightDojutsu(oldchakra.returnPlayerRightDojutsu());
-            chakra.setShinobiLevel(oldchakra.returnShinobiLevel());
-            chakra.setToggleJutsuMessage(oldchakra.returnToggleJutsuMessage());
-            chakra.setToggleScrollRenderer(oldchakra.returnToggleScrollRenderer());
-            chakra.setPlayerBodyMode(oldchakra.returnPlayerBodyMode());
+        chakra.setChakra(oldchakra.returnChakra());
+        chakra.setmaxChakra(oldchakra.returnmaxChakra());
+        chakra.setcolorChakra(oldchakra.returncolorChakra());
+        chakra.setChakraControl(oldchakra.returnChakraControl());
+        chakra.setplayerEyeSlot(oldchakra.returnplayerEyeSlot());
+        chakra.setjoinWorld(oldchakra.joinWorld());
+        chakra.setTaijutsu(oldchakra.returnTaijutsu());
+        chakra.setBeNMPoints(oldchakra.returnBeNMPoints());
+        chakra.setregenChakra(oldchakra.returnregenChakra());
+        chakra.setPlayerEntityAffiliation(oldchakra.returnPlayerEntityAffiliation());
+        chakra.setPlayerLeftDojutsu(oldchakra.returnPlayerLeftDojutsu());
+        chakra.setPlayerRightDojutsu(oldchakra.returnPlayerRightDojutsu());
+        chakra.setShinobiLevel(oldchakra.returnShinobiLevel());
+        chakra.setToggleJutsuMessage(oldchakra.returnToggleJutsuMessage());
+        chakra.setToggleScrollRenderer(oldchakra.returnToggleScrollRenderer());
+        chakra.setPlayerBodyMode(oldchakra.returnPlayerBodyMode());
 
-            chakra.setKeybind1(oldchakra.returnKeybind1());
-            chakra.setKeybind2(oldchakra.returnKeybind2());
-            chakra.setKeybind3(oldchakra.returnKeybind3());
-            chakra.setKeybind4(oldchakra.returnKeybind4());
-            chakra.setKeybind5(oldchakra.returnKeybind5());
-            chakra.setKeybind6(oldchakra.returnKeybind6());
-            chakra.setKeybind7(oldchakra.returnKeybind7());
-            chakra.setKeybind8(oldchakra.returnKeybind8());
-            chakra.setKeybind9(oldchakra.returnKeybind9());
+        chakra.setKeybind1(oldchakra.returnKeybind1());
+        chakra.setKeybind2(oldchakra.returnKeybind2());
+        chakra.setKeybind3(oldchakra.returnKeybind3());
+        chakra.setKeybind4(oldchakra.returnKeybind4());
+        chakra.setKeybind5(oldchakra.returnKeybind5());
+        chakra.setKeybind6(oldchakra.returnKeybind6());
+        chakra.setKeybind7(oldchakra.returnKeybind7());
+        chakra.setKeybind8(oldchakra.returnKeybind8());
+        chakra.setKeybind9(oldchakra.returnKeybind9());
 
-            chakra.setChakraBoolean(oldchakra.hasChakraBoolean());
-            chakra.setFireNature(oldchakra.hasFireNature());
-            chakra.setWaterNature(oldchakra.hasWaterNature());
-            chakra.setWindNature(oldchakra.hasWindNature());
-            chakra.setEarthNature(oldchakra.hasEarthNature());
-            chakra.setLightningNature(oldchakra.hasLightningNature());
-            chakra.setMagnetNature(oldchakra.hasMagnetNature());
+        chakra.setChakraBoolean(oldchakra.hasChakraBoolean());
+        chakra.setFireNature(oldchakra.hasFireNature());
+        chakra.setWaterNature(oldchakra.hasWaterNature());
+        chakra.setWindNature(oldchakra.hasWindNature());
+        chakra.setEarthNature(oldchakra.hasEarthNature());
+        chakra.setLightningNature(oldchakra.hasLightningNature());
+        chakra.setMagnetNature(oldchakra.hasMagnetNature());
 
-            chakra.setCloneJutsuBoolean(oldchakra.hasCloneJutsuBoolean());
-            chakra.setSummoningBoolean(oldchakra.hasSummoningBoolean());
-            chakra.setBodyReplacementBoolean(oldchakra.hasBodyReplacementBoolean());
-            chakra.setInvisibilityBoolean(oldchakra.hasInvisibilityBoolean());
-            chakra.setTransformationBoolean(oldchakra.hasTransformationBoolean());
+        chakra.setCloneJutsuBoolean(oldchakra.hasCloneJutsuBoolean());
+        chakra.setSummoningBoolean(oldchakra.hasSummoningBoolean());
+        chakra.setBodyReplacementBoolean(oldchakra.hasBodyReplacementBoolean());
+        chakra.setInvisibilityBoolean(oldchakra.hasInvisibilityBoolean());
+        chakra.setTransformationBoolean(oldchakra.hasTransformationBoolean());
 
-            chakra.setFireballJutsuBoolean(oldchakra.hasFireballJutsuBoolean());
-            chakra.setPhoenixFlowerJutsuBoolean(oldchakra.hasPhoenixFlowerJutsuBoolean());
-            chakra.setMoltenFistJutsuBoolean(oldchakra.hasMoltenFistJutsuBoolean());
+        chakra.setFireballJutsuBoolean(oldchakra.hasFireballJutsuBoolean());
+        chakra.setPhoenixFlowerJutsuBoolean(oldchakra.hasPhoenixFlowerJutsuBoolean());
+        chakra.setMoltenFistJutsuBoolean(oldchakra.hasMoltenFistJutsuBoolean());
 
-            chakra.setLightningBallJutsuBoolean(oldchakra.hasLightningBallJutsuBoolean());
-            chakra.setStunGunJutsuBoolean(oldchakra.hasStunGunJutsuBoolean());
-            chakra.setLightningArrowJutsuBoolean(oldchakra.hasLightningArrowJutsuBoolean());
+        chakra.setLightningBallJutsuBoolean(oldchakra.hasLightningBallJutsuBoolean());
+        chakra.setStunGunJutsuBoolean(oldchakra.hasStunGunJutsuBoolean());
+        chakra.setLightningArrowJutsuBoolean(oldchakra.hasLightningArrowJutsuBoolean());
 
-            chakra.setGalePalmJutsuBoolean(oldchakra.hasGalePalmJutsuBoolean());
-            chakra.setWindExplosionJutsuBoolean(oldchakra.hasWindExplosionJutsuBoolean());
-            chakra.setWindArrowJutsuBoolean(oldchakra.hasWindArrowJutsuBoolean());
+        chakra.setGalePalmJutsuBoolean(oldchakra.hasGalePalmJutsuBoolean());
+        chakra.setWindExplosionJutsuBoolean(oldchakra.hasWindExplosionJutsuBoolean());
+        chakra.setWindArrowJutsuBoolean(oldchakra.hasWindArrowJutsuBoolean());
 
-            chakra.setWaterShurikenJutsuBoolean(oldchakra.hasWaterShurikenJutsuBoolean());
-            chakra.setRagingWavesJutsuBoolean(oldchakra.hasRagingWavesJutsuBoolean());
-            chakra.setWaterSharkBulletJutsuBoolean(oldchakra.hasWaterSharkBulletJutsuBoolean());
+        chakra.setWaterShurikenJutsuBoolean(oldchakra.hasWaterShurikenJutsuBoolean());
+        chakra.setRagingWavesJutsuBoolean(oldchakra.hasRagingWavesJutsuBoolean());
+        chakra.setWaterSharkBulletJutsuBoolean(oldchakra.hasWaterSharkBulletJutsuBoolean());
 
-            chakra.setFlyingStonesJutsuBoolean(oldchakra.hasFlyingStonesJutsuBoolean());
-            chakra.setMudMoatJutsuBoolean(oldchakra.hasMudMoatJutsuBoolean());
-            chakra.setFistRockJutsuBoolean(oldchakra.hasFistRockJutsuBoolean());
+        chakra.setFlyingStonesJutsuBoolean(oldchakra.hasFlyingStonesJutsuBoolean());
+        chakra.setMudMoatJutsuBoolean(oldchakra.hasMudMoatJutsuBoolean());
+        chakra.setFistRockJutsuBoolean(oldchakra.hasFistRockJutsuBoolean());
 
-            chakra.setMatterRepulsionJutsuBoolean(oldchakra.hasMatterRepulsionJutsuBoolean());
-            chakra.setSelfLevitationJutsuBoolean(oldchakra.hasSelfLevitationJutsuBoolean());
+        chakra.setMatterRepulsionJutsuBoolean(oldchakra.hasMatterRepulsionJutsuBoolean());
+        chakra.setSelfLevitationJutsuBoolean(oldchakra.hasSelfLevitationJutsuBoolean());
 
-            chakra.setAmaterasuJutsuBoolean(oldchakra.hasAmaterasuJutsuBoolean());
-            chakra.setTsukuyomiJutsuBoolean(oldchakra.hasTsukuyomiJutsuBoolean());
+        chakra.setAmaterasuJutsuBoolean(oldchakra.hasAmaterasuJutsuBoolean());
+        chakra.setTsukuyomiJutsuBoolean(oldchakra.hasTsukuyomiJutsuBoolean());
 
-            chakra.setPlayerToadSageMode(oldchakra.returnPlayerToadSageMode());
-            chakra.setPlayerCurseMark(oldchakra.returnPlayerCurseMark());
-        }
+        chakra.setPlayerToadSageMode(oldchakra.returnPlayerToadSageMode());
+        chakra.setPlayerCurseMark(oldchakra.returnPlayerCurseMark());
+    }
 }

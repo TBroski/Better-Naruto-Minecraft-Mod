@@ -32,13 +32,12 @@ public class PlayerDojutsu extends AbstractTabedBackground {
                 Minecraft.getInstance().displayGuiScreen(new SharinganJutsuScreen());
             }
             else {
-                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't posses a Mangekyou Sharingan."));
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't posses an evolved Sharingan."));
             }
         }));
         addButton(guiButtonRinnegan = new GuiButtonDojutsu(this.guiLeft - 70, this.guiTop - 50, DojutsuInit.RINNEGAN, $ -> {
-            Minecraft.getInstance().displayGuiScreen(new SixPathJutsuScreen());
             if (playerCapability.returnPlayerLeftDojutsu().canUseEightPaths() || playerCapability.returnPlayerRightDojutsu().canUseEightPaths()) {
-                //Minecraft.getInstance().displayGuiScreen(new SixPathJutsuScreen());
+                Minecraft.getInstance().displayGuiScreen(new SixPathJutsuScreen());
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't posses a dojutsu that can use Six Paths Techniques."));
