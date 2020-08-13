@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.common;
+package com.benarutomod.tbroski.api.internal;
 
 import com.benarutomod.tbroski.Main;
 import net.minecraft.util.ResourceLocation;

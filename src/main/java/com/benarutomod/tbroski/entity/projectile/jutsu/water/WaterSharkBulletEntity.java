@@ -53,6 +53,11 @@ public class WaterSharkBulletEntity extends AbstractWaterJutsuEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "water_shark";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

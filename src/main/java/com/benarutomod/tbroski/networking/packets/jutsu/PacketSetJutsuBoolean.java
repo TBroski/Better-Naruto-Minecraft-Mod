@@ -1,8 +1,7 @@
 package com.benarutomod.tbroski.networking.packets.jutsu;
 
-import com.benarutomod.tbroski.common.BeNMJutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.common.jutsu.*;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import net.minecraft.client.Minecraft;

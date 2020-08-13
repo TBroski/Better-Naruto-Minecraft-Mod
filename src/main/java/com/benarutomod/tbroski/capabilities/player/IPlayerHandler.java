@@ -1,8 +1,8 @@
 package com.benarutomod.tbroski.capabilities.player;
 
-import com.benarutomod.tbroski.common.BeNMBody;
-import com.benarutomod.tbroski.common.BeNMClan;
-import com.benarutomod.tbroski.common.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMBody;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 
 public interface IPlayerHandler {
 	
@@ -55,6 +55,9 @@ public interface IPlayerHandler {
 
 	void setPlayerEntityAffiliation(String entityAffiliation);
 	String returnPlayerEntityAffiliation();
+
+	void setPlayerBijuu(String bijuu);
+	String returnPlayerBijuu();
 
 	void setPlayerLeftDojutsu(BeNMDojutsu playerDojutsu);
 	BeNMDojutsu returnPlayerLeftDojutsu();
@@ -160,6 +163,9 @@ public interface IPlayerHandler {
 	void setAmaterasuJutsuBoolean(boolean has);
 	void setTsukuyomiJutsuBoolean(boolean has);
 
+	void setTailedBeastBombBoolean(boolean has);
+	void setTailedBeastTransformationBoolean(boolean has);
+
 
 	boolean hasCloneJutsuBoolean();
 	boolean hasBodyReplacementBoolean();
@@ -192,4 +198,7 @@ public interface IPlayerHandler {
 
 	boolean hasAmaterasuJutsuBoolean();
 	boolean hasTsukuyomiJutsuBoolean();
+
+	boolean hasTailedBeastBombBoolean();
+	boolean hasTailedBeastTransformationBoolean();
 }

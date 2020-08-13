@@ -3,8 +3,8 @@ package com.benarutomod.tbroski.client.gui.player.jutsu;
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
-import com.benarutomod.tbroski.common.BeNMJutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.BeNMRegistry;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.text.TranslationTextComponent;
 

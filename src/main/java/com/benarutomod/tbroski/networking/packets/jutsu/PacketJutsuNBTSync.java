@@ -1,9 +1,5 @@
 package com.benarutomod.tbroski.networking.packets.jutsu;
 
-import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
-import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
-import com.benarutomod.tbroski.common.BeNMJutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 

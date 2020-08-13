@@ -1,11 +1,10 @@
 package com.benarutomod.tbroski.entity.shinobi.shinobi;
 
-import com.benarutomod.tbroski.common.BeNMClan;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.entity.projectile.KunaiEntity;
 import com.benarutomod.tbroski.entity.shinobi.AbstractShinobiEntity;
 import com.benarutomod.tbroski.init.ClanInit;
-import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.*;

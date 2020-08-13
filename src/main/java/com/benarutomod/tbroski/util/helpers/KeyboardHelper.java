@@ -1,11 +1,7 @@
 package com.benarutomod.tbroski.util.helpers;
 
 import com.benarutomod.tbroski.client.gui.player.ShinobiStats;
-import com.benarutomod.tbroski.common.BeNMClan;
-import com.benarutomod.tbroski.common.BeNMJutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.common.enums.Nature;
-import com.benarutomod.tbroski.common.jutsu.*;
+import com.benarutomod.tbroski.api.enums.Nature;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
@@ -16,14 +12,11 @@ import com.benarutomod.tbroski.networking.packets.*;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraAddition;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsu;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuCaller;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
@@ -31,7 +24,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
-import sun.nio.ch.Net;
 
 import java.util.Random;
 

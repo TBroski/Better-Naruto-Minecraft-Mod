@@ -4,11 +4,15 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
+import com.benarutomod.tbroski.client.gui.player.jutsu.BijuuJutsuScreen;
 import com.benarutomod.tbroski.client.gui.widgets.shinobistats.*;
 import com.benarutomod.tbroski.client.gui.widgets.player.GuiButtonPlayerArm;
 import com.benarutomod.tbroski.client.gui.widgets.player.GuiButtonPlayerBody;
 import com.benarutomod.tbroski.client.gui.widgets.player.GuiButtonPlayerHead;
 import com.benarutomod.tbroski.client.gui.widgets.player.GuiButtonPlayerLeg;
+import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
+import com.benarutomod.tbroski.entity.mobs.bijuu.ShukakuEntity;
+import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.settings.PacketEyeSlotSync;
 import com.benarutomod.tbroski.networking.packets.settings.PacketToggleMessageBoolean;
@@ -16,20 +20,41 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.inventory.InventoryScreen;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.MerchantOffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.BasicTrade;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class ShinobiStats extends Screen {
+
+    private static final ResourceLocation STATS_TEXTURE = new ResourceLocation(Main.MODID, "textures/gui/shinobistatsbackground.png");
+    private static final ResourceLocation BIJUU_OVERLAY_TEXTURE = new ResourceLocation(Main.MODID, "textures/gui/bijuuoverlay.png");
 
     GuiButtonEyeSlot guiButtonEyeSlot;
     GuiButtonMessageJutsu guiButtonMessageJutsu;
     GuiButtonSettingsWheel guiButtonSettingsWheel;
     GuiButtonArrowUp guiButtonArrowUp;
     GuiButtonArrowDown guiButtonArrowDown;
+    GuiButtonBijuuOverlay guiButtonBijuuOverlay;
+
     GuiButtonPlayerHead guiButtonPlayerHead;
     GuiButtonPlayerBody guiButtonPlayerBody;
     GuiButtonPlayerArm guiButtonPlayerArm1;
@@ -42,6 +67,7 @@ public class ShinobiStats extends Screen {
     private int guiLeft;
     private int playerEyeSlot;
     private String entityName;
+    private AbstractBijuuEntity bijuu;
 
     public ShinobiStats() {
         super(new TranslationTextComponent("gui." + Main.MODID + ".title.shinobistats"));
@@ -52,12 +78,16 @@ public class ShinobiStats extends Screen {
         buttons.clear();
         this.guiLeft = (this.width) / 2;
         this.guiTop = (this.height) / 2;
-
         Minecraft mc = Minecraft.getInstance();
         AbstractClientPlayerEntity player = mc.player;
         LazyOptional<IPlayerHandler> player_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
         IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
-
+        for (EntityType<?> entity : ForgeRegistries.ENTITIES.getValues()) {
+            if (entity.getRegistryName().toString().equalsIgnoreCase(playerc.returnPlayerBijuu())) {
+                this.bijuu = (AbstractBijuuEntity) entity.create(Minecraft.getInstance().world);
+                break;
+            }
+        }
         addButton(guiButtonEyeSlot = new GuiButtonEyeSlot(this.width - 31, 40, $ -> {
             this.onGuiButtonEyeSlotPress();
             }));
@@ -73,6 +103,11 @@ public class ShinobiStats extends Screen {
         addButton(guiButtonArrowDown = new GuiButtonArrowDown(this.guiLeft + 50, this.guiTop + 15, true, $ -> {
             this.onGuiButtonArrowDownPress();
         }));
+        addButton(guiButtonBijuuOverlay = new GuiButtonBijuuOverlay(this.guiLeft - 40, this.guiTop - 40, $ -> {
+            Minecraft.getInstance().displayGuiScreen(new BijuuJutsuScreen());
+        }));
+        if (this.bijuu == null) guiButtonBijuuOverlay.visible = false;
+
         addButton(guiButtonPlayerHead = new GuiButtonPlayerHead(this.guiLeft - 16, this.guiTop - 48, player, $ -> {
             Minecraft.getInstance().displayGuiScreen(new PlayerDojutsu());
         }));
@@ -122,7 +157,7 @@ public class ShinobiStats extends Screen {
         guiButtonMessageJutsu.renderButton(p_render_1_, p_render_2_, p_render_3_);
         guiButtonSettingsWheel.renderButton(p_render_1_, p_render_2_, p_render_3_);
         this.renderFonts();
-        mc.textureManager.bindTexture(new ResourceLocation(Main.MODID + ":textures/gui/shinobistatsbackground.png"));
+        mc.textureManager.bindTexture(STATS_TEXTURE);
         if (this.toggleEyeSelection)
         {
             mc.ingameGUI.blit(this.guiLeft - 8, (this.guiTop - 48) + (this.playerEyeSlot * 4), 0, 252, 16, 4);
@@ -221,6 +256,9 @@ public class ShinobiStats extends Screen {
 
     public void checkHovered(int p_render_1_, int p_render_2_)
     {
+        ClientPlayerEntity player = Minecraft.getInstance().player;
+        LazyOptional<IPlayerHandler> player_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
         if (guiButtonEyeSlot.isHovered())
         {
             renderTooltip("Change Player Eye Slot", p_render_1_, p_render_2_);
@@ -257,8 +295,15 @@ public class ShinobiStats extends Screen {
         {
             renderTooltip(new TranslationTextComponent("gui." + Main.MODID + ".title.legtaijutsu").getString(), p_render_1_, p_render_2_);
         }
+        if (guiButtonBijuuOverlay.isHovered()) {
+            if (this.bijuu != null) {
+                guiButtonBijuuOverlay.visible = true;
+                Minecraft.getInstance().textureManager.bindTexture(BIJUU_OVERLAY_TEXTURE);
+                Minecraft.getInstance().ingameGUI.blit(this.guiLeft - 16, this.guiTop - 16, 0, 0, 32, 48);
+                InventoryScreen.drawEntityOnScreen(this.guiLeft, this.guiTop + 16, 6, 0 + (p_render_1_ / 20), 0 + (p_render_2_ / 20), bijuu);
+            }
+        }
     }
-
 
     private void onGuiButtonMessageJutsuPress() {
         Minecraft mc = Minecraft.getInstance();

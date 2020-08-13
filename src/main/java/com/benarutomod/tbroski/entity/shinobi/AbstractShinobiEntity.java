@@ -3,7 +3,7 @@ package com.benarutomod.tbroski.entity.shinobi;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
-import com.benarutomod.tbroski.common.BeNMClan;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
 import com.benarutomod.tbroski.init.ItemInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketBeNMPointsSync;

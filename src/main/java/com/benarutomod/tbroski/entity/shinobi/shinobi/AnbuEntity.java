@@ -1,6 +1,6 @@
 package com.benarutomod.tbroski.entity.shinobi.shinobi;
 
-import com.benarutomod.tbroski.common.BeNMClan;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.entity.projectile.ExplosiveKunaiEntity;
 import com.benarutomod.tbroski.entity.shinobi.AbstractAnbuEntity;

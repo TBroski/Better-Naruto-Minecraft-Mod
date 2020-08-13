@@ -7,7 +7,7 @@ import com.benarutomod.tbroski.client.gui.player.jutsu.SixPathJutsuScreen;
 import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsuScreen;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonDojutsu;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonTab;
-import com.benarutomod.tbroski.common.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 import com.benarutomod.tbroski.init.DojutsuInit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.StringTextComponent;

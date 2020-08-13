@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu.wind;
 
+import com.benarutomod.tbroski.Config;
 import com.benarutomod.tbroski.client.renderer.misc.Particles;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
@@ -18,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -44,6 +46,9 @@ public class WindExplosionEntity extends AbstractWindJutsuEntity {
 
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
+            if (Config.SERVER.playerWorldDamage.get()) {
+                this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), 3F, Explosion.Mode.BREAK);
+            }
             if (result.getType() == RayTraceResult.Type.ENTITY) {
                 Entity entity = ((EntityRayTraceResult)result).getEntity();
                 entity.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 0.7F, 0.4F);
@@ -57,6 +62,11 @@ public class WindExplosionEntity extends AbstractWindJutsuEntity {
             this.world.setEntityState(this, (byte)3);
             this.remove();
         }
+    }
+
+    @Override
+    public String getAffiliatedJutsuName() {
+        return "wind_explosion";
     }
 
     @Override

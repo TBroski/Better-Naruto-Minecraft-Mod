@@ -1,6 +1,6 @@
-package com.benarutomod.tbroski.common;
+package com.benarutomod.tbroski.api;
 
-import java.util.List;
+import com.benarutomod.tbroski.api.BeNMRegistry;
 
 /*
 * The main interface to register new dojutsu (like sharingan),

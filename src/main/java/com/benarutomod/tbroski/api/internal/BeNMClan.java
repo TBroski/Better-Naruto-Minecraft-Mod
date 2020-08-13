@@ -1,6 +1,6 @@
-package com.benarutomod.tbroski.common;
+package com.benarutomod.tbroski.api.internal;
 
-import com.benarutomod.tbroski.common.enums.Nature;
+import com.benarutomod.tbroski.api.enums.Nature;
 import com.benarutomod.tbroski.init.DojutsuInit;
 
 public class BeNMClan {

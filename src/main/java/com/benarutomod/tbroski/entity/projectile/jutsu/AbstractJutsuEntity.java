@@ -9,6 +9,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public abstract class AbstractJutsuEntity extends ProjectileItemEntity {
 
+    public abstract String getAffiliatedJutsuName();
+
     public AbstractJutsuEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
         super(type, worldIn);
     }
@@ -19,6 +21,14 @@ public abstract class AbstractJutsuEntity extends ProjectileItemEntity {
 
     public AbstractJutsuEntity(EntityType<? extends ProjectileItemEntity> type, LivingEntity livingEntityIn, World worldIn) {
         super(type, livingEntityIn, worldIn);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.ticksExisted >= 600) {
+            this.remove();
+        }
     }
 
     @Override

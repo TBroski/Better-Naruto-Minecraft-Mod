@@ -52,5 +52,6 @@ public class NetworkLoader {
         INSTANCE.registerMessage(nextID(), PacketJutsuCancelEvent.class, PacketJutsuCancelEvent::encode, PacketJutsuCancelEvent::decode, PacketJutsuCancelEvent::handle);
         INSTANCE.registerMessage(nextID(), PacketJutsuNBTSync.class, PacketJutsuNBTSync::encode, PacketJutsuNBTSync::decode, PacketJutsuNBTSync::handle);
         INSTANCE.registerMessage(nextID(), PacketJutsuCaller.class, PacketJutsuCaller::encode, PacketJutsuCaller::decode, PacketJutsuCaller::handle);
+        INSTANCE.registerMessage(nextID(), PacketBijuuSync.class, PacketBijuuSync::encode, PacketBijuuSync::decode, PacketBijuuSync::handle);
     }
 }

@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.common.interfaces;
+package com.benarutomod.tbroski.api.interfaces;
 
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;

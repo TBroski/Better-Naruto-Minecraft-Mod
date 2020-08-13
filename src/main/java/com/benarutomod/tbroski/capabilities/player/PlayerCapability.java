@@ -1,8 +1,8 @@
 package com.benarutomod.tbroski.capabilities.player;
 
-import com.benarutomod.tbroski.common.BeNMBody;
-import com.benarutomod.tbroski.common.BeNMClan;
-import com.benarutomod.tbroski.common.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMBody;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 import com.benarutomod.tbroski.init.BodyInit;
 import com.benarutomod.tbroski.init.ClanInit;
 import com.benarutomod.tbroski.init.DojutsuInit;
@@ -42,6 +42,7 @@ public class PlayerCapability implements IPlayerHandler {
 	private boolean handToggled;
 	private boolean legToggled;
 	private String entityAffiliation = "";
+	private String bijuu = "";
 	private BeNMDojutsu playerLeftDojutsu = DojutsuInit.NULL;
 	private BeNMDojutsu playerRightDojutsu = DojutsuInit.NULL;
 	private BeNMBody playerBody = BodyInit.NULL;
@@ -81,6 +82,8 @@ public class PlayerCapability implements IPlayerHandler {
 	private boolean selfLevitationJutsu;
 	private boolean amaterasuJutsu;
 	private boolean tsukuyomiJutsu;
+	private boolean tailedBeastBomb;
+	private boolean tailedBeastTransformation;
 	private boolean joined;
 	
 	@Override
@@ -286,6 +289,17 @@ public class PlayerCapability implements IPlayerHandler {
     public String returnPlayerEntityAffiliation()
     {
         return this.entityAffiliation;
+    }
+
+    @Override
+    public void setPlayerBijuu(String bijuu)
+    {
+        this.bijuu = bijuu;
+    }
+    @Override
+    public String returnPlayerBijuu()
+    {
+        return this.bijuu;
     }
 
     @Override
@@ -821,6 +835,29 @@ public class PlayerCapability implements IPlayerHandler {
         return this.tsukuyomiJutsu;
     }
 
+
+    @Override
+    public void setTailedBeastBombBoolean(boolean has)
+    {
+        this.tailedBeastBomb = has;
+    }
+    @Override
+    public boolean hasTailedBeastBombBoolean()
+    {
+        return this.tailedBeastBomb;
+    }
+    @Override
+    public void setTailedBeastTransformationBoolean(boolean has)
+    {
+        this.tailedBeastTransformation = has;
+    }
+    @Override
+    public boolean hasTailedBeastTransformationBoolean()
+    {
+        return this.tailedBeastTransformation;
+    }
+
+
     public static class Storage implements Capability.IStorage<IPlayerHandler>
     {
         @Nullable
@@ -849,6 +886,7 @@ public class PlayerCapability implements IPlayerHandler {
             tag.putInt("playereyeslot", instance.returnplayerEyeSlot());
             tag.putInt("shinobilevel", instance.returnShinobiLevel());
             tag.putString("playeraffiliation", instance.returnPlayerEntityAffiliation());
+            tag.putString("bijuu", instance.returnPlayerBijuu());
             tag.putString("playerleftdojutsu", instance.returnPlayerLeftDojutsu().getString());
             tag.putString("playerrightdojutsu", instance.returnPlayerRightDojutsu().getString());
             tag.putString("playerbody", instance.returnPlayerBodyMode().getName());
@@ -906,6 +944,9 @@ public class PlayerCapability implements IPlayerHandler {
             //Sharingan
             tag.putBoolean("amaterasu", instance.hasAmaterasuJutsuBoolean());
             tag.putBoolean("tsukuyomi", instance.hasTsukuyomiJutsuBoolean());
+            //Bijuu
+            tag.putBoolean("tailedbeastbomb", instance.hasTailedBeastBombBoolean());
+            tag.putBoolean("tailedbeasttransformation", instance.hasTailedBeastTransformationBoolean());
             return tag;
         }
 
@@ -932,6 +973,7 @@ public class PlayerCapability implements IPlayerHandler {
             instance.setBeNMPoints(((CompoundNBT) tag).getInt("benmpoints"));
             instance.setShinobiLevel(((CompoundNBT) tag).getInt("shinobilevel"));
             instance.setPlayerEntityAffiliation(((CompoundNBT) tag).getString("playeraffiliation"));
+            instance.setPlayerBijuu(((CompoundNBT) tag).getString("bijuu"));
             instance.setPlayerLeftDojutsu(DojutsuHelper.getDojutsuFromString(((CompoundNBT) tag).getString("playerleftdojutsu")));
             instance.setPlayerRightDojutsu(DojutsuHelper.getDojutsuFromString(((CompoundNBT) tag).getString("playerrightdojutsu")));
             instance.setPlayerBodyMode(BodyHelper.getBodyFromString(((CompoundNBT) tag).getString("playerbody")));
@@ -989,6 +1031,9 @@ public class PlayerCapability implements IPlayerHandler {
             //Shaingan
             instance.setAmaterasuJutsuBoolean(((CompoundNBT) tag).getBoolean("amaterasu"));
             instance.setTsukuyomiJutsuBoolean(((CompoundNBT) tag).getBoolean("tsukuyomi"));
+            //Bijuu
+            instance.setTailedBeastBombBoolean(((CompoundNBT) tag).getBoolean("tailedbeastbomb"));
+            instance.setTailedBeastTransformationBoolean(((CompoundNBT) tag).getBoolean("tailedbeasttransfromation"));
         }
     }
 }

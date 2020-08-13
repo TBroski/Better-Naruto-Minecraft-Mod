@@ -1,8 +1,7 @@
 package com.benarutomod.tbroski.world.biome;
 
-import com.benarutomod.tbroski.common.IBeNMBiome;
+import com.benarutomod.tbroski.api.interfaces.IBeNMBiome;
 import com.benarutomod.tbroski.init.BlockInit;
-import com.benarutomod.tbroski.init.EntityInit;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;

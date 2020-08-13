@@ -1,8 +1,7 @@
 package com.benarutomod.tbroski.util.helpers;
 
-import com.benarutomod.tbroski.common.BeNMBody;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.init.BodyInit;
+import com.benarutomod.tbroski.api.internal.BeNMBody;
+import com.benarutomod.tbroski.api.BeNMRegistry;
 
 public class BodyHelper {
 

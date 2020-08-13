@@ -54,6 +54,11 @@ public class GalePalmEntity extends AbstractWindJutsuEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "gale_palm";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

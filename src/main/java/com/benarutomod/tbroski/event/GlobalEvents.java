@@ -1,20 +1,26 @@
 package com.benarutomod.tbroski.event;
 
+import com.benarutomod.tbroski.Config;
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
+import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
 import com.benarutomod.tbroski.init.SoundInit;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GlobalEvents {
@@ -51,6 +57,15 @@ public class GlobalEvents {
                 {
                     event.player.sendStatusMessage(new TranslationTextComponent("event." + Main.MODID + ".akatsuki.uponmessage"), true);
                 }
+            }
+        }
+    }
+
+    public static void bijuuSpawned(AbstractBijuuEntity bijuuEntity) {
+        if (bijuuEntity.world instanceof ServerWorld) {
+            List<ServerPlayerEntity> players = ((ServerWorld) bijuuEntity.world).getPlayers();
+            for (ServerPlayerEntity player : players) {
+                player.sendMessage(new StringTextComponent(new TranslationTextComponent("event." + Main.MODID + ".bijuu.uponmessage").getString() + bijuuEntity.world.getBiome(bijuuEntity.getPosition()).getDisplayName().getString() + "."));
             }
         }
     }

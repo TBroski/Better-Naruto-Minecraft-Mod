@@ -1,9 +1,9 @@
 package com.benarutomod.tbroski.init.jutsu.nature;
 
 import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
-import com.benarutomod.tbroski.common.BeNMJutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.common.IBeNMPlugin;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.BeNMRegistry;
+import com.benarutomod.tbroski.api.IBeNMPlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.particles.ParticleTypes;

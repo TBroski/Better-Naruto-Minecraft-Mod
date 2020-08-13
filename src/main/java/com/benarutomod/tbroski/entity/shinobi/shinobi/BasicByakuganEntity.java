@@ -1,10 +1,8 @@
 package com.benarutomod.tbroski.entity.shinobi.shinobi;
 
-import com.benarutomod.tbroski.common.BeNMClan;
-import com.benarutomod.tbroski.common.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 import com.benarutomod.tbroski.entity.ai.ByakuganMeleeAttackGoal;
-import com.benarutomod.tbroski.entity.ai.DojutsuAttackGoal;
-import com.benarutomod.tbroski.entity.ai.DojutsuConnectionGoal;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.entity.shinobi.AbstractShinobiEntity;
 import com.benarutomod.tbroski.entity.shinobi.IByakuganEntity;
@@ -16,7 +14,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -56,11 +53,13 @@ public class BasicByakuganEntity extends AbstractShinobiEntity implements IByaku
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
-        this.world.setBlockState(this.getPosition(), BlockInit.DOJUTSU_SKULL.get().getDefaultState());
-        TileEntity tileEntity = this.world.getTileEntity(this.getPosition());
-        if (tileEntity instanceof DojutsuSkullTileEntity) {
-            DojutsuSkullTileEntity dojutsuSkullTileEntity = (DojutsuSkullTileEntity) tileEntity;
-            dojutsuSkullTileEntity.setLivingEntity(this);
+        if (!this.world.isRemote) {
+            this.world.setBlockState(this.getPosition(), BlockInit.DOJUTSU_SKULL.get().getDefaultState());
+            TileEntity tileEntity = this.world.getTileEntity(this.getPosition());
+            if (tileEntity instanceof DojutsuSkullTileEntity) {
+                DojutsuSkullTileEntity dojutsuSkullTileEntity = (DojutsuSkullTileEntity) tileEntity;
+                dojutsuSkullTileEntity.setLivingEntity(this);
+            }
         }
     }
 

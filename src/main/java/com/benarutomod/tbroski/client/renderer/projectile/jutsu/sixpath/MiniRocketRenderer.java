@@ -1,8 +1,5 @@
 package com.benarutomod.tbroski.client.renderer.projectile.jutsu.sixpath;
 
-import com.benarutomod.tbroski.client.renderer.blocks.Amaterasu;
-import com.benarutomod.tbroski.client.renderer.projectile.jutsu.sharingan.AmaterasuJutsuRenderer;
-import com.benarutomod.tbroski.entity.projectile.jutsu.sharingan.AmaterasuJutsuEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.sixpath.MiniRocketProjectileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;

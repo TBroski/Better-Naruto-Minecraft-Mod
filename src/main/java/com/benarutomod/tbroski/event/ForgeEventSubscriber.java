@@ -6,43 +6,33 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.container.ExtendedPlayerInventory;
-import com.benarutomod.tbroski.common.BeNMJutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.common.jutsu.JutsuCaller;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.BeNMRegistry;
+import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.AbstractJutsuEntity;
 import com.benarutomod.tbroski.entity.shinobi.akatsuki.kakuzu.KakuzuEntity;
 import com.benarutomod.tbroski.init.EffectInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerBodyModeSync;
 import com.benarutomod.tbroski.networking.packets.PacketToggleInfusionBoolean;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsu;
 import com.benarutomod.tbroski.networking.packets.settings.PacketBackSlotSync;
 import com.benarutomod.tbroski.networking.packets.settings.PacketToggleScrollBoolean;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FallingBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.screen.inventory.CreativeScreen;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
-import net.minecraft.client.renderer.Quaternion;
-import net.minecraft.client.renderer.entity.PlayerRenderer;
-import net.minecraft.client.renderer.entity.model.PlayerModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.*;
-import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -54,7 +44,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiContainerEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
@@ -75,7 +64,9 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -128,6 +119,7 @@ public class ForgeEventSubscriber {
             if (player != null) {
                 GlobalEvents.playerRaid(event);
                 PlayerEvents.regenerateChakra(event);
+                PlayerEvents.checkNatures(event);
             }
             IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
             for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
@@ -272,6 +264,17 @@ public class ForgeEventSubscriber {
         DamageSource source = event.getSource();
         KakuzuEntity.cancelDamage(event);
         PlayerEvents.checkPlayerDojutsuDamage(event);
+        if (!event.getEntity().world.isRemote && source.getImmediateSource() instanceof AbstractJutsuEntity && event.getEntity() instanceof PlayerEntity && event.getEntity().getPersistentData().getBoolean(Main.MODID + "_preta_path")) {
+            PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
+            LazyOptional<IPlayerHandler> playerc = playerEntity.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+            IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
+            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                if (jutsu.getName().equalsIgnoreCase(((AbstractJutsuEntity) source.getImmediateSource()).getAffiliatedJutsuName())) {
+                    player_cap.addChakra(jutsu.getChakraCost());
+                    break;
+                }
+            }
+        }
         if (source.damageType.equalsIgnoreCase("player")) {
             PlayerEntity playerEntity = (PlayerEntity) source.getTrueSource();
             LazyOptional<IPlayerHandler> playerc = playerEntity.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
@@ -300,9 +303,18 @@ public class ForgeEventSubscriber {
     @SubscribeEvent(priority= EventPriority.NORMAL, receiveCanceled=true)
     public void onEvent(EntityViewRenderEvent.FogDensity event)
     {
+        List<AbstractBijuuEntity> bijuuEntities = new ArrayList<>();
+        for (Entity entity : Minecraft.getInstance().world.getAllEntities()) {
+            if (entity instanceof AbstractBijuuEntity) {
+                bijuuEntities.add((AbstractBijuuEntity) entity);
+            }
+        }
         if (Minecraft.getInstance().player.isPotionActive(EffectInit.TSUKUYOMI.get()))
         {
             event.setDensity(0.5F);
+        }
+        else if (bijuuEntities.size() > 0) {
+            event.setDensity(0.001F);
         }
         else
         {
@@ -315,12 +327,24 @@ public class ForgeEventSubscriber {
     @SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
     public void onEvent(EntityViewRenderEvent.FogColors event)
     {
+        List<AbstractBijuuEntity> bijuuEntities = new ArrayList<>();
+        for (Entity entity : Minecraft.getInstance().world.getAllEntities()) {
+            if (entity instanceof AbstractBijuuEntity) {
+                bijuuEntities.add((AbstractBijuuEntity) entity);
+            }
+        }
+        if (bijuuEntities.size() > 0) {
+            Color color = bijuuEntities.get(0).getChakraColor().getChakraColor();
+            event.setRed(color.getRed());
+            event.setGreen(color.getGreen());
+            event.setBlue(color.getBlue());
+        }
         if (Minecraft.getInstance().player.isPotionActive(EffectInit.TSUKUYOMI.get()))
         {
-            Color theColor = Color.RED;
-            event.setRed(theColor.getRed());
-            event.setGreen(theColor.getGreen());
-            event.setBlue(theColor.getBlue());
+            Color color = Color.RED;
+            event.setRed(color.getRed());
+            event.setGreen(color.getGreen());
+            event.setBlue(color.getBlue());
         }
     }
 

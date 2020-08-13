@@ -63,6 +63,11 @@ public class FireballEntity extends AbstractFireJutsuEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "fireball";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

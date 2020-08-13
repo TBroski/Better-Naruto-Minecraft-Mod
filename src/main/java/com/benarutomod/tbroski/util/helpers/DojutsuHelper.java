@@ -1,7 +1,7 @@
 package com.benarutomod.tbroski.util.helpers;
 
-import com.benarutomod.tbroski.common.BeNMDojutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.init.DojutsuInit;
 
 public class DojutsuHelper {

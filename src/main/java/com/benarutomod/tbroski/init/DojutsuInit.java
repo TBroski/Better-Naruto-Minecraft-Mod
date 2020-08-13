@@ -1,9 +1,6 @@
 package com.benarutomod.tbroski.init;
 
-import com.benarutomod.tbroski.common.BeNMDojutsu;
-import net.minecraft.util.DamageSource;
-
-import java.util.ArrayList;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 
 public class DojutsuInit {
     

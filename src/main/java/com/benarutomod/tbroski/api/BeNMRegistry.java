@@ -1,4 +1,9 @@
-package com.benarutomod.tbroski.common;
+package com.benarutomod.tbroski.api;
+
+import com.benarutomod.tbroski.api.internal.BeNMBody;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
 
 import java.util.ArrayList;
 

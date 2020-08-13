@@ -2,8 +2,8 @@ package com.benarutomod.tbroski.common.jutsu;
 
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
-import com.benarutomod.tbroski.common.BeNMJutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.BeNMRegistry;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;

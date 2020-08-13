@@ -60,6 +60,11 @@ public class AmaterasuJutsuEntity extends AbstractSharinganProjectileEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "amaterasu";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

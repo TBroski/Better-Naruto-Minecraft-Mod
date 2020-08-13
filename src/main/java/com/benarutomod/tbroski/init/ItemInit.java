@@ -112,7 +112,10 @@ public class ItemInit {
     public static final RegistryObject<ModdedSpawnEggItem> KAKUZU_SPAWN_EGG = ITEMS.register("kakuzu_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.KAKUZU, 0x000000, 0xD70303, new Item.Properties().group(Main.TAB)));
 
     public static final RegistryObject<ModdedSpawnEggItem> SNAKE_SPAWN_EGG = ITEMS.register("snake_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.SNAKE, 0x3ACC27, 0x248C04, new Item.Properties().group(Main.TAB)));
-    public static final RegistryObject<ModdedSpawnEggItem> FROG_SPAWN_EGG = ITEMS.register("frog_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.FROG, 0x3ACC27, 0x248C04, new Item.Properties().group(Main.TAB)));
+    public static final RegistryObject<ModdedSpawnEggItem> FROG_SPAWN_EGG = ITEMS.register("frog_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.FROG, 0x3ACC27, 0xFFA500, new Item.Properties().group(Main.TAB)));
+
+    public static final RegistryObject<ModdedSpawnEggItem> SHUKAKU_SPAWN_EGG = ITEMS.register("shukaku_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.SHUKAKU, 0x7F9993, 0xA79275, new Item.Properties().group(Main.TAB)));
+    public static final RegistryObject<ModdedSpawnEggItem> MATATABI_SPAWN_EGG = ITEMS.register("matatabi_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.MATATABI, 0x7F9993, 0x4A70CB, new Item.Properties().group(Main.TAB)));
 
 
     //NBTItems
@@ -134,6 +137,7 @@ public class ItemInit {
 
     //Jutsu but not really
     public static final RegistryObject<Item> MINI_ROCKET = ITEMS.register("mini_rocket", UniqueItemBase::new);
+    public static final RegistryObject<Item> TAILED_BEAST_BOMB = ITEMS.register("tailed_beast_bomb", UniqueItemBase::new);
     //Jutsu
     public static final RegistryObject<Item> FIREBALL_JUTSU = ITEMS.register("fireball_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> PHOENIX_FLOWER_JUTSU = ITEMS.register("phoenix_flower_jutsu", UniqueItemBase::new);

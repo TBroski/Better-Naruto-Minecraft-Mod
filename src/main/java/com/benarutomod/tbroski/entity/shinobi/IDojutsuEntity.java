@@ -1,6 +1,6 @@
 package com.benarutomod.tbroski.entity.shinobi;
 
-import com.benarutomod.tbroski.common.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 
 public interface IDojutsuEntity {
 

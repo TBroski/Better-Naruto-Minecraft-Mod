@@ -1,14 +1,9 @@
 package com.benarutomod.tbroski.init;
 
 import com.benarutomod.tbroski.Main;
-import com.benarutomod.tbroski.client.renderer.layers.models.bodymode.ModelCurseMarkWings;
-import com.benarutomod.tbroski.common.BeNMBody;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.common.IBeNMPlugin;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
+import com.benarutomod.tbroski.api.internal.BeNMBody;
+import com.benarutomod.tbroski.api.BeNMRegistry;
+import com.benarutomod.tbroski.api.IBeNMPlugin;
 
 public class BodyInit {
 

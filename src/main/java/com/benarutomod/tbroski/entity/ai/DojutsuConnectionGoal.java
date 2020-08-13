@@ -1,8 +1,7 @@
 package com.benarutomod.tbroski.entity.ai;
 
 import com.benarutomod.tbroski.Main;
-import com.benarutomod.tbroski.common.BeNMDojutsu;
-import com.benarutomod.tbroski.entity.shinobi.IDojutsuEntity;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 import com.benarutomod.tbroski.entity.shinobi.ISharinganEntity;
 import com.benarutomod.tbroski.init.DamageInit;
 import net.minecraft.entity.MobEntity;
@@ -10,7 +9,6 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;

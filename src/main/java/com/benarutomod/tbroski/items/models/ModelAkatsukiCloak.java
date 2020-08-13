@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 
 public class ModelAkatsukiCloak extends BipedModel<LivingEntity> {
+
 	private final ModelRenderer cloakBodyBack;
 	private final ModelRenderer backHood;
 	private final ModelRenderer cloakArmRight;

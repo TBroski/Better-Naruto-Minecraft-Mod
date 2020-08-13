@@ -53,6 +53,11 @@ public class RagingWavesEntity extends AbstractWaterJutsuEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "raging_waves";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

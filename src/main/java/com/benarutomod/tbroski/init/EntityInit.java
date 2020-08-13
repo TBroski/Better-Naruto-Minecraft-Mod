@@ -4,6 +4,9 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.entity.mobs.FrogEntity;
 import com.benarutomod.tbroski.entity.mobs.SnakeEntity;
 import com.benarutomod.tbroski.entity.clones.BasicCloneEntity;
+import com.benarutomod.tbroski.entity.mobs.bijuu.MatatabiEntity;
+import com.benarutomod.tbroski.entity.mobs.bijuu.ShukakuEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.TailedBeastBombEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.FlyingStonesEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.MudMoatEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.fire.FireballEntity;
@@ -25,18 +28,14 @@ import com.benarutomod.tbroski.entity.shinobi.akatsuki.DeidaraEntity;
 import com.benarutomod.tbroski.entity.shinobi.akatsuki.ItachiEntity;
 import com.benarutomod.tbroski.entity.shinobi.akatsuki.kakuzu.*;
 import com.benarutomod.tbroski.entity.shinobi.shinobi.*;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.SwampBiome;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Iterator;
 
 public class EntityInit {
     public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, Main.MODID);
@@ -63,6 +62,10 @@ public class EntityInit {
 
     public static final RegistryObject<EntityType<SnakeEntity>> SNAKE = ENTITIES.register("snake", () -> EntityType.Builder.<SnakeEntity>create(SnakeEntity::new, EntityClassification.CREATURE).size(1.0F, 1.0F).build(new ResourceLocation(Main.MODID, "snake").toString()));
     public static final RegistryObject<EntityType<FrogEntity>> FROG = ENTITIES.register("frog", () -> EntityType.Builder.<FrogEntity>create(FrogEntity::new, EntityClassification.CREATURE).size(EntityType.RABBIT.getWidth(), EntityType.RABBIT.getHeight()).build(new ResourceLocation(Main.MODID, "frog").toString()));
+
+    //Bijuu
+    public static final RegistryObject<EntityType<ShukakuEntity>> SHUKAKU = ENTITIES.register("shukaku", () -> EntityType.Builder.<ShukakuEntity>create(ShukakuEntity::new, EntityClassification.CREATURE).size(3F, 4F).build(new ResourceLocation(Main.MODID, "shukaku").toString()));
+    public static final RegistryObject<EntityType<MatatabiEntity>> MATATABI = ENTITIES.register("matatabi", () -> EntityType.Builder.<MatatabiEntity>create(MatatabiEntity::new, EntityClassification.CREATURE).size(3F, 4F).build(new ResourceLocation(Main.MODID, "matatabi").toString()));
 
     //Kakuzu's Goons
     public static final RegistryObject<EntityType<LightningStyleMaskedAnimalEntity>> LIGHTNING_STYLE_MASKED_ANIMAL = ENTITIES.register("lightning_style_masked_animal", () -> EntityType.Builder.<LightningStyleMaskedAnimalEntity>create(LightningStyleMaskedAnimalEntity::new, EntityClassification.CREATURE).size(1.5F, 2.5F).build(new ResourceLocation(Main.MODID, "lightning_style_masked_animal").toString()));
@@ -102,6 +105,7 @@ public class EntityInit {
 
     //Jutsu but not really
     public static final RegistryObject<EntityType<MiniRocketProjectileEntity>> MINI_ROCKET = ENTITIES.register("mini_rocket", () -> EntityType.Builder.<MiniRocketProjectileEntity>create(MiniRocketProjectileEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + "mini_rocket"));
+    public static final RegistryObject<EntityType<TailedBeastBombEntity>> TAILED_BEAST_BOMB = ENTITIES.register("tailed_beast_bomb", () -> EntityType.Builder.<TailedBeastBombEntity>create(TailedBeastBombEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + "tailed_beast_bomb"));
     //Jutsu
     public static final RegistryObject<EntityType<FireballEntity>> FIREBALL_JUTSU = ENTITIES.register("fireball_jutsu", () -> EntityType.Builder.<FireballEntity>create(FireballEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + "fireball_jutsu"));
     public static final RegistryObject<EntityType<PhoenixFlowerEntity>> PHOENIX_FLOWER_JUTSU = ENTITIES.register("phoenix_flower_jutsu", () -> EntityType.Builder.<PhoenixFlowerEntity>create(PhoenixFlowerEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + "phoenix_flower_jutsu"));

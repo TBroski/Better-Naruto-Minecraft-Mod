@@ -53,6 +53,11 @@ public class PhoenixFlowerEntity extends AbstractFireJutsuEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "phoenix_flower";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

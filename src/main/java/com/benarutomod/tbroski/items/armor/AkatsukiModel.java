@@ -23,7 +23,7 @@ public class AkatsukiModel extends ArmorItem {
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
     {
-        ModelAkatsukiCloak model = new ModelAkatsukiCloak(1F);
+        ModelAkatsukiCloak model = new ModelAkatsukiCloak(0F);
         //model.bipedLeftLeg.showModel = (armorSlot == EquipmentSlotType.CHEST);
 
         model.isChild = _default.isChild;

@@ -1,24 +1,18 @@
-package com.benarutomod.tbroski.common;
+package com.benarutomod.tbroski.api.internal;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
-import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
-import com.benarutomod.tbroski.common.interfaces.IBeNMJutsuButtonPress;
-import com.benarutomod.tbroski.common.interfaces.IBeNMJutsuButtonUpdate;
+import com.benarutomod.tbroski.api.interfaces.IBeNMJutsuButtonPress;
+import com.benarutomod.tbroski.api.interfaces.IBeNMJutsuButtonUpdate;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraSync;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class BeNMJutsu {
@@ -157,7 +151,7 @@ public class BeNMJutsu {
     }
 
     public enum Type {
-        FIRE_NATURE, LIGHTNING_NATURE, EARTH_NATURE, WIND_NATURE, WATER_NATURE, MAGNET_NATURE, E_RANK, SHARINGAN_ABILITY, SIX_PATH_TECHNIQUE
+        FIRE_NATURE, LIGHTNING_NATURE, EARTH_NATURE, WIND_NATURE, WATER_NATURE, MAGNET_NATURE, E_RANK, SHARINGAN_ABILITY, SIX_PATH_TECHNIQUE, BIJUU_ABILITY
     }
 
     public interface IAction {

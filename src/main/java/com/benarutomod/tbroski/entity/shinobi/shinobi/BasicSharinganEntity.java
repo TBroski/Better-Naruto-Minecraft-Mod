@@ -1,7 +1,7 @@
 package com.benarutomod.tbroski.entity.shinobi.shinobi;
 
-import com.benarutomod.tbroski.common.BeNMClan;
-import com.benarutomod.tbroski.common.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 import com.benarutomod.tbroski.entity.ai.DojutsuAttackGoal;
 import com.benarutomod.tbroski.entity.ai.DojutsuConnectionGoal;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
@@ -50,11 +50,13 @@ public class BasicSharinganEntity extends AbstractShinobiEntity implements IShar
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
-        this.world.setBlockState(this.getPosition(), BlockInit.DOJUTSU_SKULL.get().getDefaultState());
-        TileEntity tileEntity = this.world.getTileEntity(this.getPosition());
-        if (tileEntity instanceof DojutsuSkullTileEntity) {
-            DojutsuSkullTileEntity dojutsuSkullTileEntity = (DojutsuSkullTileEntity) tileEntity;
-            dojutsuSkullTileEntity.setLivingEntity(this);
+        if (!this.world.isRemote) {
+            this.world.setBlockState(this.getPosition(), BlockInit.DOJUTSU_SKULL.get().getDefaultState());
+            TileEntity tileEntity = this.world.getTileEntity(this.getPosition());
+            if (tileEntity instanceof DojutsuSkullTileEntity) {
+                DojutsuSkullTileEntity dojutsuSkullTileEntity = (DojutsuSkullTileEntity) tileEntity;
+                dojutsuSkullTileEntity.setLivingEntity(this);
+            }
         }
     }
 

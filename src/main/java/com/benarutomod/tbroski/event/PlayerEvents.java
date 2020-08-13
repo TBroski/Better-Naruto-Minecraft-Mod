@@ -5,24 +5,21 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
-import com.benarutomod.tbroski.common.BeNMClan;
-import com.benarutomod.tbroski.common.BeNMRegistry;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
+import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.entity.shinobi.AbstractShinobiEntity;
 import com.benarutomod.tbroski.init.*;
 import com.benarutomod.tbroski.networking.NetworkLoader;
+import com.benarutomod.tbroski.networking.packets.PacketNature;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerDojutsuSync;
 import com.benarutomod.tbroski.networking.packets.chakra.*;
-import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.enchantment.EfficiencyEnchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -34,8 +31,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -67,6 +62,16 @@ public class PlayerEvents {
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketChakraControlSync(playercap.returnChakraControl(), true));
                 player.getPersistentData().putInt("regentick", 0);
             }
+        }
+    }
+
+    public static void checkNatures(TickEvent.PlayerTickEvent event) {
+        LazyOptional<IPlayerHandler> capabilities = event.player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+
+        if ((playercap.hasWindNature() && playercap.hasEarthNature()) && !playercap.hasMagnetNature()) {
+            playercap.setMagnetNature(true);
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.player), new PacketNature(7, true, true));
         }
     }
 

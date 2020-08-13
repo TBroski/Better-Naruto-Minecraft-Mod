@@ -4,9 +4,12 @@ import com.benarutomod.tbroski.client.gui.container.ExtendedPlayerInventory;
 import com.benarutomod.tbroski.client.renderer.layers.*;
 import com.benarutomod.tbroski.client.renderer.mobs.FrogRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.SnakeRenderer;
+import com.benarutomod.tbroski.client.renderer.mobs.bijuu.MatatabiRenderer;
+import com.benarutomod.tbroski.client.renderer.mobs.bijuu.ShukakuRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.ExplosiveKunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.KunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.TeleportationKunaiRenderer;
+import com.benarutomod.tbroski.client.renderer.projectile.jutsu.TailedBeastBombRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.earth.FlyingStonesRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.earth.MudMoatRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.fire.FireBallRenderer;
@@ -78,6 +81,10 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SNAKE.get(), SnakeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FROG.get(), FrogRenderer::new);
 
+        //Bijuu
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.SHUKAKU.get(), ShukakuRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.MATATABI.get(), MatatabiRenderer::new);
+
         //Clones
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.BASIC_CLONE.get(), CloneRenderer::new);
 
@@ -94,6 +101,7 @@ public class ClientHandler {
 
         //Jutsu but not really jutsu.
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MINI_ROCKET.get(), new MiniRocketRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.TAILED_BEAST_BOMB.get(), new TailedBeastBombRenderer.Factory());
         //Jutsu
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FIREBALL_JUTSU.get(), new FireBallRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LIGHTNING_BALL_JUTSU.get(), new LightningBallRenderer.Factory());

@@ -41,20 +41,24 @@ public class WindArrowEntity extends AbstractWindJutsuEntity {
 
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
-            Entity entity = ((EntityRayTraceResult)result).getEntity();
+            Entity entity = ((EntityRayTraceResult) result).getEntity();
             entity.playSound(SoundEvents.ENTITY_ARROW_HIT, 0.7F, 0.4F);
             entity.addVelocity(this.getMotion().x * 1.05D, entityCollisionReduction, this.getMotion().z * 1.05D);
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)3);
-        }
-        else if (result.getType() == RayTraceResult.Type.BLOCK) {
+            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) 3);
+        } else if (result.getType() == RayTraceResult.Type.BLOCK) {
             BlockPos block = ((BlockRayTraceResult) result).getPos();
             world.playSound(null, block, SoundEvents.ENTITY_ARROW_HIT, SoundCategory.NEUTRAL, 0.7F, 0.4F);
         }
 
         if (!this.world.isRemote) {
-            this.world.setEntityState(this, (byte)3);
+            this.world.setEntityState(this, (byte) 3);
             this.remove();
         }
+    }
+
+    @Override
+    public String getAffiliatedJutsuName() {
+        return "wind_arrow";
     }
 
     @Override

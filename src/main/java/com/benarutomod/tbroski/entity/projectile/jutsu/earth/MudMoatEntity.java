@@ -52,6 +52,11 @@ public class MudMoatEntity extends AbstractEarthJutsuEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "mud_moat";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

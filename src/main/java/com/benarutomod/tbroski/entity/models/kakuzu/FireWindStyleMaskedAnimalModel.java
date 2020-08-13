@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.entity.models;
+package com.benarutomod.tbroski.entity.models.kakuzu;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;

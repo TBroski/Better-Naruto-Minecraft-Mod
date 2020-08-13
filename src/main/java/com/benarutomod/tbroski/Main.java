@@ -1,8 +1,8 @@
 package com.benarutomod.tbroski;
 
-import com.benarutomod.tbroski.common.BeNMPlugin;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.common.IBeNMPlugin;
+import com.benarutomod.tbroski.api.BeNMPlugin;
+import com.benarutomod.tbroski.api.BeNMRegistry;
+import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.integration.Curios;
 import com.benarutomod.tbroski.blocks.AmaterasuFireBlockBase;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;

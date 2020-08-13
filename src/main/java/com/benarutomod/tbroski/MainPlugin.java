@@ -1,14 +1,15 @@
 package com.benarutomod.tbroski;
 
 import com.benarutomod.tbroski.client.renderer.layers.models.bodymode.ModelCurseMarkWings;
-import com.benarutomod.tbroski.common.BeNMBody;
-import com.benarutomod.tbroski.common.BeNMPlugin;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.common.IBeNMPlugin;
+import com.benarutomod.tbroski.api.internal.BeNMBody;
+import com.benarutomod.tbroski.api.BeNMPlugin;
+import com.benarutomod.tbroski.api.BeNMRegistry;
+import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.init.BodyInit;
 import com.benarutomod.tbroski.init.ClanInit;
 import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.init.EffectInit;
+import com.benarutomod.tbroski.init.jutsu.BijuuJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.ERankJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.SixPathJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.nature.*;
@@ -63,5 +64,6 @@ public class MainPlugin implements IBeNMPlugin {
         MagnetNatureJutsuInit.registerMagnetJutsu(jutsuRegistry, this);
         ERankJutsuInit.registerERankJutsu(jutsuRegistry, this);
         SixPathJutsuInit.registerSixPathJutsu(jutsuRegistry, this);
+        BijuuJutsuInit.registerBijuuJutsu(jutsuRegistry, this);
     }
 }

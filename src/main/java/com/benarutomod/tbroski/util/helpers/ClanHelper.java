@@ -1,8 +1,7 @@
 package com.benarutomod.tbroski.util.helpers;
 
-import com.benarutomod.tbroski.common.BeNMClan;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.init.ClanInit;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
+import com.benarutomod.tbroski.api.BeNMRegistry;
 
 public class ClanHelper {
 

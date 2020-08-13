@@ -1,9 +1,7 @@
 package com.benarutomod.tbroski.init;
 
-import com.benarutomod.tbroski.common.BeNMClan;
-import com.benarutomod.tbroski.common.enums.Nature;
-
-import java.util.ArrayList;
+import com.benarutomod.tbroski.api.internal.BeNMClan;
+import com.benarutomod.tbroski.api.enums.Nature;
 
 public class ClanInit {
 

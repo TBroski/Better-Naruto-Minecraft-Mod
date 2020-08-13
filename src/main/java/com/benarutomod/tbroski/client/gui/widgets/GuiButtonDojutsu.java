@@ -1,7 +1,7 @@
 package com.benarutomod.tbroski.client.gui.widgets;
 
 import com.benarutomod.tbroski.Main;
-import com.benarutomod.tbroski.common.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;

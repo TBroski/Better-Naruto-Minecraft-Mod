@@ -59,6 +59,11 @@ public class LightningBallEntity extends AbstractLightningJutsuEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "lightning_ball";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

@@ -10,10 +10,7 @@ public class GuiButtonArrowUp extends Button {
     final ResourceLocation gray_texture = new ResourceLocation(Main.MODID + ":textures/gui/shinobistatsbackground.png");
     final ResourceLocation brown_texture = new ResourceLocation(Main.MODID + ":textures/gui/tabedbackground.png");
 
-    protected final Button.IPressable onPress;
     final boolean gray;
-    int buttonWidth = 21;
-    int buttonHeight = 20;
     int u = 234;
     int v = 152;
     int widthIn;
@@ -25,7 +22,6 @@ public class GuiButtonArrowUp extends Button {
         this.widthIn = widthIn;
         this.heightIn = heightIn;
         this.gray = gray;
-        this.onPress = onPress;
     }
 
     @Override

@@ -47,6 +47,11 @@ public class FlyingStonesEntity extends AbstractEarthJutsuEntity {
     }
 
     @Override
+    public String getAffiliatedJutsuName() {
+        return "flying_stones";
+    }
+
+    @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

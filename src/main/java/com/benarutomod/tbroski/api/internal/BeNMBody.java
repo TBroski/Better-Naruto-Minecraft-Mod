@@ -1,22 +1,16 @@
-package com.benarutomod.tbroski.common;
+package com.benarutomod.tbroski.api.internal;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
-import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
-import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.player.body.AbstractBodyScreen;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
-import com.benarutomod.tbroski.common.interfaces.IBeNMJutsuButtonPress;
-import com.benarutomod.tbroski.common.interfaces.IBeNMJutsuButtonUpdate;
+import com.benarutomod.tbroski.api.interfaces.IBeNMJutsuButtonPress;
+import com.benarutomod.tbroski.api.interfaces.IBeNMJutsuButtonUpdate;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.LazyOptional;
 
 public class BeNMBody {
 

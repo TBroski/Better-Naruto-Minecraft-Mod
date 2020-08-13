@@ -26,6 +26,9 @@
   "item.benarutomod.snake_spawn_egg": "Snake Spawn Egg",
   "item.benarutomod.frog_spawn_egg": "Toad Spawn Egg",
 
+  "item.benarutomod.shukaku_spawn_egg": "Shukaku Spawn Egg",
+  "item.benarutomod.matatabi_spawn_egg": "Matatabi Spawn Egg",
+
   "item.benarutomod.rations_pill": "Military Rations Pill",
   "item.benarutomod.diluted_rations_pill": "Diluted Military Rations Pill",
   "item.benarutomod.spiked_rations_pill": "Spiked Military Rations Pill",
@@ -37,6 +40,9 @@
 
   "entity.benarutomod.snake": "Snake",
   "entity.benarutomod.frog": "Toad",
+
+  "entity.benarutomod.shukaku": "Shukaku",
+  "entity.benarutomod.matatabi": "Matatabi",
 
   "block.benarutomod.explosive_paper": "Explosive Sealed Paper",
   "block.benarutomod.teleportation_paper": "Transportation Sealed Paper",
@@ -58,6 +64,9 @@
   "block.benarutomod.sakura_pressure_plate": "Sakura Pressure Plate",
 
   "block.benarutomod.lignite": "Lignite",
+
+  "biome.benarutomod.mount_myoboku": "Mount Myoboku",
+  "biome.benarutomod.sakura_forest": "Sakura Forest",
 
   "key.benarutomod.handinfusion": "Hand Chakra Infusion",
   "key.benarutomod.leginfusion": "Leg Chakra Infusion",
@@ -107,6 +116,7 @@
   "effect.benarutomod.sage_chakra_reg": "Sage Regeneration",
 
   "event.benarutomod.akatsuki.uponmessage": "Your chakra senses a strange presence nearby.",
+  "event.benarutomod.bijuu.uponmessage": "The chakra around you is overwhelming. Seems to be coming from a ",
   "event.benarutomod.livingdamage.dodgedmessage": "You've dodged damage of the amount: ",
   "event.benarutomod.livingdeath.mangekyousharinganmessage": "You feel a sting in your eyes.",
 
@@ -162,6 +172,8 @@
   "jutsu.benarutomod.tsukuyomi": "Tsukuyomi",
   "jutsu.benarutomod.matter_repulsion": "Matter Repulsion Technique",
   "jutsu.benarutomod.self_levitation": "Self Levitation Technique",
+  "jutsu.benarutomod.tailed_beast_bomb": "Tailed Beast Bomb Technique",
+  "jutsu.benarutomod.tailed_beast_transformation": "Tailed Beast Transformation Technique",
 
   "body.benarutomod.curse_mark": "Curse Mark Mode",
   "body.benarutomod.toad_sage": "Toad Sage Mode"

@@ -1,10 +1,9 @@
 package com.benarutomod.tbroski.init.jutsu;
 
 import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
-import com.benarutomod.tbroski.common.BeNMJutsu;
-import com.benarutomod.tbroski.common.BeNMRegistry;
-import com.benarutomod.tbroski.common.IBeNMPlugin;
-import com.benarutomod.tbroski.entity.projectile.jutsu.fire.FireballEntity;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.BeNMRegistry;
+import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.entity.projectile.jutsu.sixpath.MiniRocketProjectileEntity;
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.client.Minecraft;
@@ -65,6 +64,16 @@ public class SixPathJutsuInit {
             entity.setItem(new ItemStack(ItemInit.MINI_ROCKET.get()));
             entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.95F, 1.0F);
             playerIn.world.addEntity(entity);
+        }, (buttonJutsu, playerCapability) -> {
+            if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
+                buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
+            }
+        }, (buttonJutsu, playerCapability) -> {
+            buttonJutsu.setHasJutsu(true);
+        }, (playerCapability, has) -> {
+        }, (playerCapability) -> true));
+
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "preta_path", BeNMJutsu.Type.SIX_PATH_TECHNIQUE, 0, 0.5F, 208, 32, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
