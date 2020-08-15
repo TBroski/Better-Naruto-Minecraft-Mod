@@ -1,6 +1,6 @@
 package com.benarutomod.tbroski.entity.ai;
 
-import com.benarutomod.tbroski.entity.shinobi.ISharinganEntity;
+import com.benarutomod.tbroski.api.interfaces.ISharinganEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;

@@ -4,11 +4,9 @@ import com.benarutomod.tbroski.api.internal.BeNMClan;
 import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 import com.benarutomod.tbroski.entity.ai.ByakuganMeleeAttackGoal;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
-import com.benarutomod.tbroski.entity.shinobi.AbstractShinobiEntity;
-import com.benarutomod.tbroski.entity.shinobi.IByakuganEntity;
-import com.benarutomod.tbroski.init.BlockInit;
+import com.benarutomod.tbroski.api.entity.AbstractShinobiEntity;
+import com.benarutomod.tbroski.api.interfaces.IByakuganEntity;
 import com.benarutomod.tbroski.init.ClanInit;
-import com.benarutomod.tbroski.tileentity.DojutsuSkullTileEntity;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,8 +16,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class BasicByakuganEntity extends AbstractShinobiEntity implements IByakuganEntity {
@@ -48,19 +44,6 @@ public class BasicByakuganEntity extends AbstractShinobiEntity implements IByaku
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractCloneEntity.class, false));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-    }
-
-    @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        if (!this.world.isRemote) {
-            this.world.setBlockState(this.getPosition(), BlockInit.DOJUTSU_SKULL.get().getDefaultState());
-            TileEntity tileEntity = this.world.getTileEntity(this.getPosition());
-            if (tileEntity instanceof DojutsuSkullTileEntity) {
-                DojutsuSkullTileEntity dojutsuSkullTileEntity = (DojutsuSkullTileEntity) tileEntity;
-                dojutsuSkullTileEntity.setLivingEntity(this);
-            }
-        }
     }
 
     @Override

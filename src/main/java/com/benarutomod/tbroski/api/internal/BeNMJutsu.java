@@ -9,6 +9,7 @@ import com.benarutomod.tbroski.api.interfaces.IBeNMJutsuButtonPress;
 import com.benarutomod.tbroski.api.interfaces.IBeNMJutsuButtonUpdate;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraSync;
+import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
@@ -115,27 +116,28 @@ public class BeNMJutsu {
             playercap.addChakra((-this.getChakraCost() * ((100F - playercap.returnChakraControl()) * 0.01F)));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> playerIn), new PacketChakraSync(playercap.returnChakra()));
             if (!playercap.returnToggleJutsuMessage() && !this.isToggle()) playerIn.sendMessage(new StringTextComponent(new TranslationTextComponent("jutsu." + this.getCorrelatedPlugin().getPluginId() + "." + this.getName()).getString() + "! " + + (-this.getChakraCost() * ((100 - playercap.returnChakraControl()) * 0.01)) + " Chakra"));
-            action.action(playerIn, taijutsuModifier0, taijutsuModifier1, playercap);
+            this.action.action(playerIn, taijutsuModifier0, taijutsuModifier1, playercap);
         }
         else {
             if (isToggle()) {
                 throwCancelEvent(playerIn);
                 playerIn.getPersistentData().putBoolean(getCorrelatedPlugin().getPluginId() + "_" + getName(), false);
+                NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> playerIn), new PacketJutsuNBTSync(playerIn.getEntityId(), getCorrelatedPlugin().getPluginId() + "_" + getName(), false));
             }
             playerIn.sendStatusMessage(new TranslationTextComponent("jutsu." + Main.MODID + ".message.notenoughchakra"), true);
         }
     }
 
     public void update(GuiButtonJutsu jutsuButton, IPlayerHandler playerCapability) {
-        update.update(jutsuButton, playerCapability);
+        this.update.update(jutsuButton, playerCapability);
     }
 
     public void throwCancelEvent(ServerPlayerEntity playerIn) {
-        onCancelEvent.onCancel(playerIn);
+        if (this.onCancelEvent != null) this.onCancelEvent.onCancel(playerIn);
     }
 
     public void sync(IPlayerHandler playerCapability, boolean has) {
-        sync.update(playerCapability, has);
+        this.sync.update(playerCapability, has);
     }
 
     public IBeNMJutsuButtonPress getPress() {

@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 public class ShukakuModel<T extends LivingEntity> extends AgeableModel<T> implements IHasArm, IHasHead {
 
@@ -159,12 +160,17 @@ public class ShukakuModel<T extends LivingEntity> extends AgeableModel<T> implem
 
     @Override
     public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+        float scaleFactor = 4.0F;
+        matrixStack.push();
+        matrixStack.translate(0F, 1.5F - 1.5F * scaleFactor, 0F);
+        matrixStack.scale(scaleFactor, scaleFactor, scaleFactor);
         body.render(matrixStack, buffer, packedLight, packedOverlay);
         head.render(matrixStack, buffer, packedLight, packedOverlay);
         leftLeg.render(matrixStack, buffer, packedLight, packedOverlay);
         leftArm.render(matrixStack, buffer, packedLight, packedOverlay);
         rightArm.render(matrixStack, buffer, packedLight, packedOverlay);
         rightLeg.render(matrixStack, buffer, packedLight, packedOverlay);
+        matrixStack.pop();
     }
 
     @Override

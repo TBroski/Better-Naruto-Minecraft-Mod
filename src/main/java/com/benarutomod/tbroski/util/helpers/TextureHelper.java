@@ -8,6 +8,7 @@ import com.benarutomod.tbroski.entity.shinobi.shinobi.BasicByakuganEntity;
 import com.benarutomod.tbroski.entity.shinobi.shinobi.BasicSharinganEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +18,10 @@ import java.util.Map;
 public class TextureHelper {
 
     public static ResourceLocation getResourceLocationFromEntity(Minecraft minecraftIn, LivingEntity entityIn) {
-        Map<EntityType<?>, EntityRenderer<?>> entityMap = minecraftIn.getRenderManager().renderers;
+        EntityRendererManager rendererManager = Minecraft.getInstance().getRenderManager();
+        return rendererManager.getRenderer(entityIn).getEntityTexture(entityIn);
+
+/*        Map<EntityType<?>, EntityRenderer<?>> entityMap = minecraftIn.getRenderManager().renderers;
         for (Map.Entry<EntityType<?>, EntityRenderer<?>> renderer : entityMap.entrySet())
         {
             if (renderer.getValue() instanceof BasicSharinganRenderer && entityIn instanceof BasicSharinganEntity) {
@@ -33,6 +37,6 @@ public class TextureHelper {
                 return ((ItachiRenderer) renderer.getValue()).getEntityTexture(entity);
             }
         }
-        return null;
+        return null;*/
     }
 }

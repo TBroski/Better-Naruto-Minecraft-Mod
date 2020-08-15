@@ -4,6 +4,7 @@ import com.benarutomod.tbroski.client.gui.container.ExtendedPlayerInventory;
 import com.benarutomod.tbroski.client.renderer.layers.*;
 import com.benarutomod.tbroski.client.renderer.mobs.FrogRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.SnakeRenderer;
+import com.benarutomod.tbroski.client.renderer.mobs.bijuu.IsobuRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.bijuu.MatatabiRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.bijuu.ShukakuRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.ExplosiveKunaiRenderer;
@@ -84,6 +85,7 @@ public class ClientHandler {
         //Bijuu
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SHUKAKU.get(), ShukakuRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MATATABI.get(), MatatabiRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.ISOBU.get(), IsobuRenderer::new);
 
         //Clones
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.BASIC_CLONE.get(), CloneRenderer::new);
@@ -147,6 +149,7 @@ public class ClientHandler {
             layers.add(new ScrollLayer<>(renderer));
             layers.add(new DojutsuLayer<>(renderer));
             layers.add(new BodyModeLayer<>(renderer));
+            layers.add(new BijuuLayer<>(renderer));
         }
     }
 

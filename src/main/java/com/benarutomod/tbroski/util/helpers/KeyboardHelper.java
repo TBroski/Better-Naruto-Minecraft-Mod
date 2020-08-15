@@ -10,7 +10,6 @@ import com.benarutomod.tbroski.init.KeybindInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.*;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraAddition;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsu;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuCaller;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -28,6 +27,8 @@ import org.lwjgl.glfw.GLFW;
 import java.util.Random;
 
 public class KeyboardHelper {
+
+    private Random rand = new Random();
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isShiftDown() {
@@ -50,12 +51,11 @@ public class KeyboardHelper {
         ClientPlayerEntity player = Minecraft.getInstance().player;
         Minecraft mcinstance = Minecraft.getInstance();
         if (player != null) {
-            this.checkInfusion();
             LazyOptional<IPlayerHandler> playerCapability = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler player_cap = playerCapability.orElse(new PlayerCapability());
             if (KeybindInit.HAND_INFUSION.isPressed()) {
-                int randChakraNum = new Random().nextInt(6);
-                if (player.getHeldItem(Hand.MAIN_HAND).getItem() == Items.PAPER && !player_cap.hasChakraBoolean()) { //!player_cap.hasChakraBoolean()
+                if (player.getHeldItem(Hand.MAIN_HAND).getItem() == Items.PAPER && !player_cap.hasChakraBoolean()) {
+                    int randChakraNum = rand.nextInt(6);
                     NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("chakra"));
                     player_cap.setChakraBoolean(true);
                     NetworkLoader.INSTANCE.sendToServer(new PacketChakraAddition());
@@ -116,33 +116,14 @@ public class KeyboardHelper {
                         }
                     }
                 }
-                else if (player.getPersistentData().getBoolean("handinfusion") == false) {
-                    player.getPersistentData().putBoolean("handinfusion", true);
+                else if (!player_cap.returnHandInfusionToggled()) {
+                    player_cap.setHandInfusionToggled(true);
                     NetworkLoader.INSTANCE.sendToServer(new PacketBackItem());
+                    NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(1, false, true, player.getEntityId()));
                 } else {
-                    player.getPersistentData().putBoolean("handinfusion", false);
+                    player_cap.setHandInfusionToggled(false);
+                    NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(1, false, false, player.getEntityId()));
                 }
-            }
-            if (KeybindInit.BODY_INFUSION.isPressed())
-            {
-                if (player.getPersistentData().getBoolean("bodyinfusion") == false)
-                {
-                    player.getPersistentData().putBoolean("bodyinfusion", true);
-                } else {
-                    player.getPersistentData().putBoolean("bodyinfusion", false);
-                }
-            }
-            if (player.getPersistentData().getBoolean("handinfusion") == true)
-            {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu("handinfusion"));
-            }
-            if (player.getPersistentData().getBoolean("leginfusion") == true)
-            {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu("leginfusion"));
-            }
-            if (player.getPersistentData().getBoolean("bodyinfusion") == true)
-            {
-                NetworkLoader.INSTANCE.sendToServer(new PacketJutsu("bodyinfusion"));
             }
             if (KeybindInit.SHINOBI_STATS.isPressed()) {
                 Minecraft.getInstance().displayGuiScreen(new ShinobiStats());
@@ -159,7 +140,7 @@ public class KeyboardHelper {
             IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
 
             if (isTabDown()) {
-                if (player.getPersistentData().getBoolean("handinfusion") == true) {
+                if (playerc.returnHandInfusionToggled()) {
                     if (KeybindInit.KEYBIND1.isKeyDown()) {
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 1));
                     }
@@ -190,42 +171,23 @@ public class KeyboardHelper {
                 }
             }
             if (KeybindInit.LEG_INFUSION.isKeyDown()) {
-                if (player.getPersistentData().getBoolean("leginfusion") == false) {
-                    player.getPersistentData().putBoolean("leginfusion", true);
-                    //player.sendMessage(new StringTextComponent("Leg Infused"));
+                if (!playerc.returnLegInfusionToggled()) {
+                    playerc.setLegInfusionToggled(true);
+                    NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(3, false, true, player.getEntityId()));
                 } else {
-                    player.getPersistentData().putBoolean("leginfusion", false);
+                    playerc.setLegInfusionToggled(false);
+                    NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(3, false, false, player.getEntityId()));
                 }
             }
-        }
-    }
-
-    private void checkInfusion()
-    {
-        ClientPlayerEntity player = Minecraft.getInstance().player;
-        if (player != null) {
-            LazyOptional<IPlayerHandler> playerCapability = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-            IPlayerHandler player_cap = playerCapability.orElse(new PlayerCapability());
-            if (player.getPersistentData().getBoolean("handinfusion") == true) {
-                player_cap.setHandInfusionToggled(true);
-                NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(1, false, true, player.getEntityId()));
-            } else {
-                player_cap.setHandInfusionToggled(false);
-                NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(1, false, false, player.getEntityId()));
-            }
-            if (player.getPersistentData().getBoolean("bodyinfusion") == true) {
-                player_cap.setBodyInfusionToggled(true);
-                NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(2, false, true, player.getEntityId()));
-            } else {
-                player_cap.setBodyInfusionToggled(false);
-                NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(2, false, false, player.getEntityId()));
-            }
-            if (player.getPersistentData().getBoolean("leginfusion") == true) {
-                player_cap.setLegInfusionToggled(true);
-                NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(3, false, true, player.getEntityId()));
-            } else {
-                player_cap.setLegInfusionToggled(false);
-                NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(3, false, false, player.getEntityId()));
+            if (KeybindInit.BODY_INFUSION.isKeyDown())
+            {
+                if (!playerc.returnBodyInfusionToggled()) {
+                    playerc.setBodyInfusionToggled(true);
+                    NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(2, false, true, player.getEntityId()));
+                } else {
+                    playerc.setBodyInfusionToggled(false);
+                    NetworkLoader.INSTANCE.sendToServer(new PacketToggleInfusionBoolean(2, false, false, player.getEntityId()));
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.entity.shinobi;
+package com.benarutomod.tbroski.api.entity;
 
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.entity.EntityType;

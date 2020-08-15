@@ -36,7 +36,7 @@ public class ExplosivePaperBlockBase extends FallingBlock {
 
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
         entityIn.attackEntityFrom(DamageSource.FALL, 4F);
-        entityIn.setVelocity(entityIn.getMotion().getX(), 1D, entityIn.getMotion().getZ());
+        entityIn.setMotion(entityIn.getMotion().getX(), 1D, entityIn.getMotion().getZ());
         worldIn.createExplosion(entityIn, pos.getX(), pos.getY(), pos.getZ(), 3F, Explosion.Mode.DESTROY);
         if (this.placer != null) {
             this.placer.sendMessage(new StringTextComponent("A Explosive Sealed Paper Trap has been Activated."));

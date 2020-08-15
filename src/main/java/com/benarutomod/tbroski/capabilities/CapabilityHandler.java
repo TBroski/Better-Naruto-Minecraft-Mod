@@ -74,6 +74,7 @@ public class CapabilityHandler {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerHasBodyModeSync(1, playercap.returnPlayerCurseMark(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketPlayerHasBodyModeSync(2,  playercap.returnPlayerToadSageMode(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketBijuuSync(player.getEntityId(), playercap.returnPlayerBijuu()));
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketClanSync(playercap.returnPlayerClan().getString(), true));
         }
     }
 
@@ -95,12 +96,14 @@ public class CapabilityHandler {
         chakra.setBeNMPoints(oldchakra.returnBeNMPoints());
         chakra.setregenChakra(oldchakra.returnregenChakra());
         chakra.setPlayerEntityAffiliation(oldchakra.returnPlayerEntityAffiliation());
+        chakra.setPlayerBijuu(oldchakra.returnPlayerBijuu());
         chakra.setPlayerLeftDojutsu(oldchakra.returnPlayerLeftDojutsu());
         chakra.setPlayerRightDojutsu(oldchakra.returnPlayerRightDojutsu());
         chakra.setShinobiLevel(oldchakra.returnShinobiLevel());
         chakra.setToggleJutsuMessage(oldchakra.returnToggleJutsuMessage());
         chakra.setToggleScrollRenderer(oldchakra.returnToggleScrollRenderer());
         chakra.setPlayerBodyMode(oldchakra.returnPlayerBodyMode());
+        chakra.setPlayerClan(oldchakra.returnPlayerClan());
 
         chakra.setKeybind1(oldchakra.returnKeybind1());
         chakra.setKeybind2(oldchakra.returnKeybind2());
@@ -151,6 +154,9 @@ public class CapabilityHandler {
 
         chakra.setAmaterasuJutsuBoolean(oldchakra.hasAmaterasuJutsuBoolean());
         chakra.setTsukuyomiJutsuBoolean(oldchakra.hasTsukuyomiJutsuBoolean());
+
+        chakra.setTailedBeastBombBoolean(oldchakra.hasTailedBeastBombBoolean());
+        chakra.setTailedBeastTransformationBoolean(oldchakra.hasTailedBeastTransformationBoolean());
 
         chakra.setPlayerToadSageMode(oldchakra.returnPlayerToadSageMode());
         chakra.setPlayerCurseMark(oldchakra.returnPlayerCurseMark());

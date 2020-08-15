@@ -2,7 +2,7 @@ package com.benarutomod.tbroski.tileentity.renderer;
 
 import com.benarutomod.tbroski.client.renderer.layers.models.dojutsu.ModelLeftEye;
 import com.benarutomod.tbroski.client.renderer.layers.models.dojutsu.ModelRightEye;
-import com.benarutomod.tbroski.entity.shinobi.IDojutsuEntity;
+import com.benarutomod.tbroski.api.interfaces.IDojutsuEntity;
 import com.benarutomod.tbroski.tileentity.DojutsuSkullTileEntity;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import com.benarutomod.tbroski.util.helpers.TextureHelper;

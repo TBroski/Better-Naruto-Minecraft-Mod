@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.entity.shinobi;
+package com.benarutomod.tbroski.api.interfaces;
 
 import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 

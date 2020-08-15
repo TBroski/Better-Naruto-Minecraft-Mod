@@ -4,9 +4,14 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.api.internal.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
+import com.benarutomod.tbroski.networking.NetworkLoader;
+import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
+import com.benarutomod.tbroski.networking.packets.jutsu.PacketSetJutsuBoolean;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.fml.network.PacketDispatcher;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class JutsuCaller {
 
@@ -20,10 +25,12 @@ public class JutsuCaller {
                         String nbtName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
                         if (!playerIn.getPersistentData().getBoolean(nbtName)) {
                             playerIn.getPersistentData().putBoolean(nbtName, true);
+                            NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> playerIn), new PacketJutsuNBTSync(playerIn.getEntityId(), nbtName, true));
                             if (!playercap.returnToggleJutsuMessage()) playerIn.sendMessage(new StringTextComponent(new TranslationTextComponent("jutsu." + jutsu.getCorrelatedPlugin().getPluginId() + "." + jutsu.getName()).getString() + "!"));
                         } else {
                             jutsu.throwCancelEvent(playerIn);
                             playerIn.getPersistentData().putBoolean(nbtName, false);
+                            NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> playerIn), new PacketJutsuNBTSync(playerIn.getEntityId(), nbtName, false));
                         }
                     }
                     else {

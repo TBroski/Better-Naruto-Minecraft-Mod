@@ -30,7 +30,6 @@ public class NetworkLoader {
         INSTANCE.registerMessage(nextID(), PacketEyeSlotSync.class, PacketEyeSlotSync::encode, PacketEyeSlotSync::decode, PacketEyeSlotSync::handle);
         INSTANCE.registerMessage(nextID(), PacketPlayerEntityAffiliationSync.class, PacketPlayerEntityAffiliationSync::encode, PacketPlayerEntityAffiliationSync::decode, PacketPlayerEntityAffiliationSync::handle);
         INSTANCE.registerMessage(nextID(), PacketBeNMPointsSync.class, PacketBeNMPointsSync::encode, PacketBeNMPointsSync::decode, PacketBeNMPointsSync::handle);
-        INSTANCE.registerMessage(nextID(), PacketJutsu.class, PacketJutsu::encode, PacketJutsu::decode, PacketJutsu::handle);
         INSTANCE.registerMessage(nextID(), PacketAdvancement.class, PacketAdvancement::encode, PacketAdvancement::decode, PacketAdvancement::handle);
         INSTANCE.registerMessage(nextID(), PacketSetJutsuBoolean.class, PacketSetJutsuBoolean::encode, PacketSetJutsuBoolean::decode, PacketSetJutsuBoolean::handle);
         INSTANCE.registerMessage(nextID(), PacketKeybindSet.class, PacketKeybindSet::encode, PacketKeybindSet::decode, PacketKeybindSet::handle);
@@ -53,5 +52,6 @@ public class NetworkLoader {
         INSTANCE.registerMessage(nextID(), PacketJutsuNBTSync.class, PacketJutsuNBTSync::encode, PacketJutsuNBTSync::decode, PacketJutsuNBTSync::handle);
         INSTANCE.registerMessage(nextID(), PacketJutsuCaller.class, PacketJutsuCaller::encode, PacketJutsuCaller::decode, PacketJutsuCaller::handle);
         INSTANCE.registerMessage(nextID(), PacketBijuuSync.class, PacketBijuuSync::encode, PacketBijuuSync::decode, PacketBijuuSync::handle);
+        INSTANCE.registerMessage(nextID(), PacketClanSync.class, PacketClanSync::encode, PacketClanSync::decode, PacketClanSync::handle);
     }
 }

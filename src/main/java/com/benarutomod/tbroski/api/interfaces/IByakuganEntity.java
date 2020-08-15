@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.entity.shinobi;
+package com.benarutomod.tbroski.api.interfaces;
 
 public interface IByakuganEntity extends IDojutsuEntity {
 

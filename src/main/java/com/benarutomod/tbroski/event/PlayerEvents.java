@@ -7,8 +7,9 @@ import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.api.internal.BeNMClan;
 import com.benarutomod.tbroski.api.BeNMRegistry;
+import com.benarutomod.tbroski.common.jutsu.EffectsJutsu;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
-import com.benarutomod.tbroski.entity.shinobi.AbstractShinobiEntity;
+import com.benarutomod.tbroski.api.entity.AbstractShinobiEntity;
 import com.benarutomod.tbroski.init.*;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketNature;
@@ -240,6 +241,33 @@ public class PlayerEvents {
                     player.sendStatusMessage(new TranslationTextComponent("event." + Main.MODID + ".livingdeath.mangekyousharinganmessage"), true);
                 }
             }
+        }
+    }
+
+    public static void checkInfusion(TickEvent.PlayerTickEvent event) {
+        LazyOptional<IPlayerHandler> playerCapability = event.player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler player_cap = playerCapability.orElse(new PlayerCapability());
+
+        int taijutsuModifier0 = 0;
+        int taijutsuModifier1 = 0;
+        if (player_cap.returnTaijutsu() >= 15) {
+            taijutsuModifier0 = 3; taijutsuModifier1 = 2;
+        }
+        else if (player_cap.returnTaijutsu() >= 10) {
+            taijutsuModifier0 = 2; taijutsuModifier1 = 1;
+        }
+        else if (player_cap.returnTaijutsu() >= 5) {
+            taijutsuModifier0 = 1; taijutsuModifier1 = 0;
+        }
+
+        if (player_cap.returnHandInfusionToggled()){
+            EffectsJutsu.HandInfusion(event.player, 3, taijutsuModifier0, taijutsuModifier1);
+        }
+        if (player_cap.returnBodyInfusionToggled()){
+            EffectsJutsu.BodyInfusion(event.player, 4, taijutsuModifier0, taijutsuModifier1);
+        }
+        if (player_cap.returnLegInfusionToggled()){
+            EffectsJutsu.LegInfusion(event.player, 3, taijutsuModifier0, taijutsuModifier1);
         }
     }
 }

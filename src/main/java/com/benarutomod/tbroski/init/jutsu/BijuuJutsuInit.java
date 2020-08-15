@@ -28,9 +28,11 @@ public class BijuuJutsuInit {
         }, (buttonJutsu, playerCapability) -> {
             buttonJutsu.setHasJutsu(playerCapability.hasTailedBeastBombBoolean());
         }, (playerCapability, has) -> {
+            playerCapability.setTailedBeastBombBoolean(has);
         }, (playerCapability) -> playerCapability.hasTailedBeastBombBoolean()));
 
         jutsuRegistry.register(new BeNMJutsu(pluginIn, "tailed_beast_transformation", BeNMJutsu.Type.BIJUU_ABILITY, 24, 0.3F, 192, 16, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+            // Called in events elsewhere.
         }, (buttonJutsu, playerCapability) -> {
             if (Minecraft.getInstance().currentScreen instanceof AbstractJutsuScreen) {
                 boolean didBuy = buttonJutsu.doJutsuPress((AbstractJutsuScreen) Minecraft.getInstance().currentScreen);
@@ -42,6 +44,7 @@ public class BijuuJutsuInit {
         }, (buttonJutsu, playerCapability) -> {
             buttonJutsu.setHasJutsu(playerCapability.hasTailedBeastTransformationBoolean());
         }, (playerCapability, has) -> {
+            playerCapability.setTailedBeastTransformationBoolean(has);
         }, (playerCapability) -> playerCapability.hasTailedBeastTransformationBoolean()));
     }
 }

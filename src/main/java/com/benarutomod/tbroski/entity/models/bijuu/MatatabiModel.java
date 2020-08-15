@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.model.QuadrupedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 public class MatatabiModel<T extends LivingEntity> extends AgeableModel<T> implements IHasHead {
 
@@ -163,6 +164,10 @@ public class MatatabiModel<T extends LivingEntity> extends AgeableModel<T> imple
 
     @Override
     public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+        float scaleFactor = 4.0F;
+        matrixStack.push();
+        matrixStack.translate(0F, 1.5F - 1.5F * scaleFactor, 0F);
+        matrixStack.scale(scaleFactor, scaleFactor, scaleFactor);
         frontLeftLeg.render(matrixStack, buffer, packedLight, packedOverlay);
         backLeftLeg.render(matrixStack, buffer, packedLight, packedOverlay);
         body.render(matrixStack, buffer, packedLight, packedOverlay);
@@ -171,6 +176,7 @@ public class MatatabiModel<T extends LivingEntity> extends AgeableModel<T> imple
         rightTail.render(matrixStack, buffer, packedLight, packedOverlay);
         frontRightLeg.render(matrixStack, buffer, packedLight, packedOverlay);
         backRightLeg.render(matrixStack, buffer, packedLight, packedOverlay);
+        matrixStack.pop();
     }
 
     public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

@@ -176,10 +176,11 @@ public class ShinobiStats extends Screen {
                     this.entityName = entityType.getRegistryName().toString();
                 }
             }
-            font.drawStringWithShadow(new TranslationTextComponent("gui." + Main.MODID + ".playeraffiliation.shinobistats").getString() + this.entityName, 10, 30, 0xFF0000);
+            font.drawStringWithShadow(new TranslationTextComponent("gui." + Main.MODID + ".playeraffiliation.shinobistats").getString() + this.entityName, 10, 50, 0xFF0000);
         }
         font.drawStringWithShadow(new TranslationTextComponent("gui." + Main.MODID + ".benmpoints.shinobistats").getString() + playerc.returnBeNMPoints(), 10, 10, 0x32cd32);
-        font.drawStringWithShadow(new TranslationTextComponent("gui." + Main.MODID + ".benmpoints.shinobistats").getString() + playerc.returnBeNMPoints(), 10, 10, 0x32cd32);
+        String clanName = playerc.returnPlayerClan().getString();
+        font.drawStringWithShadow(new TranslationTextComponent("gui." + Main.MODID + ".clan.shinobistats").getString() + clanName.substring(0, 1).toUpperCase() + clanName.substring(1).toLowerCase(), 10, 30, 0x4A70CB);
     }
 
     @Override
@@ -300,7 +301,7 @@ public class ShinobiStats extends Screen {
                 guiButtonBijuuOverlay.visible = true;
                 Minecraft.getInstance().textureManager.bindTexture(BIJUU_OVERLAY_TEXTURE);
                 Minecraft.getInstance().ingameGUI.blit(this.guiLeft - 16, this.guiTop - 16, 0, 0, 32, 48);
-                InventoryScreen.drawEntityOnScreen(this.guiLeft, this.guiTop + 16, 6, 0 + (p_render_1_ / 20), 0 + (p_render_2_ / 20), bijuu);
+                InventoryScreen.drawEntityOnScreen(this.guiLeft, this.guiTop + 24, 1, 0 + (p_render_1_ / 20), 0 + (p_render_2_ / 20), bijuu);
             }
         }
     }

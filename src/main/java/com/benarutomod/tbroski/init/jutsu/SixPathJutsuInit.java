@@ -28,7 +28,7 @@ public class SixPathJutsuInit {
                     double motionX = -MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * velocity;
                     double motionZ = MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * velocity;
                     double motionY = -MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * velocity;
-                    entityRayTraceResult.getEntity().setVelocity(-motionX, -motionY + 0.3F, -motionZ);
+                    entityRayTraceResult.getEntity().setMotion(-motionX, -motionY + 0.3F, -motionZ);
                 }
                 else {
                     float yaw = playerIn.rotationYaw;
@@ -37,7 +37,7 @@ public class SixPathJutsuInit {
                     double motionX = -MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * velocity;
                     double motionZ = MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * velocity;
                     double motionY = -MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * velocity;
-                    entityRayTraceResult.getEntity().setVelocity(motionX, motionY + 0.3F, motionZ);
+                    entityRayTraceResult.getEntity().setMotion(motionX, motionY + 0.3F, motionZ);
                 }
             }
         }, (buttonJutsu, playerCapability) -> {

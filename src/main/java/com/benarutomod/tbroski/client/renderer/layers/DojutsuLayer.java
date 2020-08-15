@@ -7,7 +7,7 @@ import com.benarutomod.tbroski.client.renderer.layers.models.dojutsu.ModelLeftEy
 import com.benarutomod.tbroski.client.renderer.layers.models.dojutsu.ModelRightEye;
 import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
-import com.benarutomod.tbroski.entity.shinobi.IDojutsuEntity;
+import com.benarutomod.tbroski.api.interfaces.IDojutsuEntity;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

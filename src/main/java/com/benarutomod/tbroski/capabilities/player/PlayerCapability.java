@@ -38,6 +38,7 @@ public class PlayerCapability implements IPlayerHandler {
 	private int genjutsu;
 	private int benmpoints;
 	private int playerLevel;
+	private int playerBijuuLevel;
 	private boolean bodyToggled;
 	private boolean handToggled;
 	private boolean legToggled;
@@ -300,6 +301,16 @@ public class PlayerCapability implements IPlayerHandler {
     public String returnPlayerBijuu()
     {
         return this.bijuu;
+    }
+    @Override
+    public void setPlayerBijuuLevel(int level)
+    {
+        this.playerBijuuLevel = level;
+    }
+    @Override
+    public int returnPlayerBijuuLevel()
+    {
+        return this.playerBijuuLevel;
     }
 
     @Override
@@ -885,6 +896,7 @@ public class PlayerCapability implements IPlayerHandler {
             tag.putInt("benmpoints", instance.returnBeNMPoints());
             tag.putInt("playereyeslot", instance.returnplayerEyeSlot());
             tag.putInt("shinobilevel", instance.returnShinobiLevel());
+            tag.putInt("bijuulevel", instance.returnPlayerBijuuLevel());
             tag.putString("playeraffiliation", instance.returnPlayerEntityAffiliation());
             tag.putString("bijuu", instance.returnPlayerBijuu());
             tag.putString("playerleftdojutsu", instance.returnPlayerLeftDojutsu().getString());
@@ -974,6 +986,7 @@ public class PlayerCapability implements IPlayerHandler {
             instance.setShinobiLevel(((CompoundNBT) tag).getInt("shinobilevel"));
             instance.setPlayerEntityAffiliation(((CompoundNBT) tag).getString("playeraffiliation"));
             instance.setPlayerBijuu(((CompoundNBT) tag).getString("bijuu"));
+            instance.setPlayerBijuuLevel(((CompoundNBT) tag).getInt("bijuulevel"));
             instance.setPlayerLeftDojutsu(DojutsuHelper.getDojutsuFromString(((CompoundNBT) tag).getString("playerleftdojutsu")));
             instance.setPlayerRightDojutsu(DojutsuHelper.getDojutsuFromString(((CompoundNBT) tag).getString("playerrightdojutsu")));
             instance.setPlayerBodyMode(BodyHelper.getBodyFromString(((CompoundNBT) tag).getString("playerbody")));

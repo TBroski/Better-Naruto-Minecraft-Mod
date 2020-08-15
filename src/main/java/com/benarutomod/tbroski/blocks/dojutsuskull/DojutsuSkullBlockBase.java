@@ -1,25 +1,18 @@
 package com.benarutomod.tbroski.blocks.dojutsuskull;
 
 import com.benarutomod.tbroski.client.gui.DojutsuTransplant;
-import com.benarutomod.tbroski.entity.shinobi.IDojutsuEntity;
+import com.benarutomod.tbroski.api.interfaces.IDojutsuEntity;
 import com.benarutomod.tbroski.tileentity.DojutsuSkullTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.TNTBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.tileentity.SkullTileEntityRenderer;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.SkullTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;

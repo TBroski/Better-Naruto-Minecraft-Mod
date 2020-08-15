@@ -3,7 +3,7 @@ package com.benarutomod.tbroski.entity.shinobi.akatsuki.kakuzu;
 import com.benarutomod.tbroski.api.internal.BeNMClan;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.MudMoatEntity;
-import com.benarutomod.tbroski.entity.shinobi.AbstractAkatsukiEntity;
+import com.benarutomod.tbroski.api.entity.AbstractAkatsukiEntity;
 import com.benarutomod.tbroski.init.ClanInit;
 import com.benarutomod.tbroski.init.EntityInit;
 import net.minecraft.entity.Entity;

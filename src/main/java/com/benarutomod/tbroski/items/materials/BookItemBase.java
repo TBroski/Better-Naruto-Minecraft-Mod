@@ -21,33 +21,4 @@ public class BookItemBase extends Item {
     public BookItemBase() {
         super(new Item.Properties().group(Main.TAB).maxStackSize(1));
     }
-
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
-    {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (!worldIn.isRemote)
-        {
-            LazyOptional<IPlayerHandler> player_cap = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-            IPlayerHandler playerHandler = player_cap.orElse(new PlayerCapability());
-
-            if (playerHandler.returnPlayerLeftDojutsu() == DojutsuInit.RINNEGAN)
-            {
-                playerHandler.setPlayerLeftDojutsu(DojutsuInit.SHARINGAN);
-            }
-            else {
-                playerHandler.setPlayerLeftDojutsu(DojutsuInit.RINNEGAN);
-            }
-            if (playerHandler.returnPlayerRightDojutsu() == DojutsuInit.RINNEGAN)
-            {
-                playerHandler.setPlayerRightDojutsu(DojutsuInit.SHARINGAN);
-            }
-            else {
-                playerHandler.setPlayerRightDojutsu(DojutsuInit.RINNEGAN);
-            }
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new PacketPlayerDojutsuSync(playerHandler.returnPlayerLeftDojutsu().getString(), true, true));
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new PacketPlayerDojutsuSync(playerHandler.returnPlayerRightDojutsu().getString(), false, true));
-            //SummoningJutsu.BasicSummoningJutsu(playerIn, 10);
-        }
-        return ActionResult.resultSuccess(itemstack);
-    }
 }

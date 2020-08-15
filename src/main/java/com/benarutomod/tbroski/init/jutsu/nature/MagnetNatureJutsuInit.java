@@ -29,7 +29,7 @@ public class MagnetNatureJutsuInit {
                 double motionX = -MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * velocity;
                 double motionZ = MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * velocity;
                 double motionY = -MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * velocity;
-                blockEntity.setVelocity(motionX, motionY + 0.6D, motionZ);
+                blockEntity.setMotion(motionX, motionY + 0.6D, motionZ);
                 playerIn.world.addEntity(blockEntity);
             }
         }, (buttonJutsu, playerCapability) -> {

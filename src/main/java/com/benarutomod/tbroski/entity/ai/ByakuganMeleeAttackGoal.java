@@ -1,6 +1,6 @@
 package com.benarutomod.tbroski.entity.ai;
 
-import com.benarutomod.tbroski.entity.shinobi.IByakuganEntity;
+import com.benarutomod.tbroski.api.interfaces.IByakuganEntity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;

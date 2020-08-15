@@ -12,6 +12,10 @@ public class Particles {
 
     public static void addParticles(LivingEntity entity, IParticleData particleType, int loopAmount)
     {
+        if (!entity.world.isRemote) {
+            System.out.println("Can't spawn particles server-side.");
+            return;
+        }
         for (int i = 0; i < loopAmount; i++) {
             if (Minecraft.getInstance().world != null) {
                 Minecraft.getInstance().world.addParticle(particleType, entity.getPosX(), entity.getPosY(), entity.getPosZ(), 0.1, 0.1, 0.1);
@@ -21,6 +25,10 @@ public class Particles {
 
     public static void addParticles(BlockPos blockPosIn, World worldIn, IParticleData particleType, int loopAmount)
     {
+        if (!worldIn.isRemote) {
+            System.out.println("Can't spawn particles server-side.");
+            return;
+        }
         if (worldIn != null) {
             for (int i = 0; i < loopAmount; i++) {
                 worldIn.addParticle(particleType, blockPosIn.getX() + (new Random().nextInt(5) * 0.1), blockPosIn.getY()+ (new Random().nextInt(5) * 0.1), blockPosIn.getZ()+ (new Random().nextInt(5) * 0.1), 0.1, 0.1, 0.1);

@@ -6,7 +6,7 @@ import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonDojutsu;
 import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
-import com.benarutomod.tbroski.entity.shinobi.IDojutsuEntity;
+import com.benarutomod.tbroski.api.interfaces.IDojutsuEntity;
 import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerDojutsuSync;

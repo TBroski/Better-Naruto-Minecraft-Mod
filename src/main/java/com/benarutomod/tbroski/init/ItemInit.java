@@ -116,6 +116,7 @@ public class ItemInit {
 
     public static final RegistryObject<ModdedSpawnEggItem> SHUKAKU_SPAWN_EGG = ITEMS.register("shukaku_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.SHUKAKU, 0x7F9993, 0xA79275, new Item.Properties().group(Main.TAB)));
     public static final RegistryObject<ModdedSpawnEggItem> MATATABI_SPAWN_EGG = ITEMS.register("matatabi_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.MATATABI, 0x7F9993, 0x4A70CB, new Item.Properties().group(Main.TAB)));
+    public static final RegistryObject<ModdedSpawnEggItem> ISOBU_SPAWN_EGG = ITEMS.register("isobu_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.ISOBU, 0x7F9993, 0x9DA1AA, new Item.Properties().group(Main.TAB)));
 
 
     //NBTItems

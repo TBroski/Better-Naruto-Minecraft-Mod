@@ -24,25 +24,4 @@ public class RiceItemBase extends Item {
     public RiceItemBase() {
         super(new Item.Properties().group(Main.TAB));
     }
-
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
-    {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-            List<ItemEntity> itemEntities = playerIn.world.getEntitiesWithinAABB(ItemEntity.class, playerIn.getBoundingBox().grow(10));
-            Iterator iterator = itemEntities.iterator();
-            while (iterator.hasNext()) {
-                ItemEntity item = (ItemEntity) iterator.next();
-                double distX = playerIn.getPosX() - item.getPosX();
-                double distZ = playerIn.getPosZ() - item.getPosZ();
-                double distY = item.getPosY() + 1.5D - item.getPosY();
-                double dir = Math.atan2(distZ, distX);
-                double speed = 1F / item.getDistance(playerIn) * 0.5;
-                if (distY < 0) {
-                    item.setMotion(item.getMotion().x, item.getMotion().y + speed, item.getMotion().z);
-                }
-                item.setMotion(Math.cos(dir) * speed, item.getMotion().y, item.getMotion().z);
-                item.setMotion(item.getMotion().x, item.getMotion().y, Math.sin(dir) * speed);
-            }
-        return ActionResult.resultSuccess(itemstack);
-    }
 }

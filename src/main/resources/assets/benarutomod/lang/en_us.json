@@ -28,6 +28,7 @@
 
   "item.benarutomod.shukaku_spawn_egg": "Shukaku Spawn Egg",
   "item.benarutomod.matatabi_spawn_egg": "Matatabi Spawn Egg",
+  "item.benarutomod.isobu_spawn_egg": "Isobu Spawn Egg",
 
   "item.benarutomod.rations_pill": "Military Rations Pill",
   "item.benarutomod.diluted_rations_pill": "Diluted Military Rations Pill",
@@ -43,6 +44,7 @@
 
   "entity.benarutomod.shukaku": "Shukaku",
   "entity.benarutomod.matatabi": "Matatabi",
+  "entity.benarutomod.isobu": "Isobu",
 
   "block.benarutomod.explosive_paper": "Explosive Sealed Paper",
   "block.benarutomod.teleportation_paper": "Transportation Sealed Paper",
@@ -92,6 +94,7 @@
   "gui.benarutomod.title.shinobistats": "Shinobi Stats",
   "gui.benarutomod.playeraffiliation.shinobistats": "Entity Affiliation with: ",
   "gui.benarutomod.benmpoints.shinobistats": "BeNM Points: ",
+  "gui.benarutomod.clan.shinobistats": "Your Clan: ",
   "gui.benarutomod.title.dojutsu": "Dojutsu",
   "gui.benarutomod.title.bodychakra": "Chakra",
   "gui.benarutomod.chakracontrol.bodychakra": "Chakra Control Percentage: ",
@@ -123,6 +126,11 @@
   "dojutsu.benarutomod.uponmessage": "You feel intimidated by the ",
   "cursemark.benarutomod.uponmessage": "Your consciousness begins to fade.",
   "toadsage.benarutomod.uponmessage": "Your face tingles.",
+
+  "commands.benarutomod.benmpoints.add": "Added %s BeNM Points to %s. Total %s.",
+  "commands.benarutomod.benmpoints.set": "Set %s's BeNM Points to %s.",
+  "commands.benarutomod.dojutsu.set": "Set %s's %s dojutsu to %s.",
+  "commands.benarutomod.bodymode.set": "Set %s's body mode to %s.",
 
   "advancements.benarutomod.shinobi.title": "Beginnings to a Shinobi",
   "advancements.benarutomod.shinobi.text": "A beginning to a Shinobi",
@@ -172,6 +180,9 @@
   "jutsu.benarutomod.tsukuyomi": "Tsukuyomi",
   "jutsu.benarutomod.matter_repulsion": "Matter Repulsion Technique",
   "jutsu.benarutomod.self_levitation": "Self Levitation Technique",
+  "jutsu.benarutomod.asura_path": "Asura Path",
+  "jutsu.benarutomod.deva_path": "Deva Path",
+  "jutsu.benarutomod.preta_path": "Preta Path",
   "jutsu.benarutomod.tailed_beast_bomb": "Tailed Beast Bomb Technique",
   "jutsu.benarutomod.tailed_beast_transformation": "Tailed Beast Transformation Technique",
 

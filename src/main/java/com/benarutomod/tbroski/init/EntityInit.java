@@ -4,6 +4,7 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.entity.mobs.FrogEntity;
 import com.benarutomod.tbroski.entity.mobs.SnakeEntity;
 import com.benarutomod.tbroski.entity.clones.BasicCloneEntity;
+import com.benarutomod.tbroski.entity.mobs.bijuu.IsobuEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.MatatabiEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.ShukakuEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.TailedBeastBombEntity;
@@ -66,6 +67,7 @@ public class EntityInit {
     //Bijuu
     public static final RegistryObject<EntityType<ShukakuEntity>> SHUKAKU = ENTITIES.register("shukaku", () -> EntityType.Builder.<ShukakuEntity>create(ShukakuEntity::new, EntityClassification.CREATURE).size(3F, 4F).build(new ResourceLocation(Main.MODID, "shukaku").toString()));
     public static final RegistryObject<EntityType<MatatabiEntity>> MATATABI = ENTITIES.register("matatabi", () -> EntityType.Builder.<MatatabiEntity>create(MatatabiEntity::new, EntityClassification.CREATURE).size(3F, 4F).build(new ResourceLocation(Main.MODID, "matatabi").toString()));
+    public static final RegistryObject<EntityType<IsobuEntity>> ISOBU = ENTITIES.register("isobu", () -> EntityType.Builder.<IsobuEntity>create(IsobuEntity::new, EntityClassification.CREATURE).size(3F, 4F).build(new ResourceLocation(Main.MODID, "isobu").toString()));
 
     //Kakuzu's Goons
     public static final RegistryObject<EntityType<LightningStyleMaskedAnimalEntity>> LIGHTNING_STYLE_MASKED_ANIMAL = ENTITIES.register("lightning_style_masked_animal", () -> EntityType.Builder.<LightningStyleMaskedAnimalEntity>create(LightningStyleMaskedAnimalEntity::new, EntityClassification.CREATURE).size(1.5F, 2.5F).build(new ResourceLocation(Main.MODID, "lightning_style_masked_animal").toString()));

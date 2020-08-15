@@ -47,8 +47,11 @@ public interface IPlayerHandler {
 	void addChakraControl(float amount);
 	float returnChakraControl();
 
-	void setShinobiLevel(int amount);
+	void setShinobiLevel(int level);
 	int returnShinobiLevel();
+
+	void setPlayerBijuuLevel(int level);
+	int returnPlayerBijuuLevel();
 
 	void setPlayerClan(BeNMClan clan);
 	BeNMClan returnPlayerClan();

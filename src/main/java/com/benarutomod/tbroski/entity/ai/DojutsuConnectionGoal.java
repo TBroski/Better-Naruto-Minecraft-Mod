@@ -2,7 +2,7 @@ package com.benarutomod.tbroski.entity.ai;
 
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
-import com.benarutomod.tbroski.entity.shinobi.ISharinganEntity;
+import com.benarutomod.tbroski.api.interfaces.ISharinganEntity;
 import com.benarutomod.tbroski.init.DamageInit;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;

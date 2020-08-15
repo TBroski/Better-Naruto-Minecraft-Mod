@@ -6,11 +6,9 @@ import com.benarutomod.tbroski.entity.ai.DojutsuAttackGoal;
 import com.benarutomod.tbroski.entity.ai.DojutsuConnectionGoal;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.entity.projectile.KunaiEntity;
-import com.benarutomod.tbroski.entity.shinobi.AbstractShinobiEntity;
-import com.benarutomod.tbroski.entity.shinobi.ISharinganEntity;
-import com.benarutomod.tbroski.init.BlockInit;
+import com.benarutomod.tbroski.api.entity.AbstractShinobiEntity;
+import com.benarutomod.tbroski.api.interfaces.ISharinganEntity;
 import com.benarutomod.tbroski.init.ClanInit;
-import com.benarutomod.tbroski.tileentity.DojutsuSkullTileEntity;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -25,8 +23,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -45,19 +41,6 @@ public class BasicSharinganEntity extends AbstractShinobiEntity implements IShar
         super.registerData();
         this.dataManager.register(LEFT_EYE, "sharingan");
         this.dataManager.register(RIGHT_EYE, "sharingan");
-    }
-
-    @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        if (!this.world.isRemote) {
-            this.world.setBlockState(this.getPosition(), BlockInit.DOJUTSU_SKULL.get().getDefaultState());
-            TileEntity tileEntity = this.world.getTileEntity(this.getPosition());
-            if (tileEntity instanceof DojutsuSkullTileEntity) {
-                DojutsuSkullTileEntity dojutsuSkullTileEntity = (DojutsuSkullTileEntity) tileEntity;
-                dojutsuSkullTileEntity.setLivingEntity(this);
-            }
-        }
     }
 
     @Override

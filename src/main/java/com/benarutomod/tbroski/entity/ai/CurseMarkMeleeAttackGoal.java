@@ -22,7 +22,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
-import sun.nio.ch.Net;
 
 import java.util.Random;
 

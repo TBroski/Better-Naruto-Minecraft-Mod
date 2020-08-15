@@ -28,6 +28,7 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.screen.inventory.CreativeScreen;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.command.impl.GiveCommand;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -113,15 +114,42 @@ public class ForgeEventSubscriber {
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        PlayerEntity player = event.player;
         PlayerEvents.checkPlayerDojutsuTick(event);
-        if (!event.player.getEntityWorld().isRemote) {
-            PlayerEntity player = event.player;
+        if (player.getPersistentData().getBoolean(Main.MODID + "_tailed_beast_transformation")) {
+
+            if (event.player.world.isRemote) {
+
+            }
+        }
+
+        if (!event.player.world.isRemote) {
             if (player != null) {
                 GlobalEvents.playerRaid(event);
                 PlayerEvents.regenerateChakra(event);
                 PlayerEvents.checkNatures(event);
+                PlayerEvents.checkInfusion(event);
             }
             IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
+            if (playercap.returnBodyInfusionToggled() && playercap.hasMagnetNature()) {
+                List<ItemEntity> itemEntities = player.world.getEntitiesWithinAABB(ItemEntity.class, player.getBoundingBox().grow(5));
+                if (itemEntities.size() > 0) {
+                    Iterator iterator = itemEntities.iterator();
+                    while (iterator.hasNext()) {
+                        ItemEntity item = (ItemEntity) iterator.next();
+                        double distX = player.getPosX() - item.getPosX();
+                        double distZ = player.getPosZ() - item.getPosZ();
+                        double distY = item.getPosY() + 1.5D - item.getPosY();
+                        double dir = Math.atan2(distZ, distX);
+                        double speed = 1F / item.getDistance(player) * 0.5;
+                        if (distY < 0) {
+                            item.setMotion(item.getMotion().x, item.getMotion().y + speed, item.getMotion().z);
+                        }
+                        item.setMotion(Math.cos(dir) * speed, item.getMotion().y, item.getMotion().z);
+                        item.setMotion(item.getMotion().x, item.getMotion().y, Math.sin(dir) * speed);
+                    }
+                }
+            }
             for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
                 if (jutsu.isToggle()) {
                     String nbtName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
@@ -149,7 +177,6 @@ public class ForgeEventSubscriber {
         if(event.phase != TickEvent.Phase.START)
             return;
 
-        PlayerEntity player = event.player;
         if(!player.world.isRemote && player.inventory instanceof ExtendedPlayerInventory)
         {
             ExtendedPlayerInventory inventory = (ExtendedPlayerInventory) player.inventory;

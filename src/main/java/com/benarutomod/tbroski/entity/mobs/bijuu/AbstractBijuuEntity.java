@@ -12,6 +12,8 @@ import com.benarutomod.tbroski.networking.packets.PacketBeNMPointsSync;
 import com.benarutomod.tbroski.networking.packets.PacketBijuuSync;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.SpiderEntity;
+import net.minecraft.entity.monster.ZombiePigmanEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.DamageSource;
@@ -47,7 +49,7 @@ public abstract class AbstractBijuuEntity extends CreatureEntity implements IRan
 
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new RangedAttackGoal(this, this.getSpeed(), 50, 35F));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, this.getSpeed()));
+        if (this.getCreatureAttribute() != CreatureAttribute.WATER) this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, this.getSpeed()));
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractCloneEntity.class, true));
@@ -72,6 +74,7 @@ public abstract class AbstractBijuuEntity extends CreatureEntity implements IRan
 
             playercap.addBeNMPoints(20);
             playercap.setPlayerBijuu(this.getType().getRegistryName().toString());
+            playercap.setPlayerBijuuLevel(0);
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketBeNMPointsSync(playercap.returnBeNMPoints(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketBijuuSync(player.getEntityId(), this.getType().getRegistryName().toString()));
             player.sendMessage(new StringTextComponent("+20 BeNM Points! " + "Total: " + playercap.returnBeNMPoints()));
@@ -110,6 +113,11 @@ public abstract class AbstractBijuuEntity extends CreatureEntity implements IRan
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(50D);
+    }
+
+    @Override
+    public boolean canBeLeashedTo(PlayerEntity player) {
+        return false;
     }
 
     public static class BijuuColor {
