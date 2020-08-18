@@ -59,6 +59,13 @@ public class PlayerCapability implements IPlayerHandler {
     private boolean earthNature;
     private boolean waterNature;
     private boolean magnetNature;
+    private boolean woodNature;
+    private boolean iceNature;
+    private boolean lavaNature;
+    private boolean boilNature;
+    private boolean explosionNature;
+    private boolean stormNature;
+    private boolean scorchNature;
 	private boolean cloneJutsu;
 	private boolean replacementJutsu;
 	private boolean summoningJutsu;
@@ -573,12 +580,82 @@ public class PlayerCapability implements IPlayerHandler {
     @Override
     public void setMagnetNature(boolean has)
     {
-        this.windNature = has;
+        this.magnetNature = has;
     }
     @Override
     public boolean hasMagnetNature()
     {
-        return this.windNature;
+        return this.magnetNature;
+    }
+    @Override
+    public void setWoodNature(boolean has)
+    {
+        this.woodNature = has;
+    }
+    @Override
+    public boolean hasWoodNature()
+    {
+        return this.woodNature;
+    }
+    @Override
+    public void setIceNature(boolean has)
+    {
+        this.iceNature = has;
+    }
+    @Override
+    public boolean hasIceNature()
+    {
+        return this.iceNature;
+    }
+    @Override
+    public void setStormNature(boolean has)
+    {
+        this.stormNature = has;
+    }
+    @Override
+    public boolean hasStormNature()
+    {
+        return this.stormNature;
+    }
+    @Override
+    public void setScorchNature(boolean has)
+    {
+        this.scorchNature = has;
+    }
+    @Override
+    public boolean hasScorchNature()
+    {
+        return this.scorchNature;
+    }
+    @Override
+    public void setExplosionNature(boolean has)
+    {
+        this.explosionNature = has;
+    }
+    @Override
+    public boolean hasExplosionNature()
+    {
+        return this.explosionNature;
+    }
+    @Override
+    public void setBoilNature(boolean has)
+    {
+        this.boilNature = has;
+    }
+    @Override
+    public boolean hasBoilNature()
+    {
+        return this.boilNature;
+    }
+    @Override
+    public void setLavaNature(boolean has)
+    {
+        this.lavaNature = has;
+    }
+    @Override
+    public boolean hasLavaNature()
+    {
+        return this.lavaNature;
     }
 
 
@@ -922,6 +999,13 @@ public class PlayerCapability implements IPlayerHandler {
             tag.putBoolean("earthnature", instance.hasEarthNature());
             tag.putBoolean("lightningnature", instance.hasLightningNature());
             tag.putBoolean("magnetnature", instance.hasMagnetNature());
+            tag.putBoolean("woodnature", instance.hasWoodNature());
+            tag.putBoolean("lavanature", instance.hasLavaNature());
+            tag.putBoolean("icenature", instance.hasIceNature());
+            tag.putBoolean("explosionnature", instance.hasExplosionNature());
+            tag.putBoolean("scorchnature", instance.hasScorchNature());
+            tag.putBoolean("stormnature", instance.hasStormNature());
+            tag.putBoolean("boilnature", instance.hasBoilNature());
 
             tag.putBoolean("haschakra", instance.hasChakraBoolean());
             //Jutsu
@@ -1010,6 +1094,13 @@ public class PlayerCapability implements IPlayerHandler {
             instance.setWindNature(((CompoundNBT) tag).getBoolean("windnature"));
             instance.setLightningNature(((CompoundNBT) tag).getBoolean("lightningnature"));
             instance.setMagnetNature(((CompoundNBT) tag).getBoolean("magnetnature"));
+            instance.setWoodNature(((CompoundNBT) tag).getBoolean("woodnature"));
+            instance.setLavaNature(((CompoundNBT) tag).getBoolean("lavanature"));
+            instance.setIceNature(((CompoundNBT) tag).getBoolean("icenature"));
+            instance.setScorchNature(((CompoundNBT) tag).getBoolean("scorchnature"));
+            instance.setStormNature(((CompoundNBT) tag).getBoolean("stormnature"));
+            instance.setBoilNature(((CompoundNBT) tag).getBoolean("boilnature"));
+            instance.setExplosionNature(((CompoundNBT) tag).getBoolean("explosionnature"));
 
             instance.setChakraBoolean(((CompoundNBT) tag).getBoolean("haschakra"));
             //Jutsu
@@ -1046,7 +1137,7 @@ public class PlayerCapability implements IPlayerHandler {
             instance.setTsukuyomiJutsuBoolean(((CompoundNBT) tag).getBoolean("tsukuyomi"));
             //Bijuu
             instance.setTailedBeastBombBoolean(((CompoundNBT) tag).getBoolean("tailedbeastbomb"));
-            instance.setTailedBeastTransformationBoolean(((CompoundNBT) tag).getBoolean("tailedbeasttransfromation"));
+            instance.setTailedBeastTransformationBoolean(((CompoundNBT) tag).getBoolean("tailedbeasttransformation"));
         }
     }
 }

@@ -31,9 +31,12 @@ import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.command.impl.GiveCommand;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.BannerItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -46,6 +49,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiContainerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -61,6 +65,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.awt.*;
 import java.lang.reflect.Field;
@@ -118,18 +123,16 @@ public class ForgeEventSubscriber {
         PlayerEvents.checkPlayerDojutsuTick(event);
         if (player.getPersistentData().getBoolean(Main.MODID + "_tailed_beast_transformation")) {
 
-            if (event.player.world.isRemote) {
-
+            if (player.world.isRemote) {
+                //Minecraft.getInstance().renderViewEntity = bijuu;
             }
         }
 
-        if (!event.player.world.isRemote) {
-            if (player != null) {
-                GlobalEvents.playerRaid(event);
-                PlayerEvents.regenerateChakra(event);
-                PlayerEvents.checkNatures(event);
-                PlayerEvents.checkInfusion(event);
-            }
+        if (!player.world.isRemote) {
+            GlobalEvents.playerRaid(event);
+            PlayerEvents.regenerateChakra(event);
+            PlayerEvents.checkNatures(event);
+            PlayerEvents.checkInfusion(event);
             IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
             if (playercap.returnBodyInfusionToggled() && playercap.hasMagnetNature()) {
                 List<ItemEntity> itemEntities = player.world.getEntitiesWithinAABB(ItemEntity.class, player.getBoundingBox().grow(5));

@@ -28,7 +28,7 @@ public class PlayerDojutsu extends AbstractTabedBackground {
             openedTab = 0;
         }));
         addButton(guiButtonSharingan = new GuiButtonDojutsu(this.guiLeft - 90, this.guiTop - 50, DojutsuInit.MANGEKYOU_SHARINGAN, $ -> {
-            if ((playerCapability.returnPlayerLeftDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN && playerCapability.returnPlayerLeftDojutsu() != DojutsuInit.SHARINGAN) || (playerCapability.returnPlayerLeftDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN && playerCapability.returnPlayerRightDojutsu() != DojutsuInit.SHARINGAN)) {
+            if ((playerCapability.returnPlayerLeftDojutsu().getType() != BeNMDojutsu.Type.SHARINGAN && playerCapability.returnPlayerLeftDojutsu() != DojutsuInit.SHARINGAN) && (playerCapability.returnPlayerLeftDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN || playerCapability.returnPlayerRightDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN)) {
                 Minecraft.getInstance().displayGuiScreen(new SharinganJutsuScreen());
             }
             else {

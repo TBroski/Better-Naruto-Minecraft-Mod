@@ -97,9 +97,9 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
 
         //Page 2
         addButton(magnetSymbol = new GuiButtonSymbol(this.guiLeft - 5, this.guiTop - 5, 0, 50, $ -> {
-            Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
             if (playerCapability.hasMagnetNature()) {
-                //Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
+                Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
+                System.out.println("OPENed");
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Magnet Nature."));

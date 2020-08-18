@@ -131,6 +131,10 @@
   "commands.benarutomod.benmpoints.set": "Set %s's BeNM Points to %s.",
   "commands.benarutomod.dojutsu.set": "Set %s's %s dojutsu to %s.",
   "commands.benarutomod.bodymode.set": "Set %s's body mode to %s.",
+  "commands.benarutomod.jutsu.set": "Set %s's %s to %b.",
+  "commands.benarutomod.jutsu.all": "Unlocked all jutsu for %s.",
+  "commands.benarutomod.nature.all": "Unlocked all natures for %s.",
+  "commands.benarutomod.nature.set": "Set nature %s of %s to %b.",
 
   "advancements.benarutomod.shinobi.title": "Beginnings to a Shinobi",
   "advancements.benarutomod.shinobi.text": "A beginning to a Shinobi",

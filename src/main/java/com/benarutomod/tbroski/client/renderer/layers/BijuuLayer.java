@@ -6,17 +6,24 @@ import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Quaternion;
-import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -40,17 +47,16 @@ public class BijuuLayer<T extends LivingEntity, M extends EntityModel<T>> extend
                     break;
                 }
             }
+            EntityRenderer r = Minecraft.getInstance().getRenderManager().getRenderer(bijuu);
+            if (r instanceof LivingRenderer) {
+                LivingRenderer l = (LivingRenderer) r;
+                EntityModel model = l.getEntityModel();
+                ResourceLocation texture = l.getEntityTexture(bijuu);
 
-            if (bijuu != null) {
-                bijuu.rotationYawHead = netHeadYaw;
-                bijuu.rotationPitch = headPitch;
-                matrixStackIn.push();
-                matrixStackIn.translate(0, 0.1, 0);
-                Quaternion quaternion = new Quaternion(0, 180, 180, true); //Vector3f.ZP.rotationDegrees(180.0F)
-                matrixStackIn.rotate(quaternion);
-                EntityRendererManager rendererManager = Minecraft.getInstance().getRenderManager();
-                rendererManager.renderEntityStatic(bijuu, 0,0,0, entitylivingbaseIn.rotationYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-                matrixStackIn.pop();
+                this.getEntityModel().copyModelAttributesTo(model);
+                model.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+                IVertexBuilder iVertexBuilder = ItemRenderer.getBuffer(bufferIn, model.getRenderType(texture), false, false);
+                model.render(matrixStackIn, iVertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             }
         }
     }

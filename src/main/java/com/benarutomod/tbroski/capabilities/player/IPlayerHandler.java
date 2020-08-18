@@ -133,6 +133,27 @@ public interface IPlayerHandler {
 	void setMagnetNature(boolean has);
 	boolean hasMagnetNature();
 
+	void setWoodNature(boolean has);
+	boolean hasWoodNature();
+
+	void setIceNature(boolean has);
+	boolean hasIceNature();
+
+	void setLavaNature(boolean has);
+	boolean hasLavaNature();
+
+	void setStormNature(boolean has);
+	boolean hasStormNature();
+
+	void setBoilNature(boolean has);
+	boolean hasBoilNature();
+
+	void setExplosionNature(boolean has);
+	boolean hasExplosionNature();
+
+	void setScorchNature(boolean has);
+	boolean hasScorchNature();
+
 
 	void setCloneJutsuBoolean(boolean has);
 	void setBodyReplacementBoolean(boolean has);

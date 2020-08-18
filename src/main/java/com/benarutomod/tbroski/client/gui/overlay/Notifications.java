@@ -47,7 +47,7 @@ public class Notifications {
                 mc.ingameGUI.blit(5,20,0,16,16,16);
             }
             this.setJutsuNotifications(player);
-            int i = 27;
+            int i = 30;
             for (BeNMJutsu toggledJutsu : this.toggledJutsu) {
                 mc.textureManager.bindTexture(toggledJutsu.getResourceLocationForGUI());
                 mc.ingameGUI.blit(5, i, toggledJutsu.getU(), toggledJutsu.getV(), 16, 16);

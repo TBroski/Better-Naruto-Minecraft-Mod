@@ -8,6 +8,7 @@ import com.benarutomod.tbroski.entity.projectile.jutsu.TailedBeastBombEntity;
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 
 public class BijuuJutsuInit {
 

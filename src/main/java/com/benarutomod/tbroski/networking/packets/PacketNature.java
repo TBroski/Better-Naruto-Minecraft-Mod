@@ -21,6 +21,13 @@ public class PacketNature {
     //5 = Lightning
     //6 = *CHAKRA*
     //7 = Magnet
+    //8 = Wood
+    //9 = Lava
+    //10 = Ice
+    //11 = Boil
+    //12 = Scorch
+    //13 = Storm
+    //14 = Explosion
 
     private int nature;
     private boolean has;
@@ -156,6 +163,66 @@ public class PacketNature {
                         LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
                         IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
                         playercap.setMagnetNature(msg.has);
+                    }
+                    break;
+                case 8:
+                    if (msg.toClient)
+                    {
+                        ClientPlayerEntity player = Minecraft.getInstance().player;
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setWoodNature(msg.has);
+                    }
+                    else {
+                        ServerPlayerEntity player = ctx.get().getSender();
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setWoodNature(msg.has);
+                    }
+                    break;
+                case 9:
+                    if (msg.toClient)
+                    {
+                        ClientPlayerEntity player = Minecraft.getInstance().player;
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setLavaNature(msg.has);
+                    }
+                    else {
+                        ServerPlayerEntity player = ctx.get().getSender();
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setLavaNature(msg.has);
+                    }
+                    break;
+                case 10:
+                    if (msg.toClient)
+                    {
+                        ClientPlayerEntity player = Minecraft.getInstance().player;
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setIceNature(msg.has);
+                    }
+                    else {
+                        ServerPlayerEntity player = ctx.get().getSender();
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setIceNature(msg.has);
+                    }
+                    break;
+                case 11:
+                    if (msg.toClient)
+                    {
+                        ClientPlayerEntity player = Minecraft.getInstance().player;
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setBoilNature(msg.has);
+                    }
+                    else {
+                        ServerPlayerEntity player = ctx.get().getSender();
+                        LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+                        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+                        playercap.setBoilNature(msg.has);
                     }
                     break;
             }

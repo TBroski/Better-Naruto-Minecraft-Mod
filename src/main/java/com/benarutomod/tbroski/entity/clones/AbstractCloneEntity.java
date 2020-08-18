@@ -19,6 +19,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Map;
 
@@ -68,6 +70,7 @@ public abstract class AbstractCloneEntity extends CreatureEntity {
     }
 
 
+    @OnlyIn(Dist.CLIENT)
     public ResourceLocation getLocationSkin(){
         LivingEntity owner = (LivingEntity) this.world.getEntityByID(this.getOwnerID());
         if (owner instanceof PlayerEntity) {

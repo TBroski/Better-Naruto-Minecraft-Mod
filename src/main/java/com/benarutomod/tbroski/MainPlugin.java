@@ -11,6 +11,7 @@ import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.init.EffectInit;
 import com.benarutomod.tbroski.init.jutsu.BijuuJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.ERankJutsuInit;
+import com.benarutomod.tbroski.init.jutsu.SharinganJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.SixPathJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.nature.*;
 import net.minecraft.potion.Effects;
@@ -63,6 +64,7 @@ public class MainPlugin implements IBeNMPlugin {
         LightningNatureJutsuInit.registerLightningJutsu(jutsuRegistry, this);
         MagnetNatureJutsuInit.registerMagnetJutsu(jutsuRegistry, this);
         ERankJutsuInit.registerERankJutsu(jutsuRegistry, this);
+        SharinganJutsuInit.registerSharinganJutsu(jutsuRegistry, this);
         SixPathJutsuInit.registerSixPathJutsu(jutsuRegistry, this);
         BijuuJutsuInit.registerBijuuJutsu(jutsuRegistry, this);
     }

@@ -2,9 +2,7 @@ package com.benarutomod.tbroski.event;
 
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.blocks.ModdedSaplingBlock;
-import com.benarutomod.tbroski.command.impl.BeNMPointsCommand;
-import com.benarutomod.tbroski.command.impl.BodyModeCommand;
-import com.benarutomod.tbroski.command.impl.DojutsuCommand;
+import com.benarutomod.tbroski.command.impl.*;
 import com.benarutomod.tbroski.init.BiomeInit;
 import com.benarutomod.tbroski.init.BlockInit;
 import com.benarutomod.tbroski.items.materials.ModdedSpawnEggItem;
@@ -13,6 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -44,6 +43,8 @@ public class ModEventSubscriber {
             BeNMPointsCommand.register(event.getCommandDispatcher());
             DojutsuCommand.register(event.getCommandDispatcher());
             BodyModeCommand.register(event.getCommandDispatcher());
+            JutsuCommand.register(event.getCommandDispatcher());
+            NatureCommand.register(event.getCommandDispatcher());
         }
     }
 }

@@ -59,7 +59,6 @@ public class ExplosiveKunaiEntity extends ProjectileItemEntity {
                 else {
                     entity.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 0.7F, 0.4F);
                     entity.addVelocity(entity.getMotion().getX() * 1.4F, entity.getMotion().getY() + 0.3D, entity.getMotion().getZ() * 1.4F);
-                    Particles.addParticles(Minecraft.getInstance().player, ParticleTypes.EXPLOSION, 10);
                 }
                 entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)5);
             }
