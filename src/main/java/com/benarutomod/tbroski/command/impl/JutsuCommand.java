@@ -59,7 +59,7 @@ public class JutsuCommand {
     private static int allJutsu(CommandSource source, PlayerEntity player) {
         IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
         for (BeNMJutsu j : BeNMRegistry.JUTSUS.getValues()) {
-            j.sync(playercap, true);
+            j.sync(playercap, j,true);
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketSetJutsuBoolean(j.getName(), true, true));
         }
         source.sendFeedback(new TranslationTextComponent("commands." + Main.MODID + ".jutsu.all", player.getDisplayName()), true);
@@ -76,7 +76,7 @@ public class JutsuCommand {
             }
         }
         if (jutsu == null) return 0;
-        jutsu.sync(playercap, has);
+        jutsu.sync(playercap, jutsu, has);
         NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketSetJutsuBoolean(jutsuName, has, true));
         source.sendFeedback(new TranslationTextComponent("commands." + Main.MODID + ".jutsu.set", player.getDisplayName(), jutsuName, has), true);
         return 1;

@@ -38,9 +38,12 @@ public class IsobuEntity extends AbstractBijuuEntity {
 
     @Override
     public Nature[] getBijuuNatures() {
-        Nature[] natures = new Nature[1];
-        natures[0] = Nature.WATER;
-        return natures;
+        return new Nature[] {Nature.WATER};
+    }
+
+    @Override
+    public BijuuAttributes[] getBijuuAttributes() {
+        return new BijuuAttributes[] {BijuuAttributes.WATER_BREATHING};
     }
 
     @Override

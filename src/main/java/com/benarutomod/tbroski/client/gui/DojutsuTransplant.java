@@ -1,12 +1,15 @@
 package com.benarutomod.tbroski.client.gui;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.api.entity.AbstractShinobiEntity;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMSharingan;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonDojutsu;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.api.interfaces.IDojutsuEntity;
+import com.benarutomod.tbroski.entity.shinobi.shinobi.BrotherSharinganEntity;
 import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerDojutsuSync;
@@ -21,14 +24,14 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 
 
-public class DojutsuTransplant<T extends LivingEntity & IDojutsuEntity> extends Screen {
+public class DojutsuTransplant<T extends AbstractShinobiEntity & IDojutsuEntity> extends Screen {
 
     GuiButtonDojutsu guiButtonDojutsu1;
     GuiButtonDojutsu guiButtonDojutsu2;
     GuiButtonDojutsu guiButtonDojutsu3;
     GuiButtonDojutsu guiButtonDojutsu4;
     private T transplantingEntity;
-    private BeNMDojutsu dojutsuToggle = DojutsuInit.EMPTY;
+    private BeNMDojutsu dojutsuToggle = DojutsuInit.NULL;
     private boolean leftDojutsuToggled;
     private int guiLeft;
     private int guiTop;
@@ -61,9 +64,14 @@ public class DojutsuTransplant<T extends LivingEntity & IDojutsuEntity> extends 
             else {
                 this.transplantingEntity.setRightDojustsu(playerc.returnPlayerLeftDojutsu());
             }
-            playerc.setPlayerLeftDojutsu(this.dojutsuToggle);
+            if (this.transplantingEntity instanceof BrotherSharinganEntity && ((BrotherSharinganEntity) this.transplantingEntity).getOwnerID() == player.getEntityId() && this.dojutsuToggle instanceof BeNMSharingan && playerc.returnPlayerLeftDojutsu() == DojutsuInit.MANGEKYOU_SHARINGAN) {
+                playerc.setPlayerLeftDojutsu(DojutsuInit.ETERNAL_MANGEKYOU_SHARINGAN);
+            }
+            else {
+                playerc.setPlayerLeftDojutsu(this.dojutsuToggle);
+            }
             NetworkLoader.INSTANCE.sendToServer(new PacketPlayerDojutsuSync(playerc.returnPlayerLeftDojutsu().getString(), true, false));
-            this.dojutsuToggle = DojutsuInit.EMPTY;
+            this.dojutsuToggle = DojutsuInit.NULL;
             this.toggledDojutsu = 0;
         }));
 
@@ -74,19 +82,24 @@ public class DojutsuTransplant<T extends LivingEntity & IDojutsuEntity> extends 
             else {
                 this.transplantingEntity.setRightDojustsu(playerc.returnPlayerRightDojutsu());
             }
-            playerc.setPlayerRightDojutsu(this.dojutsuToggle);
+            if (this.transplantingEntity instanceof BrotherSharinganEntity && ((BrotherSharinganEntity) this.transplantingEntity).getOwnerID() == player.getEntityId() && this.dojutsuToggle instanceof BeNMSharingan && playerc.returnPlayerRightDojutsu() == DojutsuInit.MANGEKYOU_SHARINGAN) {
+                playerc.setPlayerRightDojutsu(DojutsuInit.ETERNAL_MANGEKYOU_SHARINGAN);
+            }
+            else {
+                playerc.setPlayerRightDojutsu(this.dojutsuToggle);
+            }
             NetworkLoader.INSTANCE.sendToServer(new PacketPlayerDojutsuSync(playerc.returnPlayerRightDojutsu().getString(), false, false));
-            this.dojutsuToggle = DojutsuInit.EMPTY;
+            this.dojutsuToggle = DojutsuInit.NULL;
             this.toggledDojutsu = 0;
         }));
 
-        addButton(guiButtonDojutsu3 = new GuiButtonDojutsu(this.guiLeft + 96, this.guiTop + ((this.transplantingEntity.eyeSlot() * 16) - 64), this.transplantingEntity.leftDojustsu(), $ -> {
-            this.dojutsuToggle = this.transplantingEntity.leftDojustsu();
+        addButton(guiButtonDojutsu3 = new GuiButtonDojutsu(this.guiLeft + 96, this.guiTop + ((this.transplantingEntity.eyeSlot() * 16) - 64), this.transplantingEntity.getLeftDojustsu(), $ -> {
+            this.dojutsuToggle = this.transplantingEntity.getLeftDojustsu();
             this.toggledDojutsu = 3;
             this.leftDojutsuToggled = true;
         }));
-        addButton(guiButtonDojutsu4 = new GuiButtonDojutsu(this.guiLeft + 144, this.guiTop + ((this.transplantingEntity.eyeSlot() * 16) - 64), this.transplantingEntity.rightDojustsu(), $ -> {
-            this.dojutsuToggle = this.transplantingEntity.rightDojustsu();
+        addButton(guiButtonDojutsu4 = new GuiButtonDojutsu(this.guiLeft + 144, this.guiTop + ((this.transplantingEntity.eyeSlot() * 16) - 64), this.transplantingEntity.getRightDojustsu(), $ -> {
+            this.dojutsuToggle = this.transplantingEntity.getRightDojustsu();
             this.toggledDojutsu = 4;
             this.leftDojutsuToggled = false;
         }));
@@ -97,8 +110,10 @@ public class DojutsuTransplant<T extends LivingEntity & IDojutsuEntity> extends 
         super.render(p_render_1_, p_render_2_, p_render_3_);
         Minecraft mc = Minecraft.getInstance();
         AbstractClientPlayerEntity player = mc.player;
+        LazyOptional<IPlayerHandler> player_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
 
-        mc.textureManager.bindTexture(new ResourceLocation(Main.MODID + ":textures/gui/transplant.png"));
+        mc.textureManager.bindTexture(new ResourceLocation(Main.MODID, "textures/gui/transplant.png"));
         mc.ingameGUI.blit(this.guiLeft - 61, this.guiTop - 21, 0, 0, 122, 42);
         mc.textureManager.bindTexture(player.getLocationSkin());
         mc.ingameGUI.blit(this.guiLeft - 192, this.guiTop - 64, (8 * 16), (8 * 16), (8 * 16), (8 * 16), 1024, 1024);
@@ -108,7 +123,10 @@ public class DojutsuTransplant<T extends LivingEntity & IDojutsuEntity> extends 
         guiButtonDojutsu2.renderButton(p_render_1_, p_render_2_, p_render_3_);
         guiButtonDojutsu3.renderButton(p_render_1_, p_render_2_, p_render_3_);
         guiButtonDojutsu4.renderButton(p_render_1_, p_render_2_, p_render_3_);
-        this.init();
+        guiButtonDojutsu1.setDojutsu(playerc.returnPlayerLeftDojutsu());
+        guiButtonDojutsu2.setDojutsu(playerc.returnPlayerRightDojutsu());
+        guiButtonDojutsu3.setDojutsu(this.transplantingEntity.getLeftDojustsu());
+        guiButtonDojutsu4.setDojutsu(this.transplantingEntity.getRightDojustsu());
     }
 
     @Override

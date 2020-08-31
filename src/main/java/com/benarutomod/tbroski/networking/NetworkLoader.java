@@ -53,5 +53,8 @@ public class NetworkLoader {
         INSTANCE.registerMessage(nextID(), PacketJutsuCaller.class, PacketJutsuCaller::encode, PacketJutsuCaller::decode, PacketJutsuCaller::handle);
         INSTANCE.registerMessage(nextID(), PacketBijuuSync.class, PacketBijuuSync::encode, PacketBijuuSync::decode, PacketBijuuSync::handle);
         INSTANCE.registerMessage(nextID(), PacketClanSync.class, PacketClanSync::encode, PacketClanSync::decode, PacketClanSync::handle);
+        INSTANCE.registerMessage(nextID(), PacketSpawnEntity.class, PacketSpawnEntity::encode, PacketSpawnEntity::decode, PacketSpawnEntity::handle);
+        INSTANCE.registerMessage(nextID(), PacketSusanooItemsSync.class, PacketSusanooItemsSync::encode, PacketSusanooItemsSync::decode, PacketSusanooItemsSync::handle);
+        INSTANCE.registerMessage(nextID(), PacketBlueFireSync.class, PacketBlueFireSync::encode, PacketBlueFireSync::decode, PacketBlueFireSync::handle);
     }
 }

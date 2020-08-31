@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu.earth;
 
+import com.benarutomod.tbroski.api.entity.jutsu.nature.AbstractEarthJutsuEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.entity.Entity;

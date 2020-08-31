@@ -1,13 +1,14 @@
 package com.benarutomod.tbroski.client.gui.player;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMSharingan;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 //import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsuScreen;
 import com.benarutomod.tbroski.client.gui.player.jutsu.SixPathJutsuScreen;
 import com.benarutomod.tbroski.client.gui.player.jutsu.SharinganJutsuScreen;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonDojutsu;
 import com.benarutomod.tbroski.client.gui.widgets.GuiButtonTab;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.init.DojutsuInit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.StringTextComponent;
@@ -28,7 +29,7 @@ public class PlayerDojutsu extends AbstractTabedBackground {
             openedTab = 0;
         }));
         addButton(guiButtonSharingan = new GuiButtonDojutsu(this.guiLeft - 90, this.guiTop - 50, DojutsuInit.MANGEKYOU_SHARINGAN, $ -> {
-            if ((playerCapability.returnPlayerLeftDojutsu().getType() != BeNMDojutsu.Type.SHARINGAN && playerCapability.returnPlayerLeftDojutsu() != DojutsuInit.SHARINGAN) && (playerCapability.returnPlayerLeftDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN || playerCapability.returnPlayerRightDojutsu().getType() == BeNMDojutsu.Type.SHARINGAN)) {
+            if ((playerCapability.returnPlayerLeftDojutsu() instanceof BeNMSharingan && playerCapability.returnPlayerLeftDojutsu() != DojutsuInit.SHARINGAN) || (playerCapability.returnPlayerLeftDojutsu() instanceof BeNMSharingan || playerCapability.returnPlayerRightDojutsu() != DojutsuInit.SHARINGAN)) {
                 Minecraft.getInstance().displayGuiScreen(new SharinganJutsuScreen());
             }
             else {

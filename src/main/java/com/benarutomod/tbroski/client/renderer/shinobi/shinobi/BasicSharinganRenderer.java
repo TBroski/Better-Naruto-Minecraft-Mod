@@ -18,7 +18,6 @@ public class BasicSharinganRenderer extends MobRenderer<BasicSharinganEntity, Pl
 
     public static final ResourceLocation TEXTURE = new ResourceLocation(Main.MODID, "textures/entity/sharingan/king.png");
 
-
     public BasicSharinganRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new PlayerModel<>(0.0f, false), 0.1F);
         this.addLayer(new HeldItemLayer<>(this));

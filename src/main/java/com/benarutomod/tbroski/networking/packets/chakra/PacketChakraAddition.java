@@ -3,6 +3,7 @@ package com.benarutomod.tbroski.networking.packets.chakra;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.networking.NetworkLoader;
+import com.benarutomod.tbroski.util.helpers.ClanHelper;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -42,6 +43,8 @@ public class PacketChakraAddition {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> ctx.get().getSender()), new PacketChakraSync(player_cap.returnChakra()));
             player_cap.addregenChakra(7.5F);
             player_cap.setChakraBoolean(true);
+
+            ClanHelper.addNatureFromClan(ctx.get().getSender());
         });
         ctx.get().setPacketHandled(true);
     }

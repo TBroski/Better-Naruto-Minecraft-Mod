@@ -1,20 +1,26 @@
 package com.benarutomod.tbroski.capabilities.player;
 
+import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.internal.BeNMBody;
 import com.benarutomod.tbroski.api.internal.BeNMClan;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.init.BodyInit;
 import com.benarutomod.tbroski.init.ClanInit;
 import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.util.helpers.BodyHelper;
 import com.benarutomod.tbroski.util.helpers.ClanHelper;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerCapability implements IPlayerHandler {
 
@@ -48,6 +54,8 @@ public class PlayerCapability implements IPlayerHandler {
 	private BeNMDojutsu playerRightDojutsu = DojutsuInit.NULL;
 	private BeNMBody playerBody = BodyInit.NULL;
 	private BeNMClan clan = ClanInit.NULL;
+	private ItemStack susanooMainHand = ItemStack.EMPTY;
+	private ItemStack susanooOffHand = ItemStack.EMPTY;
 	private int curseMark;
 	private int toadSage;
 	private boolean toggleMessageJutsu;
@@ -66,7 +74,7 @@ public class PlayerCapability implements IPlayerHandler {
     private boolean explosionNature;
     private boolean stormNature;
     private boolean scorchNature;
-	private boolean cloneJutsu;
+/*	private boolean cloneJutsu;
 	private boolean replacementJutsu;
 	private boolean summoningJutsu;
 	private boolean transformationJutsu;
@@ -88,11 +96,16 @@ public class PlayerCapability implements IPlayerHandler {
 	private boolean lightningArrowJutsu;
 	private boolean matterRepulsionJutsu;
 	private boolean selfLevitationJutsu;
+	private boolean woodCloneJutsu;
+	private boolean treeSummoning;
 	private boolean amaterasuJutsu;
 	private boolean tsukuyomiJutsu;
+	private boolean susanooJutsu;
 	private boolean tailedBeastBomb;
-	private boolean tailedBeastTransformation;
+	private boolean tailedBeastTransformation;*/
 	private boolean joined;
+
+	private Map<BeNMJutsu, Boolean> jutsuBooleans = new HashMap<>();
 	
 	@Override
     public float returnChakra() {
@@ -352,6 +365,23 @@ public class PlayerCapability implements IPlayerHandler {
             this.playerBody = BodyInit.NULL;
         }
         return this.playerBody;
+    }
+
+    @Override
+    public void setSusanooMainHand(ItemStack mainHand) {
+        this.susanooMainHand = mainHand;
+    }
+    @Override
+    public void setSusanooOffHand(ItemStack offHand) {
+        this.susanooOffHand = offHand;
+    }
+    @Override
+    public ItemStack getSusanooMainHand() {
+        return this.susanooMainHand;
+    }
+    @Override
+    public ItemStack getSusanooOffHand() {
+        return this.susanooOffHand;
     }
 
     @Override
@@ -627,6 +657,21 @@ public class PlayerCapability implements IPlayerHandler {
     {
         return this.scorchNature;
     }
+
+    @Override
+    public void setJutsuBoolean(BeNMJutsu jutsu, boolean has) {
+	    if (this.jutsuBooleans.containsKey(jutsu)) {
+            this.jutsuBooleans.replace(jutsu, has);
+            return;
+        }
+	    this.jutsuBooleans.put(jutsu, has);
+    }
+
+    @Override
+    public boolean hasJutsuBoolean(BeNMJutsu jutsu) {
+        return this.jutsuBooleans.getOrDefault(jutsu, false);
+    }
+
     @Override
     public void setExplosionNature(boolean has)
     {
@@ -657,294 +702,6 @@ public class PlayerCapability implements IPlayerHandler {
     {
         return this.lavaNature;
     }
-
-
-    @Override
-    public void setCloneJutsuBoolean(boolean has)
-    {
-        this.cloneJutsu = has;
-    }
-    @Override
-    public boolean hasCloneJutsuBoolean()
-    {
-        return this.cloneJutsu;
-    }
-    @Override
-    public void setBodyReplacementBoolean(boolean has)
-    {
-        this.replacementJutsu = has;
-    }
-    @Override
-    public boolean hasBodyReplacementBoolean()
-    {
-        return this.replacementJutsu;
-    }
-    @Override
-    public void setInvisibilityBoolean(boolean has)
-    {
-        this.invisibilityJutsu = has;
-    }
-    @Override
-    public boolean hasInvisibilityBoolean()
-    {
-        return this.invisibilityJutsu;
-    }
-    @Override
-    public void setSummoningBoolean(boolean has)
-    {
-        this.summoningJutsu = has;
-    }
-    @Override
-    public boolean hasSummoningBoolean()
-    {
-        return this.summoningJutsu;
-    }
-    @Override
-    public void setTransformationBoolean(boolean has)
-    {
-        this.transformationJutsu = has;
-    }
-    @Override
-    public boolean hasTransformationBoolean()
-    {
-        return this.transformationJutsu;
-    }
-
-    @Override
-    public void setFireballJutsuBoolean(boolean has)
-    {
-        this.fireballJutsu = has;
-    }
-    @Override
-    public boolean hasFireballJutsuBoolean()
-    {
-        return this.fireballJutsu;
-    }
-
-    @Override
-    public void setPhoenixFlowerJutsuBoolean(boolean has)
-    {
-        this.phoenixFlowerJutsu = has;
-    }
-    @Override
-    public boolean hasPhoenixFlowerJutsuBoolean()
-    {
-        return this.phoenixFlowerJutsu;
-    }
-
-    @Override
-    public void setMoltenFistJutsuBoolean(boolean has)
-    {
-        this.moltenFistJutsu = has;
-    }
-    @Override
-    public boolean hasMoltenFistJutsuBoolean()
-    {
-        return this.moltenFistJutsu;
-    }
-
-
-    @Override
-    public void setWaterShurikenJutsuBoolean(boolean has)
-    {
-        this.waterShurikenJutsu = has;
-    }
-    @Override
-    public boolean hasWaterShurikenJutsuBoolean()
-    {
-        return this.waterShurikenJutsu;
-    }
-
-    @Override
-    public void setRagingWavesJutsuBoolean(boolean has)
-    {
-        this.ragingWavesJutsu = has;
-    }
-    @Override
-    public boolean hasRagingWavesJutsuBoolean()
-    {
-        return this.ragingWavesJutsu;
-    }
-
-    @Override
-    public void setWaterSharkBulletJutsuBoolean(boolean has)
-    {
-        this.waterSharkBulletJutsu = has;
-    }
-    @Override
-    public boolean hasWaterSharkBulletJutsuBoolean()
-    {
-        return this.waterSharkBulletJutsu;
-    }
-
-
-    @Override
-    public void setFlyingStonesJutsuBoolean(boolean has)
-    {
-        this.flyingStonesJutsu = has;
-    }
-    @Override
-    public boolean hasFlyingStonesJutsuBoolean()
-    {
-        return this.flyingStonesJutsu;
-    }
-
-    @Override
-    public void setMudMoatJutsuBoolean(boolean has)
-    {
-        this.mudMoatJutsu = has;
-    }
-    @Override
-    public boolean hasMudMoatJutsuBoolean()
-    {
-        return this.mudMoatJutsu;
-    }
-
-    @Override
-    public void setFistRockJutsuBoolean(boolean has)
-    {
-        this.fistRockJutsu = has;
-    }
-    @Override
-    public boolean hasFistRockJutsuBoolean()
-    {
-        return this.fistRockJutsu;
-    }
-
-
-    @Override
-    public void setGalePalmJutsuBoolean(boolean has)
-    {
-        this.galePalmJutsu = has;
-    }
-    @Override
-    public boolean hasGalePalmJutsuBoolean()
-    {
-        return this.galePalmJutsu;
-    }
-
-    @Override
-    public void setWindExplosionJutsuBoolean(boolean has)
-    {
-        this.windExplosionJutsu = has;
-    }
-    @Override
-    public boolean hasWindExplosionJutsuBoolean()
-    {
-        return this.windExplosionJutsu;
-    }
-
-    @Override
-    public void setWindArrowJutsuBoolean(boolean has)
-    {
-        this.windArrowJutsu = has;
-    }
-    @Override
-    public boolean hasWindArrowJutsuBoolean()
-    {
-        return this.windArrowJutsu;
-    }
-
-
-    @Override
-    public void setLightningBallJutsuBoolean(boolean has)
-    {
-        this.lightningBallJutsu = has;
-    }
-    @Override
-    public boolean hasLightningBallJutsuBoolean()
-    {
-        return this.lightningBallJutsu;
-    }
-
-    @Override
-    public void setStunGunJutsuBoolean(boolean has)
-    {
-        this.stunGunJutsu = has;
-    }
-    @Override
-    public boolean hasStunGunJutsuBoolean()
-    {
-        return this.stunGunJutsu;
-    }
-
-    @Override
-    public void setLightningArrowJutsuBoolean(boolean has)
-    {
-        this.lightningArrowJutsu = has;
-    }
-    @Override
-    public boolean hasLightningArrowJutsuBoolean()
-    {
-        return this.lightningArrowJutsu;
-    }
-
-    @Override
-    public void setMatterRepulsionJutsuBoolean(boolean has)
-    {
-        this.matterRepulsionJutsu = has;
-    }
-    @Override
-    public boolean hasMatterRepulsionJutsuBoolean()
-    {
-        return this.matterRepulsionJutsu;
-    }
-
-    @Override
-    public void setSelfLevitationJutsuBoolean(boolean has)
-    {
-        this.selfLevitationJutsu = has;
-    }
-    @Override
-    public boolean hasSelfLevitationJutsuBoolean()
-    {
-        return this.selfLevitationJutsu;
-    }
-
-    @Override
-    public void setAmaterasuJutsuBoolean(boolean has)
-    {
-        this.amaterasuJutsu = has;
-    }
-    @Override
-    public boolean hasAmaterasuJutsuBoolean()
-    {
-        return this.amaterasuJutsu;
-    }
-
-    @Override
-    public void setTsukuyomiJutsuBoolean(boolean has)
-    {
-        this.tsukuyomiJutsu = has;
-    }
-    @Override
-    public boolean hasTsukuyomiJutsuBoolean()
-    {
-        return this.tsukuyomiJutsu;
-    }
-
-
-    @Override
-    public void setTailedBeastBombBoolean(boolean has)
-    {
-        this.tailedBeastBomb = has;
-    }
-    @Override
-    public boolean hasTailedBeastBombBoolean()
-    {
-        return this.tailedBeastBomb;
-    }
-    @Override
-    public void setTailedBeastTransformationBoolean(boolean has)
-    {
-        this.tailedBeastTransformation = has;
-    }
-    @Override
-    public boolean hasTailedBeastTransformationBoolean()
-    {
-        return this.tailedBeastTransformation;
-    }
-
 
     public static class Storage implements Capability.IStorage<IPlayerHandler>
     {
@@ -980,6 +737,12 @@ public class PlayerCapability implements IPlayerHandler {
             tag.putString("playerrightdojutsu", instance.returnPlayerRightDojutsu().getString());
             tag.putString("playerbody", instance.returnPlayerBodyMode().getName());
             tag.putString("playerclan", instance.returnPlayerClan().getString());
+            CompoundNBT susanooMHand = new CompoundNBT();
+            instance.getSusanooMainHand().write(susanooMHand);
+            tag.put("susanoomainhand", susanooMHand);
+            CompoundNBT susanooOHand = new CompoundNBT();
+            instance.getSusanooOffHand().write(susanooOHand);
+            tag.put("susanoooffhand", susanooOHand);
 
             //Keybinds for Jutsu
             tag.putString("key1", instance.returnKeybind1());
@@ -1009,7 +772,7 @@ public class PlayerCapability implements IPlayerHandler {
 
             tag.putBoolean("haschakra", instance.hasChakraBoolean());
             //Jutsu
-            tag.putBoolean("clone", instance.hasCloneJutsuBoolean());
+/*            tag.putBoolean("clone", instance.hasCloneJutsuBoolean());
             tag.putBoolean("invisibility", instance.hasInvisibilityBoolean());
             tag.putBoolean("summoning", instance.hasSummoningBoolean());
             tag.putBoolean("replacement", instance.hasBodyReplacementBoolean());
@@ -1037,12 +800,21 @@ public class PlayerCapability implements IPlayerHandler {
             //Magnet
             tag.putBoolean("matterrepulsion", instance.hasMatterRepulsionJutsuBoolean());
             tag.putBoolean("selflevitation", instance.hasSelfLevitationJutsuBoolean());
+            //Wood
+            tag.putBoolean("woodclone", instance.hasWoodCloneJutsuBoolean());
+            tag.putBoolean("treesummoning", instance.hasTreeSummoningJutsuBoolean());
             //Sharingan
             tag.putBoolean("amaterasu", instance.hasAmaterasuJutsuBoolean());
             tag.putBoolean("tsukuyomi", instance.hasTsukuyomiJutsuBoolean());
+            tag.putBoolean("susanoo", instance.hasSusanooJutsuBoolean());
             //Bijuu
             tag.putBoolean("tailedbeastbomb", instance.hasTailedBeastBombBoolean());
-            tag.putBoolean("tailedbeasttransformation", instance.hasTailedBeastTransformationBoolean());
+            tag.putBoolean("tailedbeasttransformation", instance.hasTailedBeastTransformationBoolean());*/
+
+            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                tag.putBoolean(jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName() + "_save", instance.hasJutsuBoolean(jutsu));
+            }
+
             return tag;
         }
 
@@ -1075,6 +847,8 @@ public class PlayerCapability implements IPlayerHandler {
             instance.setPlayerRightDojutsu(DojutsuHelper.getDojutsuFromString(((CompoundNBT) tag).getString("playerrightdojutsu")));
             instance.setPlayerBodyMode(BodyHelper.getBodyFromString(((CompoundNBT) tag).getString("playerbody")));
             instance.setPlayerClan(ClanHelper.getClanFromString(((CompoundNBT) tag).getString("playerclan")));
+            instance.setSusanooMainHand(ItemStack.read(((CompoundNBT) tag).getCompound("susanoomainhand")));
+            instance.setSusanooOffHand(ItemStack.read(((CompoundNBT) tag).getCompound("susanoooffhand")));
 
             //Keybinds for Jutsu
             instance.setKeybind1(((CompoundNBT) tag).getString("key1"));
@@ -1104,7 +878,7 @@ public class PlayerCapability implements IPlayerHandler {
 
             instance.setChakraBoolean(((CompoundNBT) tag).getBoolean("haschakra"));
             //Jutsu
-            instance.setCloneJutsuBoolean(((CompoundNBT) tag).getBoolean("clone"));
+/*            instance.setCloneJutsuBoolean(((CompoundNBT) tag).getBoolean("clone"));
             instance.setSummoningBoolean(((CompoundNBT) tag).getBoolean("summoning"));
             instance.setInvisibilityBoolean(((CompoundNBT) tag).getBoolean("invisibility"));
             instance.setBodyReplacementBoolean(((CompoundNBT) tag).getBoolean("replacement"));
@@ -1132,12 +906,20 @@ public class PlayerCapability implements IPlayerHandler {
             //Magnet
             instance.setMatterRepulsionJutsuBoolean(((CompoundNBT) tag).getBoolean("matterrepulsion"));
             instance.setSelfLevitationJutsuBoolean(((CompoundNBT) tag).getBoolean("selflevitation"));
+            //Wood
+            instance.setWoodCloneJutsuBoolean(((CompoundNBT) tag).getBoolean("woodclone"));
+            instance.setTreeSummoningJutsuBoolean(((CompoundNBT) tag).getBoolean("treesummoning"));
             //Shaingan
             instance.setAmaterasuJutsuBoolean(((CompoundNBT) tag).getBoolean("amaterasu"));
             instance.setTsukuyomiJutsuBoolean(((CompoundNBT) tag).getBoolean("tsukuyomi"));
+            instance.setSusanooJutsuBoolean(((CompoundNBT) tag).getBoolean("susanoo"));
             //Bijuu
             instance.setTailedBeastBombBoolean(((CompoundNBT) tag).getBoolean("tailedbeastbomb"));
-            instance.setTailedBeastTransformationBoolean(((CompoundNBT) tag).getBoolean("tailedbeasttransformation"));
+            instance.setTailedBeastTransformationBoolean(((CompoundNBT) tag).getBoolean("tailedbeasttransformation"));*/
+
+            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                instance.setJutsuBoolean(jutsu, ((CompoundNBT) tag).getBoolean(jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName() + "_save"));
+            }
         }
     }
 }

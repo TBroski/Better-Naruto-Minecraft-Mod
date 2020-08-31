@@ -16,7 +16,7 @@ public class MatatabiEntity extends AbstractBijuuEntity {
 
     @Override
     public double getSpeed() {
-        return 0.02;
+        return 0.20;
     }
 
     @Override
@@ -26,8 +26,11 @@ public class MatatabiEntity extends AbstractBijuuEntity {
 
     @Override
     public Nature[] getBijuuNatures() {
-        Nature[] natures = new Nature[1];
-        natures[0] = Nature.FIRE;
-        return natures;
+        return new Nature[] {Nature.FIRE};
+    }
+
+    @Override
+    public BijuuAttributes[] getBijuuAttributes() {
+        return new BijuuAttributes[] {BijuuAttributes.BLUE_FIRE};
     }
 }

@@ -151,14 +151,14 @@ public abstract class AbstractJutsuScreen extends Screen {
     public void checkCovered()
     {
         Minecraft mc = Minecraft.getInstance();
-        mc.textureManager.bindTexture(new ResourceLocation(Main.MODID + ":textures/gui/jutsu.png"));
+        mc.textureManager.bindTexture(new ResourceLocation(Main.MODID, "textures/gui/jutsu.png"));
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.002F);
         GL11.glPushMatrix();
         for (Widget button : this.buttons) {
             if (button instanceof GuiButtonJutsu) {
                 if (!((GuiButtonJutsu) button).hasJutsu()) {
-                    mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 240, 240, 16, 16);
+                    mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 496, 496, 16, 16, 512, 512);
                 }
             }
         }
@@ -168,13 +168,13 @@ public abstract class AbstractJutsuScreen extends Screen {
     public void checkToggled()
     {
         Minecraft mc = Minecraft.getInstance();
-        mc.textureManager.bindTexture(new ResourceLocation(Main.MODID + ":textures/gui/jutsu.png"));
+        mc.textureManager.bindTexture(new ResourceLocation(Main.MODID, "textures/gui/jutsu.png"));
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.002F);
         GL11.glPushMatrix();
         for (Widget button : this.buttons) {
             if (button instanceof GuiButtonJutsu && this.jutsuToggle.equalsIgnoreCase("jutsu." + ((GuiButtonJutsu) button).getTranslationName())) {
-                mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 240, 224, 16,16);
+                mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 496, 480, 16,16, 512, 512);
             }
         }
         GL11.glPopMatrix();

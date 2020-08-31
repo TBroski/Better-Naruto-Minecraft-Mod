@@ -47,7 +47,7 @@ public class EarthNatureJutsu extends AbstractJutsuScreen {
                 if (button instanceof GuiButtonJutsu) {
                     GuiButtonJutsu buttonJutsu = (GuiButtonJutsu) button;
                     if (buttonJutsu.getJutsuName().equalsIgnoreCase(jutsu.getName())) {
-                        jutsu.update(buttonJutsu, playerCapability);
+                        jutsu.update(buttonJutsu, jutsu, playerCapability);
                     }
                 }
             }

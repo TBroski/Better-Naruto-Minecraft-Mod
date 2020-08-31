@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
-public class ModelCurseMarkWings<T extends LivingEntity> extends AgeableModel<T> implements IFaceBodyMode{
+public class ModelCurseMarkWings<T extends LivingEntity> extends AgeableModel<T> implements IFaceBodyMode {
 
     private float swimAnimation;
 
@@ -399,7 +399,7 @@ public class ModelCurseMarkWings<T extends LivingEntity> extends AgeableModel<T>
     }
 
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         leftWing.render(matrixStack, buffer, packedLight, packedOverlay);
         rightWing.render(matrixStack, buffer, packedLight, packedOverlay);
         connection.render(matrixStack, buffer, packedLight, packedOverlay);

@@ -33,6 +33,7 @@ public abstract class AbstractBijuuEntity extends CreatureEntity implements IRan
     public abstract double getSpeed();
     public abstract BijuuColor getChakraColor();
     public abstract Nature[] getBijuuNatures();
+    public abstract BijuuAttributes[] getBijuuAttributes();
 
     protected AbstractBijuuEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -47,9 +48,11 @@ public abstract class AbstractBijuuEntity extends CreatureEntity implements IRan
     protected void registerGoals() {
         super.registerGoals();
 
-        this.goalSelector.addGoal(0, new SwimGoal(this));
+        if (this.getCreatureAttribute() != CreatureAttribute.WATER)
+            this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new RangedAttackGoal(this, this.getSpeed(), 50, 35F));
-        if (this.getCreatureAttribute() != CreatureAttribute.WATER) this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, this.getSpeed()));
+        if (this.getCreatureAttribute() != CreatureAttribute.WATER)
+            this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, this.getSpeed()));
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractCloneEntity.class, true));
@@ -133,5 +136,9 @@ public abstract class AbstractBijuuEntity extends CreatureEntity implements IRan
         public BossInfo.Color getBossColor() {
             return bossColor;
         }
+    }
+
+    public enum BijuuAttributes {
+        FLIGHT, WATER_BREATHING, BLUE_FIRE,
     }
 }

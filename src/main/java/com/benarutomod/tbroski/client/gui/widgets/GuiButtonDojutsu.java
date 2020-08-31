@@ -1,7 +1,8 @@
 package com.benarutomod.tbroski.client.gui.widgets;
 
 import com.benarutomod.tbroski.Main;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
+import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;
@@ -13,7 +14,7 @@ public class GuiButtonDojutsu extends Button {
     protected final Button.IPressable onPress;
     int u = 16;
     int v = 16;
-    BeNMDojutsu dojutsu;
+    private BeNMDojutsu dojutsu;
     int widthIn;
     int heightIn;
 
@@ -33,15 +34,19 @@ public class GuiButtonDojutsu extends Button {
     @Override
     public void renderButton(int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
         Minecraft mc = Minecraft.getInstance();
-        if (!visible || !DojutsuHelper.dojutsuNotNull(dojutsu))
+        if (!visible || dojutsu == DojutsuInit.NULL)
         {
             return;
         }
         if (toggled) {
-            mc.textureManager.bindTexture(new ResourceLocation(Main.MODID + ":textures/gui/jutsu.png"));
-            mc.ingameGUI.blit(widthIn - 1, heightIn - 1, 238, 206, 18, 18);
+            mc.textureManager.bindTexture(new ResourceLocation(Main.MODID, "textures/gui/jutsu.png"));
+            mc.ingameGUI.blit(widthIn - 1, heightIn - 1, 494, 462, 18, 18);
         }
         mc.textureManager.bindTexture(dojutsu.getResourceLocation());
         mc.ingameGUI.blit(widthIn, heightIn, u, v, width, height, 256, 256);
+    }
+
+    public void setDojutsu(BeNMDojutsu dojutsu) {
+        this.dojutsu = dojutsu;
     }
 }

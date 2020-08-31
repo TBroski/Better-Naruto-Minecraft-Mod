@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.items.nbt;
 
+import com.benarutomod.tbroski.entity.ClayEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,31 +29,25 @@ public class ClaySpawnEggItemBase extends Item {
         if (itemstack.hasTag() && itemstack.getTag().getString("affiliatedmob") != null) {
             for (EntityType<?> entityType : ForgeRegistries.ENTITIES.getValues()) {
                 if (entityType.getRegistryName().toString().equalsIgnoreCase(itemstack.getTag().getString("affiliatedmob"))) {
-                    Entity entity = entityType.spawn(worldIn, itemstack, playerIn, pos, SpawnReason.MOB_SUMMONED, true, false);
-                    entity.getPersistentData().putInt("affiliatedclayplayer", playerIn.getEntityId());
-                    if (entity instanceof TameableEntity) {
-                        ((TameableEntity) entity).setOwnerId(playerIn.getUniqueID());
-                    }
-                    if (entity instanceof LivingEntity) {
-                        ((LivingEntity) entity).setHealth(2.0F);
-                    }
+                    ClayEntity entity = new ClayEntity(worldIn, entityType, playerIn.getUniqueID(), 0);
                     if (!playerIn.abilities.isCreativeMode) {
                         itemstack.shrink(1);
                     }
                     if (playerIn.getRevengeTarget() != null) {
-                        ((MobEntity) entity).setAttackTarget(playerIn.getRevengeTarget());
-                        ((MobEntity) entity).setAttackTarget(playerIn.getLastAttackedEntity());
+                        entity.setAttackTarget(playerIn.getRevengeTarget());
+                        entity.setAttackTarget(playerIn.getLastAttackedEntity());
                     } else {
                         List<LivingEntity> mobs = entity.world.getEntitiesWithinAABB(LivingEntity.class, entity.getBoundingBox().grow(20), null);
                         Iterator iterator = mobs.iterator();
                         while (iterator.hasNext()) {
                             LivingEntity livingEntity = (LivingEntity) iterator.next();
                             if (livingEntity != playerIn && livingEntity != entity) {
-                                ((MobEntity) entity).setAttackTarget(livingEntity);
+                                entity.setAttackTarget(livingEntity);
                                 break;
                             }
                         }
                     }
+                    worldIn.addEntity(entity);
                 }
             }
             }

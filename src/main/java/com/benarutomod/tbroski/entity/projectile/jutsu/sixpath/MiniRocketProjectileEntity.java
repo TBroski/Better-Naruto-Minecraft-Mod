@@ -55,7 +55,7 @@ public class MiniRocketProjectileEntity extends ProjectileItemEntity {
     @Override
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
-            if (Config.SERVER.playerWorldDamage.get()) {
+            if (Config.COMMON.playerWorldDamage.get()) {
                 this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), 3F, Explosion.Mode.BREAK);
             }
             else if (result.getType() == RayTraceResult.Type.ENTITY) {

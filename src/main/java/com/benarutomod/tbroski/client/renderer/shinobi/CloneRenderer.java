@@ -1,7 +1,10 @@
 package com.benarutomod.tbroski.client.renderer.shinobi;
 
+import com.benarutomod.tbroski.client.renderer.layers.DojutsuLayer;
 import com.benarutomod.tbroski.client.renderer.layers.ScrollLayer;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.layers.BipedArmorLayer;
@@ -19,6 +22,7 @@ public class CloneRenderer extends LivingRenderer<AbstractCloneEntity, PlayerMod
         this.addLayer(new BipedArmorLayer(this, new BipedModel(0.5f), new BipedModel(1.0f)));
         this.addLayer(new ElytraLayer<>(this));
         this.addLayer(new ScrollLayer<>(this));
+        this.addLayer(new DojutsuLayer<>(this));
     }
 
     @Override

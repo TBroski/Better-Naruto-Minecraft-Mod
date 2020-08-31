@@ -6,6 +6,7 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.chakrastyles.*;
+import com.benarutomod.tbroski.common.jutsu.JutsuCaller;
 import com.benarutomod.tbroski.init.KeybindInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.*;
@@ -28,8 +29,6 @@ import java.util.Random;
 
 public class KeyboardHelper {
 
-    private Random rand = new Random();
-
     @OnlyIn(Dist.CLIENT)
     public static boolean isShiftDown() {
         return InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), GLFW.GLFW_KEY_LEFT_SHIFT)
@@ -49,72 +48,14 @@ public class KeyboardHelper {
     @SubscribeEvent
     public void onClientTickEvent(final TickEvent.ClientTickEvent event) {
         ClientPlayerEntity player = Minecraft.getInstance().player;
-        Minecraft mcinstance = Minecraft.getInstance();
         if (player != null) {
             LazyOptional<IPlayerHandler> playerCapability = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler player_cap = playerCapability.orElse(new PlayerCapability());
             if (KeybindInit.HAND_INFUSION.isPressed()) {
                 if (player.getHeldItem(Hand.MAIN_HAND).getItem() == Items.PAPER && !player_cap.hasChakraBoolean()) {
-                    int randChakraNum = rand.nextInt(6);
                     NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("chakra"));
                     player_cap.setChakraBoolean(true);
                     NetworkLoader.INSTANCE.sendToServer(new PacketChakraAddition());
-                    if (player_cap.returnPlayerClan().getClanNature() == Nature.NULL) {
-                        if (randChakraNum > 4) {
-                            mcinstance.displayGuiScreen(new FirePaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(1, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(1, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("firenature"));
-                        } else if (randChakraNum > 3) {
-                            mcinstance.displayGuiScreen(new LightningPaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(5, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(5, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("lightningnature"));
-                        } else if (randChakraNum > 2) {
-                            mcinstance.displayGuiScreen(new WindPaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(4, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(4, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("windnature"));
-                        } else if (randChakraNum > 1) {
-                            mcinstance.displayGuiScreen(new EarthPaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(3, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(3, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("earthnature"));
-                        } else {
-                            mcinstance.displayGuiScreen(new WaterPaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(2, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(2, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("waternature"));
-                        }
-                    }
-                    else {
-                        if (player_cap.returnPlayerClan().getClanNature() == Nature.FIRE) {
-                            mcinstance.displayGuiScreen(new FirePaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(1, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(1, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("firenature"));
-                        } else if (player_cap.returnPlayerClan().getClanNature() == Nature.LIGHTNING) {
-                            mcinstance.displayGuiScreen(new LightningPaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(5, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(5, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("lightningnature"));
-                        } else if (player_cap.returnPlayerClan().getClanNature() == Nature.WIND) {
-                            mcinstance.displayGuiScreen(new WindPaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(4, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(4, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("windnature"));
-                        } else if (player_cap.returnPlayerClan().getClanNature() == Nature.EARTH) {
-                            mcinstance.displayGuiScreen(new EarthPaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(3, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(3, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("earthnature"));
-                        } else {
-                            mcinstance.displayGuiScreen(new WaterPaperGui());
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(2, true, false));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketNature(2, true, true));
-                            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("waternature"));
-                        }
-                    }
                 }
                 else if (!player_cap.returnHandInfusionToggled()) {
                     player_cap.setHandInfusionToggled(true);
@@ -142,30 +83,39 @@ public class KeyboardHelper {
             if (isTabDown()) {
                 if (playerc.returnHandInfusionToggled()) {
                     if (KeybindInit.KEYBIND1.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind1());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 1));
                     }
                     if (KeybindInit.KEYBIND2.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind2());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 2));
                     }
                     if (KeybindInit.KEYBIND3.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind3());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 3));
                     }
                     if (KeybindInit.KEYBIND4.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind4());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 4));
                     }
                     if (KeybindInit.KEYBIND5.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind5());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 5));
                     }
                     if (KeybindInit.KEYBIND6.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind6());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 6));
                     }
                     if (KeybindInit.KEYBIND7.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind7());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 7));
                     }
                     if (KeybindInit.KEYBIND8.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind8());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 8));
                     }
                     if (KeybindInit.KEYBIND9.isKeyDown()) {
+                        JutsuCaller.JutsuCaller(player, playerc.returnKeybind9());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 9));
                     }
                 }

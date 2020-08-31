@@ -5,6 +5,7 @@ import com.benarutomod.tbroski.blocks.ModdedSaplingBlock;
 import com.benarutomod.tbroski.command.impl.*;
 import com.benarutomod.tbroski.init.BiomeInit;
 import com.benarutomod.tbroski.init.BlockInit;
+import com.benarutomod.tbroski.init.DimensionInit;
 import com.benarutomod.tbroski.items.materials.ModdedSpawnEggItem;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.EntityType;
@@ -12,9 +13,13 @@ import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.dimension.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
@@ -45,6 +50,7 @@ public class ModEventSubscriber {
             BodyModeCommand.register(event.getCommandDispatcher());
             JutsuCommand.register(event.getCommandDispatcher());
             NatureCommand.register(event.getCommandDispatcher());
+            BijuuCommand.register(event.getCommandDispatcher());
         }
     }
 }

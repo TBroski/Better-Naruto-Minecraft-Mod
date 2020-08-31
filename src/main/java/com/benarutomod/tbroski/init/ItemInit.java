@@ -1,6 +1,7 @@
 package com.benarutomod.tbroski.init;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.api.item.EtherealItem;
 import com.benarutomod.tbroski.blocks.dojutsuskull.DojutsuSkullItemBase;
 import com.benarutomod.tbroski.blocks.explosivepaper.ExplosivePaperItemBase;
 import com.benarutomod.tbroski.blocks.teleportationpaper.TeleportationPaperItemBase;
@@ -26,12 +27,15 @@ import com.benarutomod.tbroski.util.enums.AnbuArmorMaterial;
 import com.benarutomod.tbroski.util.enums.BeNMItemTier;
 import com.benarutomod.tbroski.util.enums.HeadbandArmorMaterial;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.awt.*;
 
 import static net.minecraft.item.Items.BUCKET;
 
@@ -57,7 +61,9 @@ public class ItemInit {
     public static final RegistryObject<Item> TELEPORTATION_KUNAI = ITEMS.register("teleportation_kunai", TeleportationKunaiItemBase::new);
 
     public static final RegistryObject<Item> KATANA = ITEMS.register("katana", () -> new BeNMSwordItemBase(BeNMItemTier.CHAKRA_IRON, 3, -2.0F, (new Item.Properties()).group(Main.TAB)));
-
+    //Ethereal
+    public static final RegistryObject<EtherealItem> TOTSUKA_BlADE = ITEMS.register("totsuka_blade", () -> new EtherealItem((new Item.Properties()).group(Main.TAB), new EtherealItem.EtherealProperties().setDamage(3F).setRange(1.5F)).setRenderFire(EntityType.ITEM.getWidth() * 2, EntityType.ITEM.getHeight() * 10, Color.YELLOW));
+    public static final RegistryObject<EtherealItem> YATA_MIRROR = ITEMS.register("yata_mirror", () -> new EtherealItem((new Item.Properties()).group(Main.TAB), new EtherealItem.EtherealProperties().setArmor(4F).setCancelsNinjutsu()).setRenderFire(EntityType.ITEM.getWidth() * 5, EntityType.ITEM.getHeight() * 5, Color.RED));
 
     //SoundItems
     public static final RegistryObject<Item> ITACHI_MUSIC_DISC = ITEMS.register("naruto_itachi_disc", () -> new NarutoMusicDisc(1, SoundInit.ITACHI_DISC_LAZY.get(), new Item.Properties().maxStackSize(1).group(Main.TAB)));
@@ -87,6 +93,7 @@ public class ItemInit {
     public static final RegistryObject<Item> SAKURA_PRESSURE_PLATE_ITEM = ITEMS.register("sakura_pressure_plate", ()-> new BlockItem(BlockInit.SAKURA_PRESSURE_PLATE.get(), new Item.Properties().group(Main.TAB)));
 
     public static final RegistryObject<Item> LIGNITE_ITEM = ITEMS.register("lignite", ()-> new BlockItem(BlockInit.LIGNITE.get(), new Item.Properties().group(Main.TAB)));
+    public static final RegistryObject<Item> IRON_SAND_ITEM = ITEMS.register("iron_sab", ()-> new BlockItem(BlockInit.IRON_SAND.get(), new Item.Properties().group(Main.TAB)));
 
     public static final RegistryObject<Item> TOAD_OIL_BUCKET_ITEM = ITEMS.register("toad_oil_bucket", ()-> new BucketItem(FluidInit.TOAD_OIL, (new Item.Properties()).containerItem(BUCKET).maxStackSize(1).group(Main.TAB)));
 
@@ -117,6 +124,7 @@ public class ItemInit {
     public static final RegistryObject<ModdedSpawnEggItem> SHUKAKU_SPAWN_EGG = ITEMS.register("shukaku_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.SHUKAKU, 0x7F9993, 0xA79275, new Item.Properties().group(Main.TAB)));
     public static final RegistryObject<ModdedSpawnEggItem> MATATABI_SPAWN_EGG = ITEMS.register("matatabi_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.MATATABI, 0x7F9993, 0x4A70CB, new Item.Properties().group(Main.TAB)));
     public static final RegistryObject<ModdedSpawnEggItem> ISOBU_SPAWN_EGG = ITEMS.register("isobu_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.ISOBU, 0x7F9993, 0x9DA1AA, new Item.Properties().group(Main.TAB)));
+    public static final RegistryObject<ModdedSpawnEggItem> SON_GOKU_SPAWN_EGG = ITEMS.register("son_goku_spawn_egg", ()-> new ModdedSpawnEggItem(EntityInit.SON_GOKU, 0x7F9993, 0x9D0206, new Item.Properties().group(Main.TAB)));
 
 
     //NBTItems
@@ -156,4 +164,22 @@ public class ItemInit {
     public static final RegistryObject<Item> WATER_SHURIKEN_JUTSU = ITEMS.register("water_shuriken_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> RAGING_WAVES_JUTSU = ITEMS.register("raging_waves_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> WATER_SHARK_BULLET_JUTSU = ITEMS.register("water_shark_bullet_jutsu", UniqueItemBase::new);
+    //Kekkai Genkai
+    public static final RegistryObject<Item> BLACK_IRON_FIST_JUTSU = ITEMS.register("black_iron_fist_jutsu", UniqueItemBase::new);
+
+    public static final RegistryObject<Item> SCORCHING_STREAM_ROCK_JUTSU = ITEMS.register("scorching_stream_rock_jutsu", UniqueItemBase::new);
+    public static final RegistryObject<Item> LAVA_SHURIKEN_JUTSU = ITEMS.register("lava_shuriken_jutsu", UniqueItemBase::new);
+
+    public static final RegistryObject<Item> BURNING_AQUA_GUN_JUTSU = ITEMS.register("burning_aqua_gun_jutsu", UniqueItemBase::new);
+    public static final RegistryObject<Item> CORROSIVE_ARROW_JUTSU = ITEMS.register("corrosive_arrow_jutsu", UniqueItemBase::new);
+
+    public static final RegistryObject<Item> ONE_HORNED_WHITE_WHALE_JUTSU = ITEMS.register("one_horned_white_whale_jutsu", UniqueItemBase::new);
+    public static final RegistryObject<Item> TEN_THOUSAND_ICE_PETALS_JUTSU = ITEMS.register("ten_thousand_ice_petals_jutsu", UniqueItemBase::new);
+
+    public static final RegistryObject<Item> BLACK_HUNTING_JUTSU = ITEMS.register("black_hunting_jutsu", UniqueItemBase::new);
+    public static final RegistryObject<Item> LASER_CIRCUS_JUTSU = ITEMS.register("laser_circus_jutsu", UniqueItemBase::new);
+
+    public static final RegistryObject<Item> EXTREAMLY_STEAMING_MURDER_JUTSU = ITEMS.register("extreamly_steaming_murder_jutsu", UniqueItemBase::new);
+    public static final RegistryObject<Item> BLAZING_PELLETS_JUTSU = ITEMS.register("blazing_pellets_jutsu", UniqueItemBase::new);
+    public static final RegistryObject<Item> GREAT_FIREBALL_JUTSU = ITEMS.register("great_fireball_jutsu", UniqueItemBase::new);
 }

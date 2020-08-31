@@ -52,7 +52,7 @@ public class GuiButtonJutsu extends Button {
         {
             return;
         }
-        mc.ingameGUI.blit(widthIn, heightIn, u, v, width, height);
+        mc.ingameGUI.blit(widthIn, heightIn, u, v, width, height, 512, 512);
     }
 
     public boolean hasJutsu() {

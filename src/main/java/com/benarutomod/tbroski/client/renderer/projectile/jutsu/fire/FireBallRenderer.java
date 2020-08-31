@@ -1,7 +1,9 @@
 package com.benarutomod.tbroski.client.renderer.projectile.jutsu.fire;
 
 import com.benarutomod.tbroski.entity.projectile.jutsu.fire.FireballEntity;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -20,6 +22,5 @@ public class FireBallRenderer extends SpriteRenderer<FireballEntity> {
         public EntityRenderer<? super FireballEntity> createRenderFor(EntityRendererManager manager) {
             return new FireBallRenderer(manager, Minecraft.getInstance().getItemRenderer());
         }
-
     }
 }

@@ -15,7 +15,6 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class MountMyobokuBiome extends Biome implements IBeNMBiome {
 
-
     public MountMyobokuBiome() {
         super(new Biome.Builder().surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(BlockInit.LIGNITE.get().getDefaultState(), BlockInit.LIGNITE.get().getDefaultState(), BlockInit.LIGNITE.get().getDefaultState())).precipitation(Biome.RainType.RAIN).category(Category.NONE).depth(2.0F).scale(0.5F).temperature(0.4F).downfall(0.2F).waterColor(0xCA8813).waterFogColor(0xCA8813).parent((String)null));
         DefaultBiomeFeatures.addCarvers(this);

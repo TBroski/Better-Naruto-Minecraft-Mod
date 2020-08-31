@@ -50,10 +50,10 @@ public class ExplosiveKunaiEntity extends ProjectileItemEntity {
      */
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
-            System.out.println(Config.SERVER.entityWorldDamage.get());
+            System.out.println(Config.COMMON.entityWorldDamage.get());
             if (result.getType() == RayTraceResult.Type.ENTITY) {
                 Entity entity = ((EntityRayTraceResult)result).getEntity();
-                if (this.getThrower() instanceof PlayerEntity || Config.SERVER.entityWorldDamage.get()) {
+                if (this.getThrower() instanceof PlayerEntity || Config.COMMON.entityWorldDamage.get()) {
                     world.createExplosion(entity, entity.getPosX(), entity.getPosY(), entity.getPosZ(), 2F, Explosion.Mode.BREAK);
                 }
                 else {
@@ -64,7 +64,7 @@ public class ExplosiveKunaiEntity extends ProjectileItemEntity {
             }
             else if (result.getType() == RayTraceResult.Type.BLOCK) {
                 BlockPos block = ((BlockRayTraceResult)result).getPos();
-                if (this.getThrower() instanceof PlayerEntity || Config.SERVER.entityWorldDamage.get()) {
+                if (this.getThrower() instanceof PlayerEntity || Config.COMMON.entityWorldDamage.get()) {
                     world.createExplosion(this, block.getX(), block.getY(), block.getZ(), 2F, Explosion.Mode.BREAK);
                 }
                 else {

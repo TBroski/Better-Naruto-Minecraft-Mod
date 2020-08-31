@@ -7,20 +7,30 @@ import com.benarutomod.tbroski.client.renderer.layers.models.bodymode.IFaceBodyM
 import com.benarutomod.tbroski.client.renderer.layers.models.bodymode.ModelCurseMarkWings;
 import com.benarutomod.tbroski.client.renderer.layers.models.dojutsu.ModelLeftEye;
 import com.benarutomod.tbroski.client.renderer.layers.models.dojutsu.ModelRightEye;
+import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
 import com.benarutomod.tbroski.init.BodyInit;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.tileentity.BeaconTileEntityRenderer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.lwjgl.opengl.GL11;
 
 public class BodyModeLayer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
 
@@ -43,11 +53,27 @@ public class BodyModeLayer<T extends LivingEntity, M extends EntityModel<T>> ext
                         }
                         AgeableModel model = playerc.returnPlayerBodyMode().getModelOnRender();
 
-                        matrixStackIn.push();
+                        if (model instanceof BipedModel)
+                            ((BipedModel) model).isSneak = entitylivingbaseIn.isCrouching();
                         this.getEntityModel().copyModelAttributesTo(model);
                         model.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-                        IVertexBuilder iVertexBuilderLeft = ItemRenderer.getBuffer(bufferIn, model.getRenderType(playerc.returnPlayerBodyMode().getModelResourceLocationOnRender()), false, false);
-                        model.render(matrixStackIn, iVertexBuilderLeft, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                        IVertexBuilder iVertexBuilder = ItemRenderer.getBuffer(bufferIn, model.getRenderType(playerc.returnPlayerBodyMode().getModelResourceLocationOnRender()), false, false);
+                        if (playerc.returnPlayerBodyMode().getName().equalsIgnoreCase("bijuu_mode")) {
+                            AbstractBijuuEntity bijuu = null;
+                            for (EntityType<?> entity : ForgeRegistries.ENTITIES.getValues()) {
+                                if (entity.getRegistryName().toString().equalsIgnoreCase(playerc.returnPlayerBijuu())) {
+                                    bijuu = (AbstractBijuuEntity) entity.create(Minecraft.getInstance().world);
+                                    break;
+                                }
+                            }
+                            iVertexBuilder = ItemRenderer.getBuffer(bufferIn, model.getRenderType(playerc.returnPlayerBodyMode().getModelResourceLocationOnRender()), false, true);
+                            matrixStackIn.push();
+                            model.render(matrixStackIn, iVertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, bijuu.getChakraColor().getChakraColor().getRed() / 256F + 0.1F, bijuu.getChakraColor().getChakraColor().getGreen() / 256F + 0.1F, bijuu.getChakraColor().getChakraColor().getBlue() / 256F, 0.5F);
+                        }
+                        else {
+                            matrixStackIn.push();
+                            model.render(matrixStackIn, iVertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                        }
                         matrixStackIn.pop();
                     }
                     if (playerc.returnPlayerBodyMode().getDojutsuSizeOnRender() != -1) {

@@ -1,12 +1,13 @@
 package com.benarutomod.tbroski.entity.shinobi.shinobi;
 
 import com.benarutomod.tbroski.api.internal.BeNMClan;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.entity.ai.ByakuganMeleeAttackGoal;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.api.entity.AbstractShinobiEntity;
 import com.benarutomod.tbroski.api.interfaces.IByakuganEntity;
 import com.benarutomod.tbroski.init.ClanInit;
+import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -20,18 +21,8 @@ import net.minecraft.world.World;
 
 public class BasicByakuganEntity extends AbstractShinobiEntity implements IByakuganEntity {
 
-    private static final DataParameter<String> LEFT_EYE = EntityDataManager.createKey(BasicByakuganEntity.class, DataSerializers.STRING);
-    private static final DataParameter<String> RIGHT_EYE = EntityDataManager.createKey(BasicByakuganEntity.class, DataSerializers.STRING);
-
     public BasicByakuganEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
-    }
-
-    @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(LEFT_EYE, "byakugan");
-        this.dataManager.register(RIGHT_EYE, "byakugan");
     }
 
     @Override
@@ -67,23 +58,6 @@ public class BasicByakuganEntity extends AbstractShinobiEntity implements IByaku
     }
 
     @Override
-    public BeNMDojutsu rightDojustsu() {
-        return DojutsuHelper.getDojutsuFromString(this.dataManager.get(RIGHT_EYE));
-    }
-    @Override
-    public BeNMDojutsu leftDojustsu() {
-        return DojutsuHelper.getDojutsuFromString(this.dataManager.get(LEFT_EYE));
-    }
-    @Override
-    public void setRightDojustsu(BeNMDojutsu rightEye) {
-        this.dataManager.set(RIGHT_EYE, rightEye.getString());
-    }
-    @Override
-    public void setLeftDojustsu(BeNMDojutsu leftEye) {
-        this.dataManager.set(LEFT_EYE, leftEye.getString());
-    }
-
-    @Override
     public int eyeSlot() {
         return 4;
     }
@@ -91,5 +65,15 @@ public class BasicByakuganEntity extends AbstractShinobiEntity implements IByaku
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
 
+    }
+
+    @Override
+    protected BeNMDojutsu registeredLeftEye() {
+        return DojutsuInit.BYAKUGAN;
+    }
+
+    @Override
+    protected BeNMDojutsu registeredRightEye() {
+        return DojutsuInit.BYAKUGAN;
     }
 }

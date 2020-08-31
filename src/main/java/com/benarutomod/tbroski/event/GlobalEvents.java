@@ -6,6 +6,8 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
+import com.benarutomod.tbroski.entity.shinobi.shinobi.BrotherSharinganEntity;
+import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.SoundInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -74,6 +76,26 @@ public class GlobalEvents {
             for (ServerPlayerEntity player : players) {
                 player.sendMessage(new StringTextComponent(new TranslationTextComponent("event." + Main.MODID + ".bijuu.uponmessage").getString() + bijuuEntity.world.getBiome(bijuuEntity.getPosition()).getDisplayName().getString() + "."));
             }
+        }
+    }
+
+    public static void summonBrother(TickEvent.PlayerTickEvent event) {
+        LazyOptional<IPlayerHandler> playerc = event.player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
+
+        if (player_cap.returnShinobiLevel() >= 3 && event.player.getRNG().nextInt(24000) == 0) {
+            double d0 = event.player.getPosX() + (new Random().nextDouble() - 0.5D) * 48.0D;
+            double d1 = event.player.getPosY() + (double)(new Random().nextInt(48) - 32);
+            double d2 = event.player.getPosZ() + (new Random().nextDouble() - 0.5D) * 48.0D;
+
+            BrotherSharinganEntity brother = new BrotherSharinganEntity(EntityInit.BROTHER_SHARINGAN.get(), event.player.world, event.player);
+            if (brother.attemptTeleport(d0, d1, d2, true)) {
+                event.player.world.addEntity(brother);
+            }
+            else {
+                brother.remove();
+            }
+            event.player.sendStatusMessage(new TranslationTextComponent("event." + Main.MODID + ".brother.uponmessage"), true);
         }
     }
 }

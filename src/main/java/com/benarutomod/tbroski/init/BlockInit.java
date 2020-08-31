@@ -9,6 +9,7 @@ import com.benarutomod.tbroski.blocks.trees.SakuraTree;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -45,6 +46,7 @@ public class BlockInit {
     public static final RegistryObject<Block> SAKURA_PRESSURE_PLATE = BLOCKS.register("sakura_pressure_plate", () -> new ModdedPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.PINK).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));
 
     public static final RegistryObject<Block> LIGNITE = BLOCKS.register("lignite", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.DIRT).hardnessAndResistance(1.5F, 6.0F)));
+    public static final RegistryObject<Block> IRON_SAND = BLOCKS.register("iron_sand", () -> new SandBlock(0x3b3b3b, Block.Properties.create(Material.SAND, MaterialColor.BLACK).hardnessAndResistance(0.5F).sound(SoundType.SAND)));
 
 
 

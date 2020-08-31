@@ -1,20 +1,22 @@
 package com.benarutomod.tbroski.client.handler;
 
 import com.benarutomod.tbroski.client.gui.container.ExtendedPlayerInventory;
+import com.benarutomod.tbroski.client.renderer.ClayRenderer;
+import com.benarutomod.tbroski.client.renderer.EtherealItemRenderer;
 import com.benarutomod.tbroski.client.renderer.layers.*;
 import com.benarutomod.tbroski.client.renderer.mobs.FrogRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.SnakeRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.bijuu.IsobuRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.bijuu.MatatabiRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.bijuu.ShukakuRenderer;
+import com.benarutomod.tbroski.client.renderer.mobs.bijuu.SonGokuRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.ExplosiveKunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.KunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.TeleportationKunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.TailedBeastBombRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.earth.FlyingStonesRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.earth.MudMoatRenderer;
-import com.benarutomod.tbroski.client.renderer.projectile.jutsu.fire.FireBallRenderer;
-import com.benarutomod.tbroski.client.renderer.projectile.jutsu.fire.PhoenixFlowerRenderer;
+import com.benarutomod.tbroski.client.renderer.projectile.jutsu.fire.FireJutsuRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.lightning.LightningArrowRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.lightning.LightningBallRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.sharingan.AmaterasuJutsuRenderer;
@@ -76,19 +78,23 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.ANBU.get(), AnbuRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.BASIC_SHARINGAN.get(), BasicSharinganRenderer::new);
-
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.BASIC_BYAKUGAN.get(), BasicByakuganRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.BROTHER_SHARINGAN.get(), BrotherSharinganRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SNAKE.get(), SnakeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FROG.get(), FrogRenderer::new);
 
+        //Item
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.ETHEREAL_ITEM.get(), (EntityRendererManager renderManagerIn) -> new EtherealItemRenderer(renderManagerIn));
         //Bijuu
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SHUKAKU.get(), ShukakuRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MATATABI.get(), MatatabiRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.ISOBU.get(), IsobuRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.SON_GOKU.get(), SonGokuRenderer::new);
 
         //Clones
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.BASIC_CLONE.get(), CloneRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.WOOD_CLONE.get(), CloneRenderer::new);
 
         //Akatsuki
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.DEIDARA.get(), DeidaraRenderer::new);
@@ -99,19 +105,20 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FIRE_STYLE_MASKED_ANIMAL.get(), FireStyleMaskedAnimalRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WIND_STYLE_MASKED_ANIMAL.get(), WindStyleMaskedAnimalRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WATER_STYLE_MASKED_ANIMAL.get(), WaterStyleMaskedAnimalRenderer::new);
-
+        //Clay
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.CLAY_ENTITY.get(), ClayRenderer::new);
 
         //Jutsu but not really jutsu.
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MINI_ROCKET.get(), new MiniRocketRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.TAILED_BEAST_BOMB.get(), new TailedBeastBombRenderer.Factory());
         //Jutsu
-        RenderingRegistry.registerEntityRenderingHandler(EntityInit.FIREBALL_JUTSU.get(), new FireBallRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.FIREBALL_JUTSU.get(), new FireJutsuRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LIGHTNING_BALL_JUTSU.get(), new LightningBallRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.GALE_PALM_JUTSU.get(), new GalePalmRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FLYING_STONES_JUTSU.get(), new FlyingStonesRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WATER_SHURIKEN_JUTSU.get(), new WaterShurikenRenderer.Factory());
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityInit.PHOENIX_FLOWER_JUTSU.get(), new PhoenixFlowerRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.PHOENIX_FLOWER_JUTSU.get(), new FireJutsuRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WIND_EXPLOSION_JUTSU.get(), new WindExplosionRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MUD_MOAT_JUTSU.get(), new MudMoatRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.RAGING_WAVES_JUTSU.get(), new RagingWavesRenderer.Factory());
@@ -150,6 +157,8 @@ public class ClientHandler {
             layers.add(new DojutsuLayer<>(renderer));
             layers.add(new BodyModeLayer<>(renderer));
             layers.add(new BijuuLayer<>(renderer));
+            layers.add(new SusanooLayer<>(renderer));
+            layers.add(new GiantLayer<>(renderer));
         }
     }
 

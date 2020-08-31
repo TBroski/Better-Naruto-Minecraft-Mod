@@ -12,6 +12,9 @@
   "item.benarutomod.explosive_kunai": "Explosive Sealed Kunai",
   "item.benarutomod.teleportation_kunai": "Transportation Sealed Kunai",
 
+  "item.benarutomod.totsuka_blade": "Sword Of Totsuka",
+  "item.benarutomod.yata_mirror": "Yata Mirror",
+
   "item.benarutomod.genin_spawn_egg": "Genin Spawn Egg",
   "item.benarutomod.chunin_spawn_egg": "Chunin Spawn Egg",
   "item.benarutomod.jonin_spawn_egg": "Jonin Spawn Egg",
@@ -29,6 +32,7 @@
   "item.benarutomod.shukaku_spawn_egg": "Shukaku Spawn Egg",
   "item.benarutomod.matatabi_spawn_egg": "Matatabi Spawn Egg",
   "item.benarutomod.isobu_spawn_egg": "Isobu Spawn Egg",
+  "item.benarutomod.son_goku_spawn_egg": "Son Goku Spawn Egg",
 
   "item.benarutomod.rations_pill": "Military Rations Pill",
   "item.benarutomod.diluted_rations_pill": "Diluted Military Rations Pill",
@@ -45,6 +49,7 @@
   "entity.benarutomod.shukaku": "Shukaku",
   "entity.benarutomod.matatabi": "Matatabi",
   "entity.benarutomod.isobu": "Isobu",
+  "entity.benarutomod.son_goku": "Son Goku",
 
   "block.benarutomod.explosive_paper": "Explosive Sealed Paper",
   "block.benarutomod.teleportation_paper": "Transportation Sealed Paper",
@@ -66,6 +71,7 @@
   "block.benarutomod.sakura_pressure_plate": "Sakura Pressure Plate",
 
   "block.benarutomod.lignite": "Lignite",
+  "block.benarutomod.iron_sand": "Iron Sand",
 
   "biome.benarutomod.mount_myoboku": "Mount Myoboku",
   "biome.benarutomod.sakura_forest": "Sakura Forest",
@@ -135,9 +141,20 @@
   "commands.benarutomod.jutsu.all": "Unlocked all jutsu for %s.",
   "commands.benarutomod.nature.all": "Unlocked all natures for %s.",
   "commands.benarutomod.nature.set": "Set nature %s of %s to %b.",
+  "commands.benarutomod.bijuu.set": "Set %s's bijuu to %s.",
 
   "advancements.benarutomod.shinobi.title": "Beginnings to a Shinobi",
   "advancements.benarutomod.shinobi.text": "A beginning to a Shinobi",
+  "advancements.benarutomod.genin.title": "Genin",
+  "advancements.benarutomod.genin.text": "An introduced shinobi!",
+  "advancements.benarutomod.chunin.title": "Chunin",
+  "advancements.benarutomod.chunin.text": "A basic shinobi!",
+  "advancements.benarutomod.jonin.title": "Jonin",
+  "advancements.benarutomod.jonin.text": "An advanced shinobi!",
+  "advancements.benarutomod.anbu.title": "Anbu",
+  "advancements.benarutomod.anbu.text": "A secret shinobi!",
+  "advancements.benarutomod.kage.title": "Kage",
+  "advancements.benarutomod.kage.text": "The best shinobi!",
   "advancements.benarutomod.chakra.title": "What is this, Magic?",
   "advancements.benarutomod.chakra.text": "Chakra! The essence that creates a great Shinobi!",
   "advancements.benarutomod.scroll.title": "Gotta Catch'em All!",
@@ -182,6 +199,7 @@
   "jutsu.benarutomod.fist_rock": "Fist Rock Technique",
   "jutsu.benarutomod.amaterasu": "Amaterasu",
   "jutsu.benarutomod.tsukuyomi": "Tsukuyomi",
+  "jutsu.benarutomod.susanoo": "Susanoo",
   "jutsu.benarutomod.matter_repulsion": "Matter Repulsion Technique",
   "jutsu.benarutomod.self_levitation": "Self Levitation Technique",
   "jutsu.benarutomod.asura_path": "Asura Path",

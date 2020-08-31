@@ -2,12 +2,15 @@ package com.benarutomod.tbroski.api;
 
 import com.benarutomod.tbroski.api.internal.BeNMBody;
 import com.benarutomod.tbroski.api.internal.BeNMClan;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.api.internal.BeNMJutsu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BeNMRegistry<T> {
+
+    public static List<IBeNMPlugin> PLUGINS = new ArrayList<>();
 
     public static BeNMRegistry.JutsuRegistry JUTSUS = new BeNMRegistry.JutsuRegistry();
     public static BeNMRegistry.DojutsuRegistry DOJUTSUS = new BeNMRegistry.DojutsuRegistry();
@@ -16,6 +19,10 @@ public abstract class BeNMRegistry<T> {
 
     public abstract ArrayList<T> getValues();
     public abstract void register(T registryObject);
+
+    public static void registerPlugin(IBeNMPlugin plugin) {
+        PLUGINS.add(plugin);
+    }
 
     public static class JutsuRegistry extends BeNMRegistry<BeNMJutsu> {
 

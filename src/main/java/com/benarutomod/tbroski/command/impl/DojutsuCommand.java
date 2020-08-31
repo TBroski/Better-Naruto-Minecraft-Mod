@@ -2,15 +2,14 @@ package com.benarutomod.tbroski.command.impl;
 
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.api.BeNMRegistry;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.networking.NetworkLoader;
-import com.benarutomod.tbroski.networking.packets.PacketBeNMPointsSync;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerDojutsuSync;
+import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import net.minecraft.command.CommandSource;
@@ -69,6 +68,7 @@ public class DojutsuCommand {
         else {
             playercap.setPlayerRightDojutsu(DojutsuHelper.getDojutsuFromString(dojutsu));
         }
+        //AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, dojutsu);
         NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketPlayerDojutsuSync(dojutsu, left, true));
         String d = "right";
         if (left) {

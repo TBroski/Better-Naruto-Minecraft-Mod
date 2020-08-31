@@ -1,8 +1,7 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu.sharingan;
 
-import com.benarutomod.tbroski.entity.projectile.jutsu.lightning.LightningArrowEntity;
+import com.benarutomod.tbroski.api.entity.jutsu.AbstractSharinganProjectileEntity;
 import com.benarutomod.tbroski.init.EntityInit;
-import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

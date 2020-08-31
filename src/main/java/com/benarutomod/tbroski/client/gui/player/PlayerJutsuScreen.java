@@ -25,6 +25,7 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
     GuiButtonSymbol waterSymbol;
 
     GuiButtonSymbol magnetSymbol;
+    GuiButtonSymbol woodSymbol;
 
     protected PlayerJutsuScreen() {
         super(new TranslationTextComponent("gui." + Main.MODID + ".title.bodychakra"));
@@ -99,10 +100,17 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
         addButton(magnetSymbol = new GuiButtonSymbol(this.guiLeft - 5, this.guiTop - 5, 0, 50, $ -> {
             if (playerCapability.hasMagnetNature()) {
                 Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
-                System.out.println("OPENed");
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Magnet Nature."));
+            }
+        }));
+        addButton(woodSymbol = new GuiButtonSymbol(this.guiLeft + 5, this.guiTop + 5, 0, 60, $ -> {
+            if (playerCapability.hasMagnetNature()) {
+                Minecraft.getInstance().displayGuiScreen(new WoodNatureJutsu());
+            }
+            else {
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Wood Nature."));
             }
         }));
     }
@@ -125,6 +133,7 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
         }
         if (openedTab != 2) {
             magnetSymbol.visible = false;
+            woodSymbol.visible = false;
         }
 
         switch (openedTab) {
@@ -146,7 +155,9 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
                 break;
             case 2:
                 magnetSymbol.visible = true;
+                woodSymbol.visible = true;
                 magnetSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                woodSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 break;
         }
     }

@@ -27,11 +27,9 @@ public class ScrollLayer<T extends LivingEntity, M extends EntityModel<T>> exten
 {
     private static final ResourceLocation resourcelocation = new ResourceLocation(Main.MODID, "textures/entity/layer/scroll.png");
     private ModelScroll model = new ModelScroll();
-    private PlayerModel playerModel;
 
     public ScrollLayer(IEntityRenderer<T, M> entityRendererIn) {
         super(entityRendererIn);
-        if (entityRendererIn instanceof PlayerRenderer) this.playerModel = ((PlayerRenderer) entityRendererIn).getEntityModel();
     }
 
     @Override

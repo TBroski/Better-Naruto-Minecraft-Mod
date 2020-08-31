@@ -1,7 +1,8 @@
 package com.benarutomod.tbroski.entity.ai;
 
 import com.benarutomod.tbroski.Main;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.entity.AbstractShinobiEntity;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.api.interfaces.ISharinganEntity;
 import com.benarutomod.tbroski.init.DamageInit;
 import net.minecraft.entity.MobEntity;
@@ -14,7 +15,7 @@ import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
 
-public class DojutsuConnectionGoal<T extends MobEntity & ISharinganEntity> extends Goal {
+public class DojutsuConnectionGoal<T extends AbstractShinobiEntity & ISharinganEntity> extends Goal {
 
     private T dojutsuEntity;
     private BeNMDojutsu eye;
@@ -26,10 +27,10 @@ public class DojutsuConnectionGoal<T extends MobEntity & ISharinganEntity> exten
         this.dojutsuEntity = dojutsuEntityIn;
         this.distance = distance;
         if (rightEye) {
-            this.eye = dojutsuEntityIn.rightDojustsu();
+            this.eye = dojutsuEntityIn.getRightDojustsu();
         }
         else {
-            this.eye  = dojutsuEntityIn.leftDojustsu();
+            this.eye  = dojutsuEntityIn.getLeftDojustsu();
         }
     }
 

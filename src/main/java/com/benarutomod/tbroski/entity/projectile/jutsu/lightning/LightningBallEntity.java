@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu.lightning;
 
+import com.benarutomod.tbroski.api.entity.jutsu.nature.AbstractLightningJutsuEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.entity.Entity;
@@ -25,11 +26,6 @@ public class LightningBallEntity extends AbstractLightningJutsuEntity {
 
     public LightningBallEntity(World worldIn, LivingEntity throwerIn) {
         super(EntityInit.LIGHTNING_BALL_JUTSU.get(), throwerIn, worldIn);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public LightningBallEntity(World worldIn, double x, double y, double z) {
-        super(EntityInit.LIGHTNING_BALL_JUTSU.get(), x, y, z, worldIn);
     }
 
     protected Item getDefaultItem() {

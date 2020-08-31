@@ -1,6 +1,7 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu;
 
 import com.benarutomod.tbroski.Config;
+import com.benarutomod.tbroski.api.entity.jutsu.AbstractJutsuEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.entity.Entity;
@@ -45,7 +46,7 @@ public class TailedBeastBombEntity extends AbstractJutsuEntity {
     @Override
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
-            if (Config.SERVER.playerWorldDamage.get()) {
+            if (Config.COMMON.playerWorldDamage.get()) {
                 this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), 7F, Explosion.Mode.BREAK);
             }
             if (result.getType() == RayTraceResult.Type.ENTITY) {

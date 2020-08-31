@@ -35,19 +35,8 @@ public class BodyModeCommand {
         return ISuggestionProvider.suggest(bodyNames.stream(), builder);
     };
 
-    private static final SuggestionProvider<CommandSource> SUGGEST_SET = (source, builder) -> {
-        List<String> suggestions = new ArrayList<>();
-        suggestions.add("set");
-        return ISuggestionProvider.suggest(suggestions.stream(), builder);
-    };
-
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
-        dispatcher.register(Commands.literal("bodymode").requires((commandSource) -> commandSource.hasPermissionLevel(3)).then(Commands.argument("target", EntityArgument.player()).then(Commands.argument("set", StringArgumentType.string()).suggests(SUGGEST_SET).then(Commands.argument("bodymode", StringArgumentType.string()).suggests(SUGGEST_BODY_MODE).executes((context) -> {
-            if (StringArgumentType.getString(context, "set").equalsIgnoreCase("set")) {
-                return setBodyMode(context.getSource(), EntityArgument.getPlayer(context, "target"), StringArgumentType.getString(context, "bodymode"));
-            }
-            return 0;
-        })))));
+        dispatcher.register(Commands.literal("bodymode").requires((commandSource) -> commandSource.hasPermissionLevel(3)).then(Commands.argument("target", EntityArgument.player()).then(Commands.argument("bodymode", StringArgumentType.string()).suggests(SUGGEST_BODY_MODE).executes((context) -> setBodyMode(context.getSource(), EntityArgument.getPlayer(context, "target"), StringArgumentType.getString(context, "bodymode"))))));
     }
 
     private static int setBodyMode(CommandSource source, PlayerEntity player, String bodymode) {

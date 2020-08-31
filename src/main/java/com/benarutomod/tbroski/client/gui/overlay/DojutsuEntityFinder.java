@@ -6,8 +6,12 @@ import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import com.benarutomod.tbroski.util.helpers.RenderHelper;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.client.renderer.Matrix4f;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MobEntity;
@@ -28,18 +32,10 @@ import java.util.ArrayList;
 
 public class DojutsuEntityFinder {
 
-
-    @SubscribeEvent
-    public void checkForEntities(TickEvent.PlayerTickEvent event) {
-        PlayerEntity player = event.player;
-        LazyOptional<IPlayerHandler> playerc = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-        IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
-    }
-
     @SubscribeEvent
     public void render(RenderHandEvent event) {
 
-            PlayerEntity player = Minecraft.getInstance().player;
+            ClientPlayerEntity player = Minecraft.getInstance().player;
             LazyOptional<IPlayerHandler> playerc = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
             ArrayList<MobEntity> entities = new ArrayList<>();
@@ -49,7 +45,7 @@ public class DojutsuEntityFinder {
                 if (player_cap.returnPlayerLeftDojutsu().canSeeChakra() || player_cap.returnPlayerRightDojutsu().canSeeChakra()) {
                     entities.clear();
                     for (Entity entity : Minecraft.getInstance().world.getAllEntities()) {
-                        if ((!(entity instanceof PlayerEntity) || Config.SERVER.byakuganCanSeePlayers.get()) && entity instanceof MobEntity) {
+                        if ((!(entity instanceof PlayerEntity) || Config.COMMON.byakuganCanSeePlayers.get()) && entity instanceof MobEntity) {
                             entities.add((MobEntity) entity);
                         }
                     }
@@ -64,8 +60,14 @@ public class DojutsuEntityFinder {
                     GL11.glPushMatrix();
 
                     ActiveRenderInfo camera = Minecraft.getInstance().gameRenderer.getActiveRenderInfo();
-                    GL11.glRotated(MathHelper.wrapDegrees(camera.getPitch()), 1, 0, 0);
-                    GL11.glRotated(MathHelper.wrapDegrees(camera.getYaw() + 180.0 + Minecraft.getInstance().gameSettings.fov - 70), 0, 1, 0);
+                    MatrixStack matrixstack = new MatrixStack();
+                    matrixstack.getLast().getMatrix().mul(Minecraft.getInstance().gameRenderer.getProjectionMatrix(camera, event.getPartialTicks(), true));
+
+                    Matrix4f matrix4f = matrixstack.getLast().getMatrix();
+                    Minecraft.getInstance().gameRenderer.resetProjectionMatrix(matrix4f);
+                    camera.update(Minecraft.getInstance().world, (Entity)(Minecraft.getInstance().getRenderViewEntity() == null ? Minecraft.getInstance().player : Minecraft.getInstance().getRenderViewEntity()), Minecraft.getInstance().gameSettings.thirdPersonView > 0, Minecraft.getInstance().gameSettings.thirdPersonView == 2, event.getPartialTicks());
+                    GL11.glRotated(MathHelper.wrapDegrees(camera.getPitch()) + (player.getFovModifier() * 0.5F), 1, 0, 0);
+                    GL11.glRotated(MathHelper.wrapDegrees(camera.getYaw() + 180.0), 0, 1, 0);
                     Vec3d camPos = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
                     GL11.glTranslated(-camPos.x, -camPos.y, -camPos.z);
 
@@ -77,7 +79,8 @@ public class DojutsuEntityFinder {
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                     GL11.glEnable(GL11.GL_DEPTH_TEST);
                     GL11.glDisable(GL11.GL_BLEND);
-                    GL11.glDisable(GL11.GL_LINE_SMOOTH); }
+                    GL11.glDisable(GL11.GL_LINE_SMOOTH);
+                }
             }
         }
 

@@ -45,7 +45,6 @@ public class ChakraBar {
                 if (player.getPersistentData().getInt("restrictedchakra") >= 1) {
                     int restrictedHeightRatio = (int) (tex_height * 0.75F);
                     int restrictedHeight = tex_height - restrictedHeightRatio;
-                    System.out.println("CALELD");
                     mc.ingameGUI.blit(19, 130 + restrictedHeight, 0, 104, 11, 2);
                 }
             }

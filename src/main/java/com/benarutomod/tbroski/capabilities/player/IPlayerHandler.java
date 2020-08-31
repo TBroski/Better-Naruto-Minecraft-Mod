@@ -2,7 +2,9 @@ package com.benarutomod.tbroski.capabilities.player;
 
 import com.benarutomod.tbroski.api.internal.BeNMBody;
 import com.benarutomod.tbroski.api.internal.BeNMClan;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
+import net.minecraft.item.ItemStack;
 
 public interface IPlayerHandler {
 	
@@ -70,6 +72,11 @@ public interface IPlayerHandler {
 
 	void setPlayerBodyMode(BeNMBody playerBodyMode);
 	BeNMBody returnPlayerBodyMode();
+
+	void setSusanooMainHand(ItemStack mainHand);
+	void setSusanooOffHand(ItemStack offHand);
+	ItemStack getSusanooMainHand();
+	ItemStack getSusanooOffHand();
 
 	void setPlayerCurseMark(int tier);
 	int returnPlayerCurseMark();
@@ -154,75 +161,97 @@ public interface IPlayerHandler {
 	void setScorchNature(boolean has);
 	boolean hasScorchNature();
 
+	void setJutsuBoolean(BeNMJutsu jutsu, boolean has);
+	boolean hasJutsuBoolean(BeNMJutsu jutsu);
 
-	void setCloneJutsuBoolean(boolean has);
+/*	void setCloneJutsuBoolean(boolean has);
 	void setBodyReplacementBoolean(boolean has);
 	void setInvisibilityBoolean(boolean has);
 	void setSummoningBoolean(boolean has);
 	void setTransformationBoolean(boolean has);
-
-	void setFireballJutsuBoolean(boolean has);
-	void setPhoenixFlowerJutsuBoolean(boolean has);
-	void setMoltenFistJutsuBoolean(boolean has);
-
-	void setGalePalmJutsuBoolean(boolean has);
-	void setWindExplosionJutsuBoolean(boolean has);
-	void setWindArrowJutsuBoolean(boolean has);
-
-	void setFlyingStonesJutsuBoolean(boolean has);
-	void setMudMoatJutsuBoolean(boolean has);
-	void setFistRockJutsuBoolean(boolean has);
-
-	void setWaterShurikenJutsuBoolean(boolean has);
-	void setRagingWavesJutsuBoolean(boolean has);
-	void setWaterSharkBulletJutsuBoolean(boolean has);
-
-	void setLightningBallJutsuBoolean(boolean has);
-	void setStunGunJutsuBoolean(boolean has);
-	void setLightningArrowJutsuBoolean(boolean has);
-
-	void setMatterRepulsionJutsuBoolean(boolean has);
-	void setSelfLevitationJutsuBoolean(boolean has);
-
-	void setAmaterasuJutsuBoolean(boolean has);
-	void setTsukuyomiJutsuBoolean(boolean has);
-
-	void setTailedBeastBombBoolean(boolean has);
-	void setTailedBeastTransformationBoolean(boolean has);
-
-
 	boolean hasCloneJutsuBoolean();
 	boolean hasBodyReplacementBoolean();
 	boolean hasInvisibilityBoolean();
 	boolean hasSummoningBoolean();
 	boolean hasTransformationBoolean();
 
+	void setFireballJutsuBoolean(boolean has);
+	void setPhoenixFlowerJutsuBoolean(boolean has);
+	void setMoltenFistJutsuBoolean(boolean has);
 	boolean hasFireballJutsuBoolean();
 	boolean hasPhoenixFlowerJutsuBoolean();
 	boolean hasMoltenFistJutsuBoolean();
 
+	void setGalePalmJutsuBoolean(boolean has);
+	void setWindExplosionJutsuBoolean(boolean has);
+	void setWindArrowJutsuBoolean(boolean has);
 	boolean hasGalePalmJutsuBoolean();
 	boolean hasWindExplosionJutsuBoolean();
 	boolean hasWindArrowJutsuBoolean();
 
+	void setFlyingStonesJutsuBoolean(boolean has);
+	void setMudMoatJutsuBoolean(boolean has);
+	void setFistRockJutsuBoolean(boolean has);
 	boolean hasFlyingStonesJutsuBoolean();
 	boolean hasMudMoatJutsuBoolean();
 	boolean hasFistRockJutsuBoolean();
 
+	void setWaterShurikenJutsuBoolean(boolean has);
+	void setRagingWavesJutsuBoolean(boolean has);
+	void setWaterSharkBulletJutsuBoolean(boolean has);
 	boolean hasWaterShurikenJutsuBoolean();
 	boolean hasRagingWavesJutsuBoolean();
 	boolean hasWaterSharkBulletJutsuBoolean();
 
+	void setLightningBallJutsuBoolean(boolean has);
+	void setStunGunJutsuBoolean(boolean has);
+	void setLightningArrowJutsuBoolean(boolean has);
 	boolean hasLightningBallJutsuBoolean();
 	boolean hasStunGunJutsuBoolean();
 	boolean hasLightningArrowJutsuBoolean();
 
+	void setMatterRepulsionJutsuBoolean(boolean has);
+	void setSelfLevitationJutsuBoolean(boolean has);
+	void setLightningGodSelfJutsuBoolean(boolean has);
+	void setIronFistJutsuBoolean(boolean has);
+	void setSandWaveJutsuBoolean(boolean has);
 	boolean hasMatterRepulsionJutsuBoolean();
 	boolean hasSelfLevitationJutsuBoolean();
+	boolean hasLightningGodSelfJutsuBoolean();
+	boolean hasIronFistJutsuBoolean();
+	boolean hasSandWaveJutsuBoolean();
 
+	void setWoodCloneJutsuBoolean(boolean has);
+	void setTreeSummoningJutsuBoolean(boolean has);
+	void setSeaOfTreesJutsuBoolean(boolean has);
+	void setFourPillarPrisonJutsuBoolean(boolean has);
+	void setFourPillarHouseJutsuBoolean(boolean has);
+	boolean hasWoodCloneJutsuBoolean();
+	boolean hasTreeSummoningJutsuBoolean();
+	boolean hasSeaOfTreesJutsuBoolean();
+	boolean hasFourPillarPrisonJutsuBoolean();
+	boolean hasFourPillarHouseJutsuBoolean();
+
+	void setScorchingStreamRockJutsuBoolean(boolean has);
+	void setLavaWallJutsuBoolean(boolean has);
+	void setLavaShurikenJutsuBoolean(boolean has);
+	void setGreatEruptionJutsuBoolean(boolean has);
+	void setLavaCloneJutsuBoolean(boolean has);
+	boolean hasScorchingStreamRockJutsuBoolean();
+	boolean hasLavaWallJutsuBoolean();
+	boolean hasLavaShurikenJutsuBoolean();
+	boolean hasGreatEruptionJutsuBoolean();
+	boolean hasLavaCloneJutsuBoolean();
+
+	void setAmaterasuJutsuBoolean(boolean has);
+	void setTsukuyomiJutsuBoolean(boolean has);
+	void setSusanooJutsuBoolean(boolean has);
 	boolean hasAmaterasuJutsuBoolean();
 	boolean hasTsukuyomiJutsuBoolean();
+	boolean hasSusanooJutsuBoolean();
 
+	void setTailedBeastBombBoolean(boolean has);
+	void setTailedBeastTransformationBoolean(boolean has);
 	boolean hasTailedBeastBombBoolean();
-	boolean hasTailedBeastTransformationBoolean();
+	boolean hasTailedBeastTransformationBoolean();*/
 }

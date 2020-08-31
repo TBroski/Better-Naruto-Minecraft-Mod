@@ -1,16 +1,13 @@
 package com.benarutomod.tbroski.entity.shinobi.akatsuki;
 
 import com.benarutomod.tbroski.api.internal.BeNMClan;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.entity.ai.DojutsuAttackGoal;
 import com.benarutomod.tbroski.entity.ai.DojutsuConnectionGoal;
 import com.benarutomod.tbroski.entity.projectile.KunaiEntity;
 import com.benarutomod.tbroski.api.entity.AbstractAkatsukiEntity;
 import com.benarutomod.tbroski.api.interfaces.ISharinganEntity;
-import com.benarutomod.tbroski.init.BlockInit;
-import com.benarutomod.tbroski.init.ClanInit;
-import com.benarutomod.tbroski.init.EffectInit;
-import com.benarutomod.tbroski.init.ItemInit;
+import com.benarutomod.tbroski.init.*;
 import com.benarutomod.tbroski.tileentity.DojutsuSkullTileEntity;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.block.Blocks;
@@ -37,19 +34,9 @@ import java.util.Random;
 
 public class ItachiEntity extends AbstractAkatsukiEntity implements ISharinganEntity {
 
-    private static final DataParameter<String> LEFT_EYE = EntityDataManager.createKey(ItachiEntity.class, DataSerializers.STRING);
-    private static final DataParameter<String> RIGHT_EYE = EntityDataManager.createKey(ItachiEntity.class, DataSerializers.STRING);
-
     public ItachiEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
         this.setCustomName(new StringTextComponent("Itachi"));
-    }
-
-    @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(LEFT_EYE, "sharingan");
-        this.dataManager.register(RIGHT_EYE, "sharingan");
     }
 
     @Override
@@ -83,23 +70,6 @@ public class ItachiEntity extends AbstractAkatsukiEntity implements ISharinganEn
     @Override
     public int deathBeNMPoints() {
         return 7;
-    }
-
-    @Override
-    public BeNMDojutsu rightDojustsu() {
-        return DojutsuHelper.getDojutsuFromString(this.dataManager.get(RIGHT_EYE));
-    }
-    @Override
-    public BeNMDojutsu leftDojustsu() {
-        return DojutsuHelper.getDojutsuFromString(this.dataManager.get(LEFT_EYE));
-    }
-    @Override
-    public void setRightDojustsu(BeNMDojutsu rightEye) {
-        this.dataManager.set(RIGHT_EYE, rightEye.getString());
-    }
-    @Override
-    public void setLeftDojustsu(BeNMDojutsu leftEye) {
-        this.dataManager.set(LEFT_EYE, leftEye.getString());
     }
 
     @Override
@@ -166,29 +136,12 @@ public class ItachiEntity extends AbstractAkatsukiEntity implements ISharinganEn
     }
 
     @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        if (!this.world.isRemote) {
-            this.world.setBlockState(this.getPosition(), BlockInit.DOJUTSU_SKULL.get().getDefaultState());
-            TileEntity tileEntity = this.world.getTileEntity(this.getPosition());
-            if (tileEntity instanceof DojutsuSkullTileEntity) {
-                DojutsuSkullTileEntity dojutsuSkullTileEntity = (DojutsuSkullTileEntity) tileEntity;
-                dojutsuSkullTileEntity.setLivingEntity(this);
-            }
-        }
+    protected BeNMDojutsu registeredLeftEye() {
+        return DojutsuInit.MANGEKYOU_SHARINGAN;
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
-        compound.putString("lefteye", this.dataManager.get(LEFT_EYE));
-        compound.putString("righteye", this.dataManager.get(RIGHT_EYE));
-    }
-
-    @Override
-    public void readAdditional(CompoundNBT compound) {
-        super.readAdditional(compound);
-        this.dataManager.set(LEFT_EYE, compound.getString("lefteye"));
-        this.dataManager.set(RIGHT_EYE, compound.getString("righteye"));
+    protected BeNMDojutsu registeredRightEye() {
+        return DojutsuInit.MANGEKYOU_SHARINGAN;
     }
 }

@@ -1,6 +1,7 @@
 package com.benarutomod.tbroski.init;
 
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.world.gen.feature.FourPillarHouseFeature;
 import com.benarutomod.tbroski.world.gen.feature.LigniteHoodooFeature;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
@@ -19,6 +20,7 @@ public class FeatureInit {
 
 
     public static final RegistryObject<LigniteHoodooFeature> LIGNITE_HOODOO = FEATURES.register("lignite_hoodoo", () -> new LigniteHoodooFeature(NoFeatureConfig::deserialize));
+    public static final RegistryObject<FourPillarHouseFeature> FOUR_PILLAR_HOUSE = FEATURES.register("four_pillar_house", () -> new FourPillarHouseFeature(NoFeatureConfig::deserialize));
 
 
     public static void registerBiomeFeatures() {

@@ -59,12 +59,12 @@ public class PacketSetJutsuBoolean {
                     if (msg.toClient) {
                         ClientPlayerEntity player = Minecraft.getInstance().player;
                         IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
-                        jutsu.sync(playercap, msg.has);
+                        jutsu.sync(playercap, jutsu, msg.has);
                     }
                     else {
                         ServerPlayerEntity player = ctx.get().getSender();
                         IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
-                        jutsu.sync(playercap, msg.has);
+                        jutsu.sync(playercap, jutsu, msg.has);
                     }
                 }
             }

@@ -7,6 +7,7 @@ import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketSetJutsuBoolean;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 public class JutsuCaller {
 
-    public static void JutsuCaller(ServerPlayerEntity playerIn, String jutsuName)
+    public static void JutsuCaller(PlayerEntity playerIn, String jutsuName)
     {
         if (jutsuName != null) {
             IPlayerHandler playercap = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
@@ -25,12 +26,12 @@ public class JutsuCaller {
                         String nbtName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
                         if (!playerIn.getPersistentData().getBoolean(nbtName)) {
                             playerIn.getPersistentData().putBoolean(nbtName, true);
-                            NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> playerIn), new PacketJutsuNBTSync(playerIn.getEntityId(), nbtName, true));
+                            //NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> playerIn), new PacketJutsuNBTSync(playerIn.getEntityId(), nbtName, true));
                             if (!playercap.returnToggleJutsuMessage()) playerIn.sendMessage(new StringTextComponent(new TranslationTextComponent("jutsu." + jutsu.getCorrelatedPlugin().getPluginId() + "." + jutsu.getName()).getString() + "!"));
                         } else {
                             jutsu.throwCancelEvent(playerIn);
                             playerIn.getPersistentData().putBoolean(nbtName, false);
-                            NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> playerIn), new PacketJutsuNBTSync(playerIn.getEntityId(), nbtName, false));
+                            //NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> playerIn), new PacketJutsuNBTSync(playerIn.getEntityId(), nbtName, false));
                         }
                     }
                     else {

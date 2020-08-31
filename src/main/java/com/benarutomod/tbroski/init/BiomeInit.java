@@ -3,6 +3,7 @@ package com.benarutomod.tbroski.init;
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.world.biome.MountMyobokuBiome;
 import com.benarutomod.tbroski.world.biome.SakuraBiome;
+import com.benarutomod.tbroski.world.dimension.TsukuyomiDimension;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
@@ -15,6 +16,7 @@ public class BiomeInit {
 
     public static final RegistryObject<Biome> SAKURA_BIOME = BIOMES.register("sakura", () -> new SakuraBiome());
     public static final RegistryObject<Biome> MOUNT_MYOBOKU_BIOME = BIOMES.register("mount_myoboku", () -> new MountMyobokuBiome());
+    public static final RegistryObject<Biome> TSUKUYOMI = BIOMES.register("tsukuyomi", () -> new TsukuyomiDimension.Biome());
 
 
     public static void registerBiomes() {

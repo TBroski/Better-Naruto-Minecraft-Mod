@@ -12,9 +12,11 @@ import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.api.entity.AbstractShinobiEntity;
 import com.benarutomod.tbroski.init.*;
 import com.benarutomod.tbroski.networking.NetworkLoader;
+import com.benarutomod.tbroski.networking.packets.PacketClanSync;
 import com.benarutomod.tbroski.networking.packets.PacketNature;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerDojutsuSync;
 import com.benarutomod.tbroski.networking.packets.chakra.*;
+import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -72,7 +74,27 @@ public class PlayerEvents {
 
         if ((playercap.hasWindNature() && playercap.hasEarthNature()) && !playercap.hasMagnetNature()) {
             playercap.setMagnetNature(true);
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.player), new PacketNature(7, true, true));
+        }
+        if ((playercap.hasWaterNature() && playercap.hasEarthNature()) && !playercap.hasWoodNature()) {
+            playercap.setWoodNature(true);
+        }
+        if ((playercap.hasLightningNature() && playercap.hasEarthNature()) && !playercap.hasExplosionNature()) {
+            playercap.setExplosionNature(true);
+        }
+        if ((playercap.hasFireNature() && playercap.hasEarthNature()) && !playercap.hasLavaNature()) {
+            playercap.setLavaNature(true);
+        }
+        if ((playercap.hasWindNature() && playercap.hasWaterNature()) && !playercap.hasIceNature()) {
+            playercap.setIceNature(true);
+        }
+        if ((playercap.hasWindNature() && playercap.hasFireNature()) && !playercap.hasScorchNature()) {
+            playercap.setScorchNature(true);
+        }
+        if ((playercap.hasWaterNature() && playercap.hasFireNature()) && !playercap.hasBoilNature()) {
+            playercap.setBoilNature(true);
+        }
+        if ((playercap.hasWaterNature() && playercap.hasLightningNature()) && !playercap.hasStormNature()) {
+            playercap.setStormNature(true);
         }
     }
 
@@ -115,8 +137,11 @@ public class PlayerEvents {
             }
             BeNMClan randomClan = clans.get(randomIndex);
             player_cap.setPlayerClan(randomClan);
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketClanSync(randomClan.getString(), true));
 
             if (player_cap.returnPlayerClan().getClanDojutsu() != DojutsuInit.NULL) {
+                AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, "dojutsu");
+                AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, player_cap.returnPlayerClan().getClanDojutsu().getString());
                 player_cap.setPlayerLeftDojutsu(player_cap.returnPlayerClan().getClanDojutsu());
                 player_cap.setPlayerRightDojutsu(player_cap.returnPlayerClan().getClanDojutsu());
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketPlayerDojutsuSync(player_cap.returnPlayerLeftDojutsu().getString(), true, true));
@@ -192,8 +217,8 @@ public class PlayerEvents {
             if (player_cap.returnBodyInfusionToggled() && event.getSource() != DamageInit.DODGED && (player_cap.returnPlayerLeftDojutsu().canDodgeDamage() || player_cap.returnPlayerRightDojutsu().canDodgeDamage())) {
                 if (new Random().nextInt(6) == 0) {
                     event.setCanceled(true);
-                    player.attackEntityFrom(DamageInit.DODGED, event.getAmount() - Config.SERVER.sharinganDodgedDamage.get());
-                    player.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("event." + Main.MODID + ".livingdamage.dodgedmessage").getString() + Config.SERVER.sharinganDodgedDamage.get()), true);
+                    player.attackEntityFrom(DamageInit.DODGED, Math.min(event.getAmount() - Config.COMMON.sharinganDodgedDamage.get(), 0.0F));
+                    player.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("event." + Main.MODID + ".livingdamage.dodgedmessage").getString() + Config.COMMON.sharinganDodgedDamage.get()), true);
                 }
             }
         }
@@ -232,11 +257,13 @@ public class PlayerEvents {
             if (entity.getClan() == ClanInit.UCHIHA) {
                 if (player_cap.returnPlayerLeftDojutsu() == DojutsuInit.SHARINGAN) {
                     player_cap.setPlayerLeftDojutsu(DojutsuInit.MANGEKYOU_SHARINGAN);
+                    AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, "mangekyou_sharingan");
                     NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketPlayerDojutsuSync(player_cap.returnPlayerLeftDojutsu().getString(), true, true));
                     player.sendStatusMessage(new TranslationTextComponent("event." + Main.MODID + ".livingdeath.mangekyousharinganmessage"), true);
                 }
                 if (player_cap.returnPlayerRightDojutsu() == DojutsuInit.SHARINGAN) {
                     player_cap.setPlayerRightDojutsu(DojutsuInit.MANGEKYOU_SHARINGAN);
+                    AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, "mangekyou_sharingan");
                     NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketPlayerDojutsuSync(player_cap.returnPlayerRightDojutsu().getString(), false, true));
                     player.sendStatusMessage(new TranslationTextComponent("event." + Main.MODID + ".livingdeath.mangekyousharinganmessage"), true);
                 }

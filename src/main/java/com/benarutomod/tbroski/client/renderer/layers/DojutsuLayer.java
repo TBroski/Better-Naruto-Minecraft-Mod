@@ -1,13 +1,15 @@
 package com.benarutomod.tbroski.client.renderer.layers;
 
+import com.benarutomod.tbroski.api.entity.AbstractShinobiEntity;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.renderer.layers.models.dojutsu.ModelLeftEye;
 import com.benarutomod.tbroski.client.renderer.layers.models.dojutsu.ModelRightEye;
-import com.benarutomod.tbroski.api.internal.BeNMDojutsu;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
 import com.benarutomod.tbroski.entity.clones.AbstractCloneEntity;
 import com.benarutomod.tbroski.api.interfaces.IDojutsuEntity;
+import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -22,6 +24,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.util.LazyOptional;
+import org.omg.CORBA.UShortSeqHelper;
 
 public class DojutsuLayer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M>
 {
@@ -49,9 +52,9 @@ public class DojutsuLayer<T extends LivingEntity, M extends EntityModel<T>> exte
                 this.leftModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                 this.rightModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                 IVertexBuilder iVertexBuilderLeft = ItemRenderer.getBuffer(bufferIn, this.leftModel.getRenderType(playerc.returnPlayerLeftDojutsu().getResourceLocation()), false, false);
-                if (DojutsuHelper.dojutsuNotNull(playerc.returnPlayerLeftDojutsu())) this.leftModel.render(matrixStackIn, iVertexBuilderLeft, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                if (playerc.returnPlayerLeftDojutsu() != DojutsuInit.NULL) this.leftModel.render(matrixStackIn, iVertexBuilderLeft, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
                 IVertexBuilder iVertexBuilderRight = ItemRenderer.getBuffer(bufferIn, this.rightModel.getRenderType(playerc.returnPlayerRightDojutsu().getResourceLocation()), false, false);
-                if (DojutsuHelper.dojutsuNotNull(playerc.returnPlayerRightDojutsu())) this.rightModel.render(matrixStackIn, iVertexBuilderRight, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                if (playerc.returnPlayerRightDojutsu() != DojutsuInit.NULL) this.rightModel.render(matrixStackIn, iVertexBuilderRight, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
                 matrixStackIn.pop();
             }
         }
@@ -61,34 +64,37 @@ public class DojutsuLayer<T extends LivingEntity, M extends EntityModel<T>> exte
             if (playerEntity != null) {
                 IPlayerHandler playerc = playerEntity.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
                 if (playerc.returnBodyInfusionToggled()) {
+                    matrixStackIn.push();
                     this.leftModel = findLeftEyeModel(playerc.returnplayerEyeSlot(), playerc.returnPlayerLeftDojutsu());
                     this.rightModel = findRightEyeModel(playerc.returnplayerEyeSlot(), playerc.returnPlayerRightDojutsu());
-                    matrixStackIn.push();
                     this.getEntityModel().copyModelAttributesTo(this.leftModel);
                     this.getEntityModel().copyModelAttributesTo(this.rightModel);
+                    if (this.leftModel instanceof ModelLeftEye) ((ModelLeftEye) this.leftModel).setPartialTick(entitylivingbaseIn, partialTicks);
+                    if (this.rightModel instanceof ModelRightEye) ((ModelRightEye) this.rightModel).setPartialTick(entitylivingbaseIn, partialTicks);
                     this.leftModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                     this.rightModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                     IVertexBuilder iVertexBuilderLeft = ItemRenderer.getBuffer(bufferIn, this.leftModel.getRenderType(playerc.returnPlayerLeftDojutsu().getResourceLocation()), false, false);
-                    if (DojutsuHelper.dojutsuNotNull(playerc.returnPlayerLeftDojutsu())) this.leftModel.render(matrixStackIn, iVertexBuilderLeft, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                    if (playerc.returnPlayerLeftDojutsu() != DojutsuInit.NULL) this.leftModel.render(matrixStackIn, iVertexBuilderLeft, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
                     IVertexBuilder iVertexBuilderRight = ItemRenderer.getBuffer(bufferIn, this.rightModel.getRenderType(playerc.returnPlayerRightDojutsu().getResourceLocation()), false, false);
-                    if (DojutsuHelper.dojutsuNotNull(playerc.returnPlayerRightDojutsu()))this.rightModel.render(matrixStackIn, iVertexBuilderRight, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                    if (playerc.returnPlayerRightDojutsu() != DojutsuInit.NULL) this.rightModel.render(matrixStackIn, iVertexBuilderRight, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
                     matrixStackIn.pop();
                 }
             }
         }
         else if (entitylivingbaseIn instanceof IDojutsuEntity) {
             IDojutsuEntity dojutsuEntity = (IDojutsuEntity) entitylivingbaseIn;
-            this.leftModel = findLeftEyeModel(dojutsuEntity.eyeSlot(), dojutsuEntity.leftDojustsu());
-            this.rightModel = findRightEyeModel(dojutsuEntity.eyeSlot(), dojutsuEntity.rightDojustsu());
+            AbstractShinobiEntity shinobiEntity = (AbstractShinobiEntity) entitylivingbaseIn;
+            this.leftModel = findLeftEyeModel(dojutsuEntity.eyeSlot(), shinobiEntity.getLeftDojustsu());
+            this.rightModel = findRightEyeModel(dojutsuEntity.eyeSlot(), shinobiEntity.getRightDojustsu());
             matrixStackIn.push();
             this.getEntityModel().copyModelAttributesTo(this.leftModel);
             this.getEntityModel().copyModelAttributesTo(this.rightModel);
             this.leftModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             this.rightModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-            IVertexBuilder iVertexBuilderLeft = ItemRenderer.getBuffer(bufferIn, this.leftModel.getRenderType(dojutsuEntity.leftDojustsu().getResourceLocation()), false, false);
-            if (DojutsuHelper.dojutsuNotNull(dojutsuEntity.leftDojustsu())) this.leftModel.render(matrixStackIn, iVertexBuilderLeft, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-            IVertexBuilder iVertexBuilderRight = ItemRenderer.getBuffer(bufferIn, this.rightModel.getRenderType(dojutsuEntity.rightDojustsu().getResourceLocation()), false, false);
-            if (DojutsuHelper.dojutsuNotNull(dojutsuEntity.rightDojustsu())) this.rightModel.render(matrixStackIn, iVertexBuilderRight, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            IVertexBuilder iVertexBuilderLeft = ItemRenderer.getBuffer(bufferIn, this.leftModel.getRenderType(shinobiEntity.getLeftDojustsu().getResourceLocation()), false, false);
+            if (shinobiEntity.getLeftDojustsu() != DojutsuInit.NULL) this.leftModel.render(matrixStackIn, iVertexBuilderLeft, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            IVertexBuilder iVertexBuilderRight = ItemRenderer.getBuffer(bufferIn, this.rightModel.getRenderType(shinobiEntity.getRightDojustsu().getResourceLocation()), false, false);
+            if (shinobiEntity.getRightDojustsu() != DojutsuInit.NULL) this.rightModel.render(matrixStackIn, iVertexBuilderRight, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             matrixStackIn.pop();
         }
     }

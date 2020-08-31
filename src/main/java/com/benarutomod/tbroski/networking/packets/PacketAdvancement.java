@@ -1,14 +1,9 @@
 package com.benarutomod.tbroski.networking.packets;
 
-import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.util.Iterator;
 import java.util.function.Supplier;
 
 public class PacketAdvancement {

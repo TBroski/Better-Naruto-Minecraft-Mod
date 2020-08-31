@@ -1,11 +1,11 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu.water;
 
+import com.benarutomod.tbroski.api.entity.jutsu.nature.AbstractWaterJutsuEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;

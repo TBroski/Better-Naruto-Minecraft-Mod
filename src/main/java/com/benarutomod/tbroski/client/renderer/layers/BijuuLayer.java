@@ -18,12 +18,10 @@ import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -47,16 +45,23 @@ public class BijuuLayer<T extends LivingEntity, M extends EntityModel<T>> extend
                     break;
                 }
             }
-            EntityRenderer r = Minecraft.getInstance().getRenderManager().getRenderer(bijuu);
-            if (r instanceof LivingRenderer) {
-                LivingRenderer l = (LivingRenderer) r;
-                EntityModel model = l.getEntityModel();
-                ResourceLocation texture = l.getEntityTexture(bijuu);
-
-                this.getEntityModel().copyModelAttributesTo(model);
-                model.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-                IVertexBuilder iVertexBuilder = ItemRenderer.getBuffer(bufferIn, model.getRenderType(texture), false, false);
-                model.render(matrixStackIn, iVertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            if (bijuu != null) {
+                EntityRenderer r = Minecraft.getInstance().getRenderManager().getRenderer(bijuu);
+                if (r instanceof LivingRenderer) {
+                    LivingRenderer l = (LivingRenderer) r;
+                    EntityModel model = l.getEntityModel();
+                    ResourceLocation texture = l.getEntityTexture(bijuu);
+                    matrixStackIn.push();
+                    matrixStackIn.translate(0.0, 0.0, 8.2);
+                    this.getEntityModel().copyModelAttributesTo(model);
+                    model.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+                    IVertexBuilder iVertexBuilder = ItemRenderer.getBuffer(bufferIn, model.getRenderType(texture), false, false);
+                    model.render(matrixStackIn, iVertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                    matrixStackIn.pop();
+                }
+            }
+            else {
+                System.out.println(player.getDisplayName() + " is using Tailed-Beast transformation without tailed beast.");
             }
         }
     }

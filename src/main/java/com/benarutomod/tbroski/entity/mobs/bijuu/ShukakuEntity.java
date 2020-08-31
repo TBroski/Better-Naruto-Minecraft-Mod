@@ -26,9 +26,11 @@ public class ShukakuEntity extends AbstractBijuuEntity {
 
     @Override
     public Nature[] getBijuuNatures() {
-        Nature[] natures = new Nature[2];
-        natures[0] = Nature.EARTH;
-        natures[1] = Nature.WIND;
-        return natures;
+        return new Nature[] {Nature.EARTH, Nature.WIND};
+    }
+
+    @Override
+    public BijuuAttributes[] getBijuuAttributes() {
+        return new BijuuAttributes[0];
     }
 }

@@ -5,14 +5,15 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class Config {
 
-    public static class Server {
+    public static class Common {
 
         public final ForgeConfigSpec.BooleanValue entityWorldDamage;
         public final ForgeConfigSpec.BooleanValue playerWorldDamage;
         public final ForgeConfigSpec.BooleanValue byakuganCanSeePlayers;
         public final ForgeConfigSpec.IntValue sharinganDodgedDamage;
+        public final ForgeConfigSpec.IntValue susanooStageIncrement;
 
-        public Server(ForgeConfigSpec.Builder builder) {
+        public Common(ForgeConfigSpec.Builder builder) {
 
             builder.comment("BeNM Mod Configuration")
                     .push("benarutomod");
@@ -41,15 +42,21 @@ public class Config {
                     .worldRestart()
                     .defineInRange("sharinganDodgedDamage", 2, 1, 99);
 
+            susanooStageIncrement = builder
+                    .comment("Defines the increment in ticks the player's susanoo will evolve to the next state.")
+                    .translation("config." + Main.MODID + ".susanooStageIncrement")
+                    .worldRestart()
+                    .defineInRange("susanooStageIncrement", 400, 20, 1000);
+
             builder.pop();
         }
     }
 
-    public static final ForgeConfigSpec SERVER_SPEC;
-    public static final Server SERVER;
+    public static final ForgeConfigSpec COMMON_SPEC;
+    public static final Common COMMON;
     static {
-        final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Server::new);
-        SERVER_SPEC = specPair.getRight();
-        SERVER = specPair.getLeft();
+        final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
+        COMMON_SPEC = specPair.getRight();
+        COMMON = specPair.getLeft();
     }
 }

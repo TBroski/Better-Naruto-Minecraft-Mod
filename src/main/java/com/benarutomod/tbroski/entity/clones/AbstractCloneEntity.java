@@ -8,6 +8,7 @@ import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -32,8 +33,17 @@ public abstract class AbstractCloneEntity extends CreatureEntity {
 
     public abstract int getPoofTimer();
     public abstract double getBaseHealth();
+    public abstract double getSpeed();
     protected AbstractCloneEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
+        this.experienceValue = 0;
+    }
+
+    @Override
+    protected void registerAttributes() {
+        super.registerAttributes();
+        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.getBaseHealth());
+        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(this.getSpeed());
     }
 
     @Override
@@ -71,7 +81,7 @@ public abstract class AbstractCloneEntity extends CreatureEntity {
 
 
     @OnlyIn(Dist.CLIENT)
-    public ResourceLocation getLocationSkin(){
+    public ResourceLocation getLocationSkin() {
         LivingEntity owner = (LivingEntity) this.world.getEntityByID(this.getOwnerID());
         if (owner instanceof PlayerEntity) {
             GameProfile gameProfile = ((PlayerEntity) owner).getGameProfile();

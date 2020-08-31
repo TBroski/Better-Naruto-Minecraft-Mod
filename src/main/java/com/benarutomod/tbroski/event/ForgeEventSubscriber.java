@@ -9,17 +9,17 @@ import com.benarutomod.tbroski.client.gui.container.ExtendedPlayerInventory;
 import com.benarutomod.tbroski.api.internal.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
-import com.benarutomod.tbroski.entity.projectile.jutsu.AbstractJutsuEntity;
 import com.benarutomod.tbroski.entity.shinobi.akatsuki.kakuzu.KakuzuEntity;
-import com.benarutomod.tbroski.init.EffectInit;
+import com.benarutomod.tbroski.init.DimensionInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerBodyModeSync;
+import com.benarutomod.tbroski.networking.packets.PacketSusanooItemsSync;
 import com.benarutomod.tbroski.networking.packets.PacketToggleInfusionBoolean;
+import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
 import com.benarutomod.tbroski.networking.packets.settings.PacketBackSlotSync;
 import com.benarutomod.tbroski.networking.packets.settings.PacketToggleScrollBoolean;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
+import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -28,28 +28,24 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.screen.inventory.CreativeScreen;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.command.impl.GiveCommand;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.merchant.villager.VillagerTrades;
-import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.BannerItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiContainerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -60,12 +56,12 @@ import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.awt.*;
 import java.lang.reflect.Field;
@@ -74,6 +70,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import static com.benarutomod.tbroski.init.DimensionInit.TSUKUYOMI_DIMENSION;
 
 @Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventSubscriber {
@@ -104,15 +102,7 @@ public class ForgeEventSubscriber {
                 PlayerEvents.PlayerJoinedWorld(event);
 
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) event.getEntity();
-                Advancement adv = serverPlayerEntity.server.getAdvancementManager().getAdvancement(new ResourceLocation(Main.MODID + ":shinobibeginnings"));
-                AdvancementProgress ap = serverPlayerEntity.getAdvancements().getProgress(adv);
-                if (!ap.isDone()) {
-                    Iterator iterator = ap.getRemaningCriteria().iterator();
-                    while (iterator.hasNext()) {
-                        String criterion = (String) iterator.next();
-                        serverPlayerEntity.getAdvancements().grantCriterion(adv, criterion);
-                    }
-                }
+                AdvancementHelper.grantAdvancement(serverPlayerEntity, "shinobi_beginnings");
             }
         }
     }
@@ -121,38 +111,9 @@ public class ForgeEventSubscriber {
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         PlayerEntity player = event.player;
         PlayerEvents.checkPlayerDojutsuTick(event);
-        if (player.getPersistentData().getBoolean(Main.MODID + "_tailed_beast_transformation")) {
 
-            if (player.world.isRemote) {
-                //Minecraft.getInstance().renderViewEntity = bijuu;
-            }
-        }
-
-        if (!player.world.isRemote) {
-            GlobalEvents.playerRaid(event);
-            PlayerEvents.regenerateChakra(event);
-            PlayerEvents.checkNatures(event);
-            PlayerEvents.checkInfusion(event);
+        if (player.isAlive()) {
             IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
-            if (playercap.returnBodyInfusionToggled() && playercap.hasMagnetNature()) {
-                List<ItemEntity> itemEntities = player.world.getEntitiesWithinAABB(ItemEntity.class, player.getBoundingBox().grow(5));
-                if (itemEntities.size() > 0) {
-                    Iterator iterator = itemEntities.iterator();
-                    while (iterator.hasNext()) {
-                        ItemEntity item = (ItemEntity) iterator.next();
-                        double distX = player.getPosX() - item.getPosX();
-                        double distZ = player.getPosZ() - item.getPosZ();
-                        double distY = item.getPosY() + 1.5D - item.getPosY();
-                        double dir = Math.atan2(distZ, distX);
-                        double speed = 1F / item.getDistance(player) * 0.5;
-                        if (distY < 0) {
-                            item.setMotion(item.getMotion().x, item.getMotion().y + speed, item.getMotion().z);
-                        }
-                        item.setMotion(Math.cos(dir) * speed, item.getMotion().y, item.getMotion().z);
-                        item.setMotion(item.getMotion().x, item.getMotion().y, Math.sin(dir) * speed);
-                    }
-                }
-            }
             for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
                 if (jutsu.isToggle()) {
                     String nbtName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
@@ -160,15 +121,43 @@ public class ForgeEventSubscriber {
                         int taijutsuModifier0 = 0;
                         int taijutsuModifier1 = 0;
                         if (playercap.returnTaijutsu() >= 15) {
-                            taijutsuModifier0 = 3; taijutsuModifier1 = 2;
+                            taijutsuModifier0 = 3;
+                            taijutsuModifier1 = 2;
+                        } else if (playercap.returnTaijutsu() >= 10) {
+                            taijutsuModifier0 = 2;
+                            taijutsuModifier1 = 1;
+                        } else if (playercap.returnTaijutsu() >= 5) {
+                            taijutsuModifier0 = 1;
+                            taijutsuModifier1 = 0;
                         }
-                        else if (playercap.returnTaijutsu() >= 10) {
-                            taijutsuModifier0 = 2; taijutsuModifier1 = 1;
+                        jutsu.act(player, taijutsuModifier0, taijutsuModifier1);
+                    }
+                }
+            }
+
+            PlayerEvents.checkNatures(event);
+            if (!player.world.isRemote) {
+                GlobalEvents.playerRaid(event);
+                GlobalEvents.summonBrother(event);
+                PlayerEvents.regenerateChakra(event);
+                PlayerEvents.checkInfusion(event);
+                if (playercap.returnBodyInfusionToggled() && playercap.hasMagnetNature()) {
+                    List<ItemEntity> itemEntities = player.world.getEntitiesWithinAABB(ItemEntity.class, player.getBoundingBox().grow(5));
+                    if (itemEntities.size() > 0) {
+                        Iterator iterator = itemEntities.iterator();
+                        while (iterator.hasNext()) {
+                            ItemEntity item = (ItemEntity) iterator.next();
+                            double distX = player.getPosX() - item.getPosX();
+                            double distZ = player.getPosZ() - item.getPosZ();
+                            double distY = item.getPosY() + 1.5D - item.getPosY();
+                            double dir = Math.atan2(distZ, distX);
+                            double speed = 0.2F / item.getDistance(player) * 0.5;
+                            if (distY < 0) {
+                                item.setMotion(item.getMotion().x, item.getMotion().y + speed, item.getMotion().z);
+                            }
+                            item.setMotion(Math.cos(dir) * speed, item.getMotion().y, item.getMotion().z);
+                            item.setMotion(item.getMotion().x, item.getMotion().y, Math.sin(dir) * speed);
                         }
-                        else if (playercap.returnTaijutsu() >= 5) {
-                            taijutsuModifier0 = 1; taijutsuModifier1 = 0;
-                        }
-                        jutsu.act((ServerPlayerEntity) player, taijutsuModifier0, taijutsuModifier1);
                     }
                 }
             }
@@ -227,6 +216,10 @@ public class ForgeEventSubscriber {
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(1, true, targetcap.returnHandInfusionToggled(), targetID));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(2, true, targetcap.returnBodyInfusionToggled(), targetID));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(3, true, targetcap.returnLegInfusionToggled(), targetID));
+                NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketSusanooItemsSync(targetID, targetcap.getSusanooMainHand(), targetcap.getSusanooOffHand(), true));
+                for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                    NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketJutsuNBTSync(targetID, jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName(), targetcap.hasJutsuBoolean(jutsu)));
+                }
                 if (target.inventory instanceof ExtendedPlayerInventory) NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketBackSlotSync(targetID, !Main.getBackpackStack(target).isEmpty(), Main.getBackpackStack(target).getItem().getRegistryName().toString()));
             }
         }
@@ -274,7 +267,7 @@ public class ForgeEventSubscriber {
     public void renderName(PlayerEvent.NameFormat event) {
 
         String name = event.getPlayer().getGameProfile().getName();
-        String respected = "[Creator] TBroski";
+        String respected = "[Mod Creator] TBroski";
         String tbroski = "TBroski";
         System.out.println(name.equals(tbroski));
         if(name.equals(tbroski))
@@ -287,6 +280,15 @@ public class ForgeEventSubscriber {
     @SubscribeEvent
     public void livingDeath(LivingDeathEvent event) {
         PlayerEvents.checkPlayerDojutsuDeath(event);
+        if (event.getEntity() instanceof PlayerEntity) {
+            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+                if (event.getEntity().getPersistentData().getBoolean(jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName())) {
+                    if (jutsu.throwDeathEvent((PlayerEntity) event.getEntity())) {
+                        event.setCanceled(true);
+                    }
+                }
+            }
+        }
     }
 
     @SubscribeEvent
@@ -294,26 +296,18 @@ public class ForgeEventSubscriber {
         DamageSource source = event.getSource();
         KakuzuEntity.cancelDamage(event);
         PlayerEvents.checkPlayerDojutsuDamage(event);
-        if (!event.getEntity().world.isRemote && source.getImmediateSource() instanceof AbstractJutsuEntity && event.getEntity() instanceof PlayerEntity && event.getEntity().getPersistentData().getBoolean(Main.MODID + "_preta_path")) {
-            PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
-            LazyOptional<IPlayerHandler> playerc = playerEntity.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-            IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
-            for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
-                if (jutsu.getName().equalsIgnoreCase(((AbstractJutsuEntity) source.getImmediateSource()).getAffiliatedJutsuName())) {
-                    player_cap.addChakra(jutsu.getChakraCost());
-                    break;
+        for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
+            if (source.getImmediateSource() instanceof PlayerEntity) {
+                PlayerEntity attacker = (PlayerEntity) source.getImmediateSource();
+                LivingEntity target = event.getEntityLiving();
+                if (attacker.getPersistentData().getBoolean(jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName())) {
+                    jutsu.throwAttackEvent(attacker, target);
                 }
-            }
-        }
-        if (source.damageType.equalsIgnoreCase("player")) {
-            PlayerEntity playerEntity = (PlayerEntity) source.getTrueSource();
-            LazyOptional<IPlayerHandler> playerc = playerEntity.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-            IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
-            if (playerEntity.getPersistentData().getBoolean(Main.MODID + "_molten_fist")) {
-                event.getEntityLiving().setFire(2);
-            }
-            if (playerEntity.getPersistentData().getBoolean(Main.MODID + "_fist_rock")) {
-                event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1));
+                if (target instanceof PlayerEntity && target.getPersistentData().getBoolean(jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName())) {
+                    if (jutsu.throwDamageEvent(event.getAmount(), event.getSource(), (PlayerEntity) target)) {
+                        event.setCanceled(true);
+                    }
+                }
             }
         }
     }
@@ -339,15 +333,10 @@ public class ForgeEventSubscriber {
                 bijuuEntities.add((AbstractBijuuEntity) entity);
             }
         }
-        if (Minecraft.getInstance().player.isPotionActive(EffectInit.TSUKUYOMI.get()))
-        {
-            event.setDensity(0.5F);
-        }
-        else if (bijuuEntities.size() > 0) {
+        if (bijuuEntities.size() > 0) {
             event.setDensity(0.001F);
         }
-        else
-        {
+        else if (!Minecraft.getInstance().player.isPotionActive(Effects.BLINDNESS)){
             event.setDensity(0.0001F);
         }
         event.setCanceled(true);
@@ -365,13 +354,6 @@ public class ForgeEventSubscriber {
         }
         if (bijuuEntities.size() > 0) {
             Color color = bijuuEntities.get(0).getChakraColor().getChakraColor();
-            event.setRed(color.getRed());
-            event.setGreen(color.getGreen());
-            event.setBlue(color.getBlue());
-        }
-        if (Minecraft.getInstance().player.isPotionActive(EffectInit.TSUKUYOMI.get()))
-        {
-            Color color = Color.RED;
             event.setRed(color.getRed());
             event.setGreen(color.getGreen());
             event.setBlue(color.getBlue());
@@ -538,6 +520,13 @@ public class ForgeEventSubscriber {
         catch(Exception e)
         {
             e.printStackTrace();
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRegisterDimensions(final RegisterDimensionsEvent event) {
+        if (DimensionType.byName(TSUKUYOMI_DIMENSION) == null) {
+            DimensionManager.registerDimension(TSUKUYOMI_DIMENSION, DimensionInit.TSUKUYOMI.get(), null, true);
         }
     }
 }

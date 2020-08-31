@@ -15,7 +15,7 @@ public class BijuuJutsuScreen extends AbstractJutsuScreen {
     private ArrayList<BeNMJutsu> jutsus = new ArrayList<>();
 
     public BijuuJutsuScreen() {
-        super(new TranslationTextComponent("gui." + Main.MODID + ".title.sharinganjutsu"));
+        super(new TranslationTextComponent("gui." + Main.MODID + ".title.bijuujutsu"));
         for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
             if (jutsu.getType() == BeNMJutsu.Type.BIJUU_ABILITY) {
                 this.jutsus.add(jutsu);
@@ -45,7 +45,7 @@ public class BijuuJutsuScreen extends AbstractJutsuScreen {
                 if (button instanceof GuiButtonJutsu) {
                     GuiButtonJutsu buttonJutsu = (GuiButtonJutsu) button;
                     if (buttonJutsu.getJutsuName().equalsIgnoreCase(jutsu.getName())) {
-                        jutsu.update(buttonJutsu, playerCapability);
+                        jutsu.update(buttonJutsu, jutsu, playerCapability);
                     }
                 }
             }
