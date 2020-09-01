@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:diamond_block"
+      "item": "benarutomod:earth_symbol"
     },
     "title": {
-      "translate": "advancements.benarutomod.anbu.title"
+      "translate": "advancements.benarutomod.earthnature.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.anbu.text"
+      "translate": "advancements.benarutomod.earthnature.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 15
+    "experience": 5
   },
-  "parent": "benarutomod:jonin"
+  "parent": "benarutomod:chakra/chakra"
 }

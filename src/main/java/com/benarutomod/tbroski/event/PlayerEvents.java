@@ -140,8 +140,9 @@ public class PlayerEvents {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketClanSync(randomClan.getString(), true));
 
             if (player_cap.returnPlayerClan().getClanDojutsu() != DojutsuInit.NULL) {
-                AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, "dojutsu");
-                AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, player_cap.returnPlayerClan().getClanDojutsu().getString());
+                AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, Main.MODID + ":dojutsu/dojutsu");
+                if (player_cap.returnPlayerClan().getClanDojutsu().getAdvancement() != null)
+                    AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, player_cap.returnPlayerClan().getClanDojutsu().getAdvancement());
                 player_cap.setPlayerLeftDojutsu(player_cap.returnPlayerClan().getClanDojutsu());
                 player_cap.setPlayerRightDojutsu(player_cap.returnPlayerClan().getClanDojutsu());
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketPlayerDojutsuSync(player_cap.returnPlayerLeftDojutsu().getString(), true, true));
@@ -257,13 +258,13 @@ public class PlayerEvents {
             if (entity.getClan() == ClanInit.UCHIHA) {
                 if (player_cap.returnPlayerLeftDojutsu() == DojutsuInit.SHARINGAN) {
                     player_cap.setPlayerLeftDojutsu(DojutsuInit.MANGEKYOU_SHARINGAN);
-                    AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, "mangekyou_sharingan");
+                    AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, Main.MODID + ":dojutsu/mangekyou_sharingan");
                     NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketPlayerDojutsuSync(player_cap.returnPlayerLeftDojutsu().getString(), true, true));
                     player.sendStatusMessage(new TranslationTextComponent("event." + Main.MODID + ".livingdeath.mangekyousharinganmessage"), true);
                 }
                 if (player_cap.returnPlayerRightDojutsu() == DojutsuInit.SHARINGAN) {
                     player_cap.setPlayerRightDojutsu(DojutsuInit.MANGEKYOU_SHARINGAN);
-                    AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, "mangekyou_sharingan");
+                    AdvancementHelper.grantAdvancement((ServerPlayerEntity) player, Main.MODID + ":dojutsu/mangekyou_sharingan");
                     NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketPlayerDojutsuSync(player_cap.returnPlayerRightDojutsu().getString(), false, true));
                     player.sendStatusMessage(new TranslationTextComponent("event." + Main.MODID + ".livingdeath.mangekyousharinganmessage"), true);
                 }
@@ -287,13 +288,13 @@ public class PlayerEvents {
             taijutsuModifier0 = 1; taijutsuModifier1 = 0;
         }
 
-        if (player_cap.returnHandInfusionToggled()){
+        if (player_cap.returnHandInfusionToggled()) {
             EffectsJutsu.HandInfusion(event.player, 3, taijutsuModifier0, taijutsuModifier1);
         }
-        if (player_cap.returnBodyInfusionToggled()){
+        if (player_cap.returnBodyInfusionToggled()) {
             EffectsJutsu.BodyInfusion(event.player, 4, taijutsuModifier0, taijutsuModifier1);
         }
-        if (player_cap.returnLegInfusionToggled()){
+        if (player_cap.returnLegInfusionToggled()) {
             EffectsJutsu.LegInfusion(event.player, 3, taijutsuModifier0, taijutsuModifier1);
         }
     }

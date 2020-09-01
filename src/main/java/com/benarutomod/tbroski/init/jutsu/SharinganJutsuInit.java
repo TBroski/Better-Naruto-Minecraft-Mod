@@ -33,7 +33,7 @@ import java.util.List;
 public class SharinganJutsuInit {
 
     public static void registerSharinganJutsu(BeNMRegistry.JutsuRegistry jutsuRegistry, IBeNMPlugin pluginIn) {
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "amaterasu", BeNMJutsu.Type.SHARINGAN_ABILITY, 15, 300F, 240, 0, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "amaterasu", BeNMJutsu.Type.SHARINGAN_ABILITY, 15, 300F, 496, 0, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote)
                 checkForBlindess(playerIn, playerCapability, 6);
             AmaterasuJutsuEntity entity = new AmaterasuJutsuEntity(playerIn.world, playerIn);
@@ -42,7 +42,7 @@ public class SharinganJutsuInit {
             playerIn.world.addEntity(entity);
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "tsukuyomi", BeNMJutsu.Type.SHARINGAN_ABILITY, 8, 200F, 240, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "tsukuyomi", BeNMJutsu.Type.SHARINGAN_ABILITY, 8, 200F, 496, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote)
                 checkForBlindess(playerIn, playerCapability, 6);
             if (!playerIn.world.isRemote) {
@@ -58,10 +58,7 @@ public class SharinganJutsuInit {
                     playerIn.addPotionEffect(new EffectInstance(EffectInit.TSUKUYOMI.get(), 400));
                     entity.addPotionEffect(new EffectInstance(EffectInit.TSUKUYOMI.get(), 400));
                     playerIn.setPositionAndUpdate(x, 2, z);
-                    entity.setPositionAndUpdate(x - 5, 2, z);
-                    System.out.println(entity.getPosition());
-                    System.out.println(entity.isAlive());
-                    System.out.println(entity.dimension.getRegistryName().getPath());
+                    entity.setPosition(x - 5, 2, z);
                 }
             }
         }).setExtraJutsuChecks((playerIn, taijutsuModifier0, taijutsuModifier1) -> {
@@ -89,7 +86,7 @@ public class SharinganJutsuInit {
             return false;
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "susanoo", BeNMJutsu.Type.SHARINGAN_ABILITY, 24, 0.3F, 240, 32, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "susanoo", BeNMJutsu.Type.SHARINGAN_ABILITY, 24, 0.3F, 496, 32, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote)
                 checkForBlindess(playerIn, playerCapability, 1500);
             int tick = playerIn.getPersistentData().getInt(Main.MODID + "_susanoo_tick");

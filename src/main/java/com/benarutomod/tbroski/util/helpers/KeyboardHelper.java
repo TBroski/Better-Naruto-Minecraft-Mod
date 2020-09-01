@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.util.helpers;
 
+import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.client.gui.player.ShinobiStats;
 import com.benarutomod.tbroski.api.enums.Nature;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
@@ -53,7 +54,7 @@ public class KeyboardHelper {
             IPlayerHandler player_cap = playerCapability.orElse(new PlayerCapability());
             if (KeybindInit.HAND_INFUSION.isPressed()) {
                 if (player.getHeldItem(Hand.MAIN_HAND).getItem() == Items.PAPER && !player_cap.hasChakraBoolean()) {
-                    NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("chakra"));
+                    NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement(Main.MODID + ":chakra/chakra"));
                     player_cap.setChakraBoolean(true);
                     NetworkLoader.INSTANCE.sendToServer(new PacketChakraAddition());
                 }

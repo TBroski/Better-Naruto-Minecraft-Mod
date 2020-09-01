@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "benarutomod:earth_symbol"
+      "item": "benarutomod:fire_symbol"
     },
     "title": {
-      "translate": "advancements.benarutomod.earthnature.title"
+      "translate": "advancements.benarutomod.firenature.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.earthnature.text"
+      "translate": "advancements.benarutomod.firenature.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -22,5 +22,5 @@
   "rewards": {
     "experience": 5
   },
-  "parent": "benarutomod:chakra"
+  "parent": "benarutomod:chakra/chakra"
 }

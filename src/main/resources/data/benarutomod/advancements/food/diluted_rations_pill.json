@@ -22,5 +22,5 @@
   "rewards": {
     "experience": 5
   },
-  "parent": "benarutomod:rations_pill"
+  "parent": "benarutomod:food/rations_pill"
 }

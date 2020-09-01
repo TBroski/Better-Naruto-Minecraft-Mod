@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:egg"
+      "item": "minecraft:stone"
     },
     "title": {
-      "translate": "advancements.benarutomod.dojutsu.title"
+      "translate": "advancements.benarutomod.chunin.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.dojutsu.text"
+      "translate": "advancements.benarutomod.chunin.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 10
+    "experience": 5
   },
-  "parent": "benarutomod:dojutsu"
+  "parent": "benarutomod:shinobi/genin"
 }

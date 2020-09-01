@@ -26,6 +26,8 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
 
     GuiButtonSymbol magnetSymbol;
     GuiButtonSymbol woodSymbol;
+    GuiButtonSymbol lavaSymbol;
+    GuiButtonSymbol boilSymbol;
 
     protected PlayerJutsuScreen() {
         super(new TranslationTextComponent("gui." + Main.MODID + ".title.bodychakra"));
@@ -106,11 +108,27 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
             }
         }));
         addButton(woodSymbol = new GuiButtonSymbol(this.guiLeft + 5, this.guiTop + 5, 0, 60, $ -> {
-            if (playerCapability.hasMagnetNature()) {
+            if (playerCapability.hasWoodNature()) {
                 Minecraft.getInstance().displayGuiScreen(new WoodNatureJutsu());
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Wood Nature."));
+            }
+        }));
+        addButton(lavaSymbol = new GuiButtonSymbol(this.guiLeft - 5, this.guiTop + 10, 0, 70, $ -> {
+            if (playerCapability.hasLavaNature()) {
+                Minecraft.getInstance().displayGuiScreen(new LavaNatureJutsu());
+            }
+            else {
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Lava Nature."));
+            }
+        }));
+        addButton(boilSymbol = new GuiButtonSymbol(this.guiLeft - 10, this.guiTop - 10, 0, 80, $ -> {
+            if (playerCapability.hasBoilNature()) {
+                Minecraft.getInstance().displayGuiScreen(new BoilNatureJutsu());
+            }
+            else {
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Boil Nature."));
             }
         }));
     }
@@ -134,6 +152,8 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
         if (openedTab != 2) {
             magnetSymbol.visible = false;
             woodSymbol.visible = false;
+            lavaSymbol.visible = false;
+            boilSymbol.visible = false;
         }
 
         switch (openedTab) {
@@ -156,8 +176,12 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
             case 2:
                 magnetSymbol.visible = true;
                 woodSymbol.visible = true;
+                lavaSymbol.visible = true;
+                boilSymbol.visible = true;
                 magnetSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 woodSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                lavaSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                boilSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 break;
         }
     }

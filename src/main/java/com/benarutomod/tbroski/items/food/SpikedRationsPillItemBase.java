@@ -7,6 +7,7 @@ import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketAdvancement;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraSync;
+import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Food;
@@ -31,7 +32,7 @@ public class SpikedRationsPillItemBase extends Item {
 
             player_cap.addChakra(35);
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketChakraSync(player_cap.returnChakra()));
-            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("spiked_rations_pill"));
+            AdvancementHelper.grantAdvancement(player, Main.MODID + ":food/spiked_rations_pill");
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }

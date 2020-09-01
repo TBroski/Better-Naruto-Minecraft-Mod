@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "benarutomod:rations_pill"
+      "item": "minecraft:egg"
     },
     "title": {
-      "translate": "advancements.benarutomod.rations_pill.title"
+      "translate": "advancements.benarutomod.sharingan.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.rations_pill.text"
+      "translate": "advancements.benarutomod.sharingan.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -22,5 +22,5 @@
   "rewards": {
     "experience": 10
   },
-  "parent": "benarutomod:shinobibeginnings"
+  "parent": "benarutomod:dojutsu/dojutsu"
 }

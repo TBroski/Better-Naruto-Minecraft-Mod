@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "benarutomod:chakra_symbol"
+      "item": "minecraft:dirt"
     },
     "title": {
-      "translate": "advancements.benarutomod.chakra.title"
+      "translate": "advancements.benarutomod.genin.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.chakra.text"
+      "translate": "advancements.benarutomod.genin.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 10
+    "experience": 5
   },
-  "parent": "benarutomod:shinobibeginnings"
+  "parent": "benarutomod:shinobi_beginnings"
 }

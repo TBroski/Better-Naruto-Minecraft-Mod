@@ -13,12 +13,14 @@ import com.benarutomod.tbroski.entity.shinobi.shinobi.BrotherSharinganEntity;
 import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerDojutsuSync;
+import com.benarutomod.tbroski.networking.packets.PacketShinobiLevel;
 import com.benarutomod.tbroski.tileentity.DojutsuSkullTileEntity;
 import com.benarutomod.tbroski.util.helpers.TextureHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
@@ -70,6 +72,7 @@ public class DojutsuTransplant<T extends AbstractShinobiEntity & IDojutsuEntity>
             else {
                 playerc.setPlayerLeftDojutsu(this.dojutsuToggle);
             }
+            setChunin(player);
             NetworkLoader.INSTANCE.sendToServer(new PacketPlayerDojutsuSync(playerc.returnPlayerLeftDojutsu().getString(), true, false));
             this.dojutsuToggle = DojutsuInit.NULL;
             this.toggledDojutsu = 0;
@@ -88,6 +91,7 @@ public class DojutsuTransplant<T extends AbstractShinobiEntity & IDojutsuEntity>
             else {
                 playerc.setPlayerRightDojutsu(this.dojutsuToggle);
             }
+            setChunin(player);
             NetworkLoader.INSTANCE.sendToServer(new PacketPlayerDojutsuSync(playerc.returnPlayerRightDojutsu().getString(), false, false));
             this.dojutsuToggle = DojutsuInit.NULL;
             this.toggledDojutsu = 0;
@@ -159,6 +163,16 @@ public class DojutsuTransplant<T extends AbstractShinobiEntity & IDojutsuEntity>
             mc.textureManager.bindTexture(TextureHelper.getResourceLocationFromEntity(mc, this.transplantingEntity));
             mc.ingameGUI.blit(this.guiLeft + 64, this.guiTop - 64, (8 * 16), (8 * 16), (8 * 16), (8 * 16), 1024, 1024);
             this.checkToggled();
+        }
+    }
+
+    private static void setChunin(PlayerEntity playerIn) {
+        LazyOptional<IPlayerHandler> player_cap = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
+
+        if (playerc.returnShinobiLevel() < 2) {
+            playerc.setShinobiLevel(2);
+            NetworkLoader.INSTANCE.sendToServer(new PacketShinobiLevel(2, false));
         }
     }
 }

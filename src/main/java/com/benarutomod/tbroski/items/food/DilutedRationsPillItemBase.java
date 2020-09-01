@@ -4,6 +4,7 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.init.EffectInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketAdvancement;
+import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Food;
@@ -24,7 +25,7 @@ public class DilutedRationsPillItemBase extends Item {
             ServerPlayerEntity player = (ServerPlayerEntity) entityLiving;
 
             entityLiving.addPotionEffect(new EffectInstance(EffectInit.CHAKRA_REG.get(), 50));
-            NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("diluted_rations_pill"));
+            AdvancementHelper.grantAdvancement(player, Main.MODID + ":food/diluted_rations_pill");
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }

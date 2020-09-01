@@ -1,6 +1,6 @@
-package com.benarutomod.tbroski.entity.projectile.jutsu.lava;
+package com.benarutomod.tbroski.entity.projectile.jutsu.boil;
 
-import com.benarutomod.tbroski.api.entity.jutsu.nature.AbstractLavaEntity;
+import com.benarutomod.tbroski.api.entity.jutsu.nature.AbstractBoilJutsuEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.entity.Entity;
@@ -13,23 +13,23 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class LavaShurikenEntity extends AbstractLavaEntity {
-    public LavaShurikenEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
+public class BurningAquaGunEntity extends AbstractBoilJutsuEntity {
+    public BurningAquaGunEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
-    public LavaShurikenEntity(LivingEntity livingEntityIn, World worldIn) {
-        super(EntityInit.LAVA_SHURIKEN_JUTSU.get(), livingEntityIn, worldIn);
+    public BurningAquaGunEntity(LivingEntity livingEntityIn, World worldIn) {
+        super(EntityInit.BURNING_AQUA_GUN_JUTSU.get(), livingEntityIn, worldIn);
     }
 
     @Override
     public String getAffiliatedJutsuName() {
-        return "lava_shuriken";
+        return "burning_aqua_gun";
     }
 
     @Override
     protected Item getDefaultItem() {
-        return ItemInit.LAVA_SHURIKEN_JUTSU.get();
+        return ItemInit.BURNING_AQUA_GUN_JUTSU.get();
     }
 
     @Override
@@ -38,7 +38,6 @@ public class LavaShurikenEntity extends AbstractLavaEntity {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
             entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)2);
-            entity.setFire(2);
         }
 
         if (!this.world.isRemote) {

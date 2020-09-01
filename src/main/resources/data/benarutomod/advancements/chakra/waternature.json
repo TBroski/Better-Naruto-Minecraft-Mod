@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:iron_block"
+      "item": "benarutomod:water_symbol"
     },
     "title": {
-      "translate": "advancements.benarutomod.jonin.title"
+      "translate": "advancements.benarutomod.waternature.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.jonin.text"
+      "translate": "advancements.benarutomod.waternature.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 10
+    "experience": 5
   },
-  "parent": "benarutomod:chunin"
+  "parent": "benarutomod:chakra/chakra"
 }

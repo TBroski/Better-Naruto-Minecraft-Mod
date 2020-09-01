@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:dirt"
+      "item": "minecraft:diamond_block"
     },
     "title": {
-      "translate": "advancements.benarutomod.genin.title"
+      "translate": "advancements.benarutomod.anbu.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.genin.text"
+      "translate": "advancements.benarutomod.anbu.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 5
+    "experience": 15
   },
-  "parent": "benarutomod:shinobibeginnings"
+  "parent": "benarutomod:shinobi/jonin"
 }

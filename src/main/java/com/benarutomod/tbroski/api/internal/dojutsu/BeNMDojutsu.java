@@ -1,6 +1,8 @@
 package com.benarutomod.tbroski.api.internal.dojutsu;
 
 import com.benarutomod.tbroski.Main;
+import net.minecraft.advancements.PlayerAdvancements;
+import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.util.ResourceLocation;
 
 public class BeNMDojutsu {
@@ -10,6 +12,7 @@ public class BeNMDojutsu {
     private final int size;
     private ResourceLocation resourceLocation;
 
+    private String advancement;
     private boolean seeChakra;
     private boolean damageDodgable;
     private boolean restrictsChakra;
@@ -63,6 +66,11 @@ public class BeNMDojutsu {
         return this;
     }
 
+    public BeNMDojutsu setAdvancement(String advancement) {
+        this.advancement = advancement;
+        return this;
+    }
+
 
     public boolean canSeeChakra() {
         return this.seeChakra;
@@ -80,6 +88,9 @@ public class BeNMDojutsu {
         return this.eightPaths;
     }
 
+    public String getAdvancement() {
+        return advancement;
+    }
 
     public enum Type {
         MISC, SHARINGAN, BYAKUGAN,

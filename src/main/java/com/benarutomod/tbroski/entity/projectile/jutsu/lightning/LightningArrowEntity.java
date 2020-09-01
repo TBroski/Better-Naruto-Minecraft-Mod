@@ -11,6 +11,10 @@ import net.minecraft.network.IPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -46,6 +50,9 @@ public class LightningArrowEntity extends AbstractLightningJutsuEntity {
                 livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1));
             }
             entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)3);
+        } else if (result.getType() == RayTraceResult.Type.BLOCK) {
+            BlockPos block = ((BlockRayTraceResult) result).getPos();
+            world.playSound(null, block, SoundEvents.ENTITY_ARROW_HIT, SoundCategory.NEUTRAL, 0.7F, 0.4F);
         }
 
         if (!this.world.isRemote) {

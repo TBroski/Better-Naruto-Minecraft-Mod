@@ -10,6 +10,7 @@ import com.benarutomod.tbroski.entity.shinobi.shinobi.BrotherSharinganEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerDojutsuSync;
+import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,11 +40,13 @@ public class RiceItemBase extends Item {
             brother.setOwnerID(context.getPlayer().getEntityId());
             brother.setPosition(context.getPos().getX(), context.getPos().getY() + 1, context.getPos().getZ());
             context.getPlayer().world.addEntity(brother);*/
-            LazyOptional<IPlayerHandler> player_cap = context.getPlayer().getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+/*            LazyOptional<IPlayerHandler> player_cap = context.getPlayer().getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
             for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
                 System.out.println(jutsu.getName() + " " + playerc.hasJutsuBoolean(jutsu));
-            }
+            }*/
+        if (!context.getPlayer().world.isRemote)
+            AdvancementHelper.grantAdvancement((ServerPlayerEntity) context.getPlayer(), Main.MODID + ":shinobi/jonin");
         //}
         return super.onItemUse(context);
     }

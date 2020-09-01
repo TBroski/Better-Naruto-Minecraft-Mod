@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "benarutomod:water_symbol"
+      "item": "benarutomod:rations_pill"
     },
     "title": {
-      "translate": "advancements.benarutomod.waternature.title"
+      "translate": "advancements.benarutomod.rations_pill.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.waternature.text"
+      "translate": "advancements.benarutomod.rations_pill.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 5
+    "experience": 10
   },
-  "parent": "benarutomod:chakra"
+  "parent": "benarutomod:shinobi_beginnings"
 }

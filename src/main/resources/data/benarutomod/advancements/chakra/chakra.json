@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:stone"
+      "item": "benarutomod:chakra_symbol"
     },
     "title": {
-      "translate": "advancements.benarutomod.chunin.title"
+      "translate": "advancements.benarutomod.chakra.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.chunin.text"
+      "translate": "advancements.benarutomod.chakra.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 5
+    "experience": 10
   },
-  "parent": "benarutomod:genin"
+  "parent": "benarutomod:shinobi_beginnings"
 }

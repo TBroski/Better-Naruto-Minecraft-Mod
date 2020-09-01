@@ -39,5 +39,10 @@ public class ScorchingStreamRockEntity extends AbstractLavaEntity {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
             entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)5);
         }
+
+        if (!this.world.isRemote) {
+            this.world.setEntityState(this, (byte)3);
+            this.remove();
+        }
     }
 }

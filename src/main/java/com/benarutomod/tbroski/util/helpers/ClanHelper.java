@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.util.helpers;
 
+import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.api.enums.Nature;
 import com.benarutomod.tbroski.api.internal.BeNMClan;
 import com.benarutomod.tbroski.api.BeNMRegistry;
@@ -37,27 +38,27 @@ public class ClanHelper {
                case 0:
                    playercap.setFireNature(true);
                    NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(1, true, true, true));
-                   AdvancementHelper.grantAdvancement(player, "firenature");
+                   AdvancementHelper.grantAdvancement(player, Main.MODID + ":chakra/firenature");
                    return Nature.FIRE;
                case 1:
                    playercap.setWaterNature(true);
                    NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(2, true, true, true));
-                   AdvancementHelper.grantAdvancement(player, "waternature");
+                   AdvancementHelper.grantAdvancement(player, Main.MODID + ":chakra/waternature");
                    return Nature.WATER;
                case 2:
                    playercap.setLightningNature(true);
                    NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(5, true, true, true));
-                   AdvancementHelper.grantAdvancement(player, "lightningnature");
+                   AdvancementHelper.grantAdvancement(player, Main.MODID + ":chakra/lightningnature");
                    return Nature.LIGHTNING;
                case 3:
                    playercap.setWindNature(true);
                    NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(4, true, true, true));
-                   AdvancementHelper.grantAdvancement(player, "windnature");
+                   AdvancementHelper.grantAdvancement(player, Main.MODID + ":chakra/windnature");
                    return Nature.WIND;
                case 4:
                    playercap.setEarthNature(true);
                    NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(3, true, true, true));
-                   AdvancementHelper.grantAdvancement(player, "earthnature");
+                   AdvancementHelper.grantAdvancement(player, Main.MODID + ":chakra/earthnature");
                    return Nature.EARTH;
            }
         }
@@ -66,27 +67,27 @@ public class ClanHelper {
             case FIRE:
                 playercap.setFireNature(true);
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(1, true, true, true));
-                AdvancementHelper.grantAdvancement(player, "firenature");
+                AdvancementHelper.grantAdvancement(player, Main.MODID + ":firenature");
                 return Nature.FIRE;
             case WATER:
                 playercap.setWaterNature(true);
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(2, true, true, true));
-                AdvancementHelper.grantAdvancement(player, "waternature");
+                AdvancementHelper.grantAdvancement(player, Main.MODID + ":waternature");
                 return Nature.WATER;
             case LIGHTNING:
                 playercap.setLightningNature(true);
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(5, true, true, true));
-                AdvancementHelper.grantAdvancement(player, "lightningnature");
+                AdvancementHelper.grantAdvancement(player, Main.MODID + ":lightningnature");
                 return Nature.LIGHTNING;
             case WIND:
                 playercap.setWindNature(true);
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(4, true, true, true));
-                AdvancementHelper.grantAdvancement(player, "windnature");
+                AdvancementHelper.grantAdvancement(player, Main.MODID + ":windnature");
                 return Nature.WIND;
             case EARTH:
                 playercap.setEarthNature(true);
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketNature(3, true, true, true));
-                AdvancementHelper.grantAdvancement(player, "earthnature");
+                AdvancementHelper.grantAdvancement(player, Main.MODID + ":earthnature");
                 return Nature.EARTH;
         }
 

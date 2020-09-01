@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Particles {
 
-    public static void addParticles(LivingEntity entity, IParticleData particleType, int loopAmount)
+    public static void addParticles(LivingEntity entity, IParticleData particleType, int spread, int loopAmount)
     {
         if (!entity.world.isRemote) {
             System.out.println("Can't spawn particles server-side.");
@@ -18,12 +18,17 @@ public class Particles {
         }
         for (int i = 0; i < loopAmount; i++) {
             if (Minecraft.getInstance().world != null) {
-                Minecraft.getInstance().world.addParticle(particleType, entity.getPosX(), entity.getPosY(), entity.getPosZ(), 0.1, 0.1, 0.1);
+                if (entity.getRNG().nextBoolean()) {
+                    Minecraft.getInstance().world.addParticle(particleType, entity.getPosX() - entity.getRNG().nextInt(spread), entity.getPosY() - entity.getRNG().nextInt(spread), entity.getPosZ() - entity.getRNG().nextInt(spread), 0.1 + (entity.getRNG().nextInt(spread) / 10), 0.1 + (entity.getRNG().nextInt(spread) / 10), 0.1 + (entity.getRNG().nextInt(spread) / 10));
+                }
+                else {
+                    Minecraft.getInstance().world.addParticle(particleType, entity.getPosX() + entity.getRNG().nextInt(spread), entity.getPosY() + entity.getRNG().nextInt(spread), entity.getPosZ() + entity.getRNG().nextInt(spread), 0.1 + (entity.getRNG().nextInt(spread) / 10), 0.1 + (entity.getRNG().nextInt(spread) / 10), 0.1 + (entity.getRNG().nextInt(spread) / 10));
+                }
             }
         }
     }
 
-    public static void addParticles(BlockPos blockPosIn, World worldIn, IParticleData particleType, int loopAmount)
+    public static void addParticles(BlockPos blockPosIn, World worldIn, IParticleData particleType, int spread, int loopAmount)
     {
         if (!worldIn.isRemote) {
             System.out.println("Can't spawn particles server-side.");
@@ -31,7 +36,12 @@ public class Particles {
         }
         if (worldIn != null) {
             for (int i = 0; i < loopAmount; i++) {
-                worldIn.addParticle(particleType, blockPosIn.getX() + (new Random().nextInt(5) * 0.1), blockPosIn.getY()+ (new Random().nextInt(5) * 0.1), blockPosIn.getZ()+ (new Random().nextInt(5) * 0.1), 0.1, 0.1, 0.1);
+                if (worldIn.getRandom().nextBoolean()) {
+                    Minecraft.getInstance().world.addParticle(particleType, blockPosIn.getX() - worldIn.getRandom().nextInt(spread), blockPosIn.getY() - worldIn.getRandom().nextInt(spread), blockPosIn.getZ() - worldIn.getRandom().nextInt(spread), 0.1 + (worldIn.getRandom().nextInt(spread) / 10), 0.1 + (worldIn.getRandom().nextInt(spread) / 10), 0.1 + (worldIn.getRandom().nextInt(spread) / 10));
+                }
+                else {
+                    Minecraft.getInstance().world.addParticle(particleType, blockPosIn.getX() + worldIn.getRandom().nextInt(spread), blockPosIn.getY() + worldIn.getRandom().nextInt(spread), blockPosIn.getZ() + worldIn.getRandom().nextInt(spread), 0.1 + (worldIn.getRandom().nextInt(spread) / 10), 0.1 + (worldIn.getRandom().nextInt(spread) / 10), 0.1 + (worldIn.getRandom().nextInt(spread) / 10));
+                }
             }
         }
     }

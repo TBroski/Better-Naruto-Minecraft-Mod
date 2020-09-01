@@ -48,6 +48,9 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
         addButton(new GuiButtonTab(this.getWidthInFromTab(1), this.getHeightInFromTab(1), 16, 240, 1, "Body Mode Selection & Attributes", $ -> {
             openedTab = 1;
         }));
+        addButton(new GuiButtonTab(this.getWidthInFromTab(2), this.getHeightInFromTab(2), 0, 240, 2, "Chakra Configuration", $ -> {
+            openedTab = 2;
+        }));
 
         //Page 1
         addButton(chakraControlUp = new GuiButtonArrowUp(this.guiLeft + 50, this.guiTop + 30, false, $ -> {

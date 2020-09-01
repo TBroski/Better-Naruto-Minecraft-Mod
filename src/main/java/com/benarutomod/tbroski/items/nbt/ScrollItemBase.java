@@ -7,6 +7,7 @@ import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketAdvancement;
 import com.benarutomod.tbroski.networking.packets.settings.PacketPlayerEntityAffiliationSync;
+import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
@@ -37,7 +38,7 @@ public class ScrollItemBase extends Item {
                 playerHandler.setPlayerEntityAffiliation(itemStack.getTag().getString("entityaffiliation"));
                 playerIn.sendMessage(new StringTextComponent("Added Contract"));
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new PacketPlayerEntityAffiliationSync(playerHandler.returnPlayerEntityAffiliation(), true));
-                NetworkLoader.INSTANCE.sendToServer(new PacketAdvancement("scroll"));
+                AdvancementHelper.grantAdvancement((ServerPlayerEntity) playerIn, Main.MODID + ":scroll");
             }
         }
         playerIn.addStat(Stats.ITEM_USED.get(this));

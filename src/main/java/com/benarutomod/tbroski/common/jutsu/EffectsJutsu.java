@@ -67,7 +67,7 @@ public class EffectsJutsu {
                 if (k == Blocks.WATER.getDefaultState() || k == Fluids.FLOWING_WATER.getDefaultState().getBlockState()) {
                     playerIn.setMotion(playerMotion.x, playerMotion.y + 0.2D, playerMotion.z);
                     if (playerMotion.y > 0.6D) {
-                        playerIn.setMotion(playerMotion.x, 0.6D, playerMotion.y);
+                        playerIn.setMotion(playerMotion.x, 0.6D, playerMotion.y); // 0.6D
                     }
                 } else if (n == Blocks.WATER.getDefaultState() || n == Fluids.FLOWING_WATER.getDefaultState().getBlockState()) {
                     playerIn.setMotion(playerMotion.x, playerMotion.y + 0.1D, playerMotion.z);

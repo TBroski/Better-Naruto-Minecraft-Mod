@@ -1,9 +1,11 @@
 package com.benarutomod.tbroski.api.entity;
 
+import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.init.ItemInit;
+import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -40,8 +42,10 @@ public abstract class AbstractAkatsukiEntity extends AbstractShinobiEntity {
             LazyOptional<IPlayerHandler> capabilities = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
 
-            if (playercap.returnShinobiLevel() < 3)
+            if (playercap.returnShinobiLevel() < 3) {
                 playercap.setShinobiLevel(3);
+                AdvancementHelper.grantAdvancement(player, Main.MODID + ":shinobi/jonin");
+            }
         }
     }
 }

@@ -7,4 +7,5 @@ public class DamageInit {
     public static final DamageSource DOJUTSU = new DamageSource("dojutsu").setDamageBypassesArmor();
     public static final DamageSource AMATERASU = new DamageSource("amaterasu").setDamageBypassesArmor();
     public static final DamageSource DODGED = new DamageSource("dodged");
+    public static final DamageSource EXHAUSTION = new DamageSource("exhaustion").setDamageBypassesArmor();
 }

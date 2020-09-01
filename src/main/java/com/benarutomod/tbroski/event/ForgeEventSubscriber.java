@@ -11,6 +11,7 @@ import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
 import com.benarutomod.tbroski.entity.shinobi.akatsuki.kakuzu.KakuzuEntity;
 import com.benarutomod.tbroski.init.DimensionInit;
+import com.benarutomod.tbroski.init.EffectInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerBodyModeSync;
@@ -102,7 +103,7 @@ public class ForgeEventSubscriber {
                 PlayerEvents.PlayerJoinedWorld(event);
 
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) event.getEntity();
-                AdvancementHelper.grantAdvancement(serverPlayerEntity, "shinobi_beginnings");
+                AdvancementHelper.grantAdvancement(serverPlayerEntity,  Main.MODID + ":shinobi_beginnings");
             }
         }
     }
@@ -136,12 +137,12 @@ public class ForgeEventSubscriber {
             }
 
             PlayerEvents.checkNatures(event);
+            PlayerEvents.checkInfusion(event);
             if (!player.world.isRemote) {
                 GlobalEvents.playerRaid(event);
                 GlobalEvents.summonBrother(event);
                 PlayerEvents.regenerateChakra(event);
-                PlayerEvents.checkInfusion(event);
-                if (playercap.returnBodyInfusionToggled() && playercap.hasMagnetNature()) {
+/*                if (playercap.returnBodyInfusionToggled() && playercap.hasMagnetNature()) {
                     List<ItemEntity> itemEntities = player.world.getEntitiesWithinAABB(ItemEntity.class, player.getBoundingBox().grow(5));
                     if (itemEntities.size() > 0) {
                         Iterator iterator = itemEntities.iterator();
@@ -159,7 +160,7 @@ public class ForgeEventSubscriber {
                             item.setMotion(item.getMotion().x, item.getMotion().y, Math.sin(dir) * speed);
                         }
                     }
-                }
+                }*/
             }
         }
 
@@ -336,6 +337,9 @@ public class ForgeEventSubscriber {
         if (bijuuEntities.size() > 0) {
             event.setDensity(0.001F);
         }
+        else if (Minecraft.getInstance().player.isPotionActive(EffectInit.EXHAUSTION.get())) {
+            event.setDensity(0.01F);
+        }
         else if (!Minecraft.getInstance().player.isPotionActive(Effects.BLINDNESS)){
             event.setDensity(0.0001F);
         }
@@ -357,6 +361,11 @@ public class ForgeEventSubscriber {
             event.setRed(color.getRed());
             event.setGreen(color.getGreen());
             event.setBlue(color.getBlue());
+        }
+        else if (Minecraft.getInstance().player.isPotionActive(EffectInit.EXHAUSTION.get())) {
+            event.setRed(Color.BLACK.getRed());
+            event.setBlue(Color.BLACK.getBlue());
+            event.setGreen(Color.BLACK.getGreen());
         }
     }
 

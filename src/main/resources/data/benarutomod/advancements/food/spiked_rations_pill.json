@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "benarutomod:lightning_symbol"
+      "item": "benarutomod:spiked_rations_pill"
     },
     "title": {
-      "translate": "advancements.benarutomod.lightningnature.title"
+      "translate": "advancements.benarutomod.spiked_rations_pill.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.lightningnature.text"
+      "translate": "advancements.benarutomod.spiked_rations_pill.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -22,5 +22,5 @@
   "rewards": {
     "experience": 5
   },
-  "parent": "benarutomod:chakra"
+  "parent": "benarutomod:food/rations_pill"
 }

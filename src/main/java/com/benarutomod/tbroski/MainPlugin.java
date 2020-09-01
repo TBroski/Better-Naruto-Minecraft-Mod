@@ -13,6 +13,7 @@ import com.benarutomod.tbroski.init.jutsu.ERankJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.SharinganJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.SixPathJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.nature.*;
+import com.benarutomod.tbroski.init.jutsu.nature.kekkai.LavaNatureJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.nature.kekkai.MagnetNatureJutsuInit;
 import com.benarutomod.tbroski.init.jutsu.nature.kekkai.WoodNatureJutsuInit;
 import net.minecraft.client.renderer.entity.model.PlayerModel;
@@ -69,6 +70,7 @@ public class MainPlugin implements IBeNMPlugin {
         LightningNatureJutsuInit.registerLightningJutsu(jutsuRegistry, this);
         MagnetNatureJutsuInit.registerMagnetJutsu(jutsuRegistry, this);
         WoodNatureJutsuInit.registerWoodJutsu(jutsuRegistry, this);
+        LavaNatureJutsuInit.registerLavaJutsu(jutsuRegistry, this);
         ERankJutsuInit.registerERankJutsu(jutsuRegistry, this);
         SharinganJutsuInit.registerSharinganJutsu(jutsuRegistry, this);
         SixPathJutsuInit.registerSixPathJutsu(jutsuRegistry, this);

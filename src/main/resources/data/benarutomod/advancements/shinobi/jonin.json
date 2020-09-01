@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:obsidian"
+      "item": "minecraft:iron_block"
     },
     "title": {
-      "translate": "advancements.benarutomod.kage.title"
+      "translate": "advancements.benarutomod.jonin.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.kage.text"
+      "translate": "advancements.benarutomod.jonin.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 30
+    "experience": 10
   },
-  "parent": "benarutomod:anbu"
+  "parent": "benarutomod:shinobi/chunin"
 }

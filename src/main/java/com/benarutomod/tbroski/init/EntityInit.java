@@ -12,6 +12,8 @@ import com.benarutomod.tbroski.entity.mobs.bijuu.MatatabiEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.ShukakuEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.SonGokuEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.TailedBeastBombEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.boil.BurningAquaGunEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.boil.CorrosiveArrowEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.FlyingStonesEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.MudMoatEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.fire.FireballEntity;
@@ -143,6 +145,9 @@ public class EntityInit {
 
     public static final RegistryObject<EntityType<ScorchingStreamRockEntity>> SCORCHING_STREAM_ROCK_JUTSU = ENTITIES.register("scorching_stream_rock_jutsu", () -> EntityType.Builder.<ScorchingStreamRockEntity>create(ScorchingStreamRockEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":scorching_stream_rock_jutsu"));
     public static final RegistryObject<EntityType<LavaShurikenEntity>> LAVA_SHURIKEN_JUTSU = ENTITIES.register("lava_shuriken_jutsu", () -> EntityType.Builder.<LavaShurikenEntity>create(LavaShurikenEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":lava_shuriken_jutsu"));
+
+    public static final RegistryObject<EntityType<BurningAquaGunEntity>> BURNING_AQUA_GUN_JUTSU = ENTITIES.register("burning_aqua_gun_jutsu", () -> EntityType.Builder.<BurningAquaGunEntity>create(BurningAquaGunEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":burning_aqua_gun_jutsu"));
+    public static final RegistryObject<EntityType<CorrosiveArrowEntity>> CORROSIVE_ARROW_JUTSU = ENTITIES.register("corrosive_arrow_jutsu", () -> EntityType.Builder.<CorrosiveArrowEntity>create(CorrosiveArrowEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":corrosive_arrow_jutsu"));
 
     public static final RegistryObject<EntityType<AmaterasuJutsuEntity>> AMATERASU_JUTSU = ENTITIES.register("amaterasu_jutsu", () -> EntityType.Builder.<AmaterasuJutsuEntity>create(AmaterasuJutsuEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":amaterasu_jutsu"));
 }

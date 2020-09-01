@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:egg"
+      "item": "minecraft:obsidian"
     },
     "title": {
-      "translate": "advancements.benarutomod.sharingan.title"
+      "translate": "advancements.benarutomod.kage.title"
     },
     "description": {
-      "translate": "advancements.benarutomod.sharingan.text"
+      "translate": "advancements.benarutomod.kage.text"
     },
     "frame": "task",
     "show_toast": true,
@@ -20,7 +20,7 @@
     }
   },
   "rewards": {
-    "experience": 10
+    "experience": 30
   },
-  "parent": "benarutomod:sharingan"
+  "parent": "benarutomod:shinobi/anbu"
 }

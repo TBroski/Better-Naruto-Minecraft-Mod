@@ -19,7 +19,7 @@ import net.minecraftforge.common.util.LazyOptional;
 public class SixPathJutsuInit {
 
     public static void registerSixPathJutsu(BeNMRegistry.JutsuRegistry jutsuRegistry, IBeNMPlugin pluginIn) {
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "deva_path", BeNMJutsu.Type.SIX_PATH_TECHNIQUE, 0, 150F, 208, 0, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "deva_path", BeNMJutsu.Type.SIX_PATH_TECHNIQUE, 0, 150F, 464, 0, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote) {
                 EntityRayTraceResult entityRayTraceResult = RayTraceHelper.rayTraceEntities(playerIn, 6F);
                 if (entityRayTraceResult != null) {
@@ -51,14 +51,14 @@ public class SixPathJutsuInit {
             return false;
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "asura_path", BeNMJutsu.Type.SIX_PATH_TECHNIQUE, 0, 30F, 208, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "asura_path", BeNMJutsu.Type.SIX_PATH_TECHNIQUE, 0, 30F, 464, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             MiniRocketProjectileEntity entity = new MiniRocketProjectileEntity(playerIn.world, playerIn);
             entity.setItem(new ItemStack(ItemInit.MINI_ROCKET.get()));
             entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.95F, 1.0F);
             playerIn.world.addEntity(entity);
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "preta_path", BeNMJutsu.Type.SIX_PATH_TECHNIQUE, 0, 0.5F, 208, 32, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "preta_path", BeNMJutsu.Type.SIX_PATH_TECHNIQUE, 0, 0.5F, 464, 32, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             // Marker
         }).addDamageEventListener((amount, source, defender) -> {
             if (source.getImmediateSource() instanceof AbstractNinjutsuEntity) {
