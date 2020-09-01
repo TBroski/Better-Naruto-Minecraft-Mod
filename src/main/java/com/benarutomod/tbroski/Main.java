@@ -201,14 +201,20 @@ public class Main {
 			if (filteredJutsuList.size() == 0) {
 				filteredJutsuToAdd.add(new FilteredJutsu(jutsu.getCorrelatedPlugin().getPluginId(), jutsu.getName(), false));
 			}
-			for (FilteredJutsu filteredJutsu : filteredJutsuList) {
-				String jutsuName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
-				String filteredJutsuName = filteredJutsu.getId() + "_" + filteredJutsu.getRegistryName();
-				if (!jutsuName.equalsIgnoreCase(filteredJutsuName)) {
+			else {
+				boolean flag = false;
+				for (FilteredJutsu filteredJutsu : filteredJutsuList) {
+					String jutsuName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();
+					String filteredJutsuName = filteredJutsu.getId() + "_" + filteredJutsu.getRegistryName();
+					if (jutsuName.equalsIgnoreCase(filteredJutsuName)) {
+						flag = true;
+					} else if (!jutsuName.equalsIgnoreCase(filteredJutsuName) && filteredJutsu.isBlackListed()) {
+						System.out.println("Blacklisted jutsu: " + jutsuName);
+						blacklistedValues.add(jutsu);
+					}
+				}
+				if (!flag) {
 					filteredJutsuToAdd.add(new FilteredJutsu(jutsu.getCorrelatedPlugin().getPluginId(), jutsu.getName(), false));
-				} else if (jutsuName.equalsIgnoreCase(filteredJutsuName) && filteredJutsu.isBlackListed()) {
-					System.out.println("Blacklisted jutsu: " + jutsuName);
-					blacklistedValues.add(jutsu);
 				}
 			}
 		}

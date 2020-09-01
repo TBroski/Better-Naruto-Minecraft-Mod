@@ -1,6 +1,5 @@
 package com.benarutomod.tbroski.init.jutsu.nature.kekkai;
 
-import com.benarutomod.tbroski.Config;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.api.internal.BeNMJutsu;
@@ -10,18 +9,10 @@ import com.benarutomod.tbroski.init.FeatureInit;
 import com.benarutomod.tbroski.util.helpers.RayTraceHelper;
 import com.benarutomod.tbroski.util.helpers.StaticFeatureHelper;
 import net.minecraft.block.*;
-import net.minecraft.block.trees.DarkOakTree;
 import net.minecraft.block.trees.OakTree;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.item.BoneMealItem;
 import net.minecraft.util.math.*;
-import net.minecraft.world.gen.feature.DarkOakTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.event.entity.player.BonemealEvent;
 
 public class WoodNatureJutsuInit {
 
@@ -90,7 +81,7 @@ public class WoodNatureJutsuInit {
             if (!playerIn.world.isRemote) {
                 EntityRayTraceResult entityRayTraceResult = RayTraceHelper.rayTraceEntities(playerIn, 6F);
                 if (entityRayTraceResult != null) {
-                    BlockPos setPos = new BlockPos(MathHelper.floor(entityRayTraceResult.getEntity().getPosX()), MathHelper.floor(entityRayTraceResult.getEntity().getPosY()), MathHelper.floor(entityRayTraceResult.getEntity().getPosZ()));
+                    BlockPos setPos = entityRayTraceResult.getEntity().getPosition();
                     entityRayTraceResult.getEntity().setPosition(setPos.getX(), setPos.getY(), setPos.getZ());
                     StaticFeatureHelper.placePrison(playerIn, setPos, Blocks.OAK_LOG.getDefaultState());
                 }

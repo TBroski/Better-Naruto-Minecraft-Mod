@@ -1,6 +1,5 @@
 package com.benarutomod.tbroski.client.renderer.projectile.jutsu;
 
-import com.benarutomod.tbroski.client.renderer.projectile.jutsu.sixpath.MiniRocketRenderer;
 import com.benarutomod.tbroski.entity.projectile.jutsu.TailedBeastBombEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;

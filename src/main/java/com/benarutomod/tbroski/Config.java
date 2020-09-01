@@ -10,6 +10,7 @@ public class Config {
         public final ForgeConfigSpec.BooleanValue entityWorldDamage;
         public final ForgeConfigSpec.BooleanValue playerWorldDamage;
         public final ForgeConfigSpec.BooleanValue byakuganCanSeePlayers;
+        public final ForgeConfigSpec.DoubleValue chakraCostMultiplier;
         public final ForgeConfigSpec.IntValue sharinganDodgedDamage;
         public final ForgeConfigSpec.IntValue susanooStageIncrement;
 
@@ -47,6 +48,12 @@ public class Config {
                     .translation("config." + Main.MODID + ".susanooStageIncrement")
                     .worldRestart()
                     .defineInRange("susanooStageIncrement", 400, 20, 1000);
+
+            chakraCostMultiplier = builder
+                    .comment("Defines the multiplier that will manipulate all jutsu chakra cost. Default value of [1] will keep chakra cost to stated amount in code.")
+                    .translation("config." + Main.MODID + ".chakraCostMultiplier")
+                    .worldRestart()
+                    .defineInRange("chakraCostMultiplier", 1D, 0D, 2D);
 
             builder.pop();
         }

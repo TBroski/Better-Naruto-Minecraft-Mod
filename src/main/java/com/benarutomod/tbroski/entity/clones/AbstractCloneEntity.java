@@ -58,7 +58,7 @@ public abstract class AbstractCloneEntity extends CreatureEntity {
         this.tick += 1;
         if (this.tick >= this.getPoofTimer())
         {
-            Particles.addParticles(this, ParticleTypes.CLOUD, 20);
+            Particles.addParticles(this, ParticleTypes.CLOUD, 1, 20);
             this.tick = 0;
             this.remove();
         }
@@ -67,7 +67,7 @@ public abstract class AbstractCloneEntity extends CreatureEntity {
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
-        Particles.addParticles(this, ParticleTypes.CLOUD, 20);
+        Particles.addParticles(this, ParticleTypes.CLOUD, 1, 20);
     }
 
     public void setOwnerID(int id){

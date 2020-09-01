@@ -79,11 +79,11 @@ public class MagnetNatureJutsuInit {
             return true;
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "black_iron_fist", BeNMJutsu.Type.MAGNET_NATURE, 6, 125, 96, 48, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "black_iron_fist", BeNMJutsu.Type.MAGNET_NATURE, 6, 125F, 96, 48, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote) {
                 BlackIronFistEntity entity = new BlackIronFistEntity(playerIn, playerIn.world);
                 entity.setItem(new ItemStack(ItemInit.BLACK_IRON_FIST_JUTSU.get()));
-                entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.0F, 1.0F);
+                entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.8F, 1.0F);
                 playerIn.world.addEntity(entity);
             }
         }));

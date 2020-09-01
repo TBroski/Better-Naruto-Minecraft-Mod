@@ -13,6 +13,7 @@ import com.benarutomod.tbroski.client.renderer.mobs.bijuu.SonGokuRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.ExplosiveKunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.KunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.TeleportationKunaiRenderer;
+import com.benarutomod.tbroski.client.renderer.projectile.jutsu.JutsuRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.TailedBeastBombRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.earth.FlyingStonesRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.jutsu.earth.MudMoatRenderer;
@@ -95,6 +96,7 @@ public class ClientHandler {
         //Clones
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.BASIC_CLONE.get(), CloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WOOD_CLONE.get(), CloneRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.LAVA_CLONE.get(), CloneRenderer::new);
 
         //Akatsuki
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.DEIDARA.get(), DeidaraRenderer::new);
@@ -126,6 +128,16 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LIGHTNING_ARROW_JUTSU.get(), new LightningArrowRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WIND_ARROW_JUTSU.get(), new WindArrowRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WATER_SHARK_BULLET_JUTSU.get(), new WaterSharkBulletRenderer.Factory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.BLACK_IRON_FIST_JUTSU.get(), new JutsuRenderer.Factory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.SCORCHING_STREAM_ROCK_JUTSU.get(), new JutsuRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.LAVA_SHURIKEN_JUTSU.get(), new JutsuRenderer.Factory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.BURNING_AQUA_GUN_JUTSU.get(), new JutsuRenderer.Factory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.ONE_HORNED_WHITE_WHALE_JUTSU.get(), new JutsuRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.TEN_THOUSAND_ICE_PETALS_JUTSU.get(), new JutsuRenderer.Factory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.AMATERASU_JUTSU.get(), new AmaterasuJutsuRenderer.Factory());
 

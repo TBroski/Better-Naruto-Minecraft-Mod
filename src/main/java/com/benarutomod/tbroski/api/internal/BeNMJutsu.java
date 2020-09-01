@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.api.internal;
 
+import com.benarutomod.tbroski.Config;
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
@@ -51,7 +52,7 @@ public class BeNMJutsu {
         this.u = u;
         this.v = v;
         this.cost = beNMPointCost;
-        this.chakraCost = chakraCost;
+        this.chakraCost = chakraCost * Config.COMMON.chakraCostMultiplier.get().floatValue();
         this.action = action;
         this.press = new IBeNMJutsuButtonPress() {
             @Override
@@ -147,7 +148,7 @@ public class BeNMJutsu {
                 playercap.addChakra((-this.getChakraCost() * ((100F - playercap.returnChakraControl()) * 0.01F)));
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new PacketChakraSync(playercap.returnChakra()));
             }
-            if (!playercap.returnToggleJutsuMessage() && !this.isToggle())
+            if (!playercap.returnToggleJutsuMessage() && !this.isToggle() && !playerIn.world.isRemote)
                 playerIn.sendMessage(new StringTextComponent(new TranslationTextComponent("jutsu." + this.getCorrelatedPlugin().getPluginId() + "." + this.getName()).getString() + "! " + + (-this.getChakraCost() * ((100 - playercap.returnChakraControl()) * 0.01)) + " Chakra"));
             this.action.action(playerIn, taijutsuModifier0, taijutsuModifier1, playercap);
         }

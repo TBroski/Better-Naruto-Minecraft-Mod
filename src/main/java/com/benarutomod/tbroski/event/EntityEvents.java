@@ -102,7 +102,7 @@ public class EntityEvents {
         {
             event.getEntity().getPersistentData().putInt("benmsummonedtick", event.getEntity().getPersistentData().getInt("benmsummonedtick") + 1);
             if (event.getEntity().getPersistentData().getInt("benmsummonedtick") >= 600) {
-                Particles.addParticles(event.getEntityLiving(), ParticleTypes.CLOUD, 20);
+                Particles.addParticles(event.getEntityLiving(), ParticleTypes.CLOUD, 1, 20);
                 event.getEntity().world.createExplosion(event.getEntity(), event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), 5F, false, Explosion.Mode.DESTROY);
                 event.getEntity().getPersistentData().putInt("benmsummonedtick", 0);
                 event.getEntity().remove();

@@ -50,10 +50,9 @@ public class ExplosiveKunaiEntity extends ProjectileItemEntity {
      */
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
-            System.out.println(Config.COMMON.entityWorldDamage.get());
             if (result.getType() == RayTraceResult.Type.ENTITY) {
                 Entity entity = ((EntityRayTraceResult)result).getEntity();
-                if (this.getThrower() instanceof PlayerEntity || Config.COMMON.entityWorldDamage.get()) {
+                if (this.getThrower() instanceof PlayerEntity && Config.COMMON.playerWorldDamage.get() || Config.COMMON.entityWorldDamage.get()) {
                     world.createExplosion(entity, entity.getPosX(), entity.getPosY(), entity.getPosZ(), 2F, Explosion.Mode.BREAK);
                 }
                 else {
@@ -69,7 +68,6 @@ public class ExplosiveKunaiEntity extends ProjectileItemEntity {
                 }
                 else {
                     world.playSound(null, block, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 0.7F, 0.4F);
-                    Particles.addParticles(block, Minecraft.getInstance().world, ParticleTypes.EXPLOSION, 10);
                 }
             }
             this.world.setEntityState(this, (byte)3);

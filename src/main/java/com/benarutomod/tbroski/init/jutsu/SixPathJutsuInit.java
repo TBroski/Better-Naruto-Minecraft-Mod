@@ -67,7 +67,7 @@ public class SixPathJutsuInit {
                 for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
                     if (jutsu.getName().equalsIgnoreCase(((AbstractJutsuEntity) source.getImmediateSource()).getAffiliatedJutsuName())) {
                         player_cap.addChakra(jutsu.getChakraCost());
-                        break;
+                        return true;
                     }
                 }
             }

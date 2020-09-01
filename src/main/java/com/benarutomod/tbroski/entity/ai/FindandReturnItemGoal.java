@@ -52,7 +52,7 @@ public class FindandReturnItemGoal extends Goal {
                     this.cooldown = 0;
                     this.entity.entityDropItem(returnItem);
                     if (nearplayer != null) {
-                        Particles.addParticles(entity, ParticleTypes.HEART, 20);
+                        Particles.addParticles(entity, ParticleTypes.HEART, 1, 20);
                         nearplayer.sendMessage(new StringTextComponent("<" + entity.getDisplayName().getString() +"> I think we can make a deal."));
                     }
             }
