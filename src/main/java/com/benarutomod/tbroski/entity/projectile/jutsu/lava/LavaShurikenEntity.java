@@ -1,6 +1,6 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu.lava;
 
-import com.benarutomod.tbroski.api.entity.jutsu.nature.AbstractLavaEntity;
+import com.benarutomod.tbroski.api.entity.jutsu.nature.AbstractLavaJutsuEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import net.minecraft.entity.Entity;
@@ -13,7 +13,7 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class LavaShurikenEntity extends AbstractLavaEntity {
+public class LavaShurikenEntity extends AbstractLavaJutsuEntity {
     public LavaShurikenEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
         super(type, worldIn);
     }

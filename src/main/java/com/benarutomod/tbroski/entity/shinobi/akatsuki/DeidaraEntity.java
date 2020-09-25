@@ -56,7 +56,7 @@ public class DeidaraEntity extends AbstractAkatsukiEntity {
 
     @Override
     public ItemStack getMainHandItemStack() {
-        return new ItemStack(ItemInit.CLAY_SPAWN_EGG.get());
+        return new ItemStack(ItemInit.MOLDED_CLAY_C3.get());
     }
 
     @Override

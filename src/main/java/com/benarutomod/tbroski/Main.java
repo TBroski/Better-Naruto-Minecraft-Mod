@@ -2,7 +2,7 @@ package com.benarutomod.tbroski;
 
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.integration.Curios;
 import com.benarutomod.tbroski.blocks.AmaterasuFireBlockBase;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
@@ -19,6 +19,8 @@ import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.capabilities.CapabilityHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 
+import com.benarutomod.tbroski.util.helpers.ClanHelper;
+import com.benarutomod.tbroski.util.helpers.JutsuHelper;
 import com.benarutomod.tbroski.util.helpers.KeyboardHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -96,6 +98,8 @@ public class Main {
 			plugin.registerNewBodyModes(BeNMRegistry.BODY_MODES);
 		}
 		blackListJutsus();
+		JutsuHelper.create();
+		ClanHelper.create();
 		// API Search and Registry with help from ClassGraph libraries.
 /*		ScanResult scanResult = new ClassGraph().enableClassInfo().enableAnnotationInfo().scan();
 		ClassInfoList classInfoList = scanResult.getClassesWithAnnotation(BeNMPlugin.class.getName());

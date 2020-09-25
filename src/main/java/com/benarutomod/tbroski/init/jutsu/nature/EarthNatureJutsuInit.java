@@ -1,15 +1,17 @@
 package com.benarutomod.tbroski.init.jutsu.nature;
 
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.FlyingStonesEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.MudMoatEntity;
 import com.benarutomod.tbroski.init.ItemInit;
+import com.benarutomod.tbroski.util.helpers.RayTraceHelper;
+import com.benarutomod.tbroski.util.helpers.StaticFeatureHelper;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockRayTraceResult;
 
 public class EarthNatureJutsuInit {
 
@@ -32,6 +34,21 @@ public class EarthNatureJutsuInit {
             // Marker
         }).addAttackEventListener((attacker, target) -> {
             target.attackEntityFrom(DamageSource.causePlayerDamage(attacker), 1F);
+        }));
+
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "mud_wall", BeNMJutsu.Type.EARTH_NATURE, 5, 100F, 64, 48, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+            if (!playerIn.world.isRemote) {
+                BlockRayTraceResult blockRayTraceResult = RayTraceHelper.rayTraceBlocks(playerIn, 6F);
+                if (blockRayTraceResult != null) {
+                    StaticFeatureHelper.placeWall(playerIn, blockRayTraceResult.getPos(), Blocks.DIRT.getDefaultState(), (int) playerCapability.returnChakraControl());
+                }
+            }
+        }).setExtraJutsuChecks((playerIn, taijutsuModifier0, taijutsuModifier1) -> RayTraceHelper.rayTraceBlocks(playerIn, 6F) != null));
+
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "shield_of_sand", BeNMJutsu.Type.EARTH_NATURE, 10, 150F, 64, 64, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+            if (!playerIn.world.isRemote) {
+                StaticFeatureHelper.placeDome(playerIn, playerIn.getPosition(), Blocks.SANDSTONE.getDefaultState());
+            }
         }));
     }
 }

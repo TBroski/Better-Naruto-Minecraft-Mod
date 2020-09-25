@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 public class GiantLayer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
 
     private ModelGiant giant = new ModelGiant();
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MODID, "textures/entity/layer/lightning_god_self.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MODID, "textures/entity/layer/jutsu/lightning_god_self.png");
 
     public GiantLayer(IEntityRenderer<T, M> entityRendererIn) {
         super(entityRendererIn);

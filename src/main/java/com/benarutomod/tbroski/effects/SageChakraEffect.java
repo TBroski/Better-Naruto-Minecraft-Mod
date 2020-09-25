@@ -29,7 +29,6 @@ public class SageChakraEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-
         World world = entityLivingBaseIn.getEntityWorld();
         Biome biome = world.getBiome(entityLivingBaseIn.getPosition());
         if (entityLivingBaseIn instanceof ServerPlayerEntity) {

@@ -2,7 +2,7 @@ package com.benarutomod.tbroski.init.jutsu.nature.kekkai;
 
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.entity.clones.WoodCloneEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.FeatureInit;
@@ -26,13 +26,9 @@ public class WoodNatureJutsuInit {
             }
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "tree_summoning", BeNMJutsu.Type.WOOD_NATURE, 10, 80F, 112, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "tree_summoning", BeNMJutsu.Type.WOOD_NATURE, 5, 50F, 112, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote) {
-                Vec3d vec = playerIn.getPositionVector();
-                Vec3d vec3 = new Vec3d(vec.x,vec.y + playerIn.getEyeHeight(),vec.z);
-                Vec3d vec3a = playerIn.getLook(1.0F);
-                Vec3d vec3b = vec3.add(vec3a.getX() * 5, vec3a.getY() *  5, vec3a.getZ() *  5);
-                BlockRayTraceResult blockRayTraceResult = playerIn.world.rayTraceBlocks(new RayTraceContext(vec3, vec3b, RayTraceContext.BlockMode.OUTLINE,  RayTraceContext.FluidMode.NONE, playerIn));
+                BlockRayTraceResult blockRayTraceResult = RayTraceHelper.rayTraceBlocks(playerIn, 6F);
                 if (blockRayTraceResult != null && !playerIn.world.isAirBlock(blockRayTraceResult.getPos())) {
                     if (playerIn.world.getBlockState(blockRayTraceResult.getPos()).getBlock() instanceof SaplingBlock) {
                         ((SaplingBlock) playerIn.world.getBlockState(blockRayTraceResult.getPos()).getBlock()).grow((ServerWorld) playerIn.world, playerIn.getRNG(), blockRayTraceResult.getPos(), playerIn.world.getBlockState(blockRayTraceResult.getPos()));
@@ -44,32 +40,28 @@ public class WoodNatureJutsuInit {
                 }
             }
         }).setExtraJutsuChecks((playerIn, taijutsuModifier0, taijutsuModifier1) -> {
-            Vec3d vec = playerIn.getPositionVector();
-            Vec3d vec3 = new Vec3d(vec.x,vec.y + playerIn.getEyeHeight(),vec.z);
-            Vec3d vec3a = playerIn.getLook(1.0F);
-            Vec3d vec3b = vec3.add(vec3a.getX() * 5, vec3a.getY() *  5, vec3a.getZ() *  5);
-            BlockRayTraceResult blockRayTraceResult = playerIn.world.rayTraceBlocks(new RayTraceContext(vec3, vec3b, RayTraceContext.BlockMode.OUTLINE,  RayTraceContext.FluidMode.NONE, playerIn));
+            BlockRayTraceResult blockRayTraceResult = RayTraceHelper.rayTraceBlocks(playerIn, 6F);
             if (blockRayTraceResult != null && !playerIn.world.isAirBlock(blockRayTraceResult.getPos()) && playerIn.world.isAirBlock(new BlockPos(blockRayTraceResult.getPos().getX(), blockRayTraceResult.getPos().getY() + 1, blockRayTraceResult.getPos().getZ()))) {
                 return true;
             }
             return false;
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "sea_of_trees", BeNMJutsu.Type.WOOD_NATURE, 20, 300F, 112, 32, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "sea_of_trees", BeNMJutsu.Type.WOOD_NATURE, 20, 150F, 112, 32, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote) {
                 if (playerIn.world.getBlockState(playerIn.getPosition().down()).getBlock() instanceof IGrowable) {
-                    ((IGrowable) playerIn.world.getBlockState(playerIn.getPosition().down())).grow((ServerWorld) playerIn.world, playerIn.getRNG(), playerIn.getPosition().down(), playerIn.world.getBlockState(playerIn.getPosition().down()));
+                    ((IGrowable) playerIn.world.getBlockState(playerIn.getPosition().down()).getBlock()).grow((ServerWorld) playerIn.world, playerIn.getRNG(), playerIn.getPosition().down(), playerIn.world.getBlockState(playerIn.getPosition().down()));
                 }
-                if (playerIn.world.getBlockState(playerIn.getPosition()) instanceof IGrowable) {
-                    ((IGrowable) playerIn.world.getBlockState(playerIn.getPosition())).grow((ServerWorld) playerIn.world, playerIn.getRNG(), playerIn.getPosition(), playerIn.world.getBlockState(playerIn.getPosition()));
+                if (playerIn.world.getBlockState(playerIn.getPosition()).getBlock() instanceof IGrowable) {
+                    ((IGrowable) playerIn.world.getBlockState(playerIn.getPosition()).getBlock()).grow((ServerWorld) playerIn.world, playerIn.getRNG(), playerIn.getPosition(), playerIn.world.getBlockState(playerIn.getPosition()));
                 }
                 AxisAlignedBB box = playerIn.getBoundingBox().grow(5);
                 Iterable<BlockPos> blockPos = BlockPos.getAllInBoxMutable(MathHelper.floor(box.minX), MathHelper.floor(box.minY), MathHelper.floor(box.minZ), MathHelper.floor(box.maxX), MathHelper.floor(box.maxY), MathHelper.floor(box.maxZ));
                 for (BlockPos pos : blockPos) {
-                    if (playerIn.world.getBlockState(pos) instanceof IGrowable) {
-                        ((IGrowable) playerIn.world.getBlockState(pos)).grow((ServerWorld) playerIn.world, playerIn.getRNG(), pos, playerIn.world.getBlockState(pos));
+                    if (playerIn.world.getBlockState(pos).getBlock() instanceof IGrowable) {
+                        ((IGrowable) playerIn.world.getBlockState(pos).getBlock()).grow((ServerWorld) playerIn.world, playerIn.getRNG(), pos, playerIn.world.getBlockState(pos));
                     }
-                    if (playerIn.getRNG().nextInt(3) == 0 && playerIn.world.isAirBlock(pos) && playerIn.world.getBlockState(pos.down()).getBlock() instanceof GrassBlock) {
+                    if (playerIn.getRNG().nextInt(3) == 0 && playerIn.world.isAirBlock(pos) || playerIn.world.getBlockState(pos).getBlockHardness(playerIn.world, pos) < 0.5F && playerIn.world.getBlockState(pos.down()).getBlock() instanceof GrassBlock) {
                         OakTree tree = new OakTree();
                         tree.func_225545_a_((ServerWorld) playerIn.world, ((ServerWorld) playerIn.world).getChunkProvider().getChunkGenerator(), pos, playerIn.world.getBlockState(pos), playerIn.getRNG());
                     }
@@ -77,7 +69,7 @@ public class WoodNatureJutsuInit {
             }
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "four_pillar_prison", BeNMJutsu.Type.WOOD_NATURE, 15, 270F, 112, 48, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "four_pillar_prison", BeNMJutsu.Type.WOOD_NATURE, 15, 200F, 112, 48, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote) {
                 EntityRayTraceResult entityRayTraceResult = RayTraceHelper.rayTraceEntities(playerIn, 6F);
                 if (entityRayTraceResult != null) {
@@ -92,7 +84,7 @@ public class WoodNatureJutsuInit {
             return false;
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "four_pillar_house", BeNMJutsu.Type.WOOD_NATURE, 22, 320F, 112, 64, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "four_pillar_house", BeNMJutsu.Type.WOOD_NATURE, 22, 310F, 112, 64, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> { // 320
             if (!playerIn.world.isRemote) {
                 BlockRayTraceResult blockRayTraceResult = RayTraceHelper.rayTraceBlocks(playerIn, 6F);
                 if (blockRayTraceResult != null) {

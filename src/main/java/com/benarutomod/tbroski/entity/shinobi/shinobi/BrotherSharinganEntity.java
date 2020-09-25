@@ -14,9 +14,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,21 +26,19 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 
 public class BrotherSharinganEntity extends AbstractShinobiEntity implements ISharinganEntity, IBrotherEntity {
 
     private static final DataParameter<Integer> PLAYER_ID = EntityDataManager.createKey(BrotherSharinganEntity.class, DataSerializers.VARINT);
-
-    public BrotherSharinganEntity(EntityType<? extends MonsterEntity> type, World worldIn, PlayerEntity brother) {
-        super(type, worldIn);
-        this.setCustomName(new StringTextComponent(calculateBrotherName(brother.getDisplayName().getString() + " " + this.getClan().getString().toUpperCase().substring(0,1) + this.getClan().getString().toLowerCase().substring(1), this.getRNG())));
-        this.setCustomNameVisible(true);
-    }
 
     public BrotherSharinganEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
@@ -54,11 +50,11 @@ public class BrotherSharinganEntity extends AbstractShinobiEntity implements ISh
         this.dataManager.register(PLAYER_ID, 0);
     }
 
-    public void setOwnerID(int id){
+    public void setBrotherId(int id){
         this.dataManager.set(PLAYER_ID, id);
     }
 
-    public int getOwnerID(){
+    public int getBrotherId(){
         return this.dataManager.get(PLAYER_ID);
     }
 
@@ -132,18 +128,18 @@ public class BrotherSharinganEntity extends AbstractShinobiEntity implements ISh
     @Override
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
-        compound.putInt("playerid", this.dataManager.get(PLAYER_ID));
+        compound.putInt("playerid", this.getBrotherId());
     }
 
     @Override
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
-        this.dataManager.set(PLAYER_ID, compound.getInt("playerid"));
+        this.setBrotherId(compound.getInt("playerid"));
     }
 
     @OnlyIn(Dist.CLIENT)
     public ResourceLocation getLocationSkin() {
-        LivingEntity owner = (LivingEntity) this.world.getEntityByID(this.getOwnerID());
+        LivingEntity owner = (LivingEntity) this.world.getEntityByID(this.getBrotherId());
         if (owner instanceof PlayerEntity) {
             GameProfile gameProfile = ((PlayerEntity) owner).getGameProfile();
             Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = Minecraft.getInstance().getSkinManager().loadSkinFromCache(gameProfile);
@@ -153,5 +149,16 @@ public class BrotherSharinganEntity extends AbstractShinobiEntity implements ISh
             return DefaultPlayerSkin.getDefaultSkin(PlayerEntity.getUUID(gameProfile));
         }
         return DefaultPlayerSkin.getDefaultSkinLegacy(); //DefaultPlayerSkin.getDefaultSkinLegacy();
+    }
+
+    @Nullable
+    @Override
+    public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        if (!this.world.isRemote) {
+            PlayerEntity brother = ((ServerWorld) this.world).getRandomPlayer();
+            this.setCustomName(new StringTextComponent(calculateBrotherName(brother.getDisplayName().getString() + " " + this.getClan().getString().toUpperCase().substring(0, 1) + this.getClan().getString().toLowerCase().substring(1), this.getRNG())));
+            this.setCustomNameVisible(true);
+        }
+        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 }

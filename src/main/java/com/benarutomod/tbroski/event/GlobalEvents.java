@@ -78,24 +78,4 @@ public class GlobalEvents {
             }
         }
     }
-
-    public static void summonBrother(TickEvent.PlayerTickEvent event) {
-        LazyOptional<IPlayerHandler> playerc = event.player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-        IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
-
-        if (player_cap.returnShinobiLevel() >= 3 && event.player.getRNG().nextInt(24000) == 0) {
-            double d0 = event.player.getPosX() + (new Random().nextDouble() - 0.5D) * 48.0D;
-            double d1 = event.player.getPosY() + (double)(new Random().nextInt(48) - 32);
-            double d2 = event.player.getPosZ() + (new Random().nextDouble() - 0.5D) * 48.0D;
-
-            BrotherSharinganEntity brother = new BrotherSharinganEntity(EntityInit.BROTHER_SHARINGAN.get(), event.player.world, event.player);
-            if (brother.attemptTeleport(d0, d1, d2, true)) {
-                event.player.world.addEntity(brother);
-            }
-            else {
-                brother.remove();
-            }
-            event.player.sendStatusMessage(new TranslationTextComponent("event." + Main.MODID + ".brother.uponmessage"), true);
-        }
-    }
 }

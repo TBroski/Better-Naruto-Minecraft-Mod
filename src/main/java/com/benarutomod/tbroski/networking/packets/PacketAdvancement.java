@@ -20,14 +20,12 @@ public class PacketAdvancement {
         buf.writeString(msg.advancement);
     }
 
-    public static PacketAdvancement decode(PacketBuffer buf)
-    {
+    public static PacketAdvancement decode(PacketBuffer buf) {
         String data = buf.readString();
         return new PacketAdvancement(data);
     }
 
-    public static void handle(PacketAdvancement msg, Supplier<NetworkEvent.Context> ctx)
-    {
+    public static void handle(PacketAdvancement msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             AdvancementHelper.grantAdvancement(ctx.get().getSender(), msg.advancement);
         });

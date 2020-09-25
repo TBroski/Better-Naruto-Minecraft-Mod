@@ -58,7 +58,7 @@ public class PlayerTaijutsu extends AbstractTabedBackground {
         switch (openedTab) {
             case 0:
                 taijutsuUp.visible = true;
-                font.drawString(new TranslationTextComponent("gui." + Main.MODID + ".legtaijutsu.taijutsu").getString() + playerc.returnTaijutsu(), this.guiLeft - 100, this.guiTop - 20, 0x453100);
+                font.drawString(new TranslationTextComponent("gui." + Main.MODID + ".legtaijutsu.taijutsu").getString() + playerc.returnTaijutsu(), this.guiLeft - 100, this.guiTop - 40, 0x453100);
                 font.drawString("Cost 1 BeNM Point", this.guiLeft + 18, this.guiTop + 20, 0x453100);
                 taijutsuUp.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 break;

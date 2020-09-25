@@ -19,8 +19,7 @@ public class PacketChakraAddition {
         ;
     }
 
-    public static void encode(PacketChakraAddition msg, PacketBuffer buf)
-    {
+    public static void encode(PacketChakraAddition msg, PacketBuffer buf) {
     }
 
     public static PacketChakraAddition decode(PacketBuffer buf)
@@ -28,8 +27,7 @@ public class PacketChakraAddition {
         return new PacketChakraAddition();
     }
 
-    public static void handle(PacketChakraAddition msg, Supplier<NetworkEvent.Context> ctx)
-    {
+    public static void handle(PacketChakraAddition msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             if (!ctx.get().getSender().abilities.isCreativeMode) {
                 ctx.get().getSender().getHeldItem(Hand.MAIN_HAND).shrink(1);
@@ -39,7 +37,7 @@ public class PacketChakraAddition {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> ctx.get().getSender()), new PacketColorChakraSync(player_cap.returncolorChakra()));
             player_cap.setmaxChakra(player_cap.returnPlayerClan().getStartingChakra());
             player_cap.setChakra(player_cap.returnPlayerClan().getStartingChakra());
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> ctx.get().getSender()), new PacketMaxChakraSync(player_cap.returnmaxChakra(), ctx.get().getSender().getPersistentData().getInt("restrictedchakra")));
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> ctx.get().getSender()), new PacketMaxChakraSync(player_cap.returnmaxChakra(), ctx.get().getSender().getPersistentData().getInt("restrictedchakra"), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> ctx.get().getSender()), new PacketChakraSync(player_cap.returnChakra()));
             player_cap.addregenChakra(7.5F);
             player_cap.setChakraBoolean(true);

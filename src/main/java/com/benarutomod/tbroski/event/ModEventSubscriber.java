@@ -51,6 +51,7 @@ public class ModEventSubscriber {
             JutsuCommand.register(event.getCommandDispatcher());
             NatureCommand.register(event.getCommandDispatcher());
             BijuuCommand.register(event.getCommandDispatcher());
+            ClanCommand.register(event.getCommandDispatcher());
         }
     }
 }

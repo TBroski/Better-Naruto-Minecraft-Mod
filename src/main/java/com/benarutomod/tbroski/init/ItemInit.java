@@ -14,6 +14,7 @@ import com.benarutomod.tbroski.items.food.DilutedRationsPillItemBase;
 import com.benarutomod.tbroski.items.food.RationsPillItemBase;
 import com.benarutomod.tbroski.items.food.SpikedRationsPillItemBase;
 import com.benarutomod.tbroski.items.nbt.ClaySpawnEggItemBase;
+import com.benarutomod.tbroski.items.nbt.TabletItemBase;
 import com.benarutomod.tbroski.items.projectile.ExplosiveKunaiItemBase;
 import com.benarutomod.tbroski.items.projectile.KunaiItemBase;
 import com.benarutomod.tbroski.items.projectile.TeleportationKunaiItemBase;
@@ -26,9 +27,7 @@ import com.benarutomod.tbroski.util.enums.AkatsukiArmorMaterial;
 import com.benarutomod.tbroski.util.enums.AnbuArmorMaterial;
 import com.benarutomod.tbroski.util.enums.BeNMItemTier;
 import com.benarutomod.tbroski.util.enums.HeadbandArmorMaterial;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
@@ -61,6 +60,10 @@ public class ItemInit {
     public static final RegistryObject<Item> TELEPORTATION_KUNAI = ITEMS.register("teleportation_kunai", TeleportationKunaiItemBase::new);
 
     public static final RegistryObject<Item> KATANA = ITEMS.register("katana", () -> new BeNMSwordItemBase(BeNMItemTier.CHAKRA_IRON, 3, -2.0F, (new Item.Properties()).group(Main.TAB)));
+
+    public static final RegistryObject<Item> CLAY_BALL_C1 = ITEMS.register("clay_ball_c1", () -> new Item(new Item.Properties().group(Main.TAB)));
+    public static final RegistryObject<Item> CLAY_BALL_C2 = ITEMS.register("clay_ball_c2", () -> new Item(new Item.Properties().group(Main.TAB)));
+    public static final RegistryObject<Item> CLAY_BALL_C3 = ITEMS.register("clay_ball_c3", () -> new Item(new Item.Properties().group(Main.TAB)));
     //Ethereal
     public static final RegistryObject<EtherealItem> TOTSUKA_BlADE = ITEMS.register("totsuka_blade", () -> new EtherealItem((new Item.Properties()).group(Main.TAB), new EtherealItem.EtherealProperties().setDamage(3F).setRange(1.5F)).setRenderFire(EntityType.ITEM.getWidth() * 2, EntityType.ITEM.getHeight() * 10, Color.YELLOW));
     public static final RegistryObject<EtherealItem> YATA_MIRROR = ITEMS.register("yata_mirror", () -> new EtherealItem((new Item.Properties()).group(Main.TAB), new EtherealItem.EtherealProperties().setArmor(4F).setCancelsNinjutsu()).setRenderFire(EntityType.ITEM.getWidth() * 5, EntityType.ITEM.getHeight() * 5, Color.RED));
@@ -83,7 +86,7 @@ public class ItemInit {
     public static final RegistryObject<Item> STRIPPED_SAKURA_WOOD_ITEM = ITEMS.register("stripped_sakura_wood", ()-> new BlockItem(BlockInit.STRIPPED_SAKURA_WOOD.get(), new Item.Properties().group(Main.TAB)));
     public static final RegistryObject<Item> SAKURA_WOOD_ITEM = ITEMS.register("sakura_wood", ()-> new BlockItem(BlockInit.SAKURA_WOOD.get(), new Item.Properties().group(Main.TAB)));
     public static final RegistryObject<Item> SAKURA_LEAVES_ITEM = ITEMS.register("sakura_leaves", ()-> new BlockItem(BlockInit.SAKURA_LEAVES.get(), new Item.Properties().group(Main.TAB)));
-    public static final RegistryObject<Item> SAKURA_SIGN_ITEM = ITEMS.register("sakura_sign", ()-> new SignItem(new Item.Properties().maxStackSize(16).group(Main.TAB), BlockInit.SAKURA_SIGN.get(), BlockInit.SAKURA_WALL_SIGN.get()));
+    //public static final RegistryObject<Item> SAKURA_SIGN_ITEM = ITEMS.register("sakura_sign", ()-> new SignItem(new Item.Properties().maxStackSize(16).group(Main.TAB), BlockInit.SAKURA_SIGN.get(), BlockInit.SAKURA_WALL_SIGN.get()));
     public static final RegistryObject<Item> SAKURA_DOOR_ITEM = ITEMS.register("sakura_door", ()-> new TallBlockItem(BlockInit.SAKURA_DOOR.get(), new Item.Properties().group(Main.TAB)));
     public static final RegistryObject<Item> SAKURA_SLAB_ITEM = ITEMS.register("sakura_slab", ()-> new BlockItem(BlockInit.SAKURA_SLAB.get(), new Item.Properties().group(Main.TAB)));
     public static final RegistryObject<Item> SAKURA_STAIRS_ITEM = ITEMS.register("sakura_stairs", ()-> new BlockItem(BlockInit.SAKURA_STAIRS.get(), new Item.Properties().group(Main.TAB)));
@@ -93,7 +96,7 @@ public class ItemInit {
     public static final RegistryObject<Item> SAKURA_PRESSURE_PLATE_ITEM = ITEMS.register("sakura_pressure_plate", ()-> new BlockItem(BlockInit.SAKURA_PRESSURE_PLATE.get(), new Item.Properties().group(Main.TAB)));
 
     public static final RegistryObject<Item> LIGNITE_ITEM = ITEMS.register("lignite", ()-> new BlockItem(BlockInit.LIGNITE.get(), new Item.Properties().group(Main.TAB)));
-    public static final RegistryObject<Item> IRON_SAND_ITEM = ITEMS.register("iron_sab", ()-> new BlockItem(BlockInit.IRON_SAND.get(), new Item.Properties().group(Main.TAB)));
+    public static final RegistryObject<Item> IRON_SAND_ITEM = ITEMS.register("iron_sand", ()-> new BlockItem(BlockInit.IRON_SAND.get(), new Item.Properties().group(Main.TAB)));
 
     public static final RegistryObject<Item> TOAD_OIL_BUCKET_ITEM = ITEMS.register("toad_oil_bucket", ()-> new BucketItem(FluidInit.TOAD_OIL, (new Item.Properties()).containerItem(BUCKET).maxStackSize(1).group(Main.TAB)));
 
@@ -129,8 +132,12 @@ public class ItemInit {
 
     //NBTItems
     public static final RegistryObject<Item> SCROLL = ITEMS.register("summoning_scroll", ScrollItemBase::new);
+    public static final RegistryObject<Item> TABLET = ITEMS.register("tablet", TabletItemBase::new);
 
-    public static final RegistryObject<Item> CLAY_SPAWN_EGG = ITEMS.register("clay_spawn_egg", ClaySpawnEggItemBase::new);
+    public static final RegistryObject<Item> MOLDED_CLAY = ITEMS.register("molded_clay", () -> new ClaySpawnEggItemBase(0));
+    public static final RegistryObject<Item> MOLDED_CLAY_C1 = ITEMS.register("molded_clay_c1", () -> new ClaySpawnEggItemBase(1));
+    public static final RegistryObject<Item> MOLDED_CLAY_C2 = ITEMS.register("molded_clay_c2", () -> new ClaySpawnEggItemBase(2));
+    public static final RegistryObject<Item> MOLDED_CLAY_C3 = ITEMS.register("molded_clay_c3", () -> new ClaySpawnEggItemBase(3));
 
 
     //SymbolItems
@@ -143,16 +150,25 @@ public class ItemInit {
 
     public static final RegistryObject<Item> FANGS_SYMBOL = ITEMS.register("fangs_symbol", UniqueItemBase::new);
 
+    public static final RegistryObject<Item> BYAKUGAN_SYMBOL = ITEMS.register("byakugan_symbol", UniqueItemBase::new);
+    public static final RegistryObject<Item> SHARINGAN_SYMBOL = ITEMS.register("sharingan_symbol", UniqueItemBase::new);
+    public static final RegistryObject<Item> MANGEKYOU_SHARINGAN_SYMBOL = ITEMS.register("mangekyou_sharingan_symbol", UniqueItemBase::new);
+    public static final RegistryObject<Item> ETERNAL_MANGEKYOU_SHARINGAN_SYMBOL = ITEMS.register("eternal_mangekyou_sharingan_symbol", UniqueItemBase::new);
+    public static final RegistryObject<Item> RINNEGAN_SYMBOL = ITEMS.register("rinnegan_symbol", UniqueItemBase::new);
+
 
     //Jutsu but not really
     public static final RegistryObject<Item> MINI_ROCKET = ITEMS.register("mini_rocket", UniqueItemBase::new);
     public static final RegistryObject<Item> TAILED_BEAST_BOMB = ITEMS.register("tailed_beast_bomb", UniqueItemBase::new);
+    public static final RegistryObject<Item> TRUTH_SEEKING_ORB = ITEMS.register("truth_seeking_orb", UniqueItemBase::new);
     //Jutsu
     public static final RegistryObject<Item> FIREBALL_JUTSU = ITEMS.register("fireball_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> PHOENIX_FLOWER_JUTSU = ITEMS.register("phoenix_flower_jutsu", UniqueItemBase::new);
+    public static final RegistryObject<Item> FLAME_DRAGON_JUTSU = ITEMS.register("flame_dragon_jutsu", UniqueItemBase::new);
 
     public static final RegistryObject<Item> LIGHTNING_BALL_JUTSU = ITEMS.register("lightning_ball_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> LIGHTNING_ARROW_JUTSU = ITEMS.register("lightning_arrow_jutsu", UniqueItemBase::new);
+    public static final RegistryObject<Item> KIRIN_JUTSU = ITEMS.register("kirin_jutsu", UniqueItemBase::new);
 
     public static final RegistryObject<Item> GALE_PALM_JUTSU = ITEMS.register("gale_palm_jutsu", UniqueItemBase::new);
     public static final RegistryObject<Item> WIND_EXPLOSION_JUTSU = ITEMS.register("wind_explosion_jutsu", UniqueItemBase::new);

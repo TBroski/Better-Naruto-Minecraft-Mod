@@ -66,13 +66,12 @@ public class ModelScroll<T extends LivingEntity> extends AgeableModel<T> {
 			this.bone.rotateAngleX = 0.45F;
 			this.bone.rotationPointY = 3.2F;
 			this.scroll.rotateAngleX = -0.05F;
-			this.scroll.rotationPointY = 23.5F; // 3.2F
 		} else {
 			this.bone.rotateAngleX = 0.0F;
 			this.bone.rotationPointY = 0.0F;
 			this.scroll.rotateAngleX = 0.0F;
-			this.scroll.rotationPointY = 23.5F;
 		}
+		this.scroll.rotationPointY = 23.5F; // 3.2F
 	}
 
 	@Override

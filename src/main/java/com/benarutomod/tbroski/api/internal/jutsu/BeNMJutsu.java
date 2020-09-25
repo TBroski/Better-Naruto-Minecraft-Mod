@@ -1,4 +1,4 @@
-package com.benarutomod.tbroski.api.internal;
+package com.benarutomod.tbroski.api.internal.jutsu;
 
 import com.benarutomod.tbroski.Config;
 import com.benarutomod.tbroski.Main;
@@ -8,10 +8,8 @@ import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.player.jutsu.AbstractJutsuScreen;
 import com.benarutomod.tbroski.client.gui.widgets.jutsu.GuiButtonJutsu;
 import com.benarutomod.tbroski.api.interfaces.IBeNMJutsuButtonPress;
-import com.benarutomod.tbroski.api.interfaces.IBeNMJutsuButtonUpdate;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraSync;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
 import com.benarutomod.tbroski.util.helpers.JutsuHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
@@ -21,11 +19,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class BeNMJutsu {
+
+    private static final ResourceLocation JUTSU_LOCATION = new ResourceLocation(Main.MODID, "textures/gui/jutsu.png");
 
     private final String name;
     private IBeNMPlugin correlatedPlugin;
@@ -66,7 +64,7 @@ public class BeNMJutsu {
                 }
             }
         };
-        this.resourceLocation = new ResourceLocation(Main.MODID, "textures/gui/jutsu.png");
+        this.resourceLocation = JUTSU_LOCATION;
     }
 
     public IBeNMPlugin getCorrelatedPlugin() {
@@ -205,7 +203,7 @@ public class BeNMJutsu {
     }
 
     public enum Type {
-        FIRE_NATURE, LIGHTNING_NATURE, EARTH_NATURE, WIND_NATURE, WATER_NATURE, MAGNET_NATURE, WOOD_NATURE, LAVA_NATURE, BOIL_NATURE, STORM_NATURE, SCORCH_NATURE, EXPLOSION_NATURE, ICE_NATURE, E_RANK, SHARINGAN_ABILITY, SIX_PATH_TECHNIQUE, BIJUU_ABILITY
+        FIRE_NATURE, LIGHTNING_NATURE, EARTH_NATURE, WIND_NATURE, WATER_NATURE, MAGNET_NATURE, WOOD_NATURE, LAVA_NATURE, BOIL_NATURE, STORM_NATURE, SCORCH_NATURE, EXPLOSION_NATURE, ICE_NATURE, E_RANK, SHARINGAN_ABILITY, SIX_PATH_TECHNIQUE, BIJUU_ABILITY, CLAN
     }
 
     public interface IAction {

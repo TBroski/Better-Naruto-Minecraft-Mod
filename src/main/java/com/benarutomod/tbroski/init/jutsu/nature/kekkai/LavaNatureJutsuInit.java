@@ -2,23 +2,19 @@ package com.benarutomod.tbroski.init.jutsu.nature.kekkai;
 
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.entity.clones.LavaCloneEntity;
-import com.benarutomod.tbroski.entity.clones.WoodCloneEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.lava.LavaShurikenEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.lava.ScorchingStreamRockEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
 import com.benarutomod.tbroski.util.helpers.RayTraceHelper;
 import com.benarutomod.tbroski.util.helpers.StaticFeatureHelper;
-import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
-import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
 public class LavaNatureJutsuInit {
@@ -45,13 +41,13 @@ public class LavaNatureJutsuInit {
         jutsuRegistry.register(new BeNMJutsu(pluginIn, "lava_shuriken", BeNMJutsu.Type.LAVA_NATURE, 6, 30F, 128, 32, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote) {
                 LavaShurikenEntity entity = new LavaShurikenEntity(playerIn, playerIn.world);
-                entity.setItem(new ItemStack(ItemInit.SCORCHING_STREAM_ROCK_JUTSU.get()));
+                entity.setItem(new ItemStack(ItemInit.LAVA_SHURIKEN_JUTSU.get()));
                 entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
                 playerIn.world.addEntity(entity);
             }
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "great_eruption", BeNMJutsu.Type.LAVA_NATURE, 15, 200F, 128, 48, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "great_eruption", BeNMJutsu.Type.LAVA_NATURE, 25, 300F, 128, 48, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote) {
                 EntityRayTraceResult entityRayTraceResult = RayTraceHelper.rayTraceEntities(playerIn, 6F);
                 if (entityRayTraceResult != null) {

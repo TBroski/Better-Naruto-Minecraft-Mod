@@ -26,21 +26,18 @@ public class PacketClanSync {
         this.toClient = toClient;
     }
 
-    public static void encode(PacketClanSync msg, PacketBuffer buf)
-    {
+    public static void encode(PacketClanSync msg, PacketBuffer buf) {
         buf.writeString(msg.clan);
         buf.writeBoolean(msg.toClient);
     }
 
-    public static PacketClanSync decode(PacketBuffer buf)
-    {
+    public static PacketClanSync decode(PacketBuffer buf) {
         String clan = buf.readString();
         boolean toClient = buf.readBoolean();
         return new PacketClanSync(clan, toClient);
     }
 
-    public static void handle(PacketClanSync msg, Supplier<NetworkEvent.Context> ctx)
-    {
+    public static void handle(PacketClanSync msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             if (msg.toClient) {
                 ClientPlayerEntity player = Minecraft.getInstance().player;

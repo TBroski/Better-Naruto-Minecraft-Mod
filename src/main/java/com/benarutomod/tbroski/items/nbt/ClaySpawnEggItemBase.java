@@ -9,14 +9,19 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class ClaySpawnEggItemBase extends Item {
-    public ClaySpawnEggItemBase() {
+
+    private int explosiveLevel;
+
+    public ClaySpawnEggItemBase(int explosiveLevel) {
         super(new Item.Properties().maxStackSize(4));
+        this.explosiveLevel = explosiveLevel;
     }
 
     @Override
@@ -29,7 +34,8 @@ public class ClaySpawnEggItemBase extends Item {
         if (itemstack.hasTag() && itemstack.getTag().getString("affiliatedmob") != null) {
             for (EntityType<?> entityType : ForgeRegistries.ENTITIES.getValues()) {
                 if (entityType.getRegistryName().toString().equalsIgnoreCase(itemstack.getTag().getString("affiliatedmob"))) {
-                    ClayEntity entity = new ClayEntity(worldIn, entityType, playerIn.getUniqueID(), 0);
+                    ClayEntity entity = new ClayEntity(worldIn, entityType, playerIn.getUniqueID(), this.explosiveLevel);
+                    entity.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
                     if (!playerIn.abilities.isCreativeMode) {
                         itemstack.shrink(1);
                     }

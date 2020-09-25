@@ -46,17 +46,21 @@ public class MainPlugin implements IBeNMPlugin {
     @Override
     public void registerNewBodyModes(BeNMRegistry.BodyModeRegistry bodyModeRegistry) {
         bodyModeRegistry.register(BodyInit.NULL);
-        bodyModeRegistry.register(new BeNMBody(this, "curse_mark", 224, 0, (buttonBody, playerCapability) -> {
+        bodyModeRegistry.register(new BeNMBody(this, "curse_mark", 480, 0, (buttonBody, playerCapability) -> {
             buttonBody.setHasJutsu(playerCapability.returnPlayerCurseMark() > 0);
         }).setAttackingEffect(Effects.WITHER).setModelOnRender(new ModelCurseMarkWings(), new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/cursemarkwings.png")));
 
-        bodyModeRegistry.register(new BeNMBody(this, "toad_sage", 224, 16, (buttonBody, playerCapability) -> {
+        bodyModeRegistry.register(new BeNMBody(this, "toad_sage", 480, 16, (buttonBody, playerCapability) -> {
             buttonBody.setHasJutsu(playerCapability.returnPlayerToadSageMode() > 0);
-        }).setPlayerEffect(EffectInit.SAGE_CHAKRA_REG.get()).setDojutsuModelOnRender(1, 1, new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/toadsageeyes.png")));
+        }).addPlayerEffect(EffectInit.SAGE_CHAKRA_REG.get()).setDojutsuModelOnRender(1, 1, new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/toadsageeyes.png")));
 
-        bodyModeRegistry.register(new BeNMBody(this, "bijuu_mode", 224, 32, (buttonBody, playerCapability) -> {
+        bodyModeRegistry.register(new BeNMBody(this, "bijuu", 480, 32, (buttonBody, playerCapability) -> {
             buttonBody.setHasJutsu(playerCapability.returnPlayerBijuuLevel() > 3);
-        }).setPlayerEffect(EffectInit.BIJUU_MODE.get()).setModelOnRender(new PlayerModel(1F, false), new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/bijuu_mode.png")).setDojutsuModelOnRender(1, 1, new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/toadsageeyes.png")));
+        }).addPlayerEffect(EffectInit.BIJUU_MODE.get()).setModelOnRender(new PlayerModel(1F, false), new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/bijuu_mode.png")).setDojutsuModelOnRender(1, 1, new ResourceLocation(Main.MODID, "textures/entity/layer/bodymode/toadsageeyes.png")));
+
+        bodyModeRegistry.register(new BeNMBody(this, "six_path_sage", 480, 48, (buttonBody, playerCapability) -> {
+            buttonBody.setHasJutsu(playerCapability.returnPlayerLeftDojutsu() == DojutsuInit.RINNEGAN || playerCapability.returnPlayerRightDojutsu() == DojutsuInit.RINNEGAN);
+        }).addPlayerEffect(EffectInit.SAGE_CHAKRA_REG.get()).addPlayerEffect(EffectInit.SIX_PATH_SAGE.get()).setAllowsPlayerFlight());
     }
 
     @Override
@@ -71,6 +75,9 @@ public class MainPlugin implements IBeNMPlugin {
         LavaNatureJutsuInit.registerLavaJutsu(jutsuRegistry, this);
         BoilNatureJutsuInit.registerBoilJutsu(jutsuRegistry, this);
         IceNatureJutsuInit.registerIceJutsu(jutsuRegistry, this);
+        StormNatureJutsuInit.registerStormJutsu(jutsuRegistry, this);
+        ScorchNatureJutsuInit.registerScorchJutsu(jutsuRegistry, this);
+        ExplosionNatureJutsuInit.registerExplosionJutsu(jutsuRegistry, this);
         ERankJutsuInit.registerERankJutsu(jutsuRegistry, this);
         SharinganJutsuInit.registerSharinganJutsu(jutsuRegistry, this);
         SixPathJutsuInit.registerSixPathJutsu(jutsuRegistry, this);

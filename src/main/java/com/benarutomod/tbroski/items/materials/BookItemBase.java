@@ -33,33 +33,9 @@ public class BookItemBase extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if (!playerIn.isCrouching()) {
-            EtherealItemEntity yata_mirror = new EtherealItemEntity(EntityInit.ETHEREAL_ITEM.get(), worldIn);
-            yata_mirror.setPosition(playerIn.getPosX() - 5, playerIn.getPosY(), playerIn.getPosZ() + 3);
-            yata_mirror.setItem(new ItemStack(ItemInit.YATA_MIRROR.get()));
-            worldIn.addEntity(yata_mirror);
-            EtherealItemEntity totska_blade = new EtherealItemEntity(EntityInit.ETHEREAL_ITEM.get(), worldIn);
-            totska_blade.setPosition(playerIn.getPosX() - 5, playerIn.getPosY(), playerIn.getPosZ() - 3);
-            totska_blade.setItem(new ItemStack(ItemInit.TOTSUKA_BlADE.get()));
-            worldIn.addEntity(totska_blade);
-        }
-        else {
-            LazyOptional<IPlayerHandler> player_cap = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
-            IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
-            int rand = playerIn.getRNG().nextInt(3);
-            if (rand == 0) {
-                playerc.setSusanooOffHand(new ItemStack(ItemInit.YATA_MIRROR.get()));
-                playerc.setSusanooMainHand(new ItemStack(ItemInit.TOTSUKA_BlADE.get()));
-            }
-            else if (rand == 1) {
-                playerc.setSusanooOffHand(new ItemStack(Items.GOLDEN_SWORD));
-                playerc.setSusanooMainHand(new ItemStack(Items.IRON_SWORD));
-            }
-            else {
-                playerc.setSusanooOffHand(new ItemStack(Items.SHIELD));
-                playerc.setSusanooMainHand(new ItemStack(Items.SHIELD));
-            }
-        }
+        LazyOptional<IPlayerHandler> capabilities = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler playercap = capabilities.orElse(new PlayerCapability());
+        playercap.setTruthSeekingOrbAmount(0);
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

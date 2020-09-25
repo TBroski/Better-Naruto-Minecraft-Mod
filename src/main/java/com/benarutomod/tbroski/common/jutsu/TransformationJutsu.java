@@ -113,11 +113,12 @@ public class TransformationJutsu {
                     //mobEntity.setHeadRotation(event.player.cameraYaw, (int) event.player.rotationPitch);
                     mobEntity.setPositionAndRotation(event.player.getPosX(), event.player.getPosY(), event.player.getPosZ(), event.player.rotationYaw, event.player.rotationPitch);
                     //mobEntity.setPositionAndUpdate(event.player.getPosX(), event.player.getPosY(), event.player.getPosZ());
+                    mobEntity.setRotationYawHead(event.player.rotationYawHead);
                 }
                 else {
-                    mobEntity.setRotationYawHead(event.player.rotationYawHead);
+                    //mobEntity.setRotationYawHead(event.player.rotationYawHead);
                     //mobEntity.setHeadRotation(event.player.cameraYaw, (int) event.player.rotationPitch);
-                    mobEntity.setPositionAndRotation(event.player.getPosX(), event.player.getPosY(), event.player.getPosZ(), event.player.rotationYaw, event.player.rotationPitch);
+                    //mobEntity.setPositionAndRotation(event.player.getPosX(), event.player.getPosY(), event.player.getPosZ(), event.player.rotationYaw, event.player.rotationPitch);
                     //mobEntity.setPositionAndUpdate(event.player.getPosX(), event.player.getPosY(), event.player.getPosZ());
                 }
             }

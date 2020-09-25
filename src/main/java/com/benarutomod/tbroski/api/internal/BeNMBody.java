@@ -12,12 +12,15 @@ import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BeNMBody {
 
     private final String mode;
     private IBeNMPlugin plugin;
     private boolean flight;
-    private Effect effect;
+    private List<Effect> effects = new ArrayList<>();
     private Effect attackingEffect;
     private AgeableModel model;
     private int dojutsuSize = -1;
@@ -87,8 +90,8 @@ public class BeNMBody {
         return this;
     }
 
-    public BeNMBody setPlayerEffect(Effect effect) {
-        this.effect = effect;
+    public BeNMBody addPlayerEffect(Effect effect) {
+        this.effects.add(effect);
         return this;
     }
 
@@ -114,8 +117,8 @@ public class BeNMBody {
         return this.flight;
     }
 
-    public Effect getPlayerEffect() {
-        return this.effect;
+    public List<Effect> getPlayerEffects() {
+        return this.effects;
     }
 
     public Effect getAttackingEffect() {

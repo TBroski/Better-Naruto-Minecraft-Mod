@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "benarutomod:rinnegan_symbol"
+    },
+    "title": {
+      "translate": "advancements.benarutomod.rinnegan.title"
+    },
+    "description": {
+      "translate": "advancements.benarutomod.rinnegan.text"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kao": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "parent": "benarutomod:dojutsu/eternal_mangekyou_sharingan"
+}

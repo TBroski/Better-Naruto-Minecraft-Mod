@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "XX",
+    "XXX"
+  ],
+  "key": {
+    "X": [
+      {
+        "tag": "benarutomod:sakura_planks"
+      }
+    ]
+  },
+  "result": {
+    "item": "benarutomod:sakura_stairs",
+    "count": 4
+  }
+}

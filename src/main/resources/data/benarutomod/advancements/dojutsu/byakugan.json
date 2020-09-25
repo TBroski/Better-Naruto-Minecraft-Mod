@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "benarutomod:byakugan_symbol"
+    },
+    "title": {
+      "translate": "advancements.benarutomod.byakugan.title"
+    },
+    "description": {
+      "translate": "advancements.benarutomod.byakugan.text"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kao": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "parent": "benarutomod:dojutsu/dojutsu"
+}

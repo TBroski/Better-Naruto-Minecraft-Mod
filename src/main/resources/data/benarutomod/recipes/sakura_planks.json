@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":
+  [
+    {
+      "item": "benarutomod:sakura_log"
+    }
+  ],
+
+  "result":
+  {
+    "item": "benarutomod:sakura_planks",
+    "count": 4
+  }
+}

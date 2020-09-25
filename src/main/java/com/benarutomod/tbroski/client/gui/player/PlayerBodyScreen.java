@@ -14,8 +14,11 @@ import com.benarutomod.tbroski.init.BodyInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketBeNMPointsSync;
 import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraControlSync;
+import com.benarutomod.tbroski.networking.packets.chakra.PacketMaxChakraSync;
+import com.benarutomod.tbroski.networking.packets.chakra.PacketRegenChakraSync;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -30,6 +33,10 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
     private ArrayList<GuiButtonTab> tabs = new ArrayList<>();
 
     private GuiButtonArrowUp chakraControlUp;
+
+    private GuiButtonArrowUp maxChakraUp;
+    private GuiButtonArrowUp regenChakraUp;
+
     private GuiButtonArrowDown setBodyMode;
 
     private String bodyToggle = "";
@@ -60,10 +67,17 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
         //Page 2
         addButton(setBodyMode = new GuiButtonArrowDown(this.guiLeft - 11, this.guiTop + 40, false, $ -> {
             Minecraft.getInstance().displayGuiScreen(new BodyModeScreen());
-            // Uncomment these playerCapability.setPlayerBodyMode(currentBodyMode);
-            //NetworkLoader.INSTANCE.sendToServer(new PacketPlayerBodyModeSync(playerCapability.returnPlayerBodyMode().getName(), Minecraft.getInstance().player.getEntityId(), false));
-            //Minecraft.getInstance().player.sendMessage(new StringTextComponent("Body Mode set to: " + new TranslationTextComponent(this.bodyToggle).getString()));
         }));
+
+        //Page 3
+        addButton(maxChakraUp = new GuiButtonArrowUp(this.guiLeft + 50, this.guiTop + 30, false, $ -> {
+            maxChakraUpPressed();
+        }));
+
+        addButton(regenChakraUp = new GuiButtonArrowUp(this.guiLeft - 70, this.guiTop + 30, false, $ -> {
+            regenChakraUpPressed();
+        }));
+
     }
 
     @Override
@@ -77,6 +91,10 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
         }
         if (openedTab != 1) {
             setBodyMode.visible = false;
+        }
+        if (openedTab != 2) {
+            maxChakraUp.visible = false;
+            regenChakraUp.visible = false;
         }
         switch (openedTab) {
             case 0:
@@ -93,8 +111,8 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
                 if (playerc.returnPlayerBodyMode() != BodyInit.NULL) font.drawString("Selected Body Mode: " + new TranslationTextComponent("body." + playerc.returnPlayerBodyMode().getCorrelatedPlugin().getPluginId() + "." + playerc.returnPlayerBodyMode().getName()).getString(), this.guiLeft - (font.getStringWidth("Selected Body Mode: " + new TranslationTextComponent("body." + playerc.returnPlayerBodyMode().getCorrelatedPlugin().getPluginId() + "." + playerc.returnPlayerBodyMode().getName()).getString()) / 2), this.guiTop - 45, 0x453100);
 
                 List<String> attribs = new ArrayList<>();
-                if (playerc.returnPlayerBodyMode().getPlayerEffect() != null) {
-                    attribs.add("Player Effect: " + playerc.returnPlayerBodyMode().getPlayerEffect().getDisplayName().getString());
+                for (Effect effect : playerc.returnPlayerBodyMode().getPlayerEffects()) {
+                    attribs.add("Player Effect: " + effect.getDisplayName().getString());
                 }
                 if (playerc.returnPlayerBodyMode().getAttackingEffect() != null) {
                     attribs.add("Attacking Effect: " + playerc.returnPlayerBodyMode().getAttackingEffect().getDisplayName().getString());
@@ -109,6 +127,19 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
                     i += 15;
                 }
                 attribs.clear();
+                break;
+            case 2:
+                maxChakraUp.visible = true;
+                regenChakraUp.visible = true;
+                maxChakraUp.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                regenChakraUp.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                font.drawStringWithShadow("Statistics", this.guiLeft - 70, this.guiTop - 50, 0x453100);
+                font.drawString("Cost 1 BeNM Points", this.guiLeft + 15, this.guiTop + 20, 0x453100);
+                font.drawString("Cost 1 BeNM Points", this.guiLeft - 100, this.guiTop + 20, 0x453100);
+                font.drawString("Max Chakra Level = " + playerc.returnmaxChakra(), this.guiLeft - 105, this.guiTop - 35, 0x453100);
+                font.drawString("Regeneration Chakra Level = " + playerc.returnregenChakra(), this.guiLeft - 105, this.guiTop - 15, 0x453100);
+                font.drawString("Regeneration", this.guiLeft - 85, this.guiTop + 55, 0x453100);
+                font.drawString("Max Chakra", this.guiLeft + 30, this.guiTop + 55, 0x453100);
                 break;
         }
     }
@@ -130,8 +161,41 @@ public class PlayerBodyScreen extends AbstractTabedBackground {
         NetworkLoader.INSTANCE.sendToServer(new PacketChakraControlSync(playerc.returnChakraControl(), false));
     }
 
-    public void checkHovered(int p_render_1, int p_render_2, GuiButtonJutsu... widgets)
-    {
+    private void maxChakraUpPressed() {
+        Minecraft mc = Minecraft.getInstance();
+        AbstractClientPlayerEntity player = mc.player;
+        LazyOptional<IPlayerHandler> player_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
+        if (playerc.returnBeNMPoints() >= 1) {
+            playerc.addBeNMPoints(-1);
+            playerc.addmaxChakra(5F);
+            player.sendMessage(new StringTextComponent("+5 Max Chakra Total: " + playerc.returnmaxChakra()));
+        }
+        else {
+            player.sendMessage(new StringTextComponent("Not Enough BeNM Points (Need 1)"));
+        }
+        NetworkLoader.INSTANCE.sendToServer(new PacketBeNMPointsSync(playerc.returnBeNMPoints(), false));
+        NetworkLoader.INSTANCE.sendToServer(new PacketMaxChakraSync(playerc.returnmaxChakra(), player.getPersistentData().getInt("restrictedchakra"), false));
+    }
+
+    private void regenChakraUpPressed() {
+        Minecraft mc = Minecraft.getInstance();
+        AbstractClientPlayerEntity player = mc.player;
+        LazyOptional<IPlayerHandler> player_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+        IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
+        if (playerc.returnBeNMPoints() >= 1) {
+            playerc.addBeNMPoints(-1);
+            playerc.addregenChakra(0.5F);
+            player.sendMessage(new StringTextComponent("+0.5 Regeneration Chakra Total: " + playerc.returnregenChakra()));
+        }
+        else {
+            player.sendMessage(new StringTextComponent("Not Enough BeNM Points (Need 1)"));
+        }
+        NetworkLoader.INSTANCE.sendToServer(new PacketBeNMPointsSync(playerc.returnBeNMPoints(), false));
+        NetworkLoader.INSTANCE.sendToServer(new PacketRegenChakraSync(playerc.returnregenChakra(), false));
+    }
+
+    public void checkHovered(int p_render_1, int p_render_2, GuiButtonJutsu... widgets) {
         for (GuiButtonJutsu button : widgets) {
             if (button.isHovered()) {
                 renderTooltip(new TranslationTextComponent("body." + button.getTranslationName()).getString(), p_render_1, p_render_2);

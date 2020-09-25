@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "benarutomod:eternal_mangekyou_sharingan_symbol"
+    },
+    "title": {
+      "translate": "advancements.benarutomod.eternal_mangekyou_sharingan.title"
+    },
+    "description": {
+      "translate": "advancements.benarutomod.eternal_mangekyou_sharingan.text"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kao": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "parent": "benarutomod:dojutsu/mangekyou_sharingan"
+}

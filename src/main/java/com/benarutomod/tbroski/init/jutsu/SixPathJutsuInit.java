@@ -1,6 +1,6 @@
 package com.benarutomod.tbroski.init.jutsu;
 
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
@@ -9,9 +9,9 @@ import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.api.entity.jutsu.AbstractJutsuEntity;
 import com.benarutomod.tbroski.api.entity.jutsu.AbstractNinjutsuEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.sixpath.MiniRocketProjectileEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.sixpath.TruthSeekingOrbEntity;
 import com.benarutomod.tbroski.init.ItemInit;
 import com.benarutomod.tbroski.util.helpers.RayTraceHelper;
-import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.*;
 import net.minecraftforge.common.util.LazyOptional;
@@ -72,6 +72,20 @@ public class SixPathJutsuInit {
                 }
             }
             return false;
+        }));
+
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "truth_seeking_orb_toss", BeNMJutsu.Type.SIX_PATH_TECHNIQUE, 0, 1F, 464, 48, false, ((playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+            if (playerCapability.getTruthSeekingOrbAmount() > 0) {
+                playerCapability.setTruthSeekingOrbAmount(playerCapability.getTruthSeekingOrbAmount() - 1);
+                TruthSeekingOrbEntity entity = new TruthSeekingOrbEntity(playerIn, playerIn.world);
+                entity.setItem(new ItemStack(ItemInit.TRUTH_SEEKING_ORB.get()));
+                entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 2.3F, 0.1F);
+                playerIn.world.addEntity(entity);
+            }
+        })).setExtraJutsuChecks((playerIn, taijutsuModifier0, taijutsuModifier1) -> {
+            LazyOptional<IPlayerHandler> playerc = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
+            IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
+            return player_cap.getTruthSeekingOrbAmount() > 0;
         }));
     }
 }

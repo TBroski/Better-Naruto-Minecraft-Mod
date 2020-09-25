@@ -3,7 +3,8 @@ package com.benarutomod.tbroski.api;
 import com.benarutomod.tbroski.api.internal.BeNMBody;
 import com.benarutomod.tbroski.api.internal.BeNMClan;
 import com.benarutomod.tbroski.api.internal.dojutsu.BeNMDojutsu;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMClanJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 
 import java.util.ArrayList;
 import java.util.List;

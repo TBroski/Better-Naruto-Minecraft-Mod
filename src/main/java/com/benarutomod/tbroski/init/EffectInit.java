@@ -16,4 +16,5 @@ public class EffectInit {
     public static final RegistryObject<Effect> TSUKUYOMI = EFFECT.register("tsukuyomi", TsukuyomiEffect::new);
     public static final RegistryObject<Effect> BIJUU_MODE = EFFECT.register("bijuu_mode", BijuuModeEffect::new);
     public static final RegistryObject<Effect> EXHAUSTION = EFFECT.register("exhaustion", ExhaustionEffect::new);
+    public static final RegistryObject<Effect> SIX_PATH_SAGE = EFFECT.register("six_path", SixPathSageEffect::new);
 }

@@ -28,13 +28,10 @@ public class ScrollItemBase extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemStack = playerIn.getHeldItem(handIn);
-        if (!worldIn.isRemote)
-        {
+        if (!worldIn.isRemote) {
             LazyOptional<IPlayerHandler> player_cap = playerIn.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler playerHandler = player_cap.orElse(new PlayerCapability());
-
-            if (itemStack.hasTag() && !itemStack.getTag().getString("entityaffiliation").equalsIgnoreCase(""))
-            {
+            if (itemStack.hasTag() && !itemStack.getTag().getString("entityaffiliation").equalsIgnoreCase("")) {
                 playerHandler.setPlayerEntityAffiliation(itemStack.getTag().getString("entityaffiliation"));
                 playerIn.sendMessage(new StringTextComponent("Added Contract"));
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new PacketPlayerEntityAffiliationSync(playerHandler.returnPlayerEntityAffiliation(), true));

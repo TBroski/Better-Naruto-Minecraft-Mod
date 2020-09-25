@@ -1,7 +1,7 @@
 package com.benarutomod.tbroski.capabilities;
 
 import com.benarutomod.tbroski.Main;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
@@ -12,12 +12,9 @@ import com.benarutomod.tbroski.networking.packets.*;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketSetJutsuBoolean;
 import com.benarutomod.tbroski.networking.packets.settings.*;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -93,6 +90,7 @@ public class CapabilityHandler {
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketBijuuSync(player.getEntityId(), playercap.returnPlayerBijuu()));
             NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new PacketClanSync(playercap.returnPlayerClan().getString(), true));
             NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new PacketSusanooItemsSync(player.getEntityId(), playercap.getSusanooMainHand(), playercap.getSusanooOffHand(), true)); //playercap.getSusanooMainHand(), playercap.getSusanooOffHand()
+            NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new PacketTruthSeekingOrbsSync(player.getEntityId(), playercap.getTruthSeekingOrbAmount())); //playercap.getSusanooMainHand(), playercap.getSusanooOffHand()
         }
     }
 

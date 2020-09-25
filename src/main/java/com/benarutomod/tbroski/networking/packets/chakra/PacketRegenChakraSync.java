@@ -13,14 +13,12 @@ public class PacketRegenChakraSync {
     private float regenChakra;
     private boolean toClient;
 
-    public PacketRegenChakraSync(float regenChakra, boolean toClient)
-    {
+    public PacketRegenChakraSync(float regenChakra, boolean toClient) {
         this.regenChakra = regenChakra;
         this.toClient = toClient;
     }
 
-    public static void encode(PacketRegenChakraSync msg, PacketBuffer buf)
-    {
+    public static void encode(PacketRegenChakraSync msg, PacketBuffer buf) {
         buf.writeFloat(msg.regenChakra);
         buf.writeBoolean(msg.toClient);
     }

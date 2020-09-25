@@ -21,9 +21,9 @@ public class ModelGiant<T extends LivingEntity> extends AgeableModel<T> {
         textureWidth = 128;
         textureHeight = 128;
 
-        head = new ModelRenderer(this);
+        head = new ModelRenderer(this); // -32
         head.setRotationPoint(4.0F, -8.0F, 0.0F);
-        head.setTextureOffset(0, 0).addBox(-12.0F, -32.0F, -8.0F, 16.0F, 16.0F, 16.0F, 0.0F, false);
+        head.setTextureOffset(0, 0).addBox(-12.0F, -24.0F, -8.0F, 16.0F, 16.0F, 16.0F, 0.0F, false);
 
         body = new ModelRenderer(this);
         body.setRotationPoint(4.0F, -12.0F, 0.0F);

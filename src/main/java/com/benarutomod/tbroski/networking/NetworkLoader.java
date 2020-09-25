@@ -56,5 +56,8 @@ public class NetworkLoader {
         INSTANCE.registerMessage(nextID(), PacketSpawnEntity.class, PacketSpawnEntity::encode, PacketSpawnEntity::decode, PacketSpawnEntity::handle);
         INSTANCE.registerMessage(nextID(), PacketSusanooItemsSync.class, PacketSusanooItemsSync::encode, PacketSusanooItemsSync::decode, PacketSusanooItemsSync::handle);
         INSTANCE.registerMessage(nextID(), PacketBlueFireSync.class, PacketBlueFireSync::encode, PacketBlueFireSync::decode, PacketBlueFireSync::handle);
+        INSTANCE.registerMessage(nextID(), PacketClayEntitySync.class, PacketClayEntitySync::encode, PacketClayEntitySync::decode, PacketClayEntitySync::handle);
+        INSTANCE.registerMessage(nextID(), PacketTruthSeekingOrbsSync.class, PacketTruthSeekingOrbsSync::encode, PacketTruthSeekingOrbsSync::decode, PacketTruthSeekingOrbsSync::handle);
+        INSTANCE.registerMessage(nextID(), PacketAddLearntClan.class, PacketAddLearntClan::encode, PacketAddLearntClan::decode, PacketAddLearntClan::handle);
     }
 }

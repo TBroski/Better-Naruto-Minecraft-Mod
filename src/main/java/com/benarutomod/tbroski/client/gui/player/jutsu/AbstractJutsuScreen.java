@@ -148,8 +148,7 @@ public abstract class AbstractJutsuScreen extends Screen {
         GL11.glPopMatrix();
     }
 
-    public void checkCovered()
-    {
+    public void checkCovered() {
         Minecraft mc = Minecraft.getInstance();
         mc.textureManager.bindTexture(new ResourceLocation(Main.MODID, "textures/gui/jutsu.png"));
         GL11.glEnable(GL11.GL_BLEND);

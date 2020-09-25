@@ -36,7 +36,7 @@ public class IcePetalEntity extends AbstractIceJutsuEntity {
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)0.5);
+            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0.5F);
         }
 
         if (!this.world.isRemote) {

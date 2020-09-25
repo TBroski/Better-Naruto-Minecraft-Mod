@@ -1,13 +1,10 @@
 package com.benarutomod.tbroski.command.impl;
 
 import com.benarutomod.tbroski.Main;
-import com.benarutomod.tbroski.api.BeNMRegistry;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketNature;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketSetJutsuBoolean;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;

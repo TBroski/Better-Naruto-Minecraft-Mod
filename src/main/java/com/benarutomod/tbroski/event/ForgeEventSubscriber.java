@@ -6,7 +6,7 @@ import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import com.benarutomod.tbroski.client.gui.container.ExtendedPlayerInventory;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
 import com.benarutomod.tbroski.entity.shinobi.akatsuki.kakuzu.KakuzuEntity;
@@ -17,6 +17,7 @@ import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.PacketPlayerBodyModeSync;
 import com.benarutomod.tbroski.networking.packets.PacketSusanooItemsSync;
 import com.benarutomod.tbroski.networking.packets.PacketToggleInfusionBoolean;
+import com.benarutomod.tbroski.networking.packets.PacketTruthSeekingOrbsSync;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
 import com.benarutomod.tbroski.networking.packets.settings.PacketBackSlotSync;
 import com.benarutomod.tbroski.networking.packets.settings.PacketToggleScrollBoolean;
@@ -68,7 +69,6 @@ import java.awt.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -140,7 +140,6 @@ public class ForgeEventSubscriber {
             PlayerEvents.checkInfusion(event);
             if (!player.world.isRemote) {
                 GlobalEvents.playerRaid(event);
-                GlobalEvents.summonBrother(event);
                 PlayerEvents.regenerateChakra(event);
 /*                if (playercap.returnBodyInfusionToggled() && playercap.hasMagnetNature()) {
                     List<ItemEntity> itemEntities = player.world.getEntitiesWithinAABB(ItemEntity.class, player.getBoundingBox().grow(5));
@@ -218,6 +217,7 @@ public class ForgeEventSubscriber {
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(2, true, targetcap.returnBodyInfusionToggled(), targetID));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketToggleInfusionBoolean(3, true, targetcap.returnLegInfusionToggled(), targetID));
                 NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketSusanooItemsSync(targetID, targetcap.getSusanooMainHand(), targetcap.getSusanooOffHand(), true));
+                NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketTruthSeekingOrbsSync(targetID, targetcap.getTruthSeekingOrbAmount()));
                 for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
                     NetworkLoader.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) event.getPlayer()), new PacketJutsuNBTSync(targetID, jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName(), targetcap.hasJutsuBoolean(jutsu)));
                 }

@@ -12,8 +12,6 @@ public class ExhaustionEffect extends Effect {
 
     @Override
     public boolean isReady(int duration, int amplifier) {
-        System.out.println(duration / 20 == (int) duration / 20F);
-        System.out.println(duration / 20F);
         return duration / 20 == (int) duration / 20F;
     }
 

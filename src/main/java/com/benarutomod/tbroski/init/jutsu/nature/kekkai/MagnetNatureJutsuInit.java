@@ -1,22 +1,17 @@
 package com.benarutomod.tbroski.init.jutsu.nature.kekkai;
 
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
-import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
-import com.benarutomod.tbroski.entity.projectile.jutsu.fire.FireballEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.magnet.BlackIronFistEntity;
 import com.benarutomod.tbroski.init.BlockInit;
 import com.benarutomod.tbroski.init.ItemInit;
-import com.benarutomod.tbroski.util.helpers.BijuuHelper;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.*;
-import net.minecraftforge.common.Tags;
 
 import java.util.Random;
 
@@ -55,7 +50,7 @@ public class MagnetNatureJutsuInit {
             return false;
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "self_levitation", BeNMJutsu.Type.MAGNET_NATURE, 11, 1.5F, 96, 16, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "self_levitation", BeNMJutsu.Type.MAGNET_NATURE, 11, 2.5F, 96, 16, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             playerIn.abilities.allowFlying = true;
             playerIn.abilities.isFlying = true;
             playerIn.sendPlayerAbilities();
@@ -88,18 +83,18 @@ public class MagnetNatureJutsuInit {
             }
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "iron_sand_wave", BeNMJutsu.Type.MAGNET_NATURE, 2, 0.1F, 96, 64, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
-            if (!playerIn.world.isRemote) {
-                FallingBlockEntity blockEntity = new FallingBlockEntity(playerIn.world, playerIn.getPosX(), playerIn.getPosY() + 2, playerIn.getPosZ(), BlockInit.IRON_SAND.get().getDefaultState());
+/*        jutsuRegistry.register(new BeNMJutsu(pluginIn, "iron_sand_wave", BeNMJutsu.Type.MAGNET_NATURE, 2, 0.1F, 96, 64, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+            if (!playerIn.world.isRemote && playerIn.ticksExisted % 15 == 0) {
+                FallingBlockEntity blockEntity = new FallingBlockEntity(playerIn.world, playerIn.getPosX(), playerIn.getPosY() + 3, playerIn.getPosZ(), BlockInit.IRON_SAND.get().getDefaultState());
                 float yaw = playerIn.rotationYaw;
                 float pitch = 0;
-                float velocity = 1.0F;
+                float velocity = 0.3F;
                 double motionX = -MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * velocity;
                 double motionZ = MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * velocity;
                 double motionY = -MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * velocity;
                 blockEntity.setMotion(motionX, motionY, motionZ);
                 playerIn.world.addEntity(blockEntity);
             }
-        }));
+        }));*/
     }
 }

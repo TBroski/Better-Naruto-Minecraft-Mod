@@ -21,9 +21,8 @@ public class AkatsukiModel extends ArmorItem {
     @SuppressWarnings("unchecked")
     @Nullable
     @Override
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
-    {
-        ModelAkatsukiCloak model = new ModelAkatsukiCloak(0F);
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
+        ModelAkatsukiCloak model = new ModelAkatsukiCloak();
         //model.bipedLeftLeg.showModel = (armorSlot == EquipmentSlotType.CHEST);
 
         model.isChild = _default.isChild;
@@ -34,6 +33,8 @@ public class AkatsukiModel extends ArmorItem {
 
         return (A) model;
     }
+
+
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {

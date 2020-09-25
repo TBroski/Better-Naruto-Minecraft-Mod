@@ -15,6 +15,7 @@ import com.benarutomod.tbroski.networking.packets.chakra.PacketChakraAddition;
 import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuCaller;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
@@ -81,41 +82,60 @@ public class KeyboardHelper {
             LazyOptional<IPlayerHandler> player_cap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
             IPlayerHandler playerc = player_cap.orElse(new PlayerCapability());
 
+/*            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND1.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("1");
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND2.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("2");
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND3.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("3");
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND4.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("4");
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND5.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("5");
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND6.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("6");
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND7.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("7");
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND8.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("8");
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND9.getKeyBinding().getKey().getKeyCode()))
+                System.out.println("9");*/
+
             if (isTabDown()) {
                 if (playerc.returnHandInfusionToggled()) {
-                    if (KeybindInit.KEYBIND1.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND1.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind1());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 1));
                     }
-                    if (KeybindInit.KEYBIND2.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND2.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind2());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 2));
                     }
-                    if (KeybindInit.KEYBIND3.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND3.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind3());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 3));
                     }
-                    if (KeybindInit.KEYBIND4.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND4.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind4());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 4));
                     }
-                    if (KeybindInit.KEYBIND5.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND5.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind5());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 5));
                     }
-                    if (KeybindInit.KEYBIND6.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND6.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind6());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 6));
                     }
-                    if (KeybindInit.KEYBIND7.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND7.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind7());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 7));
                     }
-                    if (KeybindInit.KEYBIND8.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND8.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind8());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 8));
                     }
-                    if (KeybindInit.KEYBIND9.isKeyDown()) {
+                    if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), KeybindInit.KEYBIND9.getKeyBinding().getKey().getKeyCode())) {
                         JutsuCaller.JutsuCaller(player, playerc.returnKeybind9());
                         NetworkLoader.INSTANCE.sendToServer(new PacketJutsuCaller("", 9));
                     }

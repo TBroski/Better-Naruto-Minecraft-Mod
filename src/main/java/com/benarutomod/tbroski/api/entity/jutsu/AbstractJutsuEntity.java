@@ -7,7 +7,11 @@ import net.minecraft.network.IPacket;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import java.util.Random;
+
 public abstract class AbstractJutsuEntity extends ProjectileItemEntity {
+
+    private Random random = new Random();
 
     public abstract String getAffiliatedJutsuName();
 
@@ -29,6 +33,10 @@ public abstract class AbstractJutsuEntity extends ProjectileItemEntity {
         if (this.ticksExisted >= 600) {
             this.remove();
         }
+    }
+
+    public Random getRNG() {
+        return random;
     }
 
     @Override

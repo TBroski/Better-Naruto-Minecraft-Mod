@@ -68,6 +68,7 @@ public class MiniRocketProjectileEntity extends ProjectileItemEntity {
                 BlockPos block = ((BlockRayTraceResult)result).getPos();
                 world.playSound(null, block, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 0.7F, 0.4F);
             }
+            this.world.setEntityState(this, (byte)3);
             this.remove();
         }
     }

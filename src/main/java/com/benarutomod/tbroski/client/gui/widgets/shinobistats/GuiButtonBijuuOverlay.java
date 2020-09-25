@@ -23,6 +23,7 @@ public class GuiButtonBijuuOverlay extends Button {
     @Override
     public void renderButton(int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
         Minecraft mc = Minecraft.getInstance();
+        mc.textureManager.bindTexture(TEXTURE);
         if (!visible)
         {
             return;

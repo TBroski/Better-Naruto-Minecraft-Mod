@@ -26,8 +26,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.util.LazyOptional;
 import org.omg.CORBA.UShortSeqHelper;
 
-public class DojutsuLayer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M>
-{
+public class DojutsuLayer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
+
     private AgeableModel leftModel = new ModelLeftEye(0, 4);
     private AgeableModel rightModel = new ModelLeftEye(0, 4);
 

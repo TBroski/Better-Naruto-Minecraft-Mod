@@ -3,31 +3,39 @@ package com.benarutomod.tbroski.init;
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.entity.ClayEntity;
 import com.benarutomod.tbroski.entity.EtherealItemEntity;
-import com.benarutomod.tbroski.entity.clones.LavaCloneEntity;
-import com.benarutomod.tbroski.entity.clones.WoodCloneEntity;
+import com.benarutomod.tbroski.entity.clones.*;
 import com.benarutomod.tbroski.entity.mobs.FrogEntity;
 import com.benarutomod.tbroski.entity.mobs.SnakeEntity;
-import com.benarutomod.tbroski.entity.clones.BasicCloneEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.IsobuEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.MatatabiEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.ShukakuEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.SonGokuEntity;
+import com.benarutomod.tbroski.entity.npc.ClanHelperEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.TailedBeastBombEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.boil.BurningAquaGunEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.boil.CorrosiveArrowEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.FlyingStonesEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.earth.MudMoatEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.fire.FireballEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.fire.FlameDragonEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.fire.PhoenixFlowerEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.ice.IcePetalEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.ice.OneHornedWhiteWhaleEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.lava.LavaShurikenEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.lava.ScorchingStreamRockEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.lightning.KirinEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.lightning.LightningArrowEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.lightning.LightningBallEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.magnet.BlackIronFistEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.scorch.BlazingPelletEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.scorch.ExtremelySteamingMurderEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.scorch.GreatFireballEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.sharingan.AmaterasuJutsuEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.sixpath.MiniRocketProjectileEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.sixpath.TruthSeekingOrbEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.storm.BlackHuntingEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.storm.DemonDragonStormEntity;
+import com.benarutomod.tbroski.entity.projectile.jutsu.storm.LaserCircusEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.water.RagingWavesEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.water.WaterSharkBulletEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.water.WaterShurikenEntity;
@@ -71,6 +79,8 @@ public class EntityInit {
     public static final RegistryObject<EntityType<BasicCloneEntity>> BASIC_CLONE = ENTITIES.register("basic_clone", () -> EntityType.Builder.<BasicCloneEntity>create(BasicCloneEntity::new, EntityClassification.CREATURE).size(EntityType.PLAYER.getWidth(), EntityType.PLAYER.getHeight()).build(new ResourceLocation(Main.MODID, "basic_clone").toString()));
     public static final RegistryObject<EntityType<WoodCloneEntity>> WOOD_CLONE = ENTITIES.register("wood_clone", () -> EntityType.Builder.<WoodCloneEntity>create(WoodCloneEntity::new, EntityClassification.CREATURE).size(EntityType.PLAYER.getWidth(), EntityType.PLAYER.getHeight()).build(new ResourceLocation(Main.MODID, "wood_clone").toString()));
     public static final RegistryObject<EntityType<LavaCloneEntity>> LAVA_CLONE = ENTITIES.register("lava_clone", () -> EntityType.Builder.<LavaCloneEntity>create(LavaCloneEntity::new, EntityClassification.CREATURE).size(EntityType.PLAYER.getWidth(), EntityType.PLAYER.getHeight()).build(new ResourceLocation(Main.MODID, "lava_clone").toString()));
+    public static final RegistryObject<EntityType<ExplosionCloneEntity>> EXPLOSION_CLONE = ENTITIES.register("explosion_clone", () -> EntityType.Builder.<ExplosionCloneEntity>create(ExplosionCloneEntity::new, EntityClassification.CREATURE).size(EntityType.PLAYER.getWidth(), EntityType.PLAYER.getHeight()).build(new ResourceLocation(Main.MODID, "explosion_clone").toString()));
+    public static final RegistryObject<EntityType<ScorchCloneEntity>> SCORCH_CLONE = ENTITIES.register("scorch_clone", () -> EntityType.Builder.<ScorchCloneEntity>create(ScorchCloneEntity::new, EntityClassification.CREATURE).size(EntityType.PLAYER.getWidth(), EntityType.PLAYER.getHeight()).build(new ResourceLocation(Main.MODID, "scorch_clone").toString()));
 
     public static final RegistryObject<EntityType<DeidaraEntity>> DEIDARA = ENTITIES.register("deidara", () -> EntityType.Builder.<DeidaraEntity>create(DeidaraEntity::new, EntityClassification.CREATURE).size(EntityType.PLAYER.getWidth(), EntityType.PLAYER.getHeight()).build(new ResourceLocation(Main.MODID, "deidara").toString()));
     public static final RegistryObject<EntityType<ItachiEntity>> ITACHI = ENTITIES.register("itachi", () -> EntityType.Builder.<ItachiEntity>create(ItachiEntity::new, EntityClassification.CREATURE).size(EntityType.PLAYER.getWidth(), EntityType.PLAYER.getHeight()).build(new ResourceLocation(Main.MODID, "itachi").toString()));
@@ -78,6 +88,11 @@ public class EntityInit {
 
     public static final RegistryObject<EntityType<SnakeEntity>> SNAKE = ENTITIES.register("snake", () -> EntityType.Builder.<SnakeEntity>create(SnakeEntity::new, EntityClassification.CREATURE).size(1.0F, 1.0F).build(new ResourceLocation(Main.MODID, "snake").toString()));
     public static final RegistryObject<EntityType<FrogEntity>> FROG = ENTITIES.register("frog", () -> EntityType.Builder.<FrogEntity>create(FrogEntity::new, EntityClassification.CREATURE).size(EntityType.RABBIT.getWidth(), EntityType.RABBIT.getHeight()).build(new ResourceLocation(Main.MODID, "frog").toString()));
+
+
+    //NPC
+    public static final RegistryObject<EntityType<ClanHelperEntity>> CLAN_HELPER = ENTITIES.register("clan_helper", () -> EntityType.Builder.<ClanHelperEntity>create(ClanHelperEntity::new, EntityClassification.CREATURE).size(EntityType.PLAYER.getWidth(), EntityType.PLAYER.getHeight()).build(new ResourceLocation(Main.MODID, "clan_helper").toString()));
+
 
     //Items
     public static RegistryObject<EntityType<EtherealItemEntity>> ETHEREAL_ITEM = ENTITIES.register("ethereal_item", () -> EntityType.Builder.<EtherealItemEntity>create(EtherealItemEntity::new, EntityClassification.MISC).size(EntityType.ITEM.getWidth(), EntityType.ITEM.getHeight()).build(new ResourceLocation(Main.MODID, "ethereal_item").toString()));
@@ -97,28 +112,27 @@ public class EntityInit {
 
 
 
-    public static void registerEntityWorldSpawns()
-    {
+    public static void registerEntityWorldSpawns() {
         registerEntityWorldSpawn(GENIN.get(), 12, 1, 3);
         registerEntityWorldSpawn(CHUNIN.get(), 8, 1, 3);
         registerEntityWorldSpawn(JONIN.get(), 5, 1, 3);
         registerEntityWorldSpawn(ANBU.get(), 3, 3, 5);
         registerEntityWorldSpawn(BASIC_SHARINGAN.get(), 1, 1, 1);
         registerEntityWorldSpawn(BASIC_BYAKUGAN.get(), 1, 1, 1);
+        registerEntityWorldSpawn(CLAN_HELPER.get(), 1, 1, 1);
+        registerEntityWorldSpawn(BROTHER_SHARINGAN.get(), 1, 1, 1);
         registerEntityLocalSpawn(SNAKE.get(), 40, 2, 4, Biomes.SWAMP, Biomes.SWAMP_HILLS);
         registerEntityLocalSpawn(FROG.get(), 100, 3, 8, BiomeInit.MOUNT_MYOBOKU_BIOME.get());
     }
 
 
-    public static void registerEntityWorldSpawn(EntityType<?> entity, int weight, int minGroupCountIn, int maxGroupCountIn)
-    {
+    public static void registerEntityWorldSpawn(EntityType<?> entity, int weight, int minGroupCountIn, int maxGroupCountIn) {
         for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
             biome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, minGroupCountIn, maxGroupCountIn));
         }
     }
 
-    public static void registerEntityLocalSpawn(EntityType<?> entity, int weight, int minGroupCountIn, int maxGroupCountIn, Biome... biomes)
-    {
+    public static void registerEntityLocalSpawn(EntityType<?> entity, int weight, int minGroupCountIn, int maxGroupCountIn, Biome... biomes) {
         for (Biome biome : biomes) {
             biome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, minGroupCountIn, maxGroupCountIn));
         }
@@ -127,12 +141,15 @@ public class EntityInit {
     //Jutsu but not really
     public static final RegistryObject<EntityType<MiniRocketProjectileEntity>> MINI_ROCKET = ENTITIES.register("mini_rocket", () -> EntityType.Builder.<MiniRocketProjectileEntity>create(MiniRocketProjectileEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":mini_rocket"));
     public static final RegistryObject<EntityType<TailedBeastBombEntity>> TAILED_BEAST_BOMB = ENTITIES.register("tailed_beast_bomb", () -> EntityType.Builder.<TailedBeastBombEntity>create(TailedBeastBombEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":tailed_beast_bomb"));
+    public static final RegistryObject<EntityType<TruthSeekingOrbEntity>> TRUTH_SEEKING_ORB = ENTITIES.register("truth_seeking_orb", () -> EntityType.Builder.<TruthSeekingOrbEntity>create(TruthSeekingOrbEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":truth_seeking_orb_entity"));
     //Jutsu
     public static final RegistryObject<EntityType<FireballEntity>> FIREBALL_JUTSU = ENTITIES.register("fireball_jutsu", () -> EntityType.Builder.<FireballEntity>create(FireballEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":fireball_jutsu"));
     public static final RegistryObject<EntityType<PhoenixFlowerEntity>> PHOENIX_FLOWER_JUTSU = ENTITIES.register("phoenix_flower_jutsu", () -> EntityType.Builder.<PhoenixFlowerEntity>create(PhoenixFlowerEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":phoenix_flower_jutsu"));
+    public static final RegistryObject<EntityType<FlameDragonEntity>> FLAME_DRAGON_JUTSU = ENTITIES.register("flame_dragon_jutsu", () -> EntityType.Builder.<FlameDragonEntity>create(FlameDragonEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":flame_dragon_jutsu"));
 
     public static final RegistryObject<EntityType<LightningBallEntity>> LIGHTNING_BALL_JUTSU = ENTITIES.register("lightning_ball_jutsu", () -> EntityType.Builder.<LightningBallEntity>create(LightningBallEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":lightning_ball_jutsu"));
     public static final RegistryObject<EntityType<LightningArrowEntity>> LIGHTNING_ARROW_JUTSU = ENTITIES.register("lightning_arrow_jutsu", () -> EntityType.Builder.<LightningArrowEntity>create(LightningArrowEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":lightning_arrow_jutsu"));
+    public static final RegistryObject<EntityType<KirinEntity>> KIRIN_JUTSU = ENTITIES.register("kirin_jutsu", () -> EntityType.Builder.<KirinEntity>create(KirinEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":kirin_jutsu"));
 
     public static final RegistryObject<EntityType<GalePalmEntity>> GALE_PALM_JUTSU = ENTITIES.register("gale_palm_jutsu", () -> EntityType.Builder.<GalePalmEntity>create(GalePalmEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":gale_palm_jutsu"));
     public static final RegistryObject<EntityType<WindExplosionEntity>> WIND_EXPLOSION_JUTSU = ENTITIES.register("wind_explosion_jutsu", () -> EntityType.Builder.<WindExplosionEntity>create(WindExplosionEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":wind_explosion_jutsu"));
@@ -155,6 +172,14 @@ public class EntityInit {
 
     public static final RegistryObject<EntityType<OneHornedWhiteWhaleEntity>> ONE_HORNED_WHITE_WHALE_JUTSU = ENTITIES.register("one_horned_white_whale_jutsu", () -> EntityType.Builder.<OneHornedWhiteWhaleEntity>create(OneHornedWhiteWhaleEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":one_horned_white_whale_jutsu"));
     public static final RegistryObject<EntityType<IcePetalEntity>> TEN_THOUSAND_ICE_PETALS_JUTSU = ENTITIES.register("ten_thousand_ice_petals_jutsu", () -> EntityType.Builder.<IcePetalEntity>create(IcePetalEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":ten_thousand_ice_petals_jutsu"));
+
+    public static final RegistryObject<EntityType<BlackHuntingEntity>> BLACK_HUNTING_JUTSU = ENTITIES.register("black_hunting_jutsu", () -> EntityType.Builder.<BlackHuntingEntity>create(BlackHuntingEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":black_hunting_jutsu"));
+    public static final RegistryObject<EntityType<LaserCircusEntity>> LASER_CIRCUS_JUTSU = ENTITIES.register("laser_circus_jutsu", () -> EntityType.Builder.<LaserCircusEntity>create(LaserCircusEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":laser_circus_jutsu"));
+    public static final RegistryObject<EntityType<DemonDragonStormEntity>> DEMON_DRAGON_STORM_JUTSU = ENTITIES.register("demon_dragon_storm_jutsu", () -> EntityType.Builder.<DemonDragonStormEntity>create(DemonDragonStormEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":demon_dragon_storm_jutsu"));
+
+    public static final RegistryObject<EntityType<ExtremelySteamingMurderEntity>> EXTREAMLY_STEAMING_MURDER_JUTSU = ENTITIES.register("extreamly_steaming_murder_jutsu", () -> EntityType.Builder.<ExtremelySteamingMurderEntity>create(ExtremelySteamingMurderEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":extremely_steaming_murder_jutsu"));
+    public static final RegistryObject<EntityType<BlazingPelletEntity>> BLAZING_PELLETS_JUTSU = ENTITIES.register("blazing_pellets_jutsu", () -> EntityType.Builder.<BlazingPelletEntity>create(BlazingPelletEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":blazing_pellet_jutsu"));
+    public static final RegistryObject<EntityType<GreatFireballEntity>> GREAT_FIREBALL_JUTSU = ENTITIES.register("great_fireball_jutsu", () -> EntityType.Builder.<GreatFireballEntity>create(GreatFireballEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":great_fireball_jutsu"));
 
     public static final RegistryObject<EntityType<AmaterasuJutsuEntity>> AMATERASU_JUTSU = ENTITIES.register("amaterasu_jutsu", () -> EntityType.Builder.<AmaterasuJutsuEntity>create(AmaterasuJutsuEntity::new, EntityClassification.MISC).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setTrackingRange(128).size(1F,1F).build(Main.MODID + ":amaterasu_jutsu"));
 }

@@ -7,6 +7,7 @@
   "item.benarutomod.headband_helmet": "Headband",
   "item.benarutomod.anbu_helmet": "Anbu Mask",
   "item.benarutomod.anbu_chestplate": "Anbu Chestplate",
+  "item.benarutomod.akatsuki_chestplate": "Akatsuki Cloak",
 
   "item.benarutomod.kunai": "Kunai",
   "item.benarutomod.explosive_kunai": "Explosive Sealed Kunai",
@@ -39,7 +40,12 @@
   "item.benarutomod.spiked_rations_pill": "Spiked Military Rations Pill",
 
   "item.benarutomod.summoning_scroll": "Scroll",
+  "item.benarutomod.tablet": "Ancient Tablet",
   "item.benarutomod.katana": "Katana",
+
+  "item.benarutomod.clay_ball_c1": "C1 Clay",
+  "item.benarutomod.clay_ball_c2": "C2 Clay",
+  "item.benarutomod.clay_ball_c3": "C3 Clay",
 
   "item.benarutomod.toad_oil_bucket": "Toad Oil Bucket",
 
@@ -123,6 +129,10 @@
 
   "effect.benarutomod.chakra_reg": "Chakra Regeneration",
   "effect.benarutomod.sage_chakra_reg": "Sage Regeneration",
+  "effect.benarutomod.tsukuyomi": "Tsukuyomi",
+  "effect.benarutomod.exhaustion": "Exhaustion",
+  "effect.benarutomod.six_path": "Six Path Sage Mode",
+  "effect.benarutomod.bijuu_mode": "Bijuu Mode",
 
   "event.benarutomod.akatsuki.uponmessage": "Your chakra senses a strange presence nearby.",
   "event.benarutomod.bijuu.uponmessage": "The chakra around you is overwhelming. Seems to be coming from a ",
@@ -138,11 +148,12 @@
   "commands.benarutomod.benmpoints.set": "Set %s's BeNM Points to %s.",
   "commands.benarutomod.dojutsu.set": "Set %s's %s dojutsu to %s.",
   "commands.benarutomod.bodymode.set": "Set %s's body mode to %s.",
-  "commands.benarutomod.jutsu.set": "Set %s's %s to %b.",
+  "commands.benarutomod.jutsu.set": "Set %s's %s to %s.",
   "commands.benarutomod.jutsu.all": "Unlocked all jutsu for %s.",
   "commands.benarutomod.nature.all": "Unlocked all natures for %s.",
-  "commands.benarutomod.nature.set": "Set nature %s of %s to %b.",
+  "commands.benarutomod.nature.set": "Set nature %s of %s to %s.",
   "commands.benarutomod.bijuu.set": "Set %s's bijuu to %s.",
+  "commands.benarutomod.clan.learn": "Learnt clan %s for %s.",
 
   "advancements.benarutomod.shinobi.title": "Beginnings to a Shinobi",
   "advancements.benarutomod.shinobi.text": "A beginning to a Shinobi",
@@ -160,6 +171,8 @@
   "advancements.benarutomod.chakra.text": "Chakra! The essence that creates a great Shinobi!",
   "advancements.benarutomod.scroll.title": "Gotta Catch'em All!",
   "advancements.benarutomod.scroll.text": "Scrolls! The gateway to summoning jutsu!",
+  "advancements.benarutomod.tablet.title": "Secrets?!",
+  "advancements.benarutomod.tablet.text": "Tablets! More jutsu!",
   "advancements.benarutomod.rations_pill.title": "Yuck!",
   "advancements.benarutomod.rations_pill.text": "Ugh! Replenishes +20 chakra.",
   "advancements.benarutomod.diluted_rations_pill.title": "A Little Better!",
@@ -176,6 +189,18 @@
   "advancements.benarutomod.waternature.text": "A ninja's greatness takes up 90% of a human body, and so does water!",
   "advancements.benarutomod.firenature.title": "Fire Nature",
   "advancements.benarutomod.firenature.text": "A ninja's ambition must be like fire, just don't let water extinquish it!",
+  "advancements.benarutomod.dojutsu.title": "Dojutsu",
+  "advancements.benarutomod.dojutsu.text": "A power kekkai genkai, and a great asset to a shinobi!",
+  "advancements.benarutomod.sharingan.title": "Sharingan",
+  "advancements.benarutomod.sharingan.text": "The copy eye!",
+  "advancements.benarutomod.mangekyou_sharingan.title": "Mangekyou Sharingan",
+  "advancements.benarutomod.mangekyou_sharingan.text": "An advanced sharingan, allows many abilities!",
+  "advancements.benarutomod.eternal_mangekyou_sharingan.title": "Eternal Mangekyou Sharingan",
+  "advancements.benarutomod.eternal_mangekyou_sharingan.text": "An everlasting sharingan!",
+  "advancements.benarutomod.rinnegan.title": "Rinnegan",
+  "advancements.benarutomod.rinnegan.text": "The great dojutsu!",
+  "advancements.benarutomod.byakugan.title": "Byakugan",
+  "advancements.benarutomod.byakugan.text": "A pure dojutsu!",
 
   "jutsu.benarutomod.message.notenoughchakra": "Not Enough Chakra.",
 
@@ -183,32 +208,98 @@
   "jutsu.benarutomod.invisibility": "Invisibility Jutsu",
   "jutsu.benarutomod.replacement": "Body Replacement Jutsu",
   "jutsu.benarutomod.transformation": "Transformation Technique",
+
   "jutsu.benarutomod.fireball": "Fireball Jutsu",
   "jutsu.benarutomod.phoenix_flower": "Phoenix Flower Jutsu",
+  "jutsu.benarutomod.molten_fist": "Molten Fist Technique",
+  "jutsu.benarutomod.running_fire": "Running Fire Technique",
+  "jutsu.benarutomod.flame_dragon": "Flame Dragon Jutsu",
+
   "jutsu.benarutomod.gale_palm": "Gale Palm Technique",
   "jutsu.benarutomod.wind_explosion": "Wind Explosion Jutsu",
+  "jutsu.benarutomod.wind_arrow": "Wind Arrow Jutsu",
+  "jutsu.benarutomod.vacuum_sphere": "Vacuum Sphere Technique",
+  "jutsu.benarutomod.zero_air_pressure": "Zero Air Pressure Technique",
+
   "jutsu.benarutomod.flying_stones": "Flying Stones Jutsu",
   "jutsu.benarutomod.mud_moat": "Mud Moat Jutsu",
+  "jutsu.benarutomod.fist_rock": "Fist Rock Technique",
+  "jutsu.benarutomod.mud_wall": "Mud Wall Technique",
+  "jutsu.benarutomod.shield_of_sand": "Shield of Sand Jutsu",
+
   "jutsu.benarutomod.water_shuriken": "Water Shuriken Jutsu",
   "jutsu.benarutomod.raging_waves": "Raging Waves Jutsu",
+  "jutsu.benarutomod.water_shark_bullet": "Water Shark Bullet Jutsu",
+  "jutsu.benarutomod.stormy_blockade": "Stormy Blockade Jutsu",
+  "jutsu.benarutomod.exploding_water_colliding_wave": "Exploding Water Colliding Wave Jutsu",
+
   "jutsu.benarutomod.lightning_ball": "Lightning Ball Jutsu",
   "jutsu.benarutomod.stun_gun": "Stun Gun Jutsu",
-  "jutsu.benarutomod.water_shark_bullet": "Water Shark Bullet Jutsu",
   "jutsu.benarutomod.lightning_arrow": "Lightning Arrow Jutsu",
-  "jutsu.benarutomod.wind_arrow": "Wind Arrow Jutsu",
-  "jutsu.benarutomod.molten_fist": "Molten Fist Technique",
-  "jutsu.benarutomod.fist_rock": "Fist Rock Technique",
+  "jutsu.benarutomod.kirin": "Kirin Technique",
+  "jutsu.benarutomod.lightning_bolt": "Lightning Bolt Jutsu",
+
   "jutsu.benarutomod.amaterasu": "Amaterasu",
   "jutsu.benarutomod.tsukuyomi": "Tsukuyomi",
   "jutsu.benarutomod.susanoo": "Susanoo",
+
   "jutsu.benarutomod.matter_repulsion": "Matter Repulsion Technique",
   "jutsu.benarutomod.self_levitation": "Self Levitation Technique",
+  "jutsu.benarutomod.lightning_god_self": "Lightning God Self Technique",
+  "jutsu.benarutomod.black_iron_fist": "Black Iron Fist Technique",
+  "jutsu.benarutomod.iron_sand_wave": "Iron Sand Wave Technique",
+
+  "jutsu.benarutomod.wood_clone": "Wood Clone Technique",
+  "jutsu.benarutomod.tree_summoning": "Tree Summoning Technique",
+  "jutsu.benarutomod.sea_of_trees": "Nativity of a Sea of Trees Technique",
+  "jutsu.benarutomod.four_pillar_prison": "Four Pillar Prison Technique",
+  "jutsu.benarutomod.four_pillar_house": "Four Pillar House Technique",
+
+  "jutsu.benarutomod.scorching_stream_rock": "Scorching Stream Rock Technique",
+  "jutsu.benarutomod.lava_wall": "Lava Wall Technique",
+  "jutsu.benarutomod.lava_shuriken": "Lava Shuriken Technique",
+  "jutsu.benarutomod.great_eruption": "Great Eruption Technique",
+  "jutsu.benarutomod.lava_clone": "Lava Clone Technique",
+
+  "jutsu.benarutomod.acid_rain": "Acid Rain Technique",
+  "jutsu.benarutomod.burning_aqua_gun": "Burning Aqua Gun Technique",
+  "jutsu.benarutomod.corrosive_arrow": "Corrosive Arrow Technique",
+  "jutsu.benarutomod.boiling_mist_geyser": "Boiling Mist Geyser Technique",
+  "jutsu.benarutomod.boiling_hands": "Boiling Hands Technique",
+
+  "jutsu.benarutomod.ice_rock_dome": "Ice Rock Dome of Magnificent Nothingness Technique",
+  "jutsu.benarutomod.ice_prison": "Ice Prison Technique",
+  "jutsu.benarutomod.one_horned_white_whale": "One Horned White Whale Technique",
+  "jutsu.benarutomod.ten_thousand_ice_petals": "Ten Thousand Ice Petals Technique",
+  "jutsu.benarutomod.demonic_mirroring_ice_crystals": "Demonic Mirroring Ice Crystals Technique",
+
+  "jutsu.benarutomod.extremely_steaming_murder": "Extremely Steaming Murder Technique",
+  "jutsu.benarutomod.blazing_pellets": "Blazing Pellets Technique",
+  "jutsu.benarutomod.great_fireball": "Great Fireball Jutsu",
+  "jutsu.benarutomod.scorch_clone": "Scorch Clone Technique",
+  "jutsu.benarutomod.heated_gas": "Heated Gas Technique",
+
+  "jutsu.benarutomod.black_hunting": "Black Hunting Technique",
+  "jutsu.benarutomod.thunder_cloud_inner_wave": "Thunder Cloud Inner Wave Technique",
+  "jutsu.benarutomod.laser_circus": "Laser Circus Technique",
+  "jutsu.benarutomod.demon_dragon_storm": "Demon Dragon Storm Technique",
+
+  "jutsu.benarutomod.explosion_clone": "Explosion Clone Technique",
+  "jutsu.benarutomod.landmine_fist": "Landmine Fist Technique",
+  "jutsu.benarutomod.clay_c1": "Clay C1 Infusion Technique",
+  "jutsu.benarutomod.clay_c2": "Clay C2 Infusion Technique",
+  "jutsu.benarutomod.clay_c3": "Clay C3 Infusion Technique",
+
   "jutsu.benarutomod.asura_path": "Asura Path",
   "jutsu.benarutomod.deva_path": "Deva Path",
   "jutsu.benarutomod.preta_path": "Preta Path",
+  "jutsu.benarutomod.truth_seeking_orb_toss": "Truth Seeking Orb Toss",
+
   "jutsu.benarutomod.tailed_beast_bomb": "Tailed Beast Bomb Technique",
   "jutsu.benarutomod.tailed_beast_transformation": "Tailed Beast Transformation Technique",
 
   "body.benarutomod.curse_mark": "Curse Mark Mode",
-  "body.benarutomod.toad_sage": "Toad Sage Mode"
+  "body.benarutomod.toad_sage": "Toad Sage Mode",
+  "body.benarutomod.bijuu": "Bijuu Mode",
+  "body.benarutomod.six_path_sage": "Six Path Sage Mode"
 }

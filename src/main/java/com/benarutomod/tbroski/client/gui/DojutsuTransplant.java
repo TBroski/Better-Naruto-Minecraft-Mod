@@ -66,7 +66,7 @@ public class DojutsuTransplant<T extends AbstractShinobiEntity & IDojutsuEntity>
             else {
                 this.transplantingEntity.setRightDojustsu(playerc.returnPlayerLeftDojutsu());
             }
-            if (this.transplantingEntity instanceof BrotherSharinganEntity && ((BrotherSharinganEntity) this.transplantingEntity).getOwnerID() == player.getEntityId() && this.dojutsuToggle instanceof BeNMSharingan && playerc.returnPlayerLeftDojutsu() == DojutsuInit.MANGEKYOU_SHARINGAN) {
+            if (this.transplantingEntity instanceof BrotherSharinganEntity && ((BrotherSharinganEntity) this.transplantingEntity).getBrotherId() == player.getEntityId() && this.dojutsuToggle instanceof BeNMSharingan && playerc.returnPlayerLeftDojutsu() == DojutsuInit.MANGEKYOU_SHARINGAN) {
                 playerc.setPlayerLeftDojutsu(DojutsuInit.ETERNAL_MANGEKYOU_SHARINGAN);
             }
             else {
@@ -85,7 +85,7 @@ public class DojutsuTransplant<T extends AbstractShinobiEntity & IDojutsuEntity>
             else {
                 this.transplantingEntity.setRightDojustsu(playerc.returnPlayerRightDojutsu());
             }
-            if (this.transplantingEntity instanceof BrotherSharinganEntity && ((BrotherSharinganEntity) this.transplantingEntity).getOwnerID() == player.getEntityId() && this.dojutsuToggle instanceof BeNMSharingan && playerc.returnPlayerRightDojutsu() == DojutsuInit.MANGEKYOU_SHARINGAN) {
+            if (this.transplantingEntity instanceof BrotherSharinganEntity && ((BrotherSharinganEntity) this.transplantingEntity).getBrotherId() == player.getEntityId() && this.dojutsuToggle instanceof BeNMSharingan && playerc.returnPlayerRightDojutsu() == DojutsuInit.MANGEKYOU_SHARINGAN) {
                 playerc.setPlayerRightDojutsu(DojutsuInit.ETERNAL_MANGEKYOU_SHARINGAN);
             }
             else {

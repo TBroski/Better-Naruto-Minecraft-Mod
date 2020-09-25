@@ -66,6 +66,7 @@ public class EtherealItem extends Item {
             float f5 = player.getRNG().nextFloat() * ((float) Math.PI * 2F);
             float f6 = 0.02F * player.getRNG().nextFloat();
             itementity.setMotion((double) (-f3 * f2 * 0.3F) + Math.cos((double) f5) * (double) f6, (double) (-f8 * 0.3F + 0.1F + (player.getRNG().nextFloat() - player.getRNG().nextFloat()) * 0.1F), (double) (f4 * f2 * 0.3F) + Math.sin((double) f5) * (double) f6);
+            player.world.addEntity(itementity);
         }
         return false;
     }

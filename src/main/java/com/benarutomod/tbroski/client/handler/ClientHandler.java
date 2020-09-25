@@ -10,6 +10,7 @@ import com.benarutomod.tbroski.client.renderer.mobs.bijuu.IsobuRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.bijuu.MatatabiRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.bijuu.ShukakuRenderer;
 import com.benarutomod.tbroski.client.renderer.mobs.bijuu.SonGokuRenderer;
+import com.benarutomod.tbroski.client.renderer.npc.ClanHelperRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.ExplosiveKunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.KunaiRenderer;
 import com.benarutomod.tbroski.client.renderer.projectile.TeleportationKunaiRenderer;
@@ -85,6 +86,10 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SNAKE.get(), SnakeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FROG.get(), FrogRenderer::new);
 
+
+        //NPC
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.CLAN_HELPER.get(), ClanHelperRenderer::new);
+
         //Item
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.ETHEREAL_ITEM.get(), (EntityRendererManager renderManagerIn) -> new EtherealItemRenderer(renderManagerIn));
         //Bijuu
@@ -97,6 +102,8 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.BASIC_CLONE.get(), CloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WOOD_CLONE.get(), CloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LAVA_CLONE.get(), CloneRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.EXPLOSION_CLONE.get(), CloneRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.SCORCH_CLONE.get(), CloneRenderer::new);
 
         //Akatsuki
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.DEIDARA.get(), DeidaraRenderer::new);
@@ -113,8 +120,10 @@ public class ClientHandler {
         //Jutsu but not really jutsu.
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MINI_ROCKET.get(), new MiniRocketRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.TAILED_BEAST_BOMB.get(), new TailedBeastBombRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.TRUTH_SEEKING_ORB.get(), new JutsuRenderer.Factory());
         //Jutsu
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FIREBALL_JUTSU.get(), new FireJutsuRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.FLAME_DRAGON_JUTSU.get(), new FireJutsuRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LIGHTNING_BALL_JUTSU.get(), new LightningBallRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.GALE_PALM_JUTSU.get(), new GalePalmRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FLYING_STONES_JUTSU.get(), new FlyingStonesRenderer.Factory());
@@ -126,6 +135,7 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.RAGING_WAVES_JUTSU.get(), new RagingWavesRenderer.Factory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LIGHTNING_ARROW_JUTSU.get(), new LightningArrowRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.KIRIN_JUTSU.get(), new JutsuRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WIND_ARROW_JUTSU.get(), new WindArrowRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.WATER_SHARK_BULLET_JUTSU.get(), new WaterSharkBulletRenderer.Factory());
 
@@ -135,14 +145,24 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LAVA_SHURIKEN_JUTSU.get(), new JutsuRenderer.Factory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.BURNING_AQUA_GUN_JUTSU.get(), new JutsuRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.CORROSIVE_ARROW_JUTSU.get(), new JutsuRenderer.Factory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.ONE_HORNED_WHITE_WHALE_JUTSU.get(), new JutsuRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.TEN_THOUSAND_ICE_PETALS_JUTSU.get(), new JutsuRenderer.Factory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.BLACK_HUNTING_JUTSU.get(), new JutsuRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.LASER_CIRCUS_JUTSU.get(), new JutsuRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.DEMON_DRAGON_STORM_JUTSU.get(), new JutsuRenderer.Factory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.EXTREAMLY_STEAMING_MURDER_JUTSU.get(), new JutsuRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.BLAZING_PELLETS_JUTSU.get(), new JutsuRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.GREAT_FIREBALL_JUTSU.get(), new JutsuRenderer.Factory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.AMATERASU_JUTSU.get(), new AmaterasuJutsuRenderer.Factory());
 
 
         RenderTypeLookup.setRenderLayer(BlockInit.AMATERASU.get(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(BlockInit.SAKURA_SAPLING.get(), RenderType.getCutoutMipped());
 
         ClientRegistry.bindTileEntityRenderer(TileEntityInit.DOJUTSU_SKULL.get(), DojutsuSkullTileEntityRenderer::new);
 
@@ -171,6 +191,7 @@ public class ClientHandler {
             layers.add(new BijuuLayer<>(renderer));
             layers.add(new SusanooLayer<>(renderer));
             layers.add(new GiantLayer<>(renderer));
+            layers.add(new TruthSeekingOrbLayer<>(renderer));
         }
     }
 

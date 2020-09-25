@@ -29,29 +29,29 @@ public class KeybindInit {
         BODY_INFUSION = new KeyBinding("key." + Main.MODID + ".bodyinfusion", GLFW_KEY_F, CATEGORY);
         LEG_INFUSION = new KeyBinding("key." + Main.MODID + ".leginfusion", GLFW_KEY_C, CATEGORY);
         SHINOBI_STATS = new KeyBinding("key." + Main.MODID + ".shinobistats", GLFW_KEY_P, CATEGORY);
-        KEYBIND1 = new KeyBinding("key." + Main.MODID + ".keybind1", GLFW_KEY_1, CATEGORY);
-        KEYBIND2 = new KeyBinding("key." + Main.MODID + ".keybind2", GLFW_KEY_2, CATEGORY);
-        KEYBIND3 = new KeyBinding("key." + Main.MODID + ".keybind3", GLFW_KEY_3, CATEGORY);
-        KEYBIND4 = new KeyBinding("key." + Main.MODID + ".keybind4", GLFW_KEY_4, CATEGORY);
-        KEYBIND5 = new KeyBinding("key." + Main.MODID + ".keybind5", GLFW_KEY_5, CATEGORY);
-        KEYBIND6 = new KeyBinding("key." + Main.MODID + ".keybind6", GLFW_KEY_6, CATEGORY);
-        KEYBIND7 = new KeyBinding("key." + Main.MODID + ".keybind7", GLFW_KEY_7, CATEGORY);
-        KEYBIND8 = new KeyBinding("key." + Main.MODID + ".keybind8", GLFW_KEY_8, CATEGORY);
-        KEYBIND9 = new KeyBinding("key." + Main.MODID + ".keybind9", GLFW_KEY_9, CATEGORY);
 
+        KEYBIND1 = new KeyBinding("key." + Main.MODID + ".keybind1", GLFW_KEY_1, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND1);
+        KEYBIND2 = new KeyBinding("key." + Main.MODID + ".keybind2", GLFW_KEY_2, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND2);
+        KEYBIND3 = new KeyBinding("key." + Main.MODID + ".keybind3", GLFW_KEY_3, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND3);
+        KEYBIND4 = new KeyBinding("key." + Main.MODID + ".keybind4", GLFW_KEY_4, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND4);
+        KEYBIND5 = new KeyBinding("key." + Main.MODID + ".keybind5", GLFW_KEY_5, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND5);
+        KEYBIND6 = new KeyBinding("key." + Main.MODID + ".keybind6", GLFW_KEY_6, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND6);
+        KEYBIND7 = new KeyBinding("key." + Main.MODID + ".keybind7", GLFW_KEY_7, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND7);
+        KEYBIND8 = new KeyBinding("key." + Main.MODID + ".keybind8", GLFW_KEY_8, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND8);
+        KEYBIND9 = new KeyBinding("key." + Main.MODID + ".keybind9", GLFW_KEY_9, CATEGORY);
+        ClientRegistry.registerKeyBinding(KEYBIND9);
 
         ClientRegistry.registerKeyBinding(HAND_INFUSION);
         ClientRegistry.registerKeyBinding(BODY_INFUSION);
         ClientRegistry.registerKeyBinding(LEG_INFUSION);
         ClientRegistry.registerKeyBinding(SHINOBI_STATS);
-        ClientRegistry.registerKeyBinding(KEYBIND1);
-        ClientRegistry.registerKeyBinding(KEYBIND2);
-        ClientRegistry.registerKeyBinding(KEYBIND3);
-        ClientRegistry.registerKeyBinding(KEYBIND4);
-        ClientRegistry.registerKeyBinding(KEYBIND5);
-        ClientRegistry.registerKeyBinding(KEYBIND6);
-        ClientRegistry.registerKeyBinding(KEYBIND7);
-        ClientRegistry.registerKeyBinding(KEYBIND8);
-        ClientRegistry.registerKeyBinding(KEYBIND9);
     }
 }

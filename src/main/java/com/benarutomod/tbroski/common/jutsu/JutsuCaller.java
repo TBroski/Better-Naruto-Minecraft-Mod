@@ -2,17 +2,11 @@ package com.benarutomod.tbroski.common.jutsu;
 
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
-import com.benarutomod.tbroski.networking.NetworkLoader;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketJutsuNBTSync;
-import com.benarutomod.tbroski.networking.packets.jutsu.PacketSetJutsuBoolean;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.network.PacketDispatcher;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 public class JutsuCaller {
 

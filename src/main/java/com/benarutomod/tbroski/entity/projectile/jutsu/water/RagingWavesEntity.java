@@ -38,7 +38,7 @@ public class RagingWavesEntity extends AbstractWaterJutsuEntity {
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)2);
+            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)3);
         }
 
         if (!this.world.isRemote) {

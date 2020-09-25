@@ -2,16 +2,12 @@ package com.benarutomod.tbroski.init.jutsu.nature.kekkai;
 
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.client.renderer.misc.Particles;
-import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.boil.BurningAquaGunEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.boil.CorrosiveArrowEntity;
-import com.benarutomod.tbroski.entity.projectile.jutsu.fire.FireballEntity;
-import com.benarutomod.tbroski.entity.projectile.jutsu.magnet.BlackIronFistEntity;
 import com.benarutomod.tbroski.init.EffectInit;
 import com.benarutomod.tbroski.init.ItemInit;
-import com.benarutomod.tbroski.util.helpers.BijuuHelper;
 import com.benarutomod.tbroski.util.helpers.RayTraceHelper;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
@@ -20,6 +16,7 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 
 import java.util.List;
@@ -72,11 +69,12 @@ public class BoilNatureJutsuInit {
             }
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "boiling_mist_geyser", BeNMJutsu.Type.BOIL_NATURE, 12, 0.8F, 144, 48, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "boiling_mist_geyser", BeNMJutsu.Type.BOIL_NATURE, 12, 1.2F, 144, 48, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             BlockRayTraceResult blockRayTraceResult = RayTraceHelper.rayTraceBlocks(playerIn, 6F);
             if (blockRayTraceResult != null) {
                 if (!playerIn.world.isRemote) {
-                    List<LivingEntity> entityList = playerIn.world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(blockRayTraceResult.getPos().south(3).east(3), blockRayTraceResult.getPos().north(3).west(3)));
+                    AxisAlignedBB aabb = new AxisAlignedBB(new BlockPos(blockRayTraceResult.getPos().getX() - 5, blockRayTraceResult.getPos().getY() - 5, blockRayTraceResult.getPos().getZ() - 5), new BlockPos(blockRayTraceResult.getPos().getX() + 5, blockRayTraceResult.getPos().getY() + 5, blockRayTraceResult.getPos().getZ() + 5));
+                    List<LivingEntity> entityList = playerIn.world.getEntitiesWithinAABB(LivingEntity.class, aabb);
                     for (LivingEntity entity : entityList) {
                         entity.addPotionEffect(new EffectInstance(EffectInit.EXHAUSTION.get(), 200));
                     }

@@ -80,8 +80,7 @@ public abstract class AbstractBodyScreen extends Screen {
     }
 
 
-    public void checkHovered(int p_render_1_, int p_render_2_)
-    {
+    public void checkHovered(int p_render_1_, int p_render_2_) {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.002F);
         GL11.glPushMatrix();
@@ -93,8 +92,7 @@ public abstract class AbstractBodyScreen extends Screen {
         GL11.glPopMatrix();
     }
 
-    public void checkCovered()
-    {
+    public void checkCovered() {
         Minecraft mc = Minecraft.getInstance();
         mc.textureManager.bindTexture(new ResourceLocation(Main.MODID + ":textures/gui/jutsu.png"));
         GL11.glEnable(GL11.GL_BLEND);
@@ -103,15 +101,14 @@ public abstract class AbstractBodyScreen extends Screen {
         for (Widget button : this.buttons) {
             if (button instanceof GuiButtonJutsu) {
                 if (!((GuiButtonJutsu) button).hasJutsu()) {
-                    mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 240, 240, 16, 16);
+                    mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 496, 496, 16, 16, 512, 512);
                 }
             }
         }
         GL11.glPopMatrix();
     }
 
-    public void checkToggled()
-    {
+    public void checkToggled() {
         Minecraft mc = Minecraft.getInstance();
         mc.textureManager.bindTexture(new ResourceLocation(Main.MODID + ":textures/gui/jutsu.png"));
         GL11.glEnable(GL11.GL_BLEND);
@@ -119,7 +116,7 @@ public abstract class AbstractBodyScreen extends Screen {
         GL11.glPushMatrix();
         for (Widget button : this.buttons) {
             if (button instanceof GuiButtonJutsu && this.bodyToggle.equalsIgnoreCase("body." + ((GuiButtonJutsu) button).getTranslationName())) {
-                mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 240, 224, 16,16);
+                mc.ingameGUI.blit(((GuiButtonJutsu) button).widthIn, ((GuiButtonJutsu) button).heightIn, 496, 480, 16,16, 512, 512);
             }
         }
         GL11.glPopMatrix();

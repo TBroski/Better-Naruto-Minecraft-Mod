@@ -31,7 +31,7 @@ public class PhoenixFlowerEntity extends AbstractFireJutsuEntity {
     @Override
     protected void onImpact(RayTraceResult result) {
         super.onImpact(result);
-        if (result.getType() == RayTraceResult.Type.ENTITY) {
+        if (!this.world.isRemote && result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
             entity.setFire(2);
             entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)3);

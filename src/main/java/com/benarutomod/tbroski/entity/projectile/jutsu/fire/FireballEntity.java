@@ -1,5 +1,6 @@
 package com.benarutomod.tbroski.entity.projectile.jutsu.fire;
 
+import com.benarutomod.tbroski.Config;
 import com.benarutomod.tbroski.api.entity.jutsu.nature.AbstractFireJutsuEntity;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.init.ItemInit;
@@ -33,21 +34,21 @@ public class FireballEntity extends AbstractFireJutsuEntity {
     @Override
     protected void onImpact(RayTraceResult result) {
         super.onImpact(result);
-        if (result.getType() == RayTraceResult.Type.ENTITY) {
-            Entity entity = ((EntityRayTraceResult)result).getEntity();
-            entity.setFire(3);
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)6);
-        }
-        else if (result.getType() == RayTraceResult.Type.BLOCK) {
-            BlockPos pos = ((BlockRayTraceResult)result).getPos();
-            if (!this.world.isRemote && world.getBlockState(pos).canEntityDestroy(world, pos, getThrower()))
-            {
-                world.getBlockState(pos).isBurning(world, pos);
-                //this.world.setBlockState(pos, Blocks.FIRE.getDefaultState());
-            }
-        }
-
         if (!this.world.isRemote) {
+            if (result.getType() == RayTraceResult.Type.ENTITY) {
+                Entity entity = ((EntityRayTraceResult)result).getEntity();
+                entity.setFire(3);
+                entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)6);
+            }
+            else if (result.getType() == RayTraceResult.Type.BLOCK) {
+                BlockPos pos = ((BlockRayTraceResult)result).getPos();
+                if (Config.COMMON.playerWorldDamage.get() && !this.world.isRemote && world.getBlockState(pos).canEntityDestroy(world, pos, getThrower()))
+                {
+                    world.getBlockState(pos).isBurning(world, pos);
+                    //this.world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+                }
+            }
+
             this.world.setEntityState(this, (byte)3);
             this.remove();
         }
@@ -61,10 +62,5 @@ public class FireballEntity extends AbstractFireJutsuEntity {
     @Override
     public String getAffiliatedJutsuName() {
         return "fireball";
-    }
-
-    @Override
-    public IPacket<?> createSpawnPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

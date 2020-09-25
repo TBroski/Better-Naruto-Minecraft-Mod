@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "benarutomod:tablet"
+    },
+    "title": {
+      "translate": "advancements.benarutomod.tablet.title"
+    },
+    "description": {
+      "translate": "advancements.benarutomod.tablet.text"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kao": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "parent": "benarutomod:shinobi_beginnings"
+}

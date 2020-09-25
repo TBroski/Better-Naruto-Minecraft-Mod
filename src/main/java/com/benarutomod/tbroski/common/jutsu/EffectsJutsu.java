@@ -35,7 +35,7 @@ public class EffectsJutsu {
                 playercap.addChakra((float) (-chakraAmount * ((100 - playercap.returnChakraControl()) * 0.01)));
                 playerIn.getPersistentData().putInt("handtick", 0);
             }
-            if (playerIn.collidedHorizontally) {
+            if (playercap.returnChakraControl() > 2F && playerIn.collidedHorizontally) {
                 playerIn.setMotion(playerIn.getMotion().x, 0.2F, playerIn.getMotion().z);
             }
         } else {
@@ -62,7 +62,7 @@ public class EffectsJutsu {
                 playercap.addChakra((float) (-chakraAmount * ((100 - playercap.returnChakraControl()) * 0.01)));
                 playerIn.getPersistentData().putInt("legtick", 0);
             }
-            if (playercap.returnChakraControl() >= 5) {
+            if (playercap.returnChakraControl() >= 5F) {
                 playerIn.getPersistentData().putBoolean("onwaterblock", false);
                 if (k == Blocks.WATER.getDefaultState() || k == Fluids.FLOWING_WATER.getDefaultState().getBlockState()) {
                     playerIn.setMotion(playerMotion.x, playerMotion.y + 0.2D, playerMotion.z);

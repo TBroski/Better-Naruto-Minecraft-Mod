@@ -4,14 +4,12 @@ import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.common.jutsu.TransformationJutsu;
 import com.benarutomod.tbroski.entity.clones.BasicCloneEntity;
 import com.benarutomod.tbroski.init.EntityInit;
-import com.benarutomod.tbroski.networking.NetworkLoader;
-import com.benarutomod.tbroski.networking.packets.PacketShinobiLevel;
 import com.benarutomod.tbroski.util.helpers.AdvancementHelper;
 import com.benarutomod.tbroski.util.helpers.RayTraceHelper;
 import net.minecraft.block.BlockState;
@@ -26,7 +24,7 @@ import net.minecraftforge.common.util.LazyOptional;
 public class ERankJutsuInit {
 
     public static void registerERankJutsu(BeNMRegistry.JutsuRegistry jutsuRegistry, IBeNMPlugin pluginIn) {
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "clone", BeNMJutsu.Type.E_RANK, 6, 200F, 0, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "clone", BeNMJutsu.Type.E_RANK, 6, 140F, 0, 16, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             setGenin(playerIn);
             if (!playerIn.world.isRemote) {
                 BasicCloneEntity entity = new BasicCloneEntity(EntityInit.BASIC_CLONE.get(), playerIn.world);
@@ -66,7 +64,7 @@ public class ERankJutsuInit {
             playerIn.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 40, 0));
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "transformation", BeNMJutsu.Type.E_RANK, 9, 25F, 0, 64, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "transformation", BeNMJutsu.Type.E_RANK, 9, 75F, 0, 64, false, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             setGenin(playerIn);
             TransformationJutsu.TransormationJutsu(playerIn, 25);
         }).setExtraJutsuChecks((playerIn, taijutsuModifier0, taijutsuModifier1) -> {

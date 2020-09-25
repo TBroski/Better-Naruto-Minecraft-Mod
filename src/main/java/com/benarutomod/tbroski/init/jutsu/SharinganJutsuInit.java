@@ -2,9 +2,10 @@ package com.benarutomod.tbroski.init.jutsu;
 
 import com.benarutomod.tbroski.Config;
 import com.benarutomod.tbroski.Main;
+import com.benarutomod.tbroski.api.internal.dojutsu.BeNMSharingan;
 import com.benarutomod.tbroski.api.item.EtherealItem;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.api.BeNMRegistry;
 import com.benarutomod.tbroski.api.IBeNMPlugin;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
@@ -13,6 +14,7 @@ import com.benarutomod.tbroski.api.entity.jutsu.AbstractNinjutsuEntity;
 import com.benarutomod.tbroski.entity.projectile.jutsu.sharingan.AmaterasuJutsuEntity;
 import com.benarutomod.tbroski.init.DojutsuInit;
 import com.benarutomod.tbroski.init.EffectInit;
+import com.benarutomod.tbroski.util.helpers.DojutsuHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -86,11 +88,12 @@ public class SharinganJutsuInit {
             return false;
         }));
 
-        jutsuRegistry.register(new BeNMJutsu(pluginIn, "susanoo", BeNMJutsu.Type.SHARINGAN_ABILITY, 24, 0.3F, 496, 32, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
+        jutsuRegistry.register(new BeNMJutsu(pluginIn, "susanoo", BeNMJutsu.Type.SHARINGAN_ABILITY, 24, 0.6F, 496, 32, true, (playerIn, taijutsuModifier0, taijutsuModifier1, playerCapability) -> {
             if (!playerIn.world.isRemote)
                 checkForBlindess(playerIn, playerCapability, 1500);
-            int tick = playerIn.getPersistentData().getInt(Main.MODID + "_susanoo_tick");
-            playerIn.getPersistentData().putInt(Main.MODID + "_susanoo_tick", tick + 1);
+            BeNMSharingan sharingan = DojutsuHelper.getBestSharinganByLevel(playerCapability);
+            float tick = playerIn.getPersistentData().getInt(Main.MODID + "_susanoo_tick") * sharingan.getLevel();
+            playerIn.getPersistentData().putInt(Main.MODID + "_susanoo_tick", playerIn.getPersistentData().getInt(Main.MODID + "_susanoo_tick") + 1);
             if (!playerIn.world.isRemote) {
                 int susanoo = 1;
                 if (tick > Config.COMMON.susanooStageIncrement.get()) {
@@ -101,13 +104,15 @@ public class SharinganJutsuInit {
                 }
                 float addedDamage = 0.0F;
                 float addedRange = 0.0F;
-                if (playerCapability.getSusanooMainHand().getItem() instanceof EtherealItem) {
-                    addedDamage += ((EtherealItem) playerCapability.getSusanooMainHand().getItem()).getProperties().getDamage();
-                    addedRange += ((EtherealItem) playerCapability.getSusanooMainHand().getItem()).getProperties().getRange();
-                }
-                if (playerCapability.getSusanooOffHand().getItem() instanceof EtherealItem) {
-                    addedDamage += ((EtherealItem) playerCapability.getSusanooOffHand().getItem()).getProperties().getDamage();
-                    addedRange += ((EtherealItem) playerCapability.getSusanooOffHand().getItem()).getProperties().getRange();
+                if (susanoo > 2) {
+                    if (playerCapability.getSusanooMainHand().getItem() instanceof EtherealItem) {
+                        addedDamage += ((EtherealItem) playerCapability.getSusanooMainHand().getItem()).getProperties().getDamage();
+                        addedRange += ((EtherealItem) playerCapability.getSusanooMainHand().getItem()).getProperties().getRange();
+                    }
+                    if (playerCapability.getSusanooOffHand().getItem() instanceof EtherealItem) {
+                        addedDamage += ((EtherealItem) playerCapability.getSusanooOffHand().getItem()).getProperties().getDamage();
+                        addedRange += ((EtherealItem) playerCapability.getSusanooOffHand().getItem()).getProperties().getRange();
+                    }
                 }
                 List<LivingEntity> entities = playerIn.world.getEntitiesWithinAABB(LivingEntity.class, playerIn.getBoundingBox().grow((susanoo * 2) + addedRange));
                 for (LivingEntity entity : entities) {
@@ -123,7 +128,9 @@ public class SharinganJutsuInit {
                     }
                 }
             }
-            if (playerIn.world.isRemote) {
+            System.out.println(tick);
+            System.out.println(Config.COMMON.susanooStageIncrement.get() * 2);
+            if (playerIn.world.isRemote && tick > Config.COMMON.susanooStageIncrement.get() * 2) {
                 playerIn.eyeHeight = 4.0F;
             }
         }).addCancelEventListener(playerIn -> {

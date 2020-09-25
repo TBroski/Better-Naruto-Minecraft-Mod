@@ -2,12 +2,11 @@ package com.benarutomod.tbroski.client.gui.overlay;
 
 import com.benarutomod.tbroski.Main;
 import com.benarutomod.tbroski.api.BeNMRegistry;
-import com.benarutomod.tbroski.api.internal.BeNMJutsu;
+import com.benarutomod.tbroski.api.internal.jutsu.BeNMJutsu;
 import com.benarutomod.tbroski.capabilities.player.IPlayerHandler;
 import com.benarutomod.tbroski.capabilities.player.PlayerCapability;
 import com.benarutomod.tbroski.capabilities.player.PlayerProvider;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -23,8 +22,7 @@ public class Notifications {
     private static final ResourceLocation NOTIFS = new ResourceLocation(Main.MODID + ":textures/gui/notifs.png");
 
     private List<BeNMJutsu> toggledJutsu = new ArrayList<>();
-    private int jutsuNotification1 = -1;
-    private int jutsuNotification2 = -1;
+
     @SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent.Post event) {
 
@@ -50,15 +48,14 @@ public class Notifications {
             int i = 30;
             for (BeNMJutsu toggledJutsu : this.toggledJutsu) {
                 mc.textureManager.bindTexture(toggledJutsu.getResourceLocationForGUI());
-                mc.ingameGUI.blit(5, i, toggledJutsu.getU(), toggledJutsu.getV(), 16, 16);
+                mc.ingameGUI.blit(5, i, toggledJutsu.getU(), toggledJutsu.getV(), 16, 16, 512, 512);
                 i += 20;
             }
             this.toggledJutsu.clear();
         }
     }
 
-    private void setJutsuNotifications(PlayerEntity playerIn)
-    {
+    private void setJutsuNotifications(PlayerEntity playerIn) {
         for (BeNMJutsu jutsu : BeNMRegistry.JUTSUS.getValues()) {
             if (jutsu.isToggle()) {
                 String nbtName = jutsu.getCorrelatedPlugin().getPluginId() + "_" + jutsu.getName();

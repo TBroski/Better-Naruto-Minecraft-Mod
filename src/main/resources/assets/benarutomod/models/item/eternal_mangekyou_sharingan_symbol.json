@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "benarutomod:items/symbols/eternal_mangekyou_sharingan_symbol"
+  }
+}

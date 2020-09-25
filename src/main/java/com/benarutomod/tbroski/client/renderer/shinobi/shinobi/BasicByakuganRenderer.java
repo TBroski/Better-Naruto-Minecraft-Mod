@@ -18,7 +18,6 @@ public class BasicByakuganRenderer extends MobRenderer<BasicByakuganEntity, Play
 
     public static final ResourceLocation TEXTURE = new ResourceLocation(Main.MODID, "textures/entity/byakugan/cow.png");
 
-
     public BasicByakuganRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new PlayerModel<>(0.0f, false), 0.1F);
         this.addLayer(new HeldItemLayer<>(this));

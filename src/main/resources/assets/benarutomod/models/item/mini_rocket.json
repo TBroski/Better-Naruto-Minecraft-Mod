@@ -1,7 +1,7 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "benarutomod:items/mini_rocket"
+    "0": "benarutomod:items/jutsu/mini_rocket"
   },
   "elements": [
     {

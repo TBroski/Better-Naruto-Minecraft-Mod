@@ -12,6 +12,7 @@ import com.benarutomod.tbroski.client.gui.widgets.player.GuiButtonPlayerHead;
 import com.benarutomod.tbroski.client.gui.widgets.player.GuiButtonPlayerLeg;
 import com.benarutomod.tbroski.entity.mobs.bijuu.AbstractBijuuEntity;
 import com.benarutomod.tbroski.entity.mobs.bijuu.ShukakuEntity;
+import com.benarutomod.tbroski.init.ClanInit;
 import com.benarutomod.tbroski.init.EntityInit;
 import com.benarutomod.tbroski.networking.NetworkLoader;
 import com.benarutomod.tbroski.networking.packets.settings.PacketEyeSlotSync;
@@ -54,6 +55,7 @@ public class ShinobiStats extends Screen {
     GuiButtonArrowUp guiButtonArrowUp;
     GuiButtonArrowDown guiButtonArrowDown;
     GuiButtonBijuuOverlay guiButtonBijuuOverlay;
+    GuiButtonClanConfiguration guiButtonClanConfiguration;
 
     GuiButtonPlayerHead guiButtonPlayerHead;
     GuiButtonPlayerBody guiButtonPlayerBody;
@@ -106,7 +108,16 @@ public class ShinobiStats extends Screen {
         addButton(guiButtonBijuuOverlay = new GuiButtonBijuuOverlay(this.guiLeft - 40, this.guiTop - 40, $ -> {
             Minecraft.getInstance().displayGuiScreen(new BijuuJutsuScreen());
         }));
-        if (this.bijuu == null) guiButtonBijuuOverlay.visible = false;
+
+        if (this.bijuu == null)
+            guiButtonBijuuOverlay.visible = false;
+
+        addButton(guiButtonClanConfiguration = new GuiButtonClanConfiguration(font.getStringWidth(new TranslationTextComponent("gui." + Main.MODID + ".clan.shinobistats").getString() + playerc.returnPlayerClan().getString().substring(0, 1).toUpperCase() + playerc.returnPlayerClan().getString().substring(1).toLowerCase()) + 15, 27, p_onPress_1_ -> {
+            Minecraft.getInstance().displayGuiScreen(new PlayerClanConfigurationScreen());
+        }));
+
+        if (playerc.returnPlayerClan() == ClanInit.NULL)
+            guiButtonClanConfiguration.visible = false;
 
         addButton(guiButtonPlayerHead = new GuiButtonPlayerHead(this.guiLeft - 16, this.guiTop - 48, player, $ -> {
             Minecraft.getInstance().displayGuiScreen(new PlayerDojutsu());

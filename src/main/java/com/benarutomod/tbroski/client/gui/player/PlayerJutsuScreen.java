@@ -28,6 +28,10 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
     GuiButtonSymbol woodSymbol;
     GuiButtonSymbol lavaSymbol;
     GuiButtonSymbol boilSymbol;
+    GuiButtonSymbol iceSymbol;
+    GuiButtonSymbol stormSymbol;
+    GuiButtonSymbol scorchSymbol;
+    GuiButtonSymbol explosionSymbol;
 
     protected PlayerJutsuScreen() {
         super(new TranslationTextComponent("gui." + Main.MODID + ".title.bodychakra"));
@@ -99,7 +103,7 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
         }));
 
         //Page 2
-        addButton(magnetSymbol = new GuiButtonSymbol(this.guiLeft - 5, this.guiTop - 5, 0, 50, $ -> {
+        addButton(magnetSymbol = new GuiButtonSymbol(this.guiLeft - 85, this.guiTop - 5, 0, 50, $ -> {
             if (playerCapability.hasMagnetNature()) {
                 Minecraft.getInstance().displayGuiScreen(new MagnetNatureJutsu());
             }
@@ -107,7 +111,7 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Magnet Nature."));
             }
         }));
-        addButton(woodSymbol = new GuiButtonSymbol(this.guiLeft + 5, this.guiTop + 5, 0, 60, $ -> {
+        addButton(woodSymbol = new GuiButtonSymbol(this.guiLeft - 65, this.guiTop - 5, 0, 60, $ -> {
             if (playerCapability.hasWoodNature()) {
                 Minecraft.getInstance().displayGuiScreen(new WoodNatureJutsu());
             }
@@ -115,7 +119,7 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Wood Nature."));
             }
         }));
-        addButton(lavaSymbol = new GuiButtonSymbol(this.guiLeft - 5, this.guiTop + 10, 0, 70, $ -> {
+        addButton(lavaSymbol = new GuiButtonSymbol(this.guiLeft - 45, this.guiTop - 5, 0, 70, $ -> {
             if (playerCapability.hasLavaNature()) {
                 Minecraft.getInstance().displayGuiScreen(new LavaNatureJutsu());
             }
@@ -123,12 +127,44 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Lava Nature."));
             }
         }));
-        addButton(boilSymbol = new GuiButtonSymbol(this.guiLeft - 10, this.guiTop - 10, 0, 80, $ -> {
+        addButton(boilSymbol = new GuiButtonSymbol(this.guiLeft - 25, this.guiTop - 5, 0, 80, $ -> {
             if (playerCapability.hasBoilNature()) {
                 Minecraft.getInstance().displayGuiScreen(new BoilNatureJutsu());
             }
             else {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Boil Nature."));
+            }
+        }));
+        addButton(iceSymbol = new GuiButtonSymbol(this.guiLeft - 5, this.guiTop - 5, 0, 90, $ -> {
+            if (playerCapability.hasIceNature()) {
+                Minecraft.getInstance().displayGuiScreen(new IceNatureJutsu());
+            }
+            else {
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Ice Nature."));
+            }
+        }));
+        addButton(stormSymbol = new GuiButtonSymbol(this.guiLeft + 15, this.guiTop - 5, 0, 100, $ -> {
+            if (playerCapability.hasStormNature()) {
+                Minecraft.getInstance().displayGuiScreen(new StormNatureJutsu());
+            }
+            else {
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Storm Nature."));
+            }
+        }));
+        addButton(scorchSymbol = new GuiButtonSymbol(this.guiLeft + 35, this.guiTop - 5, 0, 110, $ -> {
+            if (playerCapability.hasScorchNature()) {
+                Minecraft.getInstance().displayGuiScreen(new ScorchNatureJutsu());
+            }
+            else {
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Scorch Nature."));
+            }
+        }));
+        addButton(explosionSymbol = new GuiButtonSymbol(this.guiLeft + 55, this.guiTop - 5, 0, 120, $ -> {
+            if (playerCapability.hasExplosionNature()) {
+                Minecraft.getInstance().displayGuiScreen(new ExplosionNatureJutsu());
+            }
+            else {
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("You don't have Explosion Nature."));
             }
         }));
     }
@@ -154,6 +190,10 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
             woodSymbol.visible = false;
             lavaSymbol.visible = false;
             boilSymbol.visible = false;
+            iceSymbol.visible = false;
+            stormSymbol.visible = false;
+            scorchSymbol.visible = false;
+            explosionSymbol.visible = false;
         }
 
         switch (openedTab) {
@@ -178,10 +218,18 @@ public class PlayerJutsuScreen extends AbstractTabedBackground {
                 woodSymbol.visible = true;
                 lavaSymbol.visible = true;
                 boilSymbol.visible = true;
+                iceSymbol.visible = true;
+                stormSymbol.visible = true;
+                scorchSymbol.visible = true;
+                explosionSymbol.visible = true;
                 magnetSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 woodSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 lavaSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 boilSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                iceSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                stormSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                scorchSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
+                explosionSymbol.renderButton(p_render_1_, p_render_2_, p_render_3_);
                 break;
         }
     }

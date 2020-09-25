@@ -27,6 +27,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -60,7 +61,7 @@ public class PlayerEvents {
                 playercap.addChakra(regenChakra);
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketChakraSync(chakra));
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketRegenChakraSync(playercap.returnregenChakra(), true));
-                NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketMaxChakraSync(maxChakra, player.getPersistentData().getInt("restrictedchakra")));
+                NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketMaxChakraSync(maxChakra, player.getPersistentData().getInt("restrictedchakra"), true));
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketColorChakraSync(playercap.returncolorChakra()));
                 NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketChakraControlSync(playercap.returnChakraControl(), true));
                 player.getPersistentData().putInt("regentick", 0);
@@ -98,8 +99,7 @@ public class PlayerEvents {
         }
     }
 
-    public static void PlayerJoinedWorld(EntityJoinWorldEvent event)
-    {
+    public static void PlayerJoinedWorld(EntityJoinWorldEvent event) {
         PlayerEntity player = (PlayerEntity) event.getEntity();
         LazyOptional<IPlayerHandler> playerc = player.getCapability(PlayerProvider.CAPABILITY_PLAYER, null);
         IPlayerHandler player_cap = playerc.orElse(new PlayerCapability());
@@ -154,12 +154,10 @@ public class PlayerEvents {
     }
 
 
-    public static void clayRightClick(PlayerInteractEvent.RightClickItem event)
-    {
+    public static void clayRightClick(PlayerInteractEvent.RightClickItem event) {
         Item item = event.getItemStack().getItem();
         PlayerEntity playerEntity = event.getPlayer();
-        if (playerEntity.isCrouching() && item == Items.CLAY_BALL)
-        {
+        if (playerEntity.isCrouching() && item == Items.CLAY_BALL || item == ItemInit.CLAY_BALL_C1.get() || item == ItemInit.CLAY_BALL_C2.get() || item == ItemInit.CLAY_BALL_C3.get()) {
             Vec3d vec3d = playerEntity.getEyePosition(1.0F);
             Vec3d vec3d1 = playerEntity.getLook(1.0F);
             Vec3d vec3d2 = vec3d.add(vec3d1.x * 4, vec3d1.y * 4, vec3d1.z * 4);
@@ -167,9 +165,17 @@ public class PlayerEvents {
             EntityRayTraceResult entityRayTraceResult = ProjectileHelper.rayTraceEntities(playerEntity, vec3d, vec3d2, axisalignedbb, $ -> !playerEntity.isSpectator() && playerEntity.canBeCollidedWith(), 4);
 
             if (entityRayTraceResult != null && !event.getWorld().isRemote) {
-                if (entityRayTraceResult.getEntity() instanceof LivingEntity && !(entityRayTraceResult.getEntity() instanceof PlayerEntity) && !(entityRayTraceResult.getEntity() instanceof EnderDragonEntity) && !(entityRayTraceResult.getEntity() instanceof WitherEntity) && !(entityRayTraceResult.getEntity() instanceof AbstractShinobiEntity) && !(entityRayTraceResult.getEntity() instanceof AbstractCloneEntity)) { //&& !entityRayTraceResult.getEntity().isNonBoss()
-                    if (!playerEntity.abilities.isCreativeMode) event.getItemStack().shrink(1);
-                    ItemStack moldedClay = new ItemStack(ItemInit.CLAY_SPAWN_EGG.get());
+                if (entityRayTraceResult.getEntity() instanceof LivingEntity && !(entityRayTraceResult.getEntity() instanceof PlayerEntity) && !(entityRayTraceResult.getEntity() instanceof EnderDragonEntity) && !(entityRayTraceResult.getEntity() instanceof WitherEntity) && !(entityRayTraceResult.getEntity() instanceof AbstractShinobiEntity) && !(entityRayTraceResult.getEntity() instanceof AbstractCloneEntity) && entityRayTraceResult.getEntity().isNonBoss()) { //&& !entityRayTraceResult.getEntity().isNonBoss()
+                    if (!playerEntity.abilities.isCreativeMode)
+                        event.getItemStack().shrink(1);
+                    Item itemToGive = ItemInit.MOLDED_CLAY.get();
+                    if (item == ItemInit.CLAY_BALL_C1.get())
+                        itemToGive = ItemInit.MOLDED_CLAY_C1.get();
+                    if (item == ItemInit.CLAY_BALL_C2.get())
+                        itemToGive = ItemInit.MOLDED_CLAY_C2.get();
+                    if (item == ItemInit.CLAY_BALL_C3.get())
+                        itemToGive = ItemInit.MOLDED_CLAY_C3.get();
+                    ItemStack moldedClay = new ItemStack(itemToGive);
                     CompoundNBT nbt = new CompoundNBT();
 
                     nbt.putString("affiliatedmob", entityRayTraceResult.getEntity().getEntityString());
@@ -197,8 +203,10 @@ public class PlayerEvents {
             }
         }
 
-        if (player_cap.returnPlayerBodyMode().getPlayerEffect() != null && player_cap.returnBodyInfusionToggled()) {
-            player.addPotionEffect(new EffectInstance(player_cap.returnPlayerBodyMode().getPlayerEffect(), 40, 0));
+        if (player_cap.returnPlayerBodyMode().getPlayerEffects().size() > 0 && player_cap.returnBodyInfusionToggled()) {
+            for (Effect effect : player_cap.returnPlayerBodyMode().getPlayerEffects()) {
+                player.addPotionEffect(new EffectInstance(effect, 40, 0));
+            }
         }
 
         if (player_cap.returnPlayerBodyMode().allowsPlayerFlight() && player_cap.returnBodyInfusionToggled()) {
@@ -206,6 +214,7 @@ public class PlayerEvents {
         }
         else if (!player.abilities.isCreativeMode) {
             player.abilities.allowFlying = false;
+            player.abilities.isFlying = false;
         }
     }
 

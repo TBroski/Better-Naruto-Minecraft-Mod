@@ -13,10 +13,13 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ClanHelper {
 
+    private static List<BeNMClan> clansWithNPC = new ArrayList<>();
     private static Random rand = new Random();
 
     public static BeNMClan getClanFromString(String clan) {
@@ -92,5 +95,17 @@ public class ClanHelper {
         }
 
         return playercap.returnPlayerClan().getClanNature();
+    }
+
+    public static List<BeNMClan> getClansWithNPC() {
+        return clansWithNPC;
+    }
+
+    public static void create() {
+        for (BeNMClan clan : BeNMRegistry.CLANS.getValues()) {
+            if (clan.hasNPC()) {
+                clansWithNPC.add(clan);
+            }
+        }
     }
 }
